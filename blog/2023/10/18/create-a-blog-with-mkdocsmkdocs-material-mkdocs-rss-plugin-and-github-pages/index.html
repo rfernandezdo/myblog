@@ -674,8 +674,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#create-requirementstxt-in-root-folder-and-install-mkdocs-mkdocs-material-and-plugins" class="md-nav__link">
-    Create requirements.txt in root folder and install mkdocs, mkdocs-material and plugins
+  <a href="#create-requirementstxt-in-root-folder-for-mkdocs-mkdocs-material-and-plugins" class="md-nav__link">
+    Create requirements.txt in root folder for mkdocs, mkdocs-material and plugins
   </a>
   
 </li>
@@ -774,16 +774,16 @@
 <pre><code class="language-bash">git clone ssh://github.com/username/username.github.io
 cd username.github.io
 </code></pre>
-<h3 id="create-requirementstxt-in-root-folder-and-install-mkdocs-mkdocs-material-and-plugins">Create requirements.txt in root folder and install mkdocs, mkdocs-material and plugins</h3>
+<h3 id="create-requirementstxt-in-root-folder-for-mkdocs-mkdocs-material-and-plugins">Create requirements.txt in root folder for mkdocs, mkdocs-material and plugins</h3>
 <pre><code class="language-bash">mkdocs==1.5.3
 mkdocs-material==9.4.6
 mkdocs-rss-plugin==1.8.0
 </code></pre>
 <h3 id="create-a-python-virtual-environment-and-install-requirementstxt">Create a Python Virtual Environment and install requirements.txt</h3>
-<p><code>bash
-  python3 -m venv mysite
-  source mysite/bin/activate
-  pip install -r requirements.txt</code></p>
+<pre><code class="language-bash">python3 -m venv mysite
+source mysite/bin/activate
+pip install -r requirements.txt
+</code></pre>
 <h3 id="initialize-your-site">Initialize your site</h3>
 <pre><code class="language-bash">mkdocs new .
 </code></pre>
