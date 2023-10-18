@@ -621,43 +621,29 @@
 </li>
 </ul>
 <h3 id="steps-to-deploy"><a class="toclink" href="../../2023/10/18/create-a-blog-with-mkdocsmkdocs-material-mkdocs-rss-plugin-and-github-pages/#steps-to-deploy">Steps to deploy</a></h3>
-<ol>
-<li>Create a new repository</li>
-</ol>
+<h4 id="create-a-new-repository"><a class="toclink" href="../../2023/10/18/create-a-blog-with-mkdocsmkdocs-material-mkdocs-rss-plugin-and-github-pages/#create-a-new-repository">Create a new repository</a></h4>
 <p>Create a new repository on GitHub named <code>username.github.io</code>, where <code>username</code> is your username (or organization name) on GitHub. If the first part of the repository doesn’t exactly match your username, it won’t work, so make sure to get it right.</p>
-<ol>
-<li>Enable GitHub Pages on your repository</li>
-</ol>
+<h4 id="enable-github-pages-on-your-repository"><a class="toclink" href="../../2023/10/18/create-a-blog-with-mkdocsmkdocs-material-mkdocs-rss-plugin-and-github-pages/#enable-github-pages-on-your-repository">Enable GitHub Pages on your repository</a></h4>
 <p>Go into the repository settings and, if you are not using GitHub Pages already, enable GitHub Pages on the <code>gh-pages</code> branch.</p>
-<ol>
-<li>Clone the repository</li>
-</ol>
+<h4 id="clone-the-repository"><a class="toclink" href="../../2023/10/18/create-a-blog-with-mkdocsmkdocs-material-mkdocs-rss-plugin-and-github-pages/#clone-the-repository">Clone the repository</a></h4>
 <p>Go to the folder where you want to store your project, and clone the new repository:</p>
 <pre><code class="language-bash">git clone ssh://github.com/username/username.github.io
 cd username.github.io
 </code></pre>
-<ol>
-<li>Create requirements.txt in root folder and install mkdocs, mkdocs-material and plugins</li>
-</ol>
+<h4 id="create-requirementstxt-in-root-folder-and-install-mkdocs-mkdocs-material-and-plugins"><a class="toclink" href="../../2023/10/18/create-a-blog-with-mkdocsmkdocs-material-mkdocs-rss-plugin-and-github-pages/#create-requirementstxt-in-root-folder-and-install-mkdocs-mkdocs-material-and-plugins">Create requirements.txt in root folder and install mkdocs, mkdocs-material and plugins</a></h4>
 <pre><code class="language-bash">mkdocs==1.5.3
 mkdocs-material==9.4.6
 mkdocs-rss-plugin==1.8.0
 </code></pre>
-<ol>
-<li>Create a Python Virtual Environment and install requirements.txt</li>
-</ol>
+<h4 id="create-a-python-virtual-environment-and-install-requirementstxt"><a class="toclink" href="../../2023/10/18/create-a-blog-with-mkdocsmkdocs-material-mkdocs-rss-plugin-and-github-pages/#create-a-python-virtual-environment-and-install-requirementstxt">Create a Python Virtual Environment and install requirements.txt</a></h4>
 <p><code>bash
   python3 -m venv mysite
   source mysite/bin/activate
   pip install -r requirements.txt</code></p>
-<ol>
-<li>Initialize your site</li>
-</ol>
+<h4 id="initialize-your-site"><a class="toclink" href="../../2023/10/18/create-a-blog-with-mkdocsmkdocs-material-mkdocs-rss-plugin-and-github-pages/#initialize-your-site">Initialize your site</a></h4>
 <pre><code class="language-bash">mkdocs new .
 </code></pre>
-<ol>
-<li>Add configuration to mkdocs.yml in root folder</li>
-</ol>
+<h4 id="add-configuration-to-mkdocsyml-in-root-folder"><a class="toclink" href="../../2023/10/18/create-a-blog-with-mkdocsmkdocs-material-mkdocs-rss-plugin-and-github-pages/#add-configuration-to-mkdocsyml-in-root-folder">Add configuration to mkdocs.yml in root folder</a></h4>
 <p>For this post I am going to add the following configuration:</p>
 <ul>
 <li>basic configuration</li>
@@ -693,9 +679,7 @@ plugins:
         - categories
         - tags
 </code></pre>
-<ol>
-<li>publish your site</li>
-</ol>
+<h4 id="publish-your-site"><a class="toclink" href="../../2023/10/18/create-a-blog-with-mkdocsmkdocs-material-mkdocs-rss-plugin-and-github-pages/#publish-your-site">publish your site</a></h4>
 <pre><code class="language-bash">mkdocs gh-deploy
 </code></pre>
 <h3 id="urls"><a class="toclink" href="../../2023/10/18/create-a-blog-with-mkdocsmkdocs-material-mkdocs-rss-plugin-and-github-pages/#urls">urls</a></h3>

@@ -649,6 +649,68 @@
     Steps to deploy
   </a>
   
+    <nav class="md-nav" aria-label="Steps to deploy">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#create-a-new-repository" class="md-nav__link">
+    Create a new repository
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#enable-github-pages-on-your-repository" class="md-nav__link">
+    Enable GitHub Pages on your repository
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#clone-the-repository" class="md-nav__link">
+    Clone the repository
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create-requirementstxt-in-root-folder-and-install-mkdocs-mkdocs-material-and-plugins" class="md-nav__link">
+    Create requirements.txt in root folder and install mkdocs, mkdocs-material and plugins
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create-a-python-virtual-environment-and-install-requirementstxt" class="md-nav__link">
+    Create a Python Virtual Environment and install requirements.txt
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#initialize-your-site" class="md-nav__link">
+    Initialize your site
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#add-configuration-to-mkdocsyml-in-root-folder" class="md-nav__link">
+    Add configuration to mkdocs.yml in root folder
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#publish-your-site" class="md-nav__link">
+    publish your site
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -703,43 +765,29 @@
 </li>
 </ul>
 <h2 id="steps-to-deploy">Steps to deploy</h2>
-<ol>
-<li>Create a new repository</li>
-</ol>
+<h3 id="create-a-new-repository">Create a new repository</h3>
 <p>Create a new repository on GitHub named <code>username.github.io</code>, where <code>username</code> is your username (or organization name) on GitHub. If the first part of the repository doesn’t exactly match your username, it won’t work, so make sure to get it right.</p>
-<ol>
-<li>Enable GitHub Pages on your repository</li>
-</ol>
+<h3 id="enable-github-pages-on-your-repository">Enable GitHub Pages on your repository</h3>
 <p>Go into the repository settings and, if you are not using GitHub Pages already, enable GitHub Pages on the <code>gh-pages</code> branch.</p>
-<ol>
-<li>Clone the repository</li>
-</ol>
+<h3 id="clone-the-repository">Clone the repository</h3>
 <p>Go to the folder where you want to store your project, and clone the new repository:</p>
 <pre><code class="language-bash">git clone ssh://github.com/username/username.github.io
 cd username.github.io
 </code></pre>
-<ol>
-<li>Create requirements.txt in root folder and install mkdocs, mkdocs-material and plugins</li>
-</ol>
+<h3 id="create-requirementstxt-in-root-folder-and-install-mkdocs-mkdocs-material-and-plugins">Create requirements.txt in root folder and install mkdocs, mkdocs-material and plugins</h3>
 <pre><code class="language-bash">mkdocs==1.5.3
 mkdocs-material==9.4.6
 mkdocs-rss-plugin==1.8.0
 </code></pre>
-<ol>
-<li>Create a Python Virtual Environment and install requirements.txt</li>
-</ol>
+<h3 id="create-a-python-virtual-environment-and-install-requirementstxt">Create a Python Virtual Environment and install requirements.txt</h3>
 <p><code>bash
   python3 -m venv mysite
   source mysite/bin/activate
   pip install -r requirements.txt</code></p>
-<ol>
-<li>Initialize your site</li>
-</ol>
+<h3 id="initialize-your-site">Initialize your site</h3>
 <pre><code class="language-bash">mkdocs new .
 </code></pre>
-<ol>
-<li>Add configuration to mkdocs.yml in root folder</li>
-</ol>
+<h3 id="add-configuration-to-mkdocsyml-in-root-folder">Add configuration to mkdocs.yml in root folder</h3>
 <p>For this post I am going to add the following configuration:</p>
 <ul>
 <li>basic configuration</li>
@@ -775,9 +823,7 @@ plugins:
         - categories
         - tags
 </code></pre>
-<ol>
-<li>publish your site</li>
-</ol>
+<h3 id="publish-your-site">publish your site</h3>
 <pre><code class="language-bash">mkdocs gh-deploy
 </code></pre>
 <h2 id="urls">urls</h2>
