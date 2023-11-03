@@ -6,17 +6,17 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://rfernandezdo.github.io/about/</loc>
-         <lastmod>2023-11-03</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
          <loc>https://rfernandezdo.github.io/blog/</loc>
          <lastmod>2023-11-03</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://rfernandezdo.github.io/blog/tags/</loc>
+         <lastmod>2023-11-03</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://rfernandezdo.github.io/blog/2023/10/18/hello-world-from-mkdocs-material/</loc>
          <lastmod>2023-11-03</lastmod>
          <changefreq>daily</changefreq>
     </url>
@@ -36,7 +36,7 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://rfernandezdo.github.io/blog/2023/10/18/hello-world-from-mkdocs-material/</loc>
+         <loc>https://rfernandezdo.github.io/blog/2023/11/04/starting-to-develop-in-c/</loc>
          <lastmod>2023-11-03</lastmod>
          <changefreq>daily</changefreq>
     </url>
@@ -51,17 +51,22 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://rfernandezdo.github.io/blog/category/development/</loc>
+         <lastmod>2023-11-03</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://rfernandezdo.github.io/blog/category/devops/</loc>
          <lastmod>2023-11-03</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://rfernandezdo.github.io/blog/category/hello/</loc>
+         <loc>https://rfernandezdo.github.io/blog/category/english/</loc>
          <lastmod>2023-11-03</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://rfernandezdo.github.io/blog/category/world/</loc>
+         <loc>https://rfernandezdo.github.io/blog/category/hello_world/</loc>
          <lastmod>2023-11-03</lastmod>
          <changefreq>daily</changefreq>
     </url>
