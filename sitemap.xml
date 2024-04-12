@@ -141,6 +141,11 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://rfernandezdo.github.io/blog/2023/12/01/azure-functions/</loc>
+         <lastmod>2024-04-12</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://rfernandezdo.github.io/blog/2023/12/04/instalar-wsl2-en-windows-11-con-chocolatey/</loc>
          <lastmod>2024-04-12</lastmod>
          <changefreq>daily</changefreq>
@@ -181,12 +186,27 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://rfernandezdo.github.io/blog/2024/</loc>
+         <loc>https://rfernandezdo.github.io/blog/2024/04/</loc>
          <lastmod>2024-04-12</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://rfernandezdo.github.io/blog/2023/</loc>
+         <loc>https://rfernandezdo.github.io/blog/2024/02/</loc>
+         <lastmod>2024-04-12</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://rfernandezdo.github.io/blog/2023/12/</loc>
+         <lastmod>2024-04-12</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://rfernandezdo.github.io/blog/2023/11/</loc>
+         <lastmod>2024-04-12</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://rfernandezdo.github.io/blog/2023/10/</loc>
          <lastmod>2024-04-12</lastmod>
          <changefreq>daily</changefreq>
     </url>
@@ -247,11 +267,6 @@
     </url>
     <url>
          <loc>https://rfernandezdo.github.io/blog/page/2/</loc>
-         <lastmod>2024-04-12</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://rfernandezdo.github.io/blog/2023/page/2/</loc>
          <lastmod>2024-04-12</lastmod>
          <changefreq>daily</changefreq>
     </url>
