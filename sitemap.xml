@@ -176,7 +176,17 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://rfernandezdo.github.io/blog/2024/02/28/20240228-azure-policy-github/</loc>
+         <lastmod>2024-04-12</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://rfernandezdo.github.io/blog/2024/02/29/enterprise-azure-policy-as-code-epac/</loc>
+         <lastmod>2024-04-12</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://rfernandezdo.github.io/blog/2024/03/02/azure-policy-management-best-practices/</loc>
          <lastmod>2024-04-12</lastmod>
          <changefreq>daily</changefreq>
     </url>
@@ -187,6 +197,11 @@
     </url>
     <url>
          <loc>https://rfernandezdo.github.io/blog/2024/04/</loc>
+         <lastmod>2024-04-12</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://rfernandezdo.github.io/blog/2024/03/</loc>
          <lastmod>2024-04-12</lastmod>
          <changefreq>daily</changefreq>
     </url>
@@ -216,12 +231,12 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://rfernandezdo.github.io/blog/category/tools/</loc>
+         <loc>https://rfernandezdo.github.io/blog/category/azure-services/</loc>
          <lastmod>2024-04-12</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://rfernandezdo.github.io/blog/category/azure-services/</loc>
+         <loc>https://rfernandezdo.github.io/blog/category/tools/</loc>
          <lastmod>2024-04-12</lastmod>
          <changefreq>daily</changefreq>
     </url>
@@ -267,6 +282,11 @@
     </url>
     <url>
          <loc>https://rfernandezdo.github.io/blog/page/2/</loc>
+         <lastmod>2024-04-12</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://rfernandezdo.github.io/blog/page/3/</loc>
          <lastmod>2024-04-12</lastmod>
          <changefreq>daily</changefreq>
     </url>
