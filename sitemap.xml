@@ -206,6 +206,11 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://rfernandezdo.github.io/blog/2024/04/17/using-enterprise-azure-policy-as-code-epac/</loc>
+         <lastmod>2024-05-03</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://rfernandezdo.github.io/blog/2024/04/17/cambio-de-nombres-de-los-niveles-de-servicio-de-microsoft-defender-para-cloud/</loc>
          <lastmod>2024-05-03</lastmod>
          <changefreq>daily</changefreq>
@@ -316,17 +321,17 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://rfernandezdo.github.io/blog/category/tools/</loc>
+         <lastmod>2024-05-03</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://rfernandezdo.github.io/blog/category/learning/</loc>
          <lastmod>2024-05-03</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://rfernandezdo.github.io/blog/category/security/</loc>
-         <lastmod>2024-05-03</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://rfernandezdo.github.io/blog/category/tools/</loc>
          <lastmod>2024-05-03</lastmod>
          <changefreq>daily</changefreq>
     </url>
