@@ -241,6 +241,13 @@
           </label>
 <ul class="md-nav__list" data-md-scrollfix="">
 <li class="md-nav__item">
+<a class="md-nav__link" href="../../2024/09/">
+<span class="md-ellipsis">
+    2024/09
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
 <a class="md-nav__link" href="../../2024/06/">
 <span class="md-ellipsis">
     2024/06
@@ -723,6 +730,23 @@
 </ul>
 </li>
 </ul>
+<p>Example of Conditional Access policy configuration:</p>
+<ol>
+<li><strong>Block access to all users from all locations except for a specific group of users from a specific location</strong>:</li>
+<li><strong>Assignments</strong>:<ul>
+<li><strong>users</strong>: </li>
+<li>Include:All users</li>
+<li>Exclude: Group_of_excluded_users</li>
+<li><strong>Target resources</strong>:</li>
+<li><strong>Cloud apps</strong>: All cloud apps</li>
+<li><strong>Network</strong>: All trusted locations</li>
+</ul>
+</li>
+<li><strong>Access controls</strong>:<ul>
+<li><strong>Grant</strong>: Block</li>
+</ul>
+</li>
+</ol>
 <p>Mindmaps of the Conditional Access policies flow:</p>
 <pre class="language-markmap"><code># Conditional Access Policy
 ## Phase 1: Collect session details
@@ -816,8 +840,6 @@
             {{Persistent browser session}}
             {{Customize continuous access evaluation}}
 </code></pre>
-<p>Example of common Conditional Access policies flow:</p>
-<p>If you don't know anything about Conditional Access, you can read the <a href="https://docs.microsoft.com/en-us/azure/active-directory/conditional-access/overview">official documentation</a> to learn more about it.</p>
 <h3 id="resources"><a class="toclink" href="../../2024/06/17/microsoft-entra-conditional-access/#resources">Resources</a></h3>
 <ul>
 <li><a href="https://learn.microsoft.com/en-us/entra/identity/conditional-access/overview">Conditional Access documentation</a></li>

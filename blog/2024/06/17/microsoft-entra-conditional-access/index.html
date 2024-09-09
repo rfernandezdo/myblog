@@ -8,7 +8,8 @@
 <meta content="A blog about Azure, DevOps and other stuff" name="description"/>
 <meta content="Rafael Fernández" name="author"/>
 <link href="https://rfernandezdo.github.io/blog/2024/06/17/microsoft-entra-conditional-access/" rel="canonical"/>
-<link href="../markmap/" rel="prev"/>
+<link href="../../15/tagging-best-practices-in-azure/" rel="prev"/>
+<link href="../../../09/09/markmap/" rel="next"/>
 <link href="../../../../../feed_rss_created.xml" rel="alternate" title="RSS feed" type="application/rss+xml"/>
 <link href="../../../../../feed_rss_updated.xml" rel="alternate" title="RSS feed of updated content" type="application/rss+xml"/>
 <link href="../../../../../assets/images/favicon.png" rel="icon"/>
@@ -249,6 +250,13 @@
             Archive
           </label>
 <ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../../09/">
+<span class="md-ellipsis">
+    2024/09
+  </span>
+</a>
+</li>
 <li class="md-nav__item">
 <a class="md-nav__link" href="../../">
 <span class="md-ellipsis">
@@ -801,6 +809,23 @@
 </ul>
 </li>
 </ul>
+<p>Example of Conditional Access policy configuration:</p>
+<ol>
+<li><strong>Block access to all users from all locations except for a specific group of users from a specific location</strong>:</li>
+<li><strong>Assignments</strong>:<ul>
+<li><strong>users</strong>: </li>
+<li>Include:All users</li>
+<li>Exclude: Group_of_excluded_users</li>
+<li><strong>Target resources</strong>:</li>
+<li><strong>Cloud apps</strong>: All cloud apps</li>
+<li><strong>Network</strong>: All trusted locations</li>
+</ul>
+</li>
+<li><strong>Access controls</strong>:<ul>
+<li><strong>Grant</strong>: Block</li>
+</ul>
+</li>
+</ol>
 <p>Mindmaps of the Conditional Access policies flow:</p>
 <div class="language-markmap mkdocs-markmap"><markmap-data hidden="true"># Conditional Access Policy
 ## Phase 1: Collect session details
@@ -894,8 +919,6 @@
             {{Persistent browser session}}
             {{Customize continuous access evaluation}}
 </code></pre>
-<p>Example of common Conditional Access policies flow:</p>
-<p>If you don't know anything about Conditional Access, you can read the <a href="https://docs.microsoft.com/en-us/azure/active-directory/conditional-access/overview">official documentation</a> to learn more about it.</p>
 <h2 id="resources">Resources</h2>
 <ul>
 <li><a href="https://learn.microsoft.com/en-us/entra/identity/conditional-access/overview">Conditional Access documentation</a></li>
