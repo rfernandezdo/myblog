@@ -2117,6 +2117,90 @@ Custom Roles has the same structure as built-in roles:</p>
   </div>
 </article>
       
+        <article class="md-post md-post--excerpt">
+  <header class="md-post__header">
+    
+      <nav class="md-post__authors md-typeset">
+        
+          <span class="md-author">
+            <img src="https://avatars.githubusercontent.com/u/39990341" alt="Rafael Fernández">
+          </span>
+        
+      </nav>
+    
+    <div class="md-post__meta md-meta">
+      <ul class="md-meta__list">
+        <li class="md-meta__item">
+          <time datetime="2024-04-18 00:00:00">April 18, 2024</time></li>
+        
+          <li class="md-meta__item">
+            in
+            
+              <a href="./" class="md-meta__link">Azure</a></li>
+        
+        
+          
+          <li class="md-meta__item">
+            
+              3 min read
+            
+          </li>
+        
+      </ul>
+      
+    </div>
+  </header>
+  <div class="md-post__content md-typeset">
+    <h2 id="azure-role-assignment-conditions"><a class="toclink" href="../../2024/04/18/azure-role-assignment-conditions/">Azure role assignment conditions</a></h2>
+<p>First of all, let's understand what is ABAc (Attribute-Based Access Control) and how it can be used in Azure.</p>
+<h3 id="what-is-abac"><a class="toclink" href="../../2024/04/18/azure-role-assignment-conditions/#what-is-abac">What is ABAC?</a></h3>
+<p>Attribute-Based Access Control (ABAC) is an access control model that uses attributes to determine access rights. In ABAC, access decisions are based on the attributes of the user, the resource, and the environment. This allows for fine-grained access control based on a wide range of attributes, such as user roles, resource types, and time of day.</p>
+<p>ABAC is a flexible and scalable access control model that can be used to enforce complex access policies. It allows organizations to define access control rules based on a wide range of attributes and to adapt those rules as their needs change.</p>
+<p>ABAC is build on Azure RBAC.</p>
+<h3 id="what-is-azure-role-assignment-conditions"><a class="toclink" href="../../2024/04/18/azure-role-assignment-conditions/#what-is-azure-role-assignment-conditions">What is Azure role assignment conditions?</a></h3>
+<p>Azure role assignment conditions allow you to define conditions that must be met for a role assignment to be effective. </p>
+<h3 id="how-to-configure-azure-role-assignment-conditions"><a class="toclink" href="../../2024/04/18/azure-role-assignment-conditions/#how-to-configure-azure-role-assignment-conditions">How to configure Azure role assignment conditions?</a></h3>
+<p>To configure Azure role assignment conditions, configure the role assignment as usual, and then click on the "Conditions" tab. Here you can define the conditions that must be met for the role assignment to be effective.</p>
+<p><img alt="alt text" src="../../2024/09/Screenshot%202024-09-18%20111639.png" /></p>
+<p>Options for configuring Conditions:</p>
+<ul>
+<li>Allow user to only assign selected roles to selected principals (fewer privileges)</li>
+<li>Allow user to assign all roles except privileged administrator roles Owner, UAA, RBAC (Recommended)</li>
+<li>Allow user to assign all roles (highly privileged)</li>
+</ul>
+<p>The first one is the most restrictive, for example, allowing the user to only assign selected roles to selected principals. This is useful when you want to limit the privileges of a user to only a subset of roles and principals.</p>
+<p>These are the options available for "Allow user to only assign selected roles to selected principals (fewer privileges)":</p>
+<p><img alt="alt text" src="../../2024/09/Screenshot%202024-09-18%20111646.png" /></p>
+<ul>
+<li>Constrain roles:<ul>
+<li>Allow user to only assign roles you select</li>
+</ul>
+</li>
+<li>Constrain roles and principal types:<ul>
+<li>Allow user to only assign roles you select</li>
+<li>Allow user to only assign these roles to principal types you select (users, groups, or service principals)</li>
+</ul>
+</li>
+<li>Constrain roles and principals<ul>
+<li>Allow user to only assign roles you select</li>
+<li>Allow user to only assign these roles to principals you select</li>
+<li>Allow all except specific roles</li>
+<li>Allow user to assign all roles except the roles you select</li>
+</ul>
+</li>
+</ul>
+<h3 id="conclusion"><a class="toclink" href="../../2024/04/18/azure-role-assignment-conditions/#conclusion">Conclusion</a></h3>
+<p>Azure role assignment conditions provide a flexible and powerful way to control access to Azure resources. By defining conditions that must be met for a role assignment to be effective, you can enforce fine-grained access control policies that meet the specific needs of your organization. This allows you to limit the privileges of users, assign roles to specific principals, and control access to sensitive resources. Azure role assignment conditions are a valuable tool for organizations that need to enforce strict access control policies and protect their critical resources.</p>
+<h3 id="references"><a class="toclink" href="../../2024/04/18/azure-role-assignment-conditions/#references">References</a></h3>
+<ul>
+<li><a href="https://learn.microsoft.com/en-us/azure/role-based-access-control/conditions-overview">What is Azure attribute-based access control (Azure ABAC)?</a></li>
+<li><a href="https://learn.microsoft.com/en-us/azure/role-based-access-control/conditions-format">Azure role assignment condition format and syntax</a></li>
+<li><a href="https://learn.microsoft.com/en-us/azure/role-based-access-control/delegate-role-assignments-examples?tabs=template">Examples to delegate Azure role assignment management with conditions</a></li>
+</ul>
+    
+  </div>
+</article>
+      
       
         
           

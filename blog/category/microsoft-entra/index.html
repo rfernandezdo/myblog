@@ -636,6 +636,46 @@
 <div class="md-post__meta md-meta">
 <ul class="md-meta__list">
 <li class="md-meta__item">
+<time datetime="2024-06-18 00:00:00">June 18, 2024</time></li>
+<li class="md-meta__item">
+            in
+            
+              <a class="md-meta__link" href="./">Microsoft Entra</a></li>
+<li class="md-meta__item">
+            
+              1 min read
+            
+          </li>
+</ul>
+</div>
+</header>
+<div class="md-post__content md-typeset">
+<h2 id="when-to-use-service-principals"><a class="toclink" href="../../2024/06/18/when-to-use-service-principals/">When to use service principals</a></h2>
+<p>In Azure, there are two ways to authenticate your applications and services: service principals and managed identities. </p>
+<p>Basically, <strong>don't use service principals if you can use managed identities</strong>. Managed identities are a more secure way to authenticate your applications and services in Azure. However, there are some scenarios where you need to use service principals instead of managed identities. Here are some scenarios where you should use service principals:</p>
+<pre class="mermaid"><code>flowchart TD
+    A[When to use service principals] --&gt; B{Is your application or service running on-premises?}
+    B --&gt; |Yes| C{Is Azure Arc supported?}
+    C --&gt; |Yes| D[Use Managed Identity]
+    C --&gt; |No| E[Use Service Principal]
+    B --&gt; |No| F{Do the resources or applications support managed identities?}
+    F --&gt; |No| G[Use Service Principal]
+    F --&gt; |Yes| H[Use Managed Identity]
+</code></pre>
+<h3 id="conclusion"><a class="toclink" href="../../2024/06/18/when-to-use-service-principals/#conclusion">Conclusion</a></h3>
+<p>In conclusion, you should use managed identities whenever possible. However, if your application or service is running on-premises or if the resources or applications do not support managed identities, you should use service principals instead.</p>
+</div>
+</article>
+<article class="md-post md-post--excerpt">
+<header class="md-post__header">
+<nav class="md-post__authors md-typeset">
+<span class="md-author">
+<img alt="Rafael Fernández" src="https://avatars.githubusercontent.com/u/39990341"/>
+</span>
+</nav>
+<div class="md-post__meta md-meta">
+<ul class="md-meta__list">
+<li class="md-meta__item">
 <time datetime="2024-06-17 00:00:00">June 17, 2024</time></li>
 <li class="md-meta__item">
             in
@@ -685,8 +725,8 @@
 </ul>
 </li>
 <li><strong>Conditions</strong>: Control access based in signals from conditions.<ul>
-<li><strong>User risk</strong>: Control access based on the user risk level calculated by Microsoft Entra Identity Protection. User risk represents the probability that a given identity or account is compromised</li>
-<li><strong>Sign-in risk</strong>: Control access based on the sign-in risk level calculated by Microsoft Entra Identity Protection. Sign-in risk represents the probability that a given authentication request wasn't made by the identity owner.</li>
+<li><strong>User risk</strong>: Control access based on the user risk level calculated by Microsoft Entra Identity Protection. User risk represents the probability that a given identity or account is compromised, for example: Published credentials in Dark Web.</li>
+<li><strong>Sign-in risk</strong>: Control access based on the sign-in risk level calculated by Microsoft Entra Identity Protection. Sign-in risk represents the probability that a given authentication request wasn't made by the identity owner. For example, sign-in from a new location or new device.</li>
 <li><strong>Insider risk</strong>: Control access for users who are assigned specific risk levels from Adaptive Protection, a Microsoft Purview Insider Risk Management feature. Insider risk represents the probability that a given user is engaged in risky data-related activities.</li>
 <li><strong>Device Platform</strong>: Include and Exclude. Control access based on the platform of the device used to sign in.</li>
 <li><strong>Client apps</strong>: Include and Exclude. Control access based on the client apps used to sign in.</li>

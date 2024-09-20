@@ -7,13 +7,14 @@
 <meta content="width=device-width,initial-scale=1" name="viewport"/>
 <meta content="A blog about Azure, DevOps and other stuff" name="description"/>
 <meta content="Rafael Fernández" name="author"/>
-<link href="https://rfernandezdo.github.io/blog/2024/09/09/markmap/" rel="canonical"/>
-<link href="../../../06/18/when-to-use-service-principals/" rel="prev"/>
+<link href="https://rfernandezdo.github.io/blog/2024/06/16/data-threat-modeling-in-azure-storage-accounts/" rel="canonical"/>
+<link href="../../15/tagging-best-practices-in-azure/" rel="prev"/>
+<link href="../../17/microsoft-entra-conditional-access/" rel="next"/>
 <link href="../../../../../feed_rss_created.xml" rel="alternate" title="RSS feed" type="application/rss+xml"/>
 <link href="../../../../../feed_rss_updated.xml" rel="alternate" title="RSS feed of updated content" type="application/rss+xml"/>
 <link href="../../../../../assets/images/favicon.png" rel="icon"/>
 <meta content="mkdocs-1.6.1, mkdocs-material-9.5.34" name="generator"/>
-<title>markmap - Un Rinconcito donde contar lo que quiera</title>
+<title>Data threat modeling in Azure storage accounts - Un Rinconcito donde contar lo que quiera</title>
 <link href="../../../../../assets/stylesheets/main.35f28582.min.css" rel="stylesheet"/>
 <link href="../../../../../assets/stylesheets/palette.06af60db.min.css" rel="stylesheet"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
@@ -21,28 +22,18 @@
 <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
 <script>__md_scope=new URL("../../../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
 <meta content="website" property="og:type"/>
-<meta content="markmap - Un Rinconcito donde contar lo que quiera" property="og:title"/>
+<meta content="Data threat modeling in Azure storage accounts - Un Rinconcito donde contar lo que quiera" property="og:title"/>
 <meta content="A blog about Azure, DevOps and other stuff" property="og:description"/>
-<meta content="https://rfernandezdo.github.io/assets/images/social/blog/posts/2024/09/20240909_DevOps_markmap.png" property="og:image"/>
+<meta content="https://rfernandezdo.github.io/assets/images/social/blog/posts/2024/09/20240916_Azure_Storage_Account_Data_Threats.png" property="og:image"/>
 <meta content="image/png" property="og:image:type"/>
 <meta content="1200" property="og:image:width"/>
 <meta content="630" property="og:image:height"/>
-<meta content="https://rfernandezdo.github.io/blog/2024/09/09/markmap/" property="og:url"/>
+<meta content="https://rfernandezdo.github.io/blog/2024/06/16/data-threat-modeling-in-azure-storage-accounts/" property="og:url"/>
 <meta content="summary_large_image" name="twitter:card"/>
-<meta content="markmap - Un Rinconcito donde contar lo que quiera" name="twitter:title"/>
+<meta content="Data threat modeling in Azure storage accounts - Un Rinconcito donde contar lo que quiera" name="twitter:title"/>
 <meta content="A blog about Azure, DevOps and other stuff" name="twitter:description"/>
-<meta content="https://rfernandezdo.github.io/assets/images/social/blog/posts/2024/09/20240909_DevOps_markmap.png" name="twitter:image"/>
-<script src="../../../../../js/unpkg.com/d3@7.js" type="text/javascript"></script><script src="../../../../../js/unpkg.com/markmap-lib@0.15.4.js" type="text/javascript"></script><script src="../../../../../js/unpkg.com/markmap-view@0.15.4.js" type="text/javascript"></script><style type="text/css">div.mkdocs-markmap {
-    width: 100%;
-    min-height: 1em;
-    border: 1px solid grey;
-}
-.mkdocs-markmap > svg {
-    width: 100%;
-    height: 100%;
-    display: block;
-}
-</style> <link href="../../../../../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
+<meta content="https://rfernandezdo.github.io/assets/images/social/blog/posts/2024/09/20240916_Azure_Storage_Account_Data_Threats.png" name="twitter:image"/>
+ <link href="../../../../../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
     html.glightbox-open { overflow: initial; height: 100%; }
     .gslide-title { margin-top: 0px; user-select: text; }
     .gslide-desc { color: #666; user-select: text; }
@@ -57,7 +48,7 @@
 <input autocomplete="off" class="md-toggle" data-md-toggle="search" id="__search" type="checkbox"/>
 <label class="md-overlay" for="__drawer"></label>
 <div data-md-component="skip">
-<a class="md-skip" href="#markmap">
+<a class="md-skip" href="#data-threat-modeling-in-azure-storage-accounts">
           Skip to content
         </a>
 </div>
@@ -81,7 +72,7 @@
 <div class="md-header__topic" data-md-component="header-topic">
 <span class="md-ellipsis">
             
-              markmap
+              Data threat modeling in Azure storage accounts
             
           </span>
 </div>
@@ -250,14 +241,14 @@
           </label>
 <ul class="md-nav__list" data-md-scrollfix="">
 <li class="md-nav__item">
-<a class="md-nav__link" href="../../">
+<a class="md-nav__link" href="../../../09/">
 <span class="md-ellipsis">
     2024/09
   </span>
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="../../../06/">
+<a class="md-nav__link" href="../../">
 <span class="md-ellipsis">
     2024/06
   </span>
@@ -672,7 +663,7 @@
 <li class="md-nav__item">
 <div class="md-nav__link">
 <svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19 19H5V8h14m-3-7v2H8V1H6v2H5c-1.11 0-2 .89-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2h-1V1m-1 11h-5v5h5z"></path></svg>
-<time class="md-ellipsis" datetime="2024-09-09 00:00:00">September 9, 2024</time>
+<time class="md-ellipsis" datetime="2024-06-16 00:00:00">June 16, 2024</time>
 </div>
 </li>
 <li class="md-nav__item">
@@ -681,7 +672,7 @@
 <span class="md-ellipsis">
                             in
                             
-                              <a href="../../../../category/devops/">DevOps</a></span>
+                              <a href="../../../../category/azure-services/">Azure Services</a></span>
 </div>
 </li>
 <li class="md-nav__item">
@@ -689,7 +680,7 @@
 <svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 20a8 8 0 0 0 8-8 8 8 0 0 0-8-8 8 8 0 0 0-8 8 8 8 0 0 0 8 8m0-18a10 10 0 0 1 10 10 10 10 0 0 1-10 10C6.47 22 2 17.5 2 12A10 10 0 0 1 12 2m.5 5v5.25l4.5 2.67-.75 1.23L11 13V7z"></path></svg>
 <span class="md-ellipsis">
                             
-                              2 min read
+                              11 min read
                             
                           </span>
 </div>
@@ -706,23 +697,51 @@
     </label>
 <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
 <li class="md-nav__item">
-<a class="md-nav__link" href="#installation-in-mkdocs">
+<a class="md-nav__link" href="#what-is-data-threat-modeling">
 <span class="md-ellipsis">
-      Installation in mkdocs
+      What is data threat modeling?
     </span>
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="#usage">
+<a class="md-nav__link" href="#identify-assets-in-azure-storage-accounts">
 <span class="md-ellipsis">
-      Usage
+      Identify assets in Azure storage accounts
     </span>
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="#visual-studio-code-extension">
+<a class="md-nav__link" href="#identify-threats-to-data-in-azure-storage-accounts">
 <span class="md-ellipsis">
-      Visual Studio Code Extension
+      Identify threats to data in Azure storage accounts
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#assess-risks-to-data-in-azure-storage-accounts">
+<span class="md-ellipsis">
+      Assess risks to data in Azure storage accounts
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#develop-mitigation-strategies-for-data-in-azure-storage-accounts">
+<span class="md-ellipsis">
+      Develop mitigation strategies for data in Azure storage accounts
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#mixed-strategies-for-data-protection-in-azure-storage-accounts">
+<span class="md-ellipsis">
+      Mixed strategies for data protection in Azure storage accounts
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#example-of-mixed-strategies-for-data-protection-in-azure-storage-accounts">
+<span class="md-ellipsis">
+      Example of mixed strategies for data protection in Azure storage accounts
     </span>
 </a>
 </li>
@@ -747,64 +766,376 @@
 </div>
 <article class="md-content__inner md-typeset">
 <nav class="md-tags">
-<a class="md-tag" href="../../../../tags/#markmap">markmap</a>
+<a class="md-tag" href="../../../../tags/#azure-storage-account">Azure Storage Account</a>
 </nav>
-<h1 id="markmap">markmap</h1>
-<p>markmap is a visualisation tool that allows you to create mindmaps from markdown files. It is based on the mermaid library and can be used to create a visual representation of a markdown file.</p>
-<h2 id="installation-in-mkdocs">Installation in mkdocs</h2>
-<p>To install markmap in mkdocs, you need install the plugin using pip:</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-0-1"><a href="#__codelineno-0-1" id="__codelineno-0-1" name="__codelineno-0-1"></a>pip<span class="w"> </span>install<span class="w"> </span>mkdocs-markmap
-</span></code></pre></div>
-<p>Then, you need to add the following lines to your <code>mkdocs.yml</code> file:</p>
-<div class="language-yaml highlight"><pre><span></span><code><span id="__span-1-1"><a href="#__codelineno-1-1" id="__codelineno-1-1" name="__codelineno-1-1"></a><span class="nt">plugins</span><span class="p">:</span>
-</span><span id="__span-1-2"><a href="#__codelineno-1-2" id="__codelineno-1-2" name="__codelineno-1-2"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">markmap</span>
-</span></code></pre></div>
-<h2 id="usage">Usage</h2>
-<p>To use markmap, you need to add the following code block to your markdown file:</p>
-<div class="language-markdown highlight"><pre><span></span><code><span id="__span-2-1"><a href="#__codelineno-2-1" id="__codelineno-2-1" name="__codelineno-2-1"></a><span class="sb">```markmap</span><span class="w">  </span>
-</span><span id="__span-2-2"><a href="#__codelineno-2-2" id="__codelineno-2-2" name="__codelineno-2-2"></a><span class="s"># Root</span>
-</span><span id="__span-2-3"><a href="#__codelineno-2-3" id="__codelineno-2-3" name="__codelineno-2-3"></a>
-</span><span id="__span-2-4"><a href="#__codelineno-2-4" id="__codelineno-2-4" name="__codelineno-2-4"></a><span class="s">## Branch 1</span>
-</span><span id="__span-2-5"><a href="#__codelineno-2-5" id="__codelineno-2-5" name="__codelineno-2-5"></a>
-</span><span id="__span-2-6"><a href="#__codelineno-2-6" id="__codelineno-2-6" name="__codelineno-2-6"></a><span class="s">* Branchlet 1a</span>
-</span><span id="__span-2-7"><a href="#__codelineno-2-7" id="__codelineno-2-7" name="__codelineno-2-7"></a><span class="s">* Branchlet 1b</span>
-</span><span id="__span-2-8"><a href="#__codelineno-2-8" id="__codelineno-2-8" name="__codelineno-2-8"></a>
-</span><span id="__span-2-9"><a href="#__codelineno-2-9" id="__codelineno-2-9" name="__codelineno-2-9"></a><span class="s">## Branch 2</span>
-</span><span id="__span-2-10"><a href="#__codelineno-2-10" id="__codelineno-2-10" name="__codelineno-2-10"></a>
-</span><span id="__span-2-11"><a href="#__codelineno-2-11" id="__codelineno-2-11" name="__codelineno-2-11"></a><span class="s">* Branchlet 2a</span>
-</span><span id="__span-2-12"><a href="#__codelineno-2-12" id="__codelineno-2-12" name="__codelineno-2-12"></a><span class="s">* Branchlet 2b</span>
-</span><span id="__span-2-13"><a href="#__codelineno-2-13" id="__codelineno-2-13" name="__codelineno-2-13"></a><span class="sb">```</span>
-</span></code></pre></div>
-<p>And this will generate the following mindmap:</p>
-<p><a class="glightbox" data-desc-position="bottom" data-height="auto" data-type="image" data-width="auto" href="../../20240909_DevOps_markmap.png"><img alt="alt text" src="../../20240909_DevOps_markmap.png"/></a></p>
-<p>That is for the future, because in my mkdocs not work as expected:</p>
-<div class="language-markmap mkdocs-markmap"><markmap-data hidden="true"># Root
+<h1 id="data-threat-modeling-in-azure-storage-accounts">Data threat modeling in Azure storage accounts</h1>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>I apologize in advance if this is a crazy idea and there is some mistake!! I am just trying to learn and share knowledge.</p>
+</div>
+<p>Azure Storage Account is a service that provides scalable, secure, and reliable storage for data. It is used to store data such as blobs, files, tables, and queues. However, it is important to ensure that the data stored in Azure Storage Account is secure and protected from security threats. In this article, we will discuss how to perform data threat modeling in Azure storage accounts.</p>
+<h2 id="what-is-data-threat-modeling">What is data threat modeling?</h2>
+<p>Data threat modeling is a process of identifying and analyzing potential threats to data security. It helps organizations understand the risks to their data and develop strategies to mitigate those risks. Data threat modeling involves the following steps:</p>
+<ol>
+<li><strong>Identify assets</strong>: Identify the data assets stored in Azure storage accounts, such as blobs, files, tables, and queues.</li>
+<li><strong>Identify threats</strong>: Identify potential threats to the data assets, such as unauthorized access, data breaches, data leakage, malware, phishing attacks, insider threats, and data loss.</li>
+<li><strong>Assess risks</strong>: Assess the risks associated with each threat, such as the likelihood of the threat occurring and the impact of the threat on the data assets.</li>
+<li><strong>Develop mitigation strategies</strong>: Develop strategies to mitigate the risks, such as implementing security controls, access controls, encryption, monitoring, and auditing.</li>
+</ol>
+<p>By performing data threat modeling, organizations can identify and address security vulnerabilities in Azure storage accounts and protect their data from security threats.</p>
+<h2 id="identify-assets-in-azure-storage-accounts">Identify assets in Azure storage accounts</h2>
+<p>Azure storage accounts can store various types of data assets, including:</p>
+<ul>
+<li><strong>Blobs</strong>: Binary large objects (blobs) are used to store unstructured data, such as images, videos, and documents.</li>
+<li><strong>Files</strong>: Files are used to store structured data, such as text files, configuration files, and log files.</li>
+<li><strong>Tables</strong>: Tables are used to store structured data in a tabular format, such as customer information, product information, and transaction data.</li>
+<li><strong>Queues</strong>: Queues are used to store messages for communication between applications, such as task messages, notification messages, and status messages.</li>
+<li><strong>Disks</strong>: Disks are used to store virtual machine disks, such as operating system disks and data disks.</li>
+</ul>
+<p>Identifying the data assets stored in Azure storage accounts is the first step in data threat modeling. It helps organizations understand the types of data stored in Azure storage accounts and the potential risks to those data assets.</p>
+<h2 id="identify-threats-to-data-in-azure-storage-accounts">Identify threats to data in Azure storage accounts</h2>
+<p>There are several threats to data stored in Azure storage accounts, including:</p>
+<ul>
+<li><strong>Unauthorized access</strong>: Unauthorized users gaining access to Azure storage accounts and stealing data.</li>
+<li><strong>Data breaches</strong>: Data breaches can expose sensitive data stored in Azure storage accounts.</li>
+<li><strong>Data leakage</strong>: Data leakage can occur due to misconfigured access controls or insecure data transfer protocols.</li>
+<li><strong>Data loss</strong>: Data loss can occur due to accidental deletion, corruption, or hardware failure.</li>
+<li><strong>Ransomware</strong>: Ransomware can encrypt data stored in Azure storage accounts and demand a ransom for decryption.</li>
+<li><strong>DDoS attacks</strong>: DDoS attacks can disrupt access to data stored in Azure storage accounts.</li>
+<li><strong>Phishing attacks</strong>: Phishing attacks can trick users into providing their login credentials, which can be used to access and steal data.</li>
+<li><strong>Malware</strong>: Malware can be used to steal data from Azure storage accounts and transfer it to external servers.</li>
+<li><strong>Insider threats</strong>: Employees or contractors with access to sensitive data may intentionally or unintentionally exfiltrate data.</li>
+<li><strong>Data exfiltration</strong>: Unauthorized transfer of data from Azure storage accounts to external servers.</li>
+</ul>
+<p>For example, the flow of data exfiltration in Azure storage accounts can be summarized as follows:</p>
+<pre class="mermaid"><code>sequenceDiagram
+    participant User
+    participant Azure Storage Account
+    participant External Server
 
-## Branch 1
-
-* Branchlet 1a
-* Branchlet 1b
-
-## Branch 2
-
-* Branchlet 2a
-* Branchlet 2b</markmap-data></div>
-<h2 id="visual-studio-code-extension">Visual Studio Code Extension</h2>
-<p>There is also a Visual Studio Code extension that allows you to create mindmaps from markdown files. You can install it from the Visual Studio Code marketplace.</p>
-<p><div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a href="#__codelineno-3-1" id="__codelineno-3-1" name="__codelineno-3-1"></a>    Name: Markdown Preview Markmap Support
-</span><span id="__span-3-2"><a href="#__codelineno-3-2" id="__codelineno-3-2" name="__codelineno-3-2"></a>    Id: phoihos.markdown-markmap
-</span><span id="__span-3-3"><a href="#__codelineno-3-3" id="__codelineno-3-3" name="__codelineno-3-3"></a>    Description: Visualize Markdown as Mindmap (A.K.A Markmap) to VS Code's built-in markdown preview
-</span><span id="__span-3-4"><a href="#__codelineno-3-4" id="__codelineno-3-4" name="__codelineno-3-4"></a>    Version: 1.4.6
-</span><span id="__span-3-5"><a href="#__codelineno-3-5" id="__codelineno-3-5" name="__codelineno-3-5"></a>    Publisher: phoihos
-</span><span id="__span-3-6"><a href="#__codelineno-3-6" id="__codelineno-3-6" name="__codelineno-3-6"></a>    VS Marketplace Link: https://marketplace.visualstudio.com/items?itemName=phoihos.markdown-markmap
-</span></code></pre></div>
-<a href="https://marketplace.visualstudio.com/items?itemName=phoihos.markdown-markmap">VS Marketplace Link</a></p>
+    User-&gt;&gt;Azure Storage Account: Upload data
+    Azure Storage Account-&gt;&gt;External Server: Unauthorized transfer of data
+</code></pre>
+<p>In this flow, the user uploads data to the Azure Storage Account, and the data is then transferred to an external server without authorization. This unauthorized transfer of data is known as data exfiltration.</p>
+<h2 id="assess-risks-to-data-in-azure-storage-accounts">Assess risks to data in Azure storage accounts</h2>
+<p>Assessing the risks associated with threats to data in Azure storage accounts is an important step in data threat modeling. Risks can be assessed based on the likelihood of the threat occurring and the impact of the threat on the data assets. Risks can be categorized as low, medium, or high based on the likelihood and impact of the threat.</p>
+<p>For example, the risk of unauthorized access to Azure storage accounts may be categorized as high if the likelihood of unauthorized access is high and the impact of unauthorized access on the data assets is high. Similarly, the risk of data leakage may be categorized as medium if the likelihood of data leakage is medium and the impact of data leakage on the data assets is medium.</p>
+<p>By assessing risks to data in Azure storage accounts, organizations can prioritize security measures and develop strategies to mitigate the risks.</p>
+<p>For example, the risk of data exfiltration in Azure storage accounts can be assessed as follows:</p>
+<pre class="mermaid"><code>pie
+    title Data Exfiltration Risk Assessment
+    "Unauthorized Access" : 30
+    "Data Breaches" : 20
+    "Data Leakage" : 15
+    "Malware" : 10
+    "Phishing Attacks" : 10
+    "Insider Threats" : 15
+</code></pre>
+<h2 id="develop-mitigation-strategies-for-data-in-azure-storage-accounts">Develop mitigation strategies for data in Azure storage accounts</h2>
+<p>Developing mitigation strategies is an essential step in data threat modeling. Mitigation strategies help organizations protect their data assets from security threats and reduce the risks associated with those threats. Mitigation strategies could include the following:</p>
+<ol>
+<li><strong>Implement access controls</strong>: Implement access controls to restrict access to Azure storage accounts based on user roles and permissions.</li>
+<li><strong>Encrypt data</strong>: Encrypt data stored in Azure storage accounts to protect it from unauthorized access.</li>
+<li><strong>Monitor and audit access</strong>: Monitor and audit access to Azure storage accounts to detect unauthorized access and data exfiltration.</li>
+<li><strong>Implement security controls</strong>: Implement security controls, such as firewalls, network security groups, and intrusion detection systems, to protect data in Azure storage accounts.</li>
+<li><strong>Use secure transfer protocols</strong>: Use secure transfer protocols, such as HTTPS, to transfer data to and from Azure storage accounts.</li>
+<li><strong>Implement multi-factor authentication</strong>: Implement multi-factor authentication to protect user accounts from unauthorized access.</li>
+<li><strong>Train employees</strong>: Train employees on data security best practices to prevent data exfiltration and other security threats.</li>
+<li><strong>Backup data</strong>: Backup data stored in Azure storage accounts to prevent data loss due to accidental deletion or corruption.</li>
+<li><strong>Update software</strong>: Keep software and applications up to date to protect data stored in Azure storage accounts from security vulnerabilities.</li>
+<li><strong>Implement data loss prevention (DLP) policies</strong>: Implement DLP policies to prevent data leakage and unauthorized transfer of data from Azure storage accounts.</li>
+</ol>
+<p>As it is not an easy task, Microsoft provides us with tools for this, in the case of using a security framework we can always use the MCSB (Microsoft Cloud Security Baseline) which is a set of guidelines and best practices for securing Azure services, including Azure storage accounts. The MCSB provides recommendations for securing Azure storage accounts, such as enabling encryption, implementing access controls, monitoring access, and auditing activities:</p>
+<table>
+<thead>
+<tr>
+<th>Control Domain</th>
+<th>ASB Control ID</th>
+<th>ASB Control Title</th>
+<th>Responsibility</th>
+<th>Feature Name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Asset Management</td>
+<td>AM-2</td>
+<td>Use only approved services</td>
+<td>Customer</td>
+<td>Azure Policy Support</td>
+</tr>
+<tr>
+<td>Backup and recovery</td>
+<td>BR-1</td>
+<td>Ensure regular automated backups</td>
+<td>Customer</td>
+<td>Azure Backup</td>
+</tr>
+<tr>
+<td>Backup and recovery</td>
+<td>BR-1</td>
+<td>Ensure regular automated backups</td>
+<td>Customer</td>
+<td>Service Native Backup Capability</td>
+</tr>
+<tr>
+<td>Data Protection</td>
+<td>DP-1</td>
+<td>Discover, classify, and label sensitive data</td>
+<td>Customer</td>
+<td>Sensitive Data Discovery and Classification</td>
+</tr>
+<tr>
+<td>Data Protection</td>
+<td>DP-2</td>
+<td>Monitor anomalies and threats targeting sensitive data</td>
+<td>Customer</td>
+<td>Data Leakage/Loss Prevention</td>
+</tr>
+<tr>
+<td>Data Protection</td>
+<td>DP-3</td>
+<td>Encrypt sensitive data in transit</td>
+<td>Microsoft</td>
+<td>Data in Transit Encryption</td>
+</tr>
+<tr>
+<td>Data Protection</td>
+<td>DP-4</td>
+<td>Enable data at rest encryption by default</td>
+<td>Microsoft</td>
+<td>Data at Rest Encryption Using Platform Keys</td>
+</tr>
+<tr>
+<td>Data Protection</td>
+<td>DP-5</td>
+<td>Use customer-managed key option in data at rest encryption when required</td>
+<td>Customer</td>
+<td>Data at Rest Encryption Using CMK</td>
+</tr>
+<tr>
+<td>Data Protection</td>
+<td>DP-6</td>
+<td>Use a secure key management process</td>
+<td>Customer</td>
+<td>Key Management in Azure Key Vault</td>
+</tr>
+<tr>
+<td>Identity Management</td>
+<td>IM-1</td>
+<td>Use centralized identity and authentication system</td>
+<td>Microsoft</td>
+<td>Azure AD Authentication Required for Data Plane Access</td>
+</tr>
+<tr>
+<td>Identity Management</td>
+<td>IM-1</td>
+<td>Use centralized identity and authentication system</td>
+<td>Customer</td>
+<td>Local Authentication Methods for Data Plane Access</td>
+</tr>
+<tr>
+<td>Identity Management</td>
+<td>IM-3</td>
+<td>Manage application identities securely and automatically</td>
+<td>Customer</td>
+<td>Managed Identities</td>
+</tr>
+<tr>
+<td>Identity Management</td>
+<td>IM-3</td>
+<td>Manage application identities securely and automatically</td>
+<td>Customer</td>
+<td>Service Principals</td>
+</tr>
+<tr>
+<td>Identity Management</td>
+<td>IM-7</td>
+<td>Restrict resource access based on conditions</td>
+<td>Customer</td>
+<td>Conditional Access for Data Plane</td>
+</tr>
+<tr>
+<td>Identity Management</td>
+<td>IM-8</td>
+<td>Restrict the exposure of credential and secrets</td>
+<td>Customer</td>
+<td>Service Credential and Secrets Support Integration and Storage in Azure Key Vault</td>
+</tr>
+<tr>
+<td>Logging and threat detection</td>
+<td>LT-1</td>
+<td>Enable threat detection capabilities</td>
+<td>Customer</td>
+<td>Microsoft Defender for Service / Product Offering</td>
+</tr>
+<tr>
+<td>Logging and threat detection</td>
+<td>LT-4</td>
+<td>Enable network logging for security investigation</td>
+<td>Customer</td>
+<td>Azure Resource Logs</td>
+</tr>
+<tr>
+<td>Network Security</td>
+<td>NS-2</td>
+<td>Secure cloud services with network controls</td>
+<td>Customer</td>
+<td>Disable Public Network Access</td>
+</tr>
+<tr>
+<td>Network Security</td>
+<td>NS-2</td>
+<td>Secure cloud services with network controls</td>
+<td>Customer</td>
+<td>Azure Private Link</td>
+</tr>
+<tr>
+<td>Privileged Access</td>
+<td>PA-7</td>
+<td>Follow just enough administration(least privilege) principle</td>
+<td>Customer</td>
+<td>Azure RBAC for Data Plane</td>
+</tr>
+<tr>
+<td>Privileged Access</td>
+<td>PA-8</td>
+<td>Choose approval process for third-party support</td>
+<td>Customer</td>
+<td>Customer Lockbox</td>
+</tr>
+</tbody>
+</table>
+<p>And part of MCSB can be complemented with Azure Well Architected Framework, which provides guidance on best practices for designing and implementing secure, scalable, and reliable cloud solutions. The Well Architected Framework includes security best practices for Azure storage accounts, such as implementing security controls, access controls, encryption, monitoring, and auditing:</p>
+<ol>
+<li><strong>Enable Azure Defender for all your storage accounts</strong>: Azure Defender for Storage provides advanced threat protection for Azure storage accounts. It helps detect and respond to security threats in real-time.</li>
+<li><strong>Turn on soft delete for blob data</strong>: Soft delete helps protect your blob data from accidental deletion. It allows you to recover deleted data within a specified retention period.</li>
+<li><strong>Use Microsoft Entitlement Management to authorize access to blob data</strong>: Microsoft Entitlement Management provides fine-grained access control for Azure storage accounts. It allows you to define and enforce access policies based on user roles and permissions.</li>
+<li><strong>Consider the principle of least privilege</strong>: When assigning permissions to a Microsoft Entitlement security principal through Azure RBAC, follow the principle of least privilege. Only grant the minimum permissions required to perform the necessary tasks.</li>
+<li><strong>Use managed identities to access blob and queue data</strong>: Managed identities provide a secure way to access Azure storage accounts without storing credentials in your code.</li>
+<li><strong>Use blob versioning or immutable blobs</strong>: Blob versioning and immutable blobs help protect your business-critical data from accidental deletion or modification.</li>
+<li><strong>Restrict default internet access for storage accounts</strong>: Limit default internet access to Azure storage accounts to prevent unauthorized access.</li>
+<li><strong>Enable firewall rules</strong>: Use firewall rules to restrict network access to Azure storage accounts. Only allow trusted IP addresses to access the storage account.</li>
+<li><strong>Limit network access to specific networks</strong>: Limit network access to specific networks or IP ranges to prevent unauthorized access.</li>
+<li><strong>Allow trusted Microsoft services to access the storage account</strong>: Allow only trusted Microsoft services to access the storage account to prevent unauthorized access.</li>
+<li><strong>Enable the Secure transfer required option</strong>: Enable the Secure transfer required option on all your storage accounts to enforce secure connections.</li>
+<li><strong>Limit shared access signature (SAS) tokens to HTTPS connections only</strong>: Limit shared access signature (SAS) tokens to HTTPS connections only to prevent unauthorized access.</li>
+<li><strong>Avoid using Shared Key authorization</strong>: Avoid using Shared Key authorization to access storage accounts. Use Azure AD or SAS tokens instead.</li>
+<li><strong>Regenerate your account keys periodically</strong>: Regenerate your account keys periodically to prevent unauthorized access.</li>
+<li><strong>Create a revocation plan for SAS tokens</strong>: Create a revocation plan and have it in place for any SAS tokens that you issue to clients. This will help you revoke access to the storage account if necessary.</li>
+<li><strong>Use near-term expiration times on SAS tokens</strong>: Use near-term expiration times on impromptu SAS, service SAS, or account SAS to limit the exposure of the token.</li>
+</ol>
+<h2 id="mixed-strategies-for-data-protection-in-azure-storage-accounts">Mixed strategies for data protection in Azure storage accounts</h2>
+<p>Diagram of the mixed strategies for data protection in Azure storage accounts:</p>
+<pre class="mermaid"><code>graph LR
+    A[Asset Management] --&gt;B(AM-2)
+    B --&gt; C[Use only approved services]
+    C --&gt; D[Azure Policy] 
+    E[Backup and recovery] --&gt;F(BR-1)
+    F --&gt; G[Ensure regular automated backups]
+    G --&gt; H[Azure Backup]
+    G --&gt; I[Service Native Backup Capability]
+    I --&gt; I1["Azure Storage Account Configuration"]
+    I1 --&gt; I11["Turn on soft delete for blob data"]
+    I1 --&gt; I12["Use blob versioning or immutable blobs"]
+</code></pre>
+<pre class="mermaid"><code>graph LR
+    J[Data Protection] --&gt;K(DP-1)
+    K --&gt; L[Discover, classify, and label sensitive data]    
+    L --&gt; M[Sensitive Data Discovery and Classification]
+    M --&gt; M1["Microsoft Pureview"]       
+    J --&gt; N(DP-2)
+    N --&gt; O[Monitor anomalies and threats targeting sensitive data]
+    O --&gt; P[Data Leakage/Loss Prevention]
+    P --&gt; P1["Microsoft Defender for Storage"]
+    J --&gt; Q(DP-3)
+    Q --&gt; R[Encrypt sensitive data in transit]
+    R --&gt; S[Data in Transit Encryption]
+    S --&gt; S1["Azure Storage Account Configuration"]
+    S1 --&gt; S2["Enforce minimum TLS version"]
+    J --&gt; T(DP-4)
+    T --&gt; U[Enable data at rest encryption by default]
+    U --&gt; V[Data at Rest Encryption Using Platform Keys]
+    V --&gt; WW["Azure Storage Account Configuration"]    
+    J --&gt; W(DP-5)
+    W --&gt; X[Use customer-managed key option in data at rest encryption when required]
+    X --&gt; Y[Data at Rest Encryption Using CMK]
+    Y --&gt; WW["Azure Storage Account Configuration"]    
+    J --&gt; Z(DP-6)
+    Z --&gt; AA[Use a secure key management process]
+    AA --&gt; AB[Key Management in Azure Key Vault]
+    AB --&gt; AC["DEPRECATED"]
+</code></pre>
+<pre class="mermaid"><code>graph LR  
+    AC[Identity Management] --&gt;AD(IM-1)
+    AD --&gt; AE[Use centralized identity and authentication system]
+    AE --&gt; AE1["Microsoft Entra ID"]
+    AE --&gt; AF[Microsoft Entra ID Authentication Required for Data Plane Access]
+    AF --&gt; AF1["Azure Storage Account Configuration"]
+    AF1 --&gt; AF2["Disable Allow Shared Key authorization"]
+    AD --&gt; AG[Local Authentication Methods for Data Plane Access]
+    AG --&gt; AG1["Azure Storage Account Configuration"]
+    AG1 --&gt; AG2["Don't use SFTP if you don't need it"]
+    AC --&gt; AH(IM-3)
+    AH --&gt; AI[Manage application identities securely and automatically]
+    AI --&gt; AJ[Managed Identities]
+    AI --&gt; AK[Service Principals]
+    AK --&gt; AK1["Rotate or regenerate service principal credentials"]
+    AC --&gt; AL(IM-7)
+    AL --&gt; AM[Restrict resource access based on conditions]
+    AM --&gt; AN[Microsoft Entra Conditional Access for Data Plane]
+    AC --&gt; AO(IM-8)
+    AO --&gt; AP[Restrict the exposure of credential and secrets]    
+    AP --&gt; AQ[Service Credential and Secrets Support Integration and Storage in Azure Key Vault]    
+    AQ --&gt; AK1
+    click AK1 "https://github.com/Azure-Samples/KeyVault-Rotation-StorageAccountKey-PowerShell" "Open this in a new tab" _blank
+</code></pre>
+<p><pre class="mermaid"><code>graph LR
+AR[Logging and threat detection] --&gt;AS(LT-1)
+    AS --&gt; AT[Enable threat detection capabilities]
+    AT --&gt; AU[Microsoft Defender for Service / Product Offering]
+    AU --&gt; AU1["Microsoft Defender for Storage"]
+    AR --&gt; AV(LT-4)
+    AV --&gt; AW[Enable network logging for security investigation]
+    AW --&gt; AX[Azure Resource Logs]
+    AX --&gt; AX1["Azure Monitor"]
+    AX --&gt; AX2["Azure Activity Log"]
+    click AU1 "https://learn.microsoft.com/en-us/azure/defender-for-cloud/defender-for-storage-introduction" "Open this in a new tab" _blank
+</code></pre>
+<pre class="mermaid"><code>graph LR
+    AY[Network Security] --&gt;AZ(NS-2)
+    AZ --&gt; BA[Secure cloud services with network controls]
+    BA --&gt; BB["Azure Storage Account Configuration"]
+    BB --&gt; BB1[Disable Public Network Access]
+    BB --&gt; BB2[Allow trusted Microsoft services to access the storage account]
+    BA --&gt; BC[Azure Private Link]
+    BC --&gt; BC1["Azure Private Endpoint"]
+    BA --&gt; BD[Azure Network]
+    BD --&gt; BD1["Azure Service Endpoint"]
+    BA --&gt; BE["Network Security Perimeter"]
+</code></pre></p>
+<pre class="mermaid"><code>graph LR
+    BD[Privileged Access] --&gt;BE(PA-7)
+    BE --&gt; BF["Follow just enough administration(least privilege) principle"]
+    BF --&gt; BG[Azure RBAC for Data Plane]
+    BG --&gt; BG1["Azure RBAC"]
+    BG1 --&gt; BG2["Azure RBAC Roles"]
+    BD --&gt; BH(PA-8)
+    BH --&gt; BI[Choose approval process for third-party support]
+    BI --&gt; BJ[Customer Lockbox]
+click BG2 "https://learn.microsoft.com/en-us/azure/role-based-access-control/built-in-roles/storage" "Open this in a new tab" _blank
+</code></pre>
+<h2 id="example-of-mixed-strategies-for-data-protection-in-azure-storage-accounts">Example of mixed strategies for data protection in Azure storage accounts</h2>
+<p>The following example illustrates how to implement mixed strategies for data protection in Azure storage accounts:</p>
 <h2 id="conclusion">Conclusion</h2>
-<p>I don't like too much this plugin because it not work as expected in my mkdocs but it's a good tool for documentation.</p>
+<p>In conclusion, data threat modeling is an important process for identifying and addressing security vulnerabilities in Azure storage accounts. By identifying assets, threats, risks, and developing mitigation strategies, organizations can protect their data from security threats and ensure the security and integrity of their data assets. By following best practices and implementing security measures, organizations can prevent and detect data threats in Azure storage accounts and protect their data from security threats.</p>
 <h2 id="references">References</h2>
 <ul>
-<li><a href="https://markmap.js.org/">markmap</a></li>
-<li><a href="https://github.com/markmap/mkdocs-markmap">mkdocs-markmap</a></li>
+<li><a href="https://docs.microsoft.com/en-us/azure/storage/common/storage-account-overview">Azure Storage Account Documentation</a></li>
+<li><a href="https://learn.microsoft.com/en-us/azure/well-architected/service-guides/storage-accounts/security">Azure security baseline for Storage</a></li>
+<li><a href="https://learn.microsoft.com/en-us/azure/well-architected/service-guides/storage-accounts/security">Well Architected Framework - Storage Accounts and security</a></li>
+<li><a href="https://learn.microsoft.com/en-us/azure/defender-for-storage/overview">Microsoft Defender for Storage</a></li>
+<li><a href="https://center-for-threat-informed-defense.github.io/mappings-explorer/external/azure/">Azure MAPPINGS</a></li>
 </ul>
 </article>
 </div>
@@ -852,69 +1183,10 @@
 <script src="../../../../../assets/javascripts/bundle.56dfad97.min.js"></script>
 <script src="https://unpkg.com/tablesort@5.3.0/dist/tablesort.min.js"></script>
 <script src="../../../../../javascripts/tablesort.js"></script>
-<script type="text/javascript">(function initializeMarkmap() {
-    const transformer = new markmap.Transformer();
-    const assets = transformer.getAssets();
-    const loading = Promise.all([
-        assets.styles && markmap.loadCSS(assets.styles),
-        assets.scripts && markmap.loadJS(assets.scripts),
-    ]);
-
-    function parseData(content) {
-        const { root, frontmatter } = transformer.transform(content);
-        let options = markmap.deriveOptions(frontmatter?.markmap);
-        options = Object.assign({
-            fitRatio: 0.85,
-        }, options);
-        return { root, options };
-    }
-
-    function resetMarkmap(m, el) {
-        const { minX, maxX, minY, maxY } = m.state;
-        const height = el.clientWidth * (maxX - minX) / (maxY - minY);
-        el.style.height = height + "px";
-        m.fit();
-    }
-
-    function renderMarkmap(el) {
-        let svg = el.querySelector('svg');
-        if (svg) return;
-        const content = el.textContent;
-        el.innerHTML = '<svg>';
-        svg = el.firstChild;
-        const { root, options } = parseData(content);
-        const m = markmap.Markmap.create(svg, options, root);
-        resetMarkmap(m, el);
-        transformer.hooks.retransform.tap(() => {
-            const { root, options } = parseData(content);
-            m.setData(root, options);
-            resetMarkmap(m, el);
-        });
-    }
-
-    function updateMarkmaps(node) {
-        for (const el of node.querySelectorAll('.mkdocs-markmap')) {
-            renderMarkmap(el);
-        }
-    }
-
-    loading.then(() => {
-        const observer = new MutationObserver((mutationList) => {
-            for (const mutation of mutationList) {
-                if (mutation.type === 'childList') {
-                    for (const node of mutation.addedNodes) {
-                        updateMarkmaps(node);
-                    }
-                }
-            }
-        });
-
-        observer.observe(document.body, { childList: true });
-
-        updateMarkmaps(document);
-    });
-})();
-</script><script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+<script type="module">import mermaid from "https://unpkg.com/mermaid@11.2.0/dist/mermaid.esm.min.mjs";
+window.mermaidConfig = {default: {
+    startOnLoad: false
+}};</script><script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
 document$.subscribe(() => { lightbox.reload() });
 </script></body>
 </html>

@@ -12,13 +12,13 @@
         <meta name="author" content="Rafael Fernández">
       
       
-        <link rel="canonical" href="https://rfernandezdo.github.io/blog/2024/06/15/tagging-best-practices-in-azure/">
+        <link rel="canonical" href="https://rfernandezdo.github.io/blog/2024/04/18/azure-role-assignment-conditions/">
       
       
-        <link rel="prev" href="../../13/restrict-managed-disks-from-being-imported-or-exported/">
+        <link rel="prev" href="../../17/using-enterprise-azure-policy-as-code-epac/">
       
       
-        <link rel="next" href="../../16/data-threat-modeling-in-azure-storage-accounts/">
+        <link rel="next" href="../kusto-query-language-kql-for-azure-resource-graph/">
       
       
         <link rel="alternate" type="application/rss+xml" title="RSS feed" href="../../../../../feed_rss_created.xml">
@@ -29,7 +29,7 @@
     
     
       
-        <title>Tagging best practices in Azure - Un Rinconcito donde contar lo que quiera</title>
+        <title>Azure role assignment conditions - Un Rinconcito donde contar lo que quiera</title>
       
     
     
@@ -64,11 +64,11 @@
       
         <meta  property="og:type"  content="website" >
       
-        <meta  property="og:title"  content="Tagging best practices in Azure - Un Rinconcito donde contar lo que quiera" >
+        <meta  property="og:title"  content="Azure role assignment conditions - Un Rinconcito donde contar lo que quiera" >
       
         <meta  property="og:description"  content="A blog about Azure, DevOps and other stuff" >
       
-        <meta  property="og:image"  content="https://rfernandezdo.github.io/assets/images/social/blog/posts/2024/06/20240615_Azure_tags.png" >
+        <meta  property="og:image"  content="https://rfernandezdo.github.io/assets/images/social/blog/posts/2024/09/20240918_Azure_role_assigment_conditions.png" >
       
         <meta  property="og:image:type"  content="image/png" >
       
@@ -76,15 +76,15 @@
       
         <meta  property="og:image:height"  content="630" >
       
-        <meta  property="og:url"  content="https://rfernandezdo.github.io/blog/2024/06/15/tagging-best-practices-in-azure/" >
+        <meta  property="og:url"  content="https://rfernandezdo.github.io/blog/2024/04/18/azure-role-assignment-conditions/" >
       
         <meta  name="twitter:card"  content="summary_large_image" >
       
-        <meta  name="twitter:title"  content="Tagging best practices in Azure - Un Rinconcito donde contar lo que quiera" >
+        <meta  name="twitter:title"  content="Azure role assignment conditions - Un Rinconcito donde contar lo que quiera" >
       
         <meta  name="twitter:description"  content="A blog about Azure, DevOps and other stuff" >
       
-        <meta  name="twitter:image"  content="https://rfernandezdo.github.io/assets/images/social/blog/posts/2024/06/20240615_Azure_tags.png" >
+        <meta  name="twitter:image"  content="https://rfernandezdo.github.io/assets/images/social/blog/posts/2024/09/20240918_Azure_role_assigment_conditions.png" >
       
     
     
@@ -116,7 +116,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#tagging-best-practices-in-azure" class="md-skip">
+        <a href="#azure-role-assignment-conditions" class="md-skip">
           Skip to content
         </a>
       
@@ -152,7 +152,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Tagging best practices in Azure
+              Azure role assignment conditions
             
           </span>
         </div>
@@ -563,7 +563,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../" class="md-nav__link">
+      <a href="../../../06/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -609,7 +609,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../04/" class="md-nav__link">
+      <a href="../../" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1761,7 +1761,7 @@
                     <li class="md-nav__item">
                       <div class="md-nav__link">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 19H5V8h14m-3-7v2H8V1H6v2H5c-1.11 0-2 .89-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2h-1V1m-1 11h-5v5h5z"/></svg>
-                        <time datetime="2024-06-15 00:00:00" class="md-ellipsis">June 15, 2024</time>
+                        <time datetime="2024-04-18 00:00:00" class="md-ellipsis">April 18, 2024</time>
                       </div>
                     </li>
                     
@@ -1772,7 +1772,7 @@
                           <span class="md-ellipsis">
                             in
                             
-                              <a href="../../../../category/azure-services/">Azure Services</a></span>
+                              <a href="../../../../category/azure/">Azure</a></span>
                         </div>
                       </li>
                     
@@ -1811,27 +1811,27 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#what-are-tags" class="md-nav__link">
+  <a href="#what-is-abac" class="md-nav__link">
     <span class="md-ellipsis">
-      What are tags?
+      What is ABAC?
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#why-use-tags" class="md-nav__link">
+  <a href="#what-is-azure-role-assignment-conditions" class="md-nav__link">
     <span class="md-ellipsis">
-      Why use tags?
+      What is Azure role assignment conditions?
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#best-practices-for-tagging-resources-in-azure" class="md-nav__link">
+  <a href="#how-to-configure-azure-role-assignment-conditions" class="md-nav__link">
     <span class="md-ellipsis">
-      Best practices for tagging resources in Azure
+      How to configure Azure role assignment conditions?
     </span>
   </a>
   
@@ -1841,6 +1841,15 @@
   <a href="#conclusion" class="md-nav__link">
     <span class="md-ellipsis">
       Conclusion
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#references" class="md-nav__link">
+    <span class="md-ellipsis">
+      References
     </span>
   </a>
   
@@ -1864,67 +1873,71 @@
     
     
     
-      <a href="../../../../tags/#azure-tags" class="md-tag">Azure Tags</a>
+      <a href="../../../../tags/#attribute-based-access-control" class="md-tag">Attribute-Based Access Control</a>
+    
+  
+    
+    
+    
+      <a href="../../../../tags/#azure-rbac" class="md-tag">Azure RBAC</a>
+    
+  
+    
+    
+    
+      <a href="../../../../tags/#azure-role-assignment-conditions" class="md-tag">Azure role assignment conditions</a>
     
   
 </nav>
 
 
 
-<h1 id="tagging-best-practices-in-azure">Tagging best practices in Azure</h1>
-<p>In this post, I will show you some best practices for tagging resources in Azure.</p>
-<h2 id="what-are-tags">What are tags?</h2>
-<p>Tags are key-value pairs that you can assign to your Azure resources to organize and manage them more effectively. Tags allow you to categorize resources in different ways, such as by environment, owner, or cost center, and to apply policies and automation based on these categories.</p>
-<p>If you don't know anything about tags, you can read the <a href="https://docs.microsoft.com/en-us/azure/azure-resource-manager/management/tag-resources">official documentation</a> to learn more about them.</p>
-<h2 id="why-use-tags">Why use tags?</h2>
-<p>There are several reasons to use tags:</p>
+<h1 id="azure-role-assignment-conditions">Azure role assignment conditions</h1>
+<p>First of all, let's understand what is ABAc (Attribute-Based Access Control) and how it can be used in Azure.</p>
+<h2 id="what-is-abac">What is ABAC?</h2>
+<p>Attribute-Based Access Control (ABAC) is an access control model that uses attributes to determine access rights. In ABAC, access decisions are based on the attributes of the user, the resource, and the environment. This allows for fine-grained access control based on a wide range of attributes, such as user roles, resource types, and time of day.</p>
+<p>ABAC is a flexible and scalable access control model that can be used to enforce complex access policies. It allows organizations to define access control rules based on a wide range of attributes and to adapt those rules as their needs change.</p>
+<p>ABAC is build on Azure RBAC.</p>
+<h2 id="what-is-azure-role-assignment-conditions">What is Azure role assignment conditions?</h2>
+<p>Azure role assignment conditions allow you to define conditions that must be met for a role assignment to be effective. </p>
+<h2 id="how-to-configure-azure-role-assignment-conditions">How to configure Azure role assignment conditions?</h2>
+<p>To configure Azure role assignment conditions, configure the role assignment as usual, and then click on the "Conditions" tab. Here you can define the conditions that must be met for the role assignment to be effective.</p>
+<p><a class="glightbox" href="../../../09/Screenshot%202024-09-18%20111639.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="alt text" src="../../../09/Screenshot%202024-09-18%20111639.png"/></a></p>
+<p>Options for configuring Conditions:</p>
 <ul>
-<li>
-<p><strong>Organization</strong>: Tags allow you to organize your resources in a way that makes sense for your organization. You can use tags to group resources by environment, project, or department, making it easier to manage and monitor them.</p>
-</li>
-<li>
-<p><strong>Cost management</strong>: Tags allow you to track and manage costs more effectively. You can use tags to identify resources that are part of a specific project or department, and to allocate costs accordingly.</p>
-</li>
-<li>
-<p><strong>Automation</strong>: Tags allow you to automate tasks based on resource categories. You can use tags to apply policies, trigger alerts, or enforce naming conventions, making it easier to manage your resources at scale.</p>
-</li>
+<li>Allow user to only assign selected roles to selected principals (fewer privileges)</li>
+<li>Allow user to assign all roles except privileged administrator roles Owner, UAA, RBAC (Recommended)</li>
+<li>Allow user to assign all roles (highly privileged)</li>
 </ul>
-<h2 id="best-practices-for-tagging-resources-in-azure">Best practices for tagging resources in Azure</h2>
-<p>Here are some best practices for tagging resources in Azure:</p>
+<p>The first one is the most restrictive, for example, allowing the user to only assign selected roles to selected principals. This is useful when you want to limit the privileges of a user to only a subset of roles and principals.</p>
+<p>These are the options available for "Allow user to only assign selected roles to selected principals (fewer privileges)":</p>
+<p><a class="glightbox" href="../../../09/Screenshot%202024-09-18%20111646.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="alt text" src="../../../09/Screenshot%202024-09-18%20111646.png"/></a></p>
 <ul>
-<li>
-<p><strong>Use consistent naming conventions</strong>: Define a set of standard tags that you will use across all your resources. This will make it easier to search for and manage resources, and to apply policies and automation consistently.</p>
+<li>Constrain roles:<ul>
+<li>Allow user to only assign roles you select</li>
+</ul>
 </li>
-<li>
-<p><strong>Apply tags at resource creation</strong>: Apply tags to resources when you create them, rather than adding them later. This will ensure that all resources are tagged correctly from the start, and will help you avoid missing or incorrect tags.</p>
+<li>Constrain roles and principal types:<ul>
+<li>Allow user to only assign roles you select</li>
+<li>Allow user to only assign these roles to principal types you select (users, groups, or service principals)</li>
+</ul>
 </li>
-<li>
-<p><strong>Use tags to track costs</strong>: Use tags to track costs by project, department, or environment. This will help you allocate costs more effectively, and will make it easier to identify resources that are not being used or are costing more than expected.</p>
-</li>
-<li>
-<p><strong>Define tags by hierarchy</strong>: Define tags in a hierarchy that makes sense for your organization, from more general at level subscription to more specific at resource group level. </p>
-</li>
-<li>
-<p><strong>Use inherited tags</strong>: Use inherited tags to apply tags to resources automatically based on their parent resources. This will help you ensure that all resources are tagged consistently, and will reduce the risk of missing or incorrect tags. Exist Azure Policy to enforce inherited tags for example, you can check all in   <a href="https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/tag-policies#policy-definitions">Assign policy definitions for tag compliance</a></p>
-</li>
-<li>
-<p><strong>Don't use tags for policy filtering</strong>: If you use Azure Policy, it's highly recommended not to use tag filtering in your policy rules when the policy relates to security setting, when you use tags to filter, resources without tag appear Compliance. Azure Policy exemptions or Azure Policy exclusions are recommended.</p>
-</li>
-<li>
-<p><strong>Don't use tags for replace naming convention gaps</strong>: Tags are not a replacement for naming conventions. Use tags to categorize resources, and use naming conventions to identify resources uniquely.</p>
-</li>
-<li>
-<p><strong>Use tags for automation</strong>: Use tags to trigger automation tasks, such as scaling, backup, or monitoring. You can use tags to define policies that enforce specific actions based on resource categories.</p>
-</li>
-<li>
-<p><strong>Don't go crazy adding tags</strong>: Don't add too many tags to your resources. Keep it simple and use tags that are meaningful and useful. Too many tags can make it difficult to manage. You can begin with a small set of tags and expand as needed, for example: <a href="https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/ready/azure-best-practices/resource-tagging#minimum-suggested-tags">Minimum Suggested Tags</a></p>
-</li>
-<li>
-<p><strong>Not all Azure services support tags</strong>: Keep in mind that not all Azure services support tags. You can check in the <a href="https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/tag-support">Tag support for Azure resources</a> to see which services support tags.</p>
+<li>Constrain roles and principals<ul>
+<li>Allow user to only assign roles you select</li>
+<li>Allow user to only assign these roles to principals you select</li>
+<li>Allow all except specific roles</li>
+<li>Allow user to assign all roles except the roles you select</li>
+</ul>
 </li>
 </ul>
 <h2 id="conclusion">Conclusion</h2>
-<p>By using tags, you can organize and manage your resources more effectively, track and manage costs more efficiently, and automate tasks based on resource categories. I hope this post has given you a good introduction to tagging best practices in Azure and how you can use tags to optimize your cloud environment.</p>
+<p>Azure role assignment conditions provide a flexible and powerful way to control access to Azure resources. By defining conditions that must be met for a role assignment to be effective, you can enforce fine-grained access control policies that meet the specific needs of your organization. This allows you to limit the privileges of users, assign roles to specific principals, and control access to sensitive resources. Azure role assignment conditions are a valuable tool for organizations that need to enforce strict access control policies and protect their critical resources.</p>
+<h2 id="references">References</h2>
+<ul>
+<li><a href="https://learn.microsoft.com/en-us/azure/role-based-access-control/conditions-overview">What is Azure attribute-based access control (Azure ABAC)?</a></li>
+<li><a href="https://learn.microsoft.com/en-us/azure/role-based-access-control/conditions-format">Azure role assignment condition format and syntax</a></li>
+<li><a href="https://learn.microsoft.com/en-us/azure/role-based-access-control/delegate-role-assignments-examples?tabs=template">Examples to delegate Azure role assignment management with conditions</a></li>
+</ul>
 
 
 

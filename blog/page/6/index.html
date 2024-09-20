@@ -635,6 +635,158 @@
 <div class="md-post__meta md-meta">
 <ul class="md-meta__list">
 <li class="md-meta__item">
+<time datetime="2023-11-18 00:00:00">November 18, 2023</time></li>
+<li class="md-meta__item">
+            in
+            
+              <a class="md-meta__link" href="../../category/azure-services/">Azure Services</a></li>
+<li class="md-meta__item">
+            
+              2 min read
+            
+          </li>
+</ul>
+</div>
+</header>
+<div class="md-post__content md-typeset">
+<h2 id="azure-communication-services"><a class="toclink" href="../../2023/11/18/azure-communication-services/">Azure Communication Services</a></h2>
+<h3 id="what-is-azure-communication-services"><a class="toclink" href="../../2023/11/18/azure-communication-services/#what-is-azure-communication-services">What is Azure Communication Services?</a></h3>
+<p>Azure Communication Services are cloud-based services with REST APIs and client library SDKs available to help you integrate communication into your applications. You can add communication to your applications without being an expert in underlying technologies such as media encoding or telephony.</p>
+<p>Azure Communication Services supports various communication formats:</p>
+<ul>
+<li>Voice and Video Calling</li>
+<li>Rich Text Chat</li>
+<li>SMS</li>
+<li>Email</li>
+</ul>
+<p>And offers the following services:</p>
+<ul>
+<li>SMS: Send and receive SMS messages from your applications.</li>
+<li>Phone calling: Enable your applications to make and receive PSTN calls.</li>
+<li>Voice and video calling: Enable your applications to make and receive voice and video calls.</li>
+<li>Chat: Enable your applications to send and receive chat messages.</li>
+<li>Email: Send and receive emails from your applications.</li>
+<li>Network traversal: Enable your applications to connect to other clients behind firewalls and NATs.</li>
+<li>Advanced Messaging:<ul>
+<li>WhatsApp(Public Preview): Enable you to send and receive WhatsApp messages using the Azure Communication Services Messaging SDK. </li>
+</ul>
+</li>
+<li>Job Router(Public Preview): It's a tool designed to optimize the management of customer interactions across various communication applications.</li>
+</ul>
+<p>Some Use Cases:</p>
+<ul>
+<li>Telemedicine: Enable patients to connect with doctors and nurses through video consultations.</li>
+<li>Remote education: Enable students to connect with teachers and other students through video classes.</li>
+<li>Financial Advisory: Enhancing global advisor and client interactions with rich capabilities such as translation for chat.</li>
+<li>Retail Notifications: Send notifications to customers about their orders via SMS or email.</li>
+<li>Professional Support: Enable customers to connect with support agents through chat, voice, or video.</li>
+</ul>
+<h3 id="design-considerations"><a class="toclink" href="../../2023/11/18/azure-communication-services/#design-considerations">Design considerations</a></h3>
+<p>You have  some data flow diagrams to help you to understand how Azure Communication Services works <a href="https://learn.microsoft.com/en-us/azure/architecture/guide/mobile/azure-communication-services-architecture">here</a></p>
+<p>Some aspects to consider:</p>
+<ul>
+<li>You need to apply throttling patterns to avoid overloading the service,  HTTP status code 429 (Too many requests).</li>
+<li>Plan how to map users from your identity domain to Azure Communication Services identities. You can follow any kind of pattern. For example, you can use 1:1, 1:N, N:1, or M:N</li>
+<li>Check regional availability. You can see more information about regional availability <a href="https://azure.microsoft.com/en-us/global-infrastructure/services/?products=communication-services">here</a>.</li>
+<li>Check the service limits. You can see more information about service limits <a href="https://learn.microsoft.com/en-us/azure/communication-services/concepts/service-limits">here</a>.</li>
+<li>Check security baseline. You can see more information about security baseline <a href="https://learn.microsoft.com/en-us/security/benchmark/azure/baselines/azure-communication-services-security-baseline">here</a>.</li>
+</ul>
+<h3 id="pricing"><a class="toclink" href="../../2023/11/18/azure-communication-services/#pricing">Pricing</a></h3>
+<p>Azure Communication Services is a pay-as-you-go service. You only pay for what you use, and there are no upfront costs. You can see more information about pricing <a href="https://azure.microsoft.com/en-us/pricing/details/communication-services/">here</a>.</p>
+<p>The bad news are:</p>
+<ul>
+<li>In some services pricing vary by country.</li>
+<li>You don't have a free tier, but you have something free.</li>
+<li>You don't have Azure Reservations or equivalent.</li>
+</ul>
+<h3 id="conclusion"><a class="toclink" href="../../2023/11/18/azure-communication-services/#conclusion">Conclusion</a></h3>
+<p>Azure Communication Services is a very interesting service but you need to consider the cost of the service and the regional availability before to use it.</p>
+<p>That's it folks!, thanks for reading <img alt="😄" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.0.3/assets/svg/1f604.svg" title=":smile:">!.</img></p>
+</div>
+</article>
+<article class="md-post md-post--excerpt">
+<header class="md-post__header">
+<nav class="md-post__authors md-typeset">
+<span class="md-author">
+<img alt="Rafael Fernández" src="https://avatars.githubusercontent.com/u/39990341"/>
+</span>
+</nav>
+<div class="md-post__meta md-meta">
+<ul class="md-meta__list">
+<li class="md-meta__item">
+<time datetime="2023-11-15 00:00:00">November 15, 2023</time></li>
+<li class="md-meta__item">
+            in
+            
+              <a class="md-meta__link" href="../../category/azure-services/">Azure Services</a></li>
+<li class="md-meta__item">
+            
+              1 min read
+            
+          </li>
+</ul>
+</div>
+</header>
+<div class="md-post__content md-typeset">
+<h2 id="azure-services"><a class="toclink" href="../../2023/11/15/azure--services/">Azure  Services</a></h2>
+<p>I have decided to create a new category on my blog to talk about Azure services.</p>
+<p>The main goal of this category is to provide a quick overview of some Azure services and some design considerations.</p>
+<p>What is this category due to?</p>
+<p>In some cases, it is because I am working with this Service and I think it is a good idea to share my experience with you and write it down for me, in others, it is because I am studying/reviewing an Azure Service and I think it is a good idea. Share my notes with you.</p>
+<p>I hope you like it.</p>
+<p>I am going to start with <a href="../../2023/11/18/azure-communication-services/">Azure Communication Services</a></p>
+<p>That's all folks!, thanks for reading <img alt="❤" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.0.3/assets/svg/2764.svg" title=":heart:">!</img></p>
+</div>
+</article>
+<article class="md-post md-post--excerpt">
+<header class="md-post__header">
+<div class="md-post__meta md-meta">
+<ul class="md-meta__list">
+<li class="md-meta__item">
+<time datetime="2023-11-04 00:00:00">November 4, 2023</time></li>
+<li class="md-meta__item">
+            in
+            
+              <a class="md-meta__link" href="../../category/development/">Development</a></li>
+<li class="md-meta__item">
+            
+              1 min read
+            
+          </li>
+</ul>
+</div>
+</header>
+<div class="md-post__content md-typeset">
+<h2 id="starting-to-develop-in-c"><a class="toclink" href="../../2023/11/04/starting-to-develop-in-c/">Starting to develop in c#</a></h2>
+<p>First, I need to clarify that I'm not a C# developer. I'm learning C# so I can better understand the code that has to be deployed to some Azure services when .NET is used.</p>
+<p>If someone that knows me is reading this post, he/she will be thinking: </p>
+<ul>
+<li>"What the hell is he doing?"</li>
+<li>"He is crazy"</li>
+<li>"He is going to die trying".</li>
+<li>The end of the world is approaching!!</li>
+</ul>
+<p>Maybe the last thought can be really true but I have to say that I have decided to learn a programming language and that I have chosen C# because many of the examples for Azure Developers that I have seen are written in C#.</p>
+<p>I repeat, I am not a developer but I'd like to share with you my experience learning C#.</p>
+<h3 id="my-first-steps"><a class="toclink" href="../../2023/11/04/starting-to-develop-in-c/#my-first-steps">My first Steps</a></h3>
+<p>You have a lot of resources for learning on <a href="https://dotnet.microsoft.com/">Learn .NET</a> and in <a href="https://docs.microsoft.com/en-us/dotnet/csharp/">c# documentation</a>.</p>
+<p>In my case I prefer to simplify and follow <a href="https://github.com/dotnet/csharp-notebooks">csharp-notebooks</a>, these materials are designed to be used with <a href="https://learn.microsoft.com/en-us/shows/csharp-101/">
+C# 101 SERIES</a>.</p>
+<p>After that, I will follow the free course <a href="https://www.freecodecamp.org/learn/foundational-c-sharp-with-microsoft/">(New) Foundational C# with Microsoft</a>.</p>
+<p>And after that, I think that I will be ready to start with <a href="https://learn.microsoft.com/en-us/dotnet/standard/get-started?source=recommendations">Tutorials for getting started with .NET</a> and plan next steps.</p>
+<p>That's all folks!!</p>
+</div>
+</article>
+<article class="md-post md-post--excerpt">
+<header class="md-post__header">
+<nav class="md-post__authors md-typeset">
+<span class="md-author">
+<img alt="Rafael Fernández" src="https://avatars.githubusercontent.com/u/39990341"/>
+</span>
+</nav>
+<div class="md-post__meta md-meta">
+<ul class="md-meta__list">
+<li class="md-meta__item">
 <time datetime="2023-11-03 00:00:00">November 3, 2023</time></li>
 <li class="md-meta__item">
             in

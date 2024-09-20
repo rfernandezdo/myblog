@@ -7,13 +7,14 @@
 <meta content="width=device-width,initial-scale=1" name="viewport"/>
 <meta content="A blog about Azure, DevOps and other stuff" name="description"/>
 <meta content="Rafael Fernández" name="author"/>
-<link href="https://rfernandezdo.github.io/blog/2024/09/09/markmap/" rel="canonical"/>
-<link href="../../../06/18/when-to-use-service-principals/" rel="prev"/>
+<link href="https://rfernandezdo.github.io/blog/2024/06/18/when-to-use-service-principals/" rel="canonical"/>
+<link href="../../17/microsoft-entra-conditional-access/" rel="prev"/>
+<link href="../../../09/09/markmap/" rel="next"/>
 <link href="../../../../../feed_rss_created.xml" rel="alternate" title="RSS feed" type="application/rss+xml"/>
 <link href="../../../../../feed_rss_updated.xml" rel="alternate" title="RSS feed of updated content" type="application/rss+xml"/>
 <link href="../../../../../assets/images/favicon.png" rel="icon"/>
 <meta content="mkdocs-1.6.1, mkdocs-material-9.5.34" name="generator"/>
-<title>markmap - Un Rinconcito donde contar lo que quiera</title>
+<title>When to use service principals - Un Rinconcito donde contar lo que quiera</title>
 <link href="../../../../../assets/stylesheets/main.35f28582.min.css" rel="stylesheet"/>
 <link href="../../../../../assets/stylesheets/palette.06af60db.min.css" rel="stylesheet"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
@@ -21,28 +22,18 @@
 <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
 <script>__md_scope=new URL("../../../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
 <meta content="website" property="og:type"/>
-<meta content="markmap - Un Rinconcito donde contar lo que quiera" property="og:title"/>
+<meta content="When to use service principals - Un Rinconcito donde contar lo que quiera" property="og:title"/>
 <meta content="A blog about Azure, DevOps and other stuff" property="og:description"/>
-<meta content="https://rfernandezdo.github.io/assets/images/social/blog/posts/2024/09/20240909_DevOps_markmap.png" property="og:image"/>
+<meta content="https://rfernandezdo.github.io/assets/images/social/blog/posts/2024/06/20240618_Identity.png" property="og:image"/>
 <meta content="image/png" property="og:image:type"/>
 <meta content="1200" property="og:image:width"/>
 <meta content="630" property="og:image:height"/>
-<meta content="https://rfernandezdo.github.io/blog/2024/09/09/markmap/" property="og:url"/>
+<meta content="https://rfernandezdo.github.io/blog/2024/06/18/when-to-use-service-principals/" property="og:url"/>
 <meta content="summary_large_image" name="twitter:card"/>
-<meta content="markmap - Un Rinconcito donde contar lo que quiera" name="twitter:title"/>
+<meta content="When to use service principals - Un Rinconcito donde contar lo que quiera" name="twitter:title"/>
 <meta content="A blog about Azure, DevOps and other stuff" name="twitter:description"/>
-<meta content="https://rfernandezdo.github.io/assets/images/social/blog/posts/2024/09/20240909_DevOps_markmap.png" name="twitter:image"/>
-<script src="../../../../../js/unpkg.com/d3@7.js" type="text/javascript"></script><script src="../../../../../js/unpkg.com/markmap-lib@0.15.4.js" type="text/javascript"></script><script src="../../../../../js/unpkg.com/markmap-view@0.15.4.js" type="text/javascript"></script><style type="text/css">div.mkdocs-markmap {
-    width: 100%;
-    min-height: 1em;
-    border: 1px solid grey;
-}
-.mkdocs-markmap > svg {
-    width: 100%;
-    height: 100%;
-    display: block;
-}
-</style> <link href="../../../../../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
+<meta content="https://rfernandezdo.github.io/assets/images/social/blog/posts/2024/06/20240618_Identity.png" name="twitter:image"/>
+ <link href="../../../../../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
     html.glightbox-open { overflow: initial; height: 100%; }
     .gslide-title { margin-top: 0px; user-select: text; }
     .gslide-desc { color: #666; user-select: text; }
@@ -57,7 +48,7 @@
 <input autocomplete="off" class="md-toggle" data-md-toggle="search" id="__search" type="checkbox"/>
 <label class="md-overlay" for="__drawer"></label>
 <div data-md-component="skip">
-<a class="md-skip" href="#markmap">
+<a class="md-skip" href="#when-to-use-service-principals">
           Skip to content
         </a>
 </div>
@@ -81,7 +72,7 @@
 <div class="md-header__topic" data-md-component="header-topic">
 <span class="md-ellipsis">
             
-              markmap
+              When to use service principals
             
           </span>
 </div>
@@ -250,14 +241,14 @@
           </label>
 <ul class="md-nav__list" data-md-scrollfix="">
 <li class="md-nav__item">
-<a class="md-nav__link" href="../../">
+<a class="md-nav__link" href="../../../09/">
 <span class="md-ellipsis">
     2024/09
   </span>
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="../../../06/">
+<a class="md-nav__link" href="../../">
 <span class="md-ellipsis">
     2024/06
   </span>
@@ -672,7 +663,7 @@
 <li class="md-nav__item">
 <div class="md-nav__link">
 <svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19 19H5V8h14m-3-7v2H8V1H6v2H5c-1.11 0-2 .89-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2h-1V1m-1 11h-5v5h5z"></path></svg>
-<time class="md-ellipsis" datetime="2024-09-09 00:00:00">September 9, 2024</time>
+<time class="md-ellipsis" datetime="2024-06-18 00:00:00">June 18, 2024</time>
 </div>
 </li>
 <li class="md-nav__item">
@@ -681,7 +672,7 @@
 <span class="md-ellipsis">
                             in
                             
-                              <a href="../../../../category/devops/">DevOps</a></span>
+                              <a href="../../../../category/microsoft-entra/">Microsoft Entra</a></span>
 </div>
 </li>
 <li class="md-nav__item">
@@ -689,7 +680,7 @@
 <svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 20a8 8 0 0 0 8-8 8 8 0 0 0-8-8 8 8 0 0 0-8 8 8 8 0 0 0 8 8m0-18a10 10 0 0 1 10 10 10 10 0 0 1-10 10C6.47 22 2 17.5 2 12A10 10 0 0 1 12 2m.5 5v5.25l4.5 2.67-.75 1.23L11 13V7z"></path></svg>
 <span class="md-ellipsis">
                             
-                              2 min read
+                              1 min read
                             
                           </span>
 </div>
@@ -706,37 +697,9 @@
     </label>
 <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
 <li class="md-nav__item">
-<a class="md-nav__link" href="#installation-in-mkdocs">
-<span class="md-ellipsis">
-      Installation in mkdocs
-    </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#usage">
-<span class="md-ellipsis">
-      Usage
-    </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#visual-studio-code-extension">
-<span class="md-ellipsis">
-      Visual Studio Code Extension
-    </span>
-</a>
-</li>
-<li class="md-nav__item">
 <a class="md-nav__link" href="#conclusion">
 <span class="md-ellipsis">
       Conclusion
-    </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#references">
-<span class="md-ellipsis">
-      References
     </span>
 </a>
 </li>
@@ -747,65 +710,23 @@
 </div>
 <article class="md-content__inner md-typeset">
 <nav class="md-tags">
-<a class="md-tag" href="../../../../tags/#markmap">markmap</a>
+<a class="md-tag" href="../../../../tags/#service-principal">Service Principal</a>
+<a class="md-tag" href="../../../../tags/#managed-identity">Managed Identity</a>
 </nav>
-<h1 id="markmap">markmap</h1>
-<p>markmap is a visualisation tool that allows you to create mindmaps from markdown files. It is based on the mermaid library and can be used to create a visual representation of a markdown file.</p>
-<h2 id="installation-in-mkdocs">Installation in mkdocs</h2>
-<p>To install markmap in mkdocs, you need install the plugin using pip:</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-0-1"><a href="#__codelineno-0-1" id="__codelineno-0-1" name="__codelineno-0-1"></a>pip<span class="w"> </span>install<span class="w"> </span>mkdocs-markmap
-</span></code></pre></div>
-<p>Then, you need to add the following lines to your <code>mkdocs.yml</code> file:</p>
-<div class="language-yaml highlight"><pre><span></span><code><span id="__span-1-1"><a href="#__codelineno-1-1" id="__codelineno-1-1" name="__codelineno-1-1"></a><span class="nt">plugins</span><span class="p">:</span>
-</span><span id="__span-1-2"><a href="#__codelineno-1-2" id="__codelineno-1-2" name="__codelineno-1-2"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">markmap</span>
-</span></code></pre></div>
-<h2 id="usage">Usage</h2>
-<p>To use markmap, you need to add the following code block to your markdown file:</p>
-<div class="language-markdown highlight"><pre><span></span><code><span id="__span-2-1"><a href="#__codelineno-2-1" id="__codelineno-2-1" name="__codelineno-2-1"></a><span class="sb">```markmap</span><span class="w">  </span>
-</span><span id="__span-2-2"><a href="#__codelineno-2-2" id="__codelineno-2-2" name="__codelineno-2-2"></a><span class="s"># Root</span>
-</span><span id="__span-2-3"><a href="#__codelineno-2-3" id="__codelineno-2-3" name="__codelineno-2-3"></a>
-</span><span id="__span-2-4"><a href="#__codelineno-2-4" id="__codelineno-2-4" name="__codelineno-2-4"></a><span class="s">## Branch 1</span>
-</span><span id="__span-2-5"><a href="#__codelineno-2-5" id="__codelineno-2-5" name="__codelineno-2-5"></a>
-</span><span id="__span-2-6"><a href="#__codelineno-2-6" id="__codelineno-2-6" name="__codelineno-2-6"></a><span class="s">* Branchlet 1a</span>
-</span><span id="__span-2-7"><a href="#__codelineno-2-7" id="__codelineno-2-7" name="__codelineno-2-7"></a><span class="s">* Branchlet 1b</span>
-</span><span id="__span-2-8"><a href="#__codelineno-2-8" id="__codelineno-2-8" name="__codelineno-2-8"></a>
-</span><span id="__span-2-9"><a href="#__codelineno-2-9" id="__codelineno-2-9" name="__codelineno-2-9"></a><span class="s">## Branch 2</span>
-</span><span id="__span-2-10"><a href="#__codelineno-2-10" id="__codelineno-2-10" name="__codelineno-2-10"></a>
-</span><span id="__span-2-11"><a href="#__codelineno-2-11" id="__codelineno-2-11" name="__codelineno-2-11"></a><span class="s">* Branchlet 2a</span>
-</span><span id="__span-2-12"><a href="#__codelineno-2-12" id="__codelineno-2-12" name="__codelineno-2-12"></a><span class="s">* Branchlet 2b</span>
-</span><span id="__span-2-13"><a href="#__codelineno-2-13" id="__codelineno-2-13" name="__codelineno-2-13"></a><span class="sb">```</span>
-</span></code></pre></div>
-<p>And this will generate the following mindmap:</p>
-<p><a class="glightbox" data-desc-position="bottom" data-height="auto" data-type="image" data-width="auto" href="../../20240909_DevOps_markmap.png"><img alt="alt text" src="../../20240909_DevOps_markmap.png"/></a></p>
-<p>That is for the future, because in my mkdocs not work as expected:</p>
-<div class="language-markmap mkdocs-markmap"><markmap-data hidden="true"># Root
-
-## Branch 1
-
-* Branchlet 1a
-* Branchlet 1b
-
-## Branch 2
-
-* Branchlet 2a
-* Branchlet 2b</markmap-data></div>
-<h2 id="visual-studio-code-extension">Visual Studio Code Extension</h2>
-<p>There is also a Visual Studio Code extension that allows you to create mindmaps from markdown files. You can install it from the Visual Studio Code marketplace.</p>
-<p><div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a href="#__codelineno-3-1" id="__codelineno-3-1" name="__codelineno-3-1"></a>    Name: Markdown Preview Markmap Support
-</span><span id="__span-3-2"><a href="#__codelineno-3-2" id="__codelineno-3-2" name="__codelineno-3-2"></a>    Id: phoihos.markdown-markmap
-</span><span id="__span-3-3"><a href="#__codelineno-3-3" id="__codelineno-3-3" name="__codelineno-3-3"></a>    Description: Visualize Markdown as Mindmap (A.K.A Markmap) to VS Code's built-in markdown preview
-</span><span id="__span-3-4"><a href="#__codelineno-3-4" id="__codelineno-3-4" name="__codelineno-3-4"></a>    Version: 1.4.6
-</span><span id="__span-3-5"><a href="#__codelineno-3-5" id="__codelineno-3-5" name="__codelineno-3-5"></a>    Publisher: phoihos
-</span><span id="__span-3-6"><a href="#__codelineno-3-6" id="__codelineno-3-6" name="__codelineno-3-6"></a>    VS Marketplace Link: https://marketplace.visualstudio.com/items?itemName=phoihos.markdown-markmap
-</span></code></pre></div>
-<a href="https://marketplace.visualstudio.com/items?itemName=phoihos.markdown-markmap">VS Marketplace Link</a></p>
+<h1 id="when-to-use-service-principals">When to use service principals</h1>
+<p>In Azure, there are two ways to authenticate your applications and services: service principals and managed identities. </p>
+<p>Basically, <strong>don't use service principals if you can use managed identities</strong>. Managed identities are a more secure way to authenticate your applications and services in Azure. However, there are some scenarios where you need to use service principals instead of managed identities. Here are some scenarios where you should use service principals:</p>
+<pre class="mermaid"><code>flowchart TD
+    A[When to use service principals] --&gt; B{Is your application or service running on-premises?}
+    B --&gt; |Yes| C{Is Azure Arc supported?}
+    C --&gt; |Yes| D[Use Managed Identity]
+    C --&gt; |No| E[Use Service Principal]
+    B --&gt; |No| F{Do the resources or applications support managed identities?}
+    F --&gt; |No| G[Use Service Principal]
+    F --&gt; |Yes| H[Use Managed Identity]
+</code></pre>
 <h2 id="conclusion">Conclusion</h2>
-<p>I don't like too much this plugin because it not work as expected in my mkdocs but it's a good tool for documentation.</p>
-<h2 id="references">References</h2>
-<ul>
-<li><a href="https://markmap.js.org/">markmap</a></li>
-<li><a href="https://github.com/markmap/mkdocs-markmap">mkdocs-markmap</a></li>
-</ul>
+<p>In conclusion, you should use managed identities whenever possible. However, if your application or service is running on-premises or if the resources or applications do not support managed identities, you should use service principals instead.</p>
 </article>
 </div>
 <script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
@@ -852,69 +773,10 @@
 <script src="../../../../../assets/javascripts/bundle.56dfad97.min.js"></script>
 <script src="https://unpkg.com/tablesort@5.3.0/dist/tablesort.min.js"></script>
 <script src="../../../../../javascripts/tablesort.js"></script>
-<script type="text/javascript">(function initializeMarkmap() {
-    const transformer = new markmap.Transformer();
-    const assets = transformer.getAssets();
-    const loading = Promise.all([
-        assets.styles && markmap.loadCSS(assets.styles),
-        assets.scripts && markmap.loadJS(assets.scripts),
-    ]);
-
-    function parseData(content) {
-        const { root, frontmatter } = transformer.transform(content);
-        let options = markmap.deriveOptions(frontmatter?.markmap);
-        options = Object.assign({
-            fitRatio: 0.85,
-        }, options);
-        return { root, options };
-    }
-
-    function resetMarkmap(m, el) {
-        const { minX, maxX, minY, maxY } = m.state;
-        const height = el.clientWidth * (maxX - minX) / (maxY - minY);
-        el.style.height = height + "px";
-        m.fit();
-    }
-
-    function renderMarkmap(el) {
-        let svg = el.querySelector('svg');
-        if (svg) return;
-        const content = el.textContent;
-        el.innerHTML = '<svg>';
-        svg = el.firstChild;
-        const { root, options } = parseData(content);
-        const m = markmap.Markmap.create(svg, options, root);
-        resetMarkmap(m, el);
-        transformer.hooks.retransform.tap(() => {
-            const { root, options } = parseData(content);
-            m.setData(root, options);
-            resetMarkmap(m, el);
-        });
-    }
-
-    function updateMarkmaps(node) {
-        for (const el of node.querySelectorAll('.mkdocs-markmap')) {
-            renderMarkmap(el);
-        }
-    }
-
-    loading.then(() => {
-        const observer = new MutationObserver((mutationList) => {
-            for (const mutation of mutationList) {
-                if (mutation.type === 'childList') {
-                    for (const node of mutation.addedNodes) {
-                        updateMarkmaps(node);
-                    }
-                }
-            }
-        });
-
-        observer.observe(document.body, { childList: true });
-
-        updateMarkmaps(document);
-    });
-})();
-</script><script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+<script type="module">import mermaid from "https://unpkg.com/mermaid@11.2.0/dist/mermaid.esm.min.mjs";
+window.mermaidConfig = {default: {
+    startOnLoad: false
+}};</script><script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
 document$.subscribe(() => { lightbox.reload() });
 </script></body>
 </html>

@@ -7,13 +7,14 @@
 <meta content="width=device-width,initial-scale=1" name="viewport"/>
 <meta content="A blog about Azure, DevOps and other stuff" name="description"/>
 <meta content="Rafael Fernández" name="author"/>
-<link href="https://rfernandezdo.github.io/blog/2024/09/09/markmap/" rel="canonical"/>
-<link href="../../../06/18/when-to-use-service-principals/" rel="prev"/>
+<link href="https://rfernandezdo.github.io/blog/2024/04/page/3/" rel="canonical"/>
+<link href="../../../05/" rel="prev"/>
+<link href="../../../03/" rel="next"/>
 <link href="../../../../../feed_rss_created.xml" rel="alternate" title="RSS feed" type="application/rss+xml"/>
 <link href="../../../../../feed_rss_updated.xml" rel="alternate" title="RSS feed of updated content" type="application/rss+xml"/>
 <link href="../../../../../assets/images/favicon.png" rel="icon"/>
 <meta content="mkdocs-1.6.1, mkdocs-material-9.5.34" name="generator"/>
-<title>markmap - Un Rinconcito donde contar lo que quiera</title>
+<title>2024/04 - Un Rinconcito donde contar lo que quiera</title>
 <link href="../../../../../assets/stylesheets/main.35f28582.min.css" rel="stylesheet"/>
 <link href="../../../../../assets/stylesheets/palette.06af60db.min.css" rel="stylesheet"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
@@ -21,28 +22,18 @@
 <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
 <script>__md_scope=new URL("../../../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
 <meta content="website" property="og:type"/>
-<meta content="markmap - Un Rinconcito donde contar lo que quiera" property="og:title"/>
+<meta content="2024/04 - Un Rinconcito donde contar lo que quiera" property="og:title"/>
 <meta content="A blog about Azure, DevOps and other stuff" property="og:description"/>
-<meta content="https://rfernandezdo.github.io/assets/images/social/blog/posts/2024/09/20240909_DevOps_markmap.png" property="og:image"/>
+<meta content="https://rfernandezdo.github.io/assets/images/social/blog/2024/04/page/3.png" property="og:image"/>
 <meta content="image/png" property="og:image:type"/>
 <meta content="1200" property="og:image:width"/>
 <meta content="630" property="og:image:height"/>
-<meta content="https://rfernandezdo.github.io/blog/2024/09/09/markmap/" property="og:url"/>
+<meta content="https://rfernandezdo.github.io/blog/2024/04/page/3/" property="og:url"/>
 <meta content="summary_large_image" name="twitter:card"/>
-<meta content="markmap - Un Rinconcito donde contar lo que quiera" name="twitter:title"/>
+<meta content="2024/04 - Un Rinconcito donde contar lo que quiera" name="twitter:title"/>
 <meta content="A blog about Azure, DevOps and other stuff" name="twitter:description"/>
-<meta content="https://rfernandezdo.github.io/assets/images/social/blog/posts/2024/09/20240909_DevOps_markmap.png" name="twitter:image"/>
-<script src="../../../../../js/unpkg.com/d3@7.js" type="text/javascript"></script><script src="../../../../../js/unpkg.com/markmap-lib@0.15.4.js" type="text/javascript"></script><script src="../../../../../js/unpkg.com/markmap-view@0.15.4.js" type="text/javascript"></script><style type="text/css">div.mkdocs-markmap {
-    width: 100%;
-    min-height: 1em;
-    border: 1px solid grey;
-}
-.mkdocs-markmap > svg {
-    width: 100%;
-    height: 100%;
-    display: block;
-}
-</style> <link href="../../../../../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
+<meta content="https://rfernandezdo.github.io/assets/images/social/blog/2024/04/page/3.png" name="twitter:image"/>
+ <link href="../../../../../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
     html.glightbox-open { overflow: initial; height: 100%; }
     .gslide-title { margin-top: 0px; user-select: text; }
     .gslide-desc { color: #666; user-select: text; }
@@ -57,7 +48,7 @@
 <input autocomplete="off" class="md-toggle" data-md-toggle="search" id="__search" type="checkbox"/>
 <label class="md-overlay" for="__drawer"></label>
 <div data-md-component="skip">
-<a class="md-skip" href="#markmap">
+<a class="md-skip" href="#202404">
           Skip to content
         </a>
 </div>
@@ -81,7 +72,7 @@
 <div class="md-header__topic" data-md-component="header-topic">
 <span class="md-ellipsis">
             
-              markmap
+              2024/04
             
           </span>
 </div>
@@ -196,7 +187,7 @@
 <div class="md-container" data-md-component="container">
 <main class="md-main" data-md-component="main">
 <div class="md-main__inner md-grid">
-<div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" hidden="">
+<div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation">
 <div class="md-sidebar__scrollwrap">
 <div class="md-sidebar__inner">
 <nav aria-label="Navigation" class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" data-md-level="0">
@@ -221,7 +212,7 @@
             Blog
           </label>
 <ul class="md-nav__list" data-md-scrollfix="">
-<li class="md-nav__item md-nav__item--active">
+<li class="md-nav__item">
 <a class="md-nav__link" href="../../../../">
 <span class="md-ellipsis">
     Blog
@@ -235,22 +226,22 @@
   </span>
 </a>
 </li>
-<li class="md-nav__item md-nav__item--section md-nav__item--nested">
-<input class="md-nav__toggle md-toggle md-toggle--indeterminate" id="__nav_1_3" type="checkbox"/>
+<li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+<input checked="" class="md-nav__toggle md-toggle" id="__nav_1_3" type="checkbox"/>
 <label class="md-nav__link" for="__nav_1_3" id="__nav_1_3_label" tabindex="">
 <span class="md-ellipsis">
     Archive
   </span>
 <span class="md-nav__icon md-icon"></span>
 </label>
-<nav aria-expanded="false" aria-labelledby="__nav_1_3_label" class="md-nav" data-md-level="2">
+<nav aria-expanded="true" aria-labelledby="__nav_1_3_label" class="md-nav" data-md-level="2">
 <label class="md-nav__title" for="__nav_1_3">
 <span class="md-nav__icon md-icon"></span>
             Archive
           </label>
 <ul class="md-nav__list" data-md-scrollfix="">
 <li class="md-nav__item">
-<a class="md-nav__link" href="../../">
+<a class="md-nav__link" href="../../../09/">
 <span class="md-ellipsis">
     2024/09
   </span>
@@ -271,11 +262,33 @@
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="../../../04/">
+<input class="md-nav__toggle md-toggle" id="__toc" type="checkbox"/>
+<label class="md-nav__link md-nav__link--active" for="__toc">
+<span class="md-ellipsis">
+    2024/04
+  </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<a class="md-nav__link md-nav__link--active" href="../../">
 <span class="md-ellipsis">
     2024/04
   </span>
 </a>
+<nav aria-label="Table of contents" class="md-nav md-nav--secondary">
+<label class="md-nav__title" for="__toc">
+<span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#privileged-access-management-pam-strategy-with-microsoft-entra-id-and-some-azure-services">
+<span class="md-ellipsis">
+      Privileged Access Management (PAM) Strategy with Microsoft Entra ID and some Azure Services
+    </span>
+</a>
+</li>
+</ul>
+</nav>
 </li>
 <li class="md-nav__item">
 <a class="md-nav__link" href="../../../03/">
@@ -629,184 +642,156 @@
 </div>
 </div>
 </div>
-<div class="md-content md-content--post" data-md-component="content">
-<div class="md-sidebar md-sidebar--post" data-md-component="sidebar" data-md-type="navigation">
-<div class="md-sidebar__scrollwrap">
-<div class="md-sidebar__inner md-post">
-<nav class="md-nav md-nav--primary">
-<div class="md-post__back">
-<div class="md-nav__title md-nav__container">
-<a class="md-nav__link" href="../../../../">
-<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"></path></svg>
-<span class="md-ellipsis">
-                    Back to index
-                  </span>
-</a>
-</div>
-</div>
-<div class="md-post__authors md-typeset">
-<div class="md-profile md-post__profile">
-<span class="md-author md-author--long">
+<div class="md-content" data-md-component="content">
+<div class="md-content__inner">
+<header class="md-typeset">
+<h1 id="202404">2024/04</h1>
+</header>
+<article class="md-post md-post--excerpt">
+<header class="md-post__header">
+<nav class="md-post__authors md-typeset">
+<span class="md-author">
 <img alt="Rafael Fernández" src="https://avatars.githubusercontent.com/u/39990341"/>
 </span>
-<span class="md-profile__description">
-<strong>
-                        
-                          Rafael Fernández
-                        
-                      </strong>
-<br/>
-                      Creator
-                    </span>
-</div>
-</div>
-<ul class="md-post__meta md-nav__list">
-<li class="md-nav__item md-nav__item--section">
-<div class="md-post__title">
-<span class="md-ellipsis">
-                    Metadata
-                  </span>
-</div>
-<nav class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<div class="md-nav__link">
-<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19 19H5V8h14m-3-7v2H8V1H6v2H5c-1.11 0-2 .89-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2h-1V1m-1 11h-5v5h5z"></path></svg>
-<time class="md-ellipsis" datetime="2024-09-09 00:00:00">September 9, 2024</time>
-</div>
-</li>
-<li class="md-nav__item">
-<div class="md-nav__link">
-<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9 3v15h3V3zm3 2 4 13 3-1-4-13zM5 5v13h3V5zM3 19v2h18v-2z"></path></svg>
-<span class="md-ellipsis">
-                            in
-                            
-                              <a href="../../../../category/devops/">DevOps</a></span>
-</div>
-</li>
-<li class="md-nav__item">
-<div class="md-nav__link">
-<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 20a8 8 0 0 0 8-8 8 8 0 0 0-8-8 8 8 0 0 0-8 8 8 8 0 0 0 8 8m0-18a10 10 0 0 1 10 10 10 10 0 0 1-10 10C6.47 22 2 17.5 2 12A10 10 0 0 1 12 2m.5 5v5.25l4.5 2.67-.75 1.23L11 13V7z"></path></svg>
-<span class="md-ellipsis">
-                            
-                              2 min read
-                            
-                          </span>
-</div>
-</li>
+</nav>
+<div class="md-post__meta md-meta">
+<ul class="md-meta__list">
+<li class="md-meta__item">
+<time datetime="2024-04-04 00:00:00">April 4, 2024</time></li>
+<li class="md-meta__item">
+            in
+            
+              <a class="md-meta__link" href="../../../../category/security/">Security</a></li>
+<li class="md-meta__item">
+            
+              4 min read
+            
+          </li>
 </ul>
-</nav>
-</li>
-</ul>
-</nav>
-<nav aria-label="Table of contents" class="md-nav md-nav--secondary">
-<label class="md-nav__title" for="__toc">
-<span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#installation-in-mkdocs">
-<span class="md-ellipsis">
-      Installation in mkdocs
-    </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#usage">
-<span class="md-ellipsis">
-      Usage
-    </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#visual-studio-code-extension">
-<span class="md-ellipsis">
-      Visual Studio Code Extension
-    </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#conclusion">
-<span class="md-ellipsis">
-      Conclusion
-    </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#references">
-<span class="md-ellipsis">
-      References
-    </span>
-</a>
-</li>
-</ul>
-</nav>
 </div>
+</header>
+<div class="md-post__content md-typeset">
+<h2 id="privileged-access-management-pam-strategy-with-microsoft-entra-id-and-some-azure-services"><a class="toclink" href="../../04/privileged-access-management-pam-strategy-with-microsoft-entra-id-and-some-azure-services/">Privileged Access Management (PAM) Strategy with Microsoft Entra ID and some Azure Services</a></h2>
+<p>Today, I'd like to share a brief of a recommended strategy for Privileged Access Management (PAM) of other vendors with Microsoft Entra ID and some Azure Services. This strategy is divided into seven phases:</p>
+<pre class="mermaid"><code>
+graph LR;
+    A[Phase 1: Set Policy] 
+    C[Phase 2: The Process of Discovery]
+    E[Phase 3: Protect Credentials]
+    G[Phase 4: Secure Privileged Access]
+    I[Phase 5: Least Privilege]
+    K[Phase 6: Control All Applications]
+    M[Phase 7: Detect and Respond]
+
+    A--&gt;C
+    C--&gt;E
+    E--&gt;G
+    G--&gt;I
+    I--&gt;K
+    K--&gt;M
+    M--&gt;A
+
+    classDef phase fill:#f9f,stroke:#333,stroke-width:2px;
+    class A,C,E,G,I,K,M phase;
+
+
+</code></pre>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>Be hybrid, be secure with a single control plane, use Azure ARC to inherit the same security and compliance policies across your on-premises, multi-cloud, and edge environments as in Azure.</p>
 </div>
-</div>
-<article class="md-content__inner md-typeset">
-<nav class="md-tags">
-<a class="md-tag" href="../../../../tags/#markmap">markmap</a>
-</nav>
-<h1 id="markmap">markmap</h1>
-<p>markmap is a visualisation tool that allows you to create mindmaps from markdown files. It is based on the mermaid library and can be used to create a visual representation of a markdown file.</p>
-<h2 id="installation-in-mkdocs">Installation in mkdocs</h2>
-<p>To install markmap in mkdocs, you need install the plugin using pip:</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-0-1"><a href="#__codelineno-0-1" id="__codelineno-0-1" name="__codelineno-0-1"></a>pip<span class="w"> </span>install<span class="w"> </span>mkdocs-markmap
-</span></code></pre></div>
-<p>Then, you need to add the following lines to your <code>mkdocs.yml</code> file:</p>
-<div class="language-yaml highlight"><pre><span></span><code><span id="__span-1-1"><a href="#__codelineno-1-1" id="__codelineno-1-1" name="__codelineno-1-1"></a><span class="nt">plugins</span><span class="p">:</span>
-</span><span id="__span-1-2"><a href="#__codelineno-1-2" id="__codelineno-1-2" name="__codelineno-1-2"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">markmap</span>
-</span></code></pre></div>
-<h2 id="usage">Usage</h2>
-<p>To use markmap, you need to add the following code block to your markdown file:</p>
-<div class="language-markdown highlight"><pre><span></span><code><span id="__span-2-1"><a href="#__codelineno-2-1" id="__codelineno-2-1" name="__codelineno-2-1"></a><span class="sb">```markmap</span><span class="w">  </span>
-</span><span id="__span-2-2"><a href="#__codelineno-2-2" id="__codelineno-2-2" name="__codelineno-2-2"></a><span class="s"># Root</span>
-</span><span id="__span-2-3"><a href="#__codelineno-2-3" id="__codelineno-2-3" name="__codelineno-2-3"></a>
-</span><span id="__span-2-4"><a href="#__codelineno-2-4" id="__codelineno-2-4" name="__codelineno-2-4"></a><span class="s">## Branch 1</span>
-</span><span id="__span-2-5"><a href="#__codelineno-2-5" id="__codelineno-2-5" name="__codelineno-2-5"></a>
-</span><span id="__span-2-6"><a href="#__codelineno-2-6" id="__codelineno-2-6" name="__codelineno-2-6"></a><span class="s">* Branchlet 1a</span>
-</span><span id="__span-2-7"><a href="#__codelineno-2-7" id="__codelineno-2-7" name="__codelineno-2-7"></a><span class="s">* Branchlet 1b</span>
-</span><span id="__span-2-8"><a href="#__codelineno-2-8" id="__codelineno-2-8" name="__codelineno-2-8"></a>
-</span><span id="__span-2-9"><a href="#__codelineno-2-9" id="__codelineno-2-9" name="__codelineno-2-9"></a><span class="s">## Branch 2</span>
-</span><span id="__span-2-10"><a href="#__codelineno-2-10" id="__codelineno-2-10" name="__codelineno-2-10"></a>
-</span><span id="__span-2-11"><a href="#__codelineno-2-11" id="__codelineno-2-11" name="__codelineno-2-11"></a><span class="s">* Branchlet 2a</span>
-</span><span id="__span-2-12"><a href="#__codelineno-2-12" id="__codelineno-2-12" name="__codelineno-2-12"></a><span class="s">* Branchlet 2b</span>
-</span><span id="__span-2-13"><a href="#__codelineno-2-13" id="__codelineno-2-13" name="__codelineno-2-13"></a><span class="sb">```</span>
-</span></code></pre></div>
-<p>And this will generate the following mindmap:</p>
-<p><a class="glightbox" data-desc-position="bottom" data-height="auto" data-type="image" data-width="auto" href="../../20240909_DevOps_markmap.png"><img alt="alt text" src="../../20240909_DevOps_markmap.png"/></a></p>
-<p>That is for the future, because in my mkdocs not work as expected:</p>
-<div class="language-markmap mkdocs-markmap"><markmap-data hidden="true"># Root
-
-## Branch 1
-
-* Branchlet 1a
-* Branchlet 1b
-
-## Branch 2
-
-* Branchlet 2a
-* Branchlet 2b</markmap-data></div>
-<h2 id="visual-studio-code-extension">Visual Studio Code Extension</h2>
-<p>There is also a Visual Studio Code extension that allows you to create mindmaps from markdown files. You can install it from the Visual Studio Code marketplace.</p>
-<p><div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a href="#__codelineno-3-1" id="__codelineno-3-1" name="__codelineno-3-1"></a>    Name: Markdown Preview Markmap Support
-</span><span id="__span-3-2"><a href="#__codelineno-3-2" id="__codelineno-3-2" name="__codelineno-3-2"></a>    Id: phoihos.markdown-markmap
-</span><span id="__span-3-3"><a href="#__codelineno-3-3" id="__codelineno-3-3" name="__codelineno-3-3"></a>    Description: Visualize Markdown as Mindmap (A.K.A Markmap) to VS Code's built-in markdown preview
-</span><span id="__span-3-4"><a href="#__codelineno-3-4" id="__codelineno-3-4" name="__codelineno-3-4"></a>    Version: 1.4.6
-</span><span id="__span-3-5"><a href="#__codelineno-3-5" id="__codelineno-3-5" name="__codelineno-3-5"></a>    Publisher: phoihos
-</span><span id="__span-3-6"><a href="#__codelineno-3-6" id="__codelineno-3-6" name="__codelineno-3-6"></a>    VS Marketplace Link: https://marketplace.visualstudio.com/items?itemName=phoihos.markdown-markmap
-</span></code></pre></div>
-<a href="https://marketplace.visualstudio.com/items?itemName=phoihos.markdown-markmap">VS Marketplace Link</a></p>
-<h2 id="conclusion">Conclusion</h2>
-<p>I don't like too much this plugin because it not work as expected in my mkdocs but it's a good tool for documentation.</p>
-<h2 id="references">References</h2>
+<h3 id="phase-1-set-policy"><a class="toclink" href="../../04/privileged-access-management-pam-strategy-with-microsoft-entra-id-and-some-azure-services/#phase-1-set-policy"><strong>Phase 1: Set Policy</strong></a></h3>
+<p>The first step in any PAM strategy is to establish a clear policy. This policy should define who has access to what, when they have access, and what they can do with that access. It should also include guidelines for password management and multi-factor authentication. For example:</p>
 <ul>
-<li><a href="https://markmap.js.org/">markmap</a></li>
-<li><a href="https://github.com/markmap/mkdocs-markmap">mkdocs-markmap</a></li>
+<li>Define clear access control policies.</li>
+<li>Establish guidelines for password management and multi-factor authentication.</li>
+<li>Regularly review and update the policy to reflect changes in the organization.</li>
 </ul>
+<p>How to implement this:</p>
+<ul>
+<li>Use <strong>Azure Policy</strong> to define and manage policies for your Azure environment.</li>
+<li>Use <strong>Microsoft Entra multifactor authentication</strong> for implementing multi-factor authentication.</li>
+</ul>
+<h3 id="phase-2-the-process-of-discovery"><a class="toclink" href="../../04/privileged-access-management-pam-strategy-with-microsoft-entra-id-and-some-azure-services/#phase-2-the-process-of-discovery"><strong>Phase 2: The Process of Discovery</strong></a></h3>
+<p>In this phase, we identify all the privileged accounts across the organization. This includes service accounts, local administrative accounts, domain administrative accounts, emergency accounts, and application accounts. For example:</p>
+<ul>
+<li>Use automated tools to identify all privileged accounts across the organization.</li>
+<li>Regularly update the inventory of privileged accounts.</li>
+<li>Identify any accounts that are no longer in use and deactivate them.</li>
+</ul>
+<p>How to implement this:</p>
+<ul>
+<li>Use <strong>Microsoft Entra Privileged Identity Management</strong> to discover, restrict and monitor administrators and their access to resources and provide just-in-time access when needed.</li>
+</ul>
+<h3 id="phase-3-protect-credentials"><a class="toclink" href="../../04/privileged-access-management-pam-strategy-with-microsoft-entra-id-and-some-azure-services/#phase-3-protect-credentials"><strong>Phase 3: Protect Credentials</strong></a></h3>
+<p>Once we've identified all privileged accounts, we need to ensure that these credentials are stored securely. This could involve using a secure vault, regularly rotating passwords, and using unique passwords for each account. For example:</p>
+<ul>
+<li>Store credentials in a secure vault.</li>
+<li>Implement regular password rotation.</li>
+<li>Use unique passwords for each account.</li>
+</ul>
+<p>How to implement this:</p>
+<ul>
+<li>Use <strong>Azure Key Vault</strong> to safeguard cryptographic keys and other secrets used by your apps and services and <a href="https://learn.microsoft.com/en-us/azure/key-vault/secrets/tutorial-rotation-dual?tabs=azure-cli">rotate secrets regularly</a>.</li>
+<li>Implement <strong>Microsoft Entra ID Password Protection</strong> to protect against weak passwords that can be easily guessed or cracked.</li>
+</ul>
+<h3 id="phase-4-secure-privileged-access"><a class="toclink" href="../../04/privileged-access-management-pam-strategy-with-microsoft-entra-id-and-some-azure-services/#phase-4-secure-privileged-access"><strong>Phase 4: Secure Privileged Access</strong></a></h3>
+<p>Securing privileged access involves implementing controls to prevent unauthorized access. This could include limiting the number of privileged accounts, implementing least privilege, and using just-in-time access. For example:</p>
+<ul>
+<li>Limit the number of privileged accounts.</li>
+<li>Implement just-in-time access, where access is granted only for the duration of a task.</li>
+<li>Use session recording and monitoring for privileged access.</li>
+</ul>
+<p>How to implement this:</p>
+<ul>
+<li>Use <strong>Microsoft Entra ID Conditional Access</strong> to enforce controls on the access to apps in your environment based on specific conditions.</li>
+<li>Implement <strong>Microsoft Entra Privileged Identity Management</strong> for just-in-time access.</li>
+</ul>
+<h3 id="phase-5-least-privilege"><a class="toclink" href="../../04/privileged-access-management-pam-strategy-with-microsoft-entra-id-and-some-azure-services/#phase-5-least-privilege"><strong>Phase 5: Least Privilege</strong></a></h3>
+<p>The principle of least privilege involves giving users the minimum levels of access — or permissions — they need to complete their job functions. By limiting the access rights of users, the risk of a security breach is reduced. For example:</p>
+<ul>
+<li>Implement role-based access control (RBAC) in Azure to grant the minimum necessary access to users.</li>
+<li>Regularly review user roles and access rights.</li>
+<li>Implement a process for revoking access when it's no longer needed.</li>
+</ul>
+<p>How to implement this:</p>
+<ul>
+<li>Implement <strong>Role-Based Access Control (RBAC)</strong> in Azure to grant the minimum necessary access to users.</li>
+<li>Use <strong>Microsoft Entra ID Access Reviews</strong> to efficiently manage group memberships, access to enterprise applications, and role assignments.</li>
+</ul>
+<h3 id="phase-6-control-all-applications"><a class="toclink" href="../../04/privileged-access-management-pam-strategy-with-microsoft-entra-id-and-some-azure-services/#phase-6-control-all-applications"><strong>Phase 6: Control All Applications</strong></a></h3>
+<p>In this phase, we ensure that all applications, whether on-premises or in the cloud, are controlled and monitored. This includes implementing application control policies and monitoring application usage. For example:</p>
+<ul>
+<li>Implement application control policies that dictate what applications can be run on systems.</li>
+<li>Monitor application usage and block unauthorized applications.</li>
+<li>Regularly update and patch all applications to reduce vulnerabilities.</li>
+</ul>
+<p>How to implement this:</p>
+<ul>
+<li>Use <strong>Microsoft Entra Application Proxy</strong> to control and secure access to on-premises and cloud apps.</li>
+<li>Enable Change Tracking and Inventory in <strong>Azure Automation</strong> to track changes to your Azure VMs. Use desired state configuration to ensure that your VMs are configured correctly.</li>
+<li>Implement <strong>Microsoft Intune</strong> to manage and secure your devices and applications.</li>
+</ul>
+<h3 id="phase-7-detect-and-respond"><a class="toclink" href="../../04/privileged-access-management-pam-strategy-with-microsoft-entra-id-and-some-azure-services/#phase-7-detect-and-respond"><strong>Phase 7: Detect and Respond</strong></a></h3>
+<p>The final phase involves setting up systems to detect and respond to any suspicious activity. This could involve setting up alerts for unusual activity, regularly auditing access logs, and having a response plan in place for when a breach occurs. For example:</p>
+<ul>
+<li>Set up alerts for unusual activity.</li>
+<li>Regularly audit access logs.</li>
+<li>Have a response plan in place for when a breach occurs, including steps for containment, eradication, and recovery.</li>
+</ul>
+<p>How to implement this:</p>
+<ul>
+<li>Use <strong>Microsoft Defender for Cloud</strong> for increased visibility into your security state and to detect and respond to threats.</li>
+<li>Implement <strong>Azure Sentinel</strong>, Microsoft's cloud-native SIEM solution, for intelligent security analytics.</li>
+</ul>
+<p>By following these seven phases, you can create a robust PAM strategy that protects your organization from security breaches and helps you maintain compliance with various regulations.</p>
+<p>Remember, a good PAM strategy is not a one-time effort but an ongoing process that needs to be regularly reviewed and updated. Microsoft and Azure services provide a robust set of tools to help you implement and manage your PAM strategy effectively.</p>
+</div>
 </article>
+<nav class="md-pagination">
+<a class="md-pagination__link" href="../../">1</a> <a class="md-pagination__link" href="../2/">2</a> <span class="md-pagination__current">3</span>
+</nav>
+</div>
 </div>
 <script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
 </div>
@@ -852,69 +837,10 @@
 <script src="../../../../../assets/javascripts/bundle.56dfad97.min.js"></script>
 <script src="https://unpkg.com/tablesort@5.3.0/dist/tablesort.min.js"></script>
 <script src="../../../../../javascripts/tablesort.js"></script>
-<script type="text/javascript">(function initializeMarkmap() {
-    const transformer = new markmap.Transformer();
-    const assets = transformer.getAssets();
-    const loading = Promise.all([
-        assets.styles && markmap.loadCSS(assets.styles),
-        assets.scripts && markmap.loadJS(assets.scripts),
-    ]);
-
-    function parseData(content) {
-        const { root, frontmatter } = transformer.transform(content);
-        let options = markmap.deriveOptions(frontmatter?.markmap);
-        options = Object.assign({
-            fitRatio: 0.85,
-        }, options);
-        return { root, options };
-    }
-
-    function resetMarkmap(m, el) {
-        const { minX, maxX, minY, maxY } = m.state;
-        const height = el.clientWidth * (maxX - minX) / (maxY - minY);
-        el.style.height = height + "px";
-        m.fit();
-    }
-
-    function renderMarkmap(el) {
-        let svg = el.querySelector('svg');
-        if (svg) return;
-        const content = el.textContent;
-        el.innerHTML = '<svg>';
-        svg = el.firstChild;
-        const { root, options } = parseData(content);
-        const m = markmap.Markmap.create(svg, options, root);
-        resetMarkmap(m, el);
-        transformer.hooks.retransform.tap(() => {
-            const { root, options } = parseData(content);
-            m.setData(root, options);
-            resetMarkmap(m, el);
-        });
-    }
-
-    function updateMarkmaps(node) {
-        for (const el of node.querySelectorAll('.mkdocs-markmap')) {
-            renderMarkmap(el);
-        }
-    }
-
-    loading.then(() => {
-        const observer = new MutationObserver((mutationList) => {
-            for (const mutation of mutationList) {
-                if (mutation.type === 'childList') {
-                    for (const node of mutation.addedNodes) {
-                        updateMarkmaps(node);
-                    }
-                }
-            }
-        });
-
-        observer.observe(document.body, { childList: true });
-
-        updateMarkmaps(document);
-    });
-})();
-</script><script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+<script type="module">import mermaid from "https://unpkg.com/mermaid@11.2.0/dist/mermaid.esm.min.mjs";
+window.mermaidConfig = {default: {
+    startOnLoad: false
+}};</script><script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
 document$.subscribe(() => { lightbox.reload() });
 </script></body>
 </html>

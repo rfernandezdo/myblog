@@ -635,6 +635,139 @@
 <div class="md-post__meta md-meta">
 <ul class="md-meta__list">
 <li class="md-meta__item">
+<time datetime="2024-04-27 00:00:00">April 27, 2024</time></li>
+<li class="md-meta__item">
+            in
+            
+              <a class="md-meta__link" href="../../category/devops/">DevOps</a></li>
+<li class="md-meta__item">
+            
+              2 min read
+            
+          </li>
+</ul>
+</div>
+</header>
+<div class="md-post__content md-typeset">
+<h2 id="starting-my-iac-project-with-terraform"><a class="toclink" href="../../2024/04/27/starting-my-iac-project-with-terraform/">Starting my IaC project with terraform</a></h2>
+<p>This is not my first IaC project but I want to share with you some key considerations that I have in mind to start a personal IaC project with Terraform based on post <a href="../../2024/04/26/what-you-need-to-think-about-when-starting-an-iac-project-/">What you need to think about when starting an IaC project ?</a></p>
+<h3 id="1-define-your-goals"><a class="toclink" href="../../2024/04/27/starting-my-iac-project-with-terraform/#1-define-your-goals">1. <strong>Define Your Goals</strong></a></h3>
+<p>These are my goals:</p>
+<ul>
+<li>Automate the provisioning of infrastructure</li>
+<li>Improve consistency and repeatability</li>
+<li>Reduce manual effort</li>
+<li>Enable faster deployments</li>
+</ul>
+<h3 id="2-select-the-right-tools"><a class="toclink" href="../../2024/04/27/starting-my-iac-project-with-terraform/#2-select-the-right-tools">2. <strong>Select the Right Tools</strong></a></h3>
+<p>For my project I will use Terraform because I am familiar with it and I like its declarative configuration language.</p>
+<h3 id="3-design-your-infrastructure"><a class="toclink" href="../../2024/04/27/starting-my-iac-project-with-terraform/#3-design-your-infrastructure">3. <strong>Design Your Infrastructure</strong></a></h3>
+<p>In my project, I will use a modular design that separates my infrastructure into different modules, such as networking, compute, and storage. This will allow me to reuse code across different projects and make my infrastructure more maintainable.</p>
+<h3 id="4-version-control-your-code"><a class="toclink" href="../../2024/04/27/starting-my-iac-project-with-terraform/#4-version-control-your-code">4. <strong>Version Control Your Code</strong></a></h3>
+<p>I will use Git for version control and follow best practices for version control, such as using descriptive commit messages and branching strategies.</p>
+<h3 id="5-automate-testing"><a class="toclink" href="../../2024/04/27/starting-my-iac-project-with-terraform/#5-automate-testing">5. <strong>Automate Testing</strong></a></h3>
+<p>Like appear in <a href="https://learn.microsoft.com/en-us/azure/developer/terraform/best-practices-compliance-testing">Implement compliance testing with Terraform and Azure</a>, I'd  like to implement: </p>
+<ul>
+<li>Compliance testing</li>
+<li>End-to-end testing</li>
+<li>Integration testing</li>
+</ul>
+<h3 id="6-implement-continuous-integrationcontinuous-deployment-cicd"><a class="toclink" href="../../2024/04/27/starting-my-iac-project-with-terraform/#6-implement-continuous-integrationcontinuous-deployment-cicd">6. <strong>Implement Continuous Integration/Continuous Deployment (CI/CD)</strong></a></h3>
+<p>I set up my  CI/CD pipelines with Github Actions.</p>
+<h3 id="7-monitor-and-maintain-your-infrastructure"><a class="toclink" href="../../2024/04/27/starting-my-iac-project-with-terraform/#7-monitor-and-maintain-your-infrastructure">7. <strong>Monitor and Maintain Your Infrastructure</strong></a></h3>
+<p>I will use Azure Monitor to monitor my infrastructure and set up alerts to notify me of any issues. I will also regularly review and update my infrastructure code to ensure that it remains up to date and secure.</p>
+<p>Of course I don't have all the answers yet, but I will keep you updated on my progress and share my learnings along the way. Stay tuned for more updates on my IaC project with Terraform!</p>
+</div>
+</article>
+<article class="md-post md-post--excerpt">
+<header class="md-post__header">
+<nav class="md-post__authors md-typeset">
+<span class="md-author">
+<img alt="Rafael Fernández" src="https://avatars.githubusercontent.com/u/39990341"/>
+</span>
+</nav>
+<div class="md-post__meta md-meta">
+<ul class="md-meta__list">
+<li class="md-meta__item">
+<time datetime="2024-04-26 00:00:00">April 26, 2024</time></li>
+<li class="md-meta__item">
+            in
+            
+              <a class="md-meta__link" href="../../category/devops/">DevOps</a></li>
+<li class="md-meta__item">
+            
+              4 min read
+            
+          </li>
+</ul>
+</div>
+</header>
+<div class="md-post__content md-typeset">
+<h2 id="what-you-need-to-think-about-when-starting-an-iac-project"><a class="toclink" href="../../2024/04/26/what-you-need-to-think-about-when-starting-an-iac-project-/">What you need to think about when starting an IaC project ?</a></h2>
+<p>Infrastructure as Code (IaC) is a key practice in modern software development that allows you to manage your infrastructure in a declarative manner. With IaC, you can define your infrastructure using code, which can be version-controlled, tested, and deployed automatically. This approach brings several benefits, such as increased consistency, repeatability, and scalability.</p>
+<p>When starting an IaC project, there are several key considerations you need to keep in mind to ensure its success. In this article, we will discuss some of the key things you should think about when embarking on an IaC project.</p>
+<h3 id="1-define-your-goals"><a class="toclink" href="../../2024/04/26/what-you-need-to-think-about-when-starting-an-iac-project-/#1-define-your-goals">1. <strong>Define Your Goals</strong></a></h3>
+<p>Before you start writing any code, it's essential to define your goals for the IaC project. What are you trying to achieve with IaC? Are you looking to automate the provisioning of infrastructure, improve consistency, or increase scalability? By clearly defining your goals, you can ensure that your IaC project is aligned with your organization's objectives.</p>
+<p>Some examples: </p>
+<ul>
+<li>Automate the provisioning of infrastructure</li>
+<li>Improve consistency and repeatability</li>
+<li>Increase scalability and reduce manual effort</li>
+<li>Enhance security and compliance</li>
+<li>Enable faster development and deployment cycles</li>
+</ul>
+<h3 id="2-select-the-right-tools"><a class="toclink" href="../../2024/04/26/what-you-need-to-think-about-when-starting-an-iac-project-/#2-select-the-right-tools">2. <strong>Select the Right Tools</strong></a></h3>
+<p>Choosing the right tools is crucial for the success of your IaC project. There are several IaC tools available, such as Terraform, Ansible, and AWS CloudFormation, each with its strengths and weaknesses. Consider factors such as ease of use, scalability, and integration with your existing tools when selecting an IaC tool.</p>
+<p>Some examples:</p>
+<ul>
+<li>Terraform: A popular IaC tool that allows you to define your infrastructure using a declarative configuration language.</li>
+<li>Ansible: A configuration management tool that can also be used for IaC.</li>
+<li>AWS CloudFormation: A service provided by AWS that allows you to define your infrastructure using JSON or YAML templates.</li>
+<li>Azure Resource Manager (ARM) templates: A service provided by Azure that allows you to define your infrastructure using JSON templates.</li>
+<li>Bicep: A domain-specific language for defining Azure resources that compiles to ARM templates.</li>
+<li>Pulumi: A tool that allows you to define your infrastructure using familiar programming languages such as Python, JavaScript, and Go.</li>
+<li>Chef: A configuration management tool that can also be used for IaC.</li>
+</ul>
+<h3 id="3-design-your-infrastructure"><a class="toclink" href="../../2024/04/26/what-you-need-to-think-about-when-starting-an-iac-project-/#3-design-your-infrastructure">3. <strong>Design Your Infrastructure</strong></a></h3>
+<p>When designing your infrastructure, think about how you want to structure your code. Consider using modular designs that allow you to reuse code across different projects. Define your infrastructure in a way that is easy to understand and maintain, and follow best practices for code organization.</p>
+<h3 id="4-version-control-your-code"><a class="toclink" href="../../2024/04/26/what-you-need-to-think-about-when-starting-an-iac-project-/#4-version-control-your-code">4. <strong>Version Control Your Code</strong></a></h3>
+<p>Version control is a fundamental practice in software development, and it is equally important for IaC projects. By using version control systems such as Git, you can track changes to your infrastructure code, collaborate with team members, and roll back changes if needed. Make sure to follow best practices for version control, such as using descriptive commit messages and branching strategies.</p>
+<p>Some examples:</p>
+<ul>
+<li>Use Git for version control</li>
+<li>Use branching strategies like Microsoft Flow or GitHub Flow to manage your codebase</li>
+<li>Use pull requests for code reviews</li>
+<li>Automate your CI/CD pipelines to run tests and deploy changes</li>
+<li>Use tags to mark releases or milestones</li>
+</ul>
+<h3 id="5-automate-testing"><a class="toclink" href="../../2024/04/26/what-you-need-to-think-about-when-starting-an-iac-project-/#5-automate-testing">5. <strong>Automate Testing</strong></a></h3>
+<p>Testing is an essential part of any software development project, and IaC is no exception. Automating your tests can help you catch errors early in the development process and ensure that your infrastructure code is working as expected. Consider using tools such as Terraform's built-in testing framework or third-party testing tools to automate your tests.</p>
+<p>Some examples:</p>
+<ul>
+<li>Use Terraform's built-in testing framework to write unit tests for your infrastructure code</li>
+<li>Use tools like Terratest or Kitchen-Terraform to write integration tests for your infrastructure code</li>
+<li>Use static code analysis tools to check for common errors and best practices in your infrastructure code, like Terraform's <code>terraform validate</code> command, or tools like <code>tfsec</code> or <code>checkov</code>.</li>
+<li>Use linting tools to enforce coding standards and style guidelines in your infrastructure code, like Terraform's <code>terraform fmt</code> command, or tools like <code>tflint</code> or <code>checkov</code>.</li>
+<li>Use security scanning tools to identify potential security vulnerabilities in your infrastructure code.</li>
+</ul>
+<h3 id="6-implement-continuous-integrationcontinuous-deployment-cicd"><a class="toclink" href="../../2024/04/26/what-you-need-to-think-about-when-starting-an-iac-project-/#6-implement-continuous-integrationcontinuous-deployment-cicd">6. <strong>Implement Continuous Integration/Continuous Deployment (CI/CD)</strong></a></h3>
+<p>CI/CD pipelines are a key component of modern software development practices, and they are equally important for IaC projects. By implementing CI/CD pipelines, you can automate the testing, building, and deployment of your infrastructure code, reducing the risk of errors and speeding up the development process. Consider using tools such as Github or Azure DevOps to set up your CI/CD pipelines.</p>
+<p>Use tools like Terraform Cloud, Azure DevOps, or Github Actions to automate your CI/CD pipelines.</p>
+<h3 id="7-monitor-and-maintain-your-infrastructure"><a class="toclink" href="../../2024/04/26/what-you-need-to-think-about-when-starting-an-iac-project-/#7-monitor-and-maintain-your-infrastructure">7. <strong>Monitor and Maintain Your Infrastructure</strong></a></h3>
+<p>Once your IaC project is up and running, it's essential to monitor and maintain your infrastructure. Implement monitoring solutions that allow you to track the health and performance of your infrastructure, and set up alerts to notify you of any issues. Regularly review and update your infrastructure code to ensure that it remains up-to-date and secure.</p>
+<p>By keeping these key considerations in mind when starting an IaC project, you can set yourself up for success and ensure that your infrastructure is managed efficiently and effectively. IaC is a powerful practice that can help you automate and scale your infrastructure, and by following best practices, you can maximize the benefits of this approach.</p>
+</div>
+</article>
+<article class="md-post md-post--excerpt">
+<header class="md-post__header">
+<nav class="md-post__authors md-typeset">
+<span class="md-author">
+<img alt="Rafael Fernández" src="https://avatars.githubusercontent.com/u/39990341"/>
+</span>
+</nav>
+<div class="md-post__meta md-meta">
+<ul class="md-meta__list">
+<li class="md-meta__item">
 <time datetime="2024-04-24 00:00:00">April 24, 2024</time></li>
 <li class="md-meta__item">
             in
@@ -1361,28 +1494,28 @@ param(
 </ol>
 <h3 id="how-to-use-the-hub-and-spoke-topology-in-azure"><a class="toclink" href="../../2024/04/19/azure-network-hub-and-spoke-topology/#how-to-use-the-hub-and-spoke-topology-in-azure">How to Use the Hub and Spoke Topology in Azure</a></h3>
 <p>To implement the Hub and Spoke topology in Azure, follow these steps:</p>
-<div class="language-sh highlight"><pre><span></span><code><span id="__span-2-1"><a href="#__codelineno-2-1" id="__codelineno-2-1" name="__codelineno-2-1"></a><span class="c1"># Step 1: Create a virtual network for the Hub</span>
-</span><span id="__span-2-2"><a href="#__codelineno-2-2" id="__codelineno-2-2" name="__codelineno-2-2"></a>az<span class="w"> </span>network<span class="w"> </span>vnet<span class="w"> </span>create<span class="w"> </span>--name<span class="w"> </span>HubVnet<span class="w"> </span>--resource-group<span class="w"> </span>MyResourceGroup<span class="w"> </span>--location<span class="w"> </span>eastus<span class="w"> </span>--address-prefix
-</span><span id="__span-2-3"><a href="#__codelineno-2-3" id="__codelineno-2-3" name="__codelineno-2-3"></a>
-</span><span id="__span-2-4"><a href="#__codelineno-2-4" id="__codelineno-2-4" name="__codelineno-2-4"></a><span class="c1"># Step 2: Create virtual networks for the Spokes</span>
-</span><span id="__span-2-5"><a href="#__codelineno-2-5" id="__codelineno-2-5" name="__codelineno-2-5"></a>az<span class="w"> </span>network<span class="w"> </span>vnet<span class="w"> </span>create<span class="w"> </span>--name<span class="w"> </span>Spoke1Vnet<span class="w"> </span>--resource-group<span class="w"> </span>MyResourceGroup<span class="w"> </span>--location<span class="w"> </span>eastus<span class="w"> </span>--address-prefix
-</span><span id="__span-2-6"><a href="#__codelineno-2-6" id="__codelineno-2-6" name="__codelineno-2-6"></a>az<span class="w"> </span>network<span class="w"> </span>vnet<span class="w"> </span>create<span class="w"> </span>--name<span class="w"> </span>Spoke2Vnet<span class="w"> </span>--resource-group<span class="w"> </span>MyResourceGroup<span class="w"> </span>--location<span class="w"> </span>eastus<span class="w"> </span>--address-prefix
-</span><span id="__span-2-7"><a href="#__codelineno-2-7" id="__codelineno-2-7" name="__codelineno-2-7"></a>az<span class="w"> </span>network<span class="w"> </span>vnet<span class="w"> </span>create<span class="w"> </span>--name<span class="w"> </span>Spoke3Vnet<span class="w"> </span>--resource-group<span class="w"> </span>MyResourceGroup<span class="w"> </span>--location<span class="w"> </span>eastus<span class="w"> </span>--address-prefix
-</span><span id="__span-2-8"><a href="#__codelineno-2-8" id="__codelineno-2-8" name="__codelineno-2-8"></a>
-</span><span id="__span-2-9"><a href="#__codelineno-2-9" id="__codelineno-2-9" name="__codelineno-2-9"></a><span class="c1"># Step 3: Connect the Spokes to the Hub</span>
-</span><span id="__span-2-10"><a href="#__codelineno-2-10" id="__codelineno-2-10" name="__codelineno-2-10"></a>az<span class="w"> </span>network<span class="w"> </span>vnet<span class="w"> </span>peering<span class="w"> </span>create<span class="w"> </span>--name<span class="w"> </span>Spoke1ToHub<span class="w"> </span>--resource-group<span class="w"> </span>MyResourceGroup<span class="w"> </span>--vnet-name<span class="w"> </span>Spoke1Vnet<span class="w"> </span>--remote-vnet<span class="w"> </span>HubVnet<span class="w"> </span>--allow-vnet-access
-</span><span id="__span-2-11"><a href="#__codelineno-2-11" id="__codelineno-2-11" name="__codelineno-2-11"></a>az<span class="w"> </span>network<span class="w"> </span>vnet<span class="w"> </span>peering<span class="w"> </span>create<span class="w"> </span>--name<span class="w"> </span>Spoke2ToHub<span class="w"> </span>--resource-group<span class="w"> </span>MyResourceGroup<span class="w"> </span>--vnet-name<span class="w"> </span>Spoke2Vnet<span class="w"> </span>--remote-vnet<span class="w"> </span>HubVnet<span class="w"> </span>--allow-vnet-access
-</span><span id="__span-2-12"><a href="#__codelineno-2-12" id="__codelineno-2-12" name="__codelineno-2-12"></a>az<span class="w"> </span>network<span class="w"> </span>vnet<span class="w"> </span>peering<span class="w"> </span>create<span class="w"> </span>--name<span class="w"> </span>Spoke3ToHub<span class="w"> </span>--resource-group<span class="w"> </span>MyResourceGroup<span class="w"> </span>--vnet-name<span class="w"> </span>Spoke3Vnet<span class="w"> </span>--remote-vnet<span class="w"> </span>HubVnet<span class="w"> </span>--allow-vnet-access
-</span><span id="__span-2-13"><a href="#__codelineno-2-13" id="__codelineno-2-13" name="__codelineno-2-13"></a>
-</span><span id="__span-2-14"><a href="#__codelineno-2-14" id="__codelineno-2-14" name="__codelineno-2-14"></a><span class="c1"># Step 4: Configure routing between the Hub and the Spokes</span>
-</span><span id="__span-2-15"><a href="#__codelineno-2-15" id="__codelineno-2-15" name="__codelineno-2-15"></a>az<span class="w"> </span>network<span class="w"> </span>vnet<span class="w"> </span>peering<span class="w"> </span>update<span class="w"> </span>--name<span class="w"> </span>Spoke1ToHub<span class="w"> </span>--resource-group<span class="w"> </span>MyResourceGroup<span class="w"> </span>--vnet-name<span class="w"> </span>Spoke1Vnet<span class="w"> </span>--set<span class="w"> </span>virtualNetworkGateway:AllowGatewayTransit<span class="o">=</span><span class="nb">true</span>
-</span><span id="__span-2-16"><a href="#__codelineno-2-16" id="__codelineno-2-16" name="__codelineno-2-16"></a>az<span class="w"> </span>network<span class="w"> </span>vnet<span class="w"> </span>peering<span class="w"> </span>update<span class="w"> </span>--name<span class="w"> </span>Spoke2ToHub<span class="w"> </span>--resource-group<span class="w"> </span>MyResourceGroup<span class="w"> </span>--vnet-name<span class="w"> </span>Spoke2Vnet<span class="w"> </span>--set<span class="w"> </span>virtualNetworkGateway:AllowGatewayTransit<span class="o">=</span><span class="nb">true</span>
-</span><span id="__span-2-17"><a href="#__codelineno-2-17" id="__codelineno-2-17" name="__codelineno-2-17"></a>az<span class="w"> </span>network<span class="w"> </span>vnet<span class="w"> </span>peering<span class="w"> </span>update<span class="w"> </span>--name<span class="w"> </span>Spoke3ToHub<span class="w"> </span>--resource-group<span class="w"> </span>MyResourceGroup<span class="w"> </span>--vnet-name<span class="w"> </span>Spoke3Vnet<span class="w"> </span>--set<span class="w"> </span>virtualNetworkGateway:AllowGatewayTransit<span class="o">=</span><span class="nb">true</span>
-</span><span id="__span-2-18"><a href="#__codelineno-2-18" id="__codelineno-2-18" name="__codelineno-2-18"></a>
-</span><span id="__span-2-19"><a href="#__codelineno-2-19" id="__codelineno-2-19" name="__codelineno-2-19"></a><span class="c1"># Step 5: Configure routing in the Hub</span>
-</span><span id="__span-2-20"><a href="#__codelineno-2-20" id="__codelineno-2-20" name="__codelineno-2-20"></a>az<span class="w"> </span>network<span class="w"> </span>vnet<span class="w"> </span>peering<span class="w"> </span>update<span class="w"> </span>--name<span class="w"> </span>HubToSpoke1<span class="w"> </span>--resource-group<span class="w"> </span>MyResourceGroup<span class="w"> </span>--vnet-name<span class="w"> </span>HubVnet<span class="w"> </span>--set<span class="w"> </span>virtualNetworkGateway:UseRemoteGateways<span class="o">=</span><span class="nb">true</span>
-</span><span id="__span-2-21"><a href="#__codelineno-2-21" id="__codelineno-2-21" name="__codelineno-2-21"></a>az<span class="w"> </span>network<span class="w"> </span>vnet<span class="w"> </span>peering<span class="w"> </span>update<span class="w"> </span>--name<span class="w"> </span>HubToSpoke2<span class="w"> </span>--resource-group<span class="w"> </span>MyResourceGroup<span class="w"> </span>--vnet-name<span class="w"> </span>HubVnet<span class="w"> </span>--set<span class="w"> </span>virtualNetworkGateway:UseRemoteGateways<span class="o">=</span><span class="nb">true</span>
-</span><span id="__span-2-22"><a href="#__codelineno-2-22" id="__codelineno-2-22" name="__codelineno-2-22"></a>az<span class="w"> </span>network<span class="w"> </span>vnet<span class="w"> </span>peering<span class="w"> </span>update<span class="w"> </span>--name<span class="w"> </span>HubToSpoke3<span class="w"> </span>--resource-group<span class="w"> </span>MyResourceGroup<span class="w"> </span>--vnet-name<span class="w"> </span>HubVnet<span class="w"> </span>--set<span class="w"> </span>virtualNetworkGateway:UseRemoteGateways<span class="o">=</span><span class="nb">true</span>
+<div class="language-sh highlight"><pre><span></span><code><span id="__span-0-1"><a href="#__codelineno-0-1" id="__codelineno-0-1" name="__codelineno-0-1"></a><span class="c1"># Step 1: Create a virtual network for the Hub</span>
+</span><span id="__span-0-2"><a href="#__codelineno-0-2" id="__codelineno-0-2" name="__codelineno-0-2"></a>az<span class="w"> </span>network<span class="w"> </span>vnet<span class="w"> </span>create<span class="w"> </span>--name<span class="w"> </span>HubVnet<span class="w"> </span>--resource-group<span class="w"> </span>MyResourceGroup<span class="w"> </span>--location<span class="w"> </span>eastus<span class="w"> </span>--address-prefix
+</span><span id="__span-0-3"><a href="#__codelineno-0-3" id="__codelineno-0-3" name="__codelineno-0-3"></a>
+</span><span id="__span-0-4"><a href="#__codelineno-0-4" id="__codelineno-0-4" name="__codelineno-0-4"></a><span class="c1"># Step 2: Create virtual networks for the Spokes</span>
+</span><span id="__span-0-5"><a href="#__codelineno-0-5" id="__codelineno-0-5" name="__codelineno-0-5"></a>az<span class="w"> </span>network<span class="w"> </span>vnet<span class="w"> </span>create<span class="w"> </span>--name<span class="w"> </span>Spoke1Vnet<span class="w"> </span>--resource-group<span class="w"> </span>MyResourceGroup<span class="w"> </span>--location<span class="w"> </span>eastus<span class="w"> </span>--address-prefix
+</span><span id="__span-0-6"><a href="#__codelineno-0-6" id="__codelineno-0-6" name="__codelineno-0-6"></a>az<span class="w"> </span>network<span class="w"> </span>vnet<span class="w"> </span>create<span class="w"> </span>--name<span class="w"> </span>Spoke2Vnet<span class="w"> </span>--resource-group<span class="w"> </span>MyResourceGroup<span class="w"> </span>--location<span class="w"> </span>eastus<span class="w"> </span>--address-prefix
+</span><span id="__span-0-7"><a href="#__codelineno-0-7" id="__codelineno-0-7" name="__codelineno-0-7"></a>az<span class="w"> </span>network<span class="w"> </span>vnet<span class="w"> </span>create<span class="w"> </span>--name<span class="w"> </span>Spoke3Vnet<span class="w"> </span>--resource-group<span class="w"> </span>MyResourceGroup<span class="w"> </span>--location<span class="w"> </span>eastus<span class="w"> </span>--address-prefix
+</span><span id="__span-0-8"><a href="#__codelineno-0-8" id="__codelineno-0-8" name="__codelineno-0-8"></a>
+</span><span id="__span-0-9"><a href="#__codelineno-0-9" id="__codelineno-0-9" name="__codelineno-0-9"></a><span class="c1"># Step 3: Connect the Spokes to the Hub</span>
+</span><span id="__span-0-10"><a href="#__codelineno-0-10" id="__codelineno-0-10" name="__codelineno-0-10"></a>az<span class="w"> </span>network<span class="w"> </span>vnet<span class="w"> </span>peering<span class="w"> </span>create<span class="w"> </span>--name<span class="w"> </span>Spoke1ToHub<span class="w"> </span>--resource-group<span class="w"> </span>MyResourceGroup<span class="w"> </span>--vnet-name<span class="w"> </span>Spoke1Vnet<span class="w"> </span>--remote-vnet<span class="w"> </span>HubVnet<span class="w"> </span>--allow-vnet-access
+</span><span id="__span-0-11"><a href="#__codelineno-0-11" id="__codelineno-0-11" name="__codelineno-0-11"></a>az<span class="w"> </span>network<span class="w"> </span>vnet<span class="w"> </span>peering<span class="w"> </span>create<span class="w"> </span>--name<span class="w"> </span>Spoke2ToHub<span class="w"> </span>--resource-group<span class="w"> </span>MyResourceGroup<span class="w"> </span>--vnet-name<span class="w"> </span>Spoke2Vnet<span class="w"> </span>--remote-vnet<span class="w"> </span>HubVnet<span class="w"> </span>--allow-vnet-access
+</span><span id="__span-0-12"><a href="#__codelineno-0-12" id="__codelineno-0-12" name="__codelineno-0-12"></a>az<span class="w"> </span>network<span class="w"> </span>vnet<span class="w"> </span>peering<span class="w"> </span>create<span class="w"> </span>--name<span class="w"> </span>Spoke3ToHub<span class="w"> </span>--resource-group<span class="w"> </span>MyResourceGroup<span class="w"> </span>--vnet-name<span class="w"> </span>Spoke3Vnet<span class="w"> </span>--remote-vnet<span class="w"> </span>HubVnet<span class="w"> </span>--allow-vnet-access
+</span><span id="__span-0-13"><a href="#__codelineno-0-13" id="__codelineno-0-13" name="__codelineno-0-13"></a>
+</span><span id="__span-0-14"><a href="#__codelineno-0-14" id="__codelineno-0-14" name="__codelineno-0-14"></a><span class="c1"># Step 4: Configure routing between the Hub and the Spokes</span>
+</span><span id="__span-0-15"><a href="#__codelineno-0-15" id="__codelineno-0-15" name="__codelineno-0-15"></a>az<span class="w"> </span>network<span class="w"> </span>vnet<span class="w"> </span>peering<span class="w"> </span>update<span class="w"> </span>--name<span class="w"> </span>Spoke1ToHub<span class="w"> </span>--resource-group<span class="w"> </span>MyResourceGroup<span class="w"> </span>--vnet-name<span class="w"> </span>Spoke1Vnet<span class="w"> </span>--set<span class="w"> </span>virtualNetworkGateway:AllowGatewayTransit<span class="o">=</span><span class="nb">true</span>
+</span><span id="__span-0-16"><a href="#__codelineno-0-16" id="__codelineno-0-16" name="__codelineno-0-16"></a>az<span class="w"> </span>network<span class="w"> </span>vnet<span class="w"> </span>peering<span class="w"> </span>update<span class="w"> </span>--name<span class="w"> </span>Spoke2ToHub<span class="w"> </span>--resource-group<span class="w"> </span>MyResourceGroup<span class="w"> </span>--vnet-name<span class="w"> </span>Spoke2Vnet<span class="w"> </span>--set<span class="w"> </span>virtualNetworkGateway:AllowGatewayTransit<span class="o">=</span><span class="nb">true</span>
+</span><span id="__span-0-17"><a href="#__codelineno-0-17" id="__codelineno-0-17" name="__codelineno-0-17"></a>az<span class="w"> </span>network<span class="w"> </span>vnet<span class="w"> </span>peering<span class="w"> </span>update<span class="w"> </span>--name<span class="w"> </span>Spoke3ToHub<span class="w"> </span>--resource-group<span class="w"> </span>MyResourceGroup<span class="w"> </span>--vnet-name<span class="w"> </span>Spoke3Vnet<span class="w"> </span>--set<span class="w"> </span>virtualNetworkGateway:AllowGatewayTransit<span class="o">=</span><span class="nb">true</span>
+</span><span id="__span-0-18"><a href="#__codelineno-0-18" id="__codelineno-0-18" name="__codelineno-0-18"></a>
+</span><span id="__span-0-19"><a href="#__codelineno-0-19" id="__codelineno-0-19" name="__codelineno-0-19"></a><span class="c1"># Step 5: Configure routing in the Hub</span>
+</span><span id="__span-0-20"><a href="#__codelineno-0-20" id="__codelineno-0-20" name="__codelineno-0-20"></a>az<span class="w"> </span>network<span class="w"> </span>vnet<span class="w"> </span>peering<span class="w"> </span>update<span class="w"> </span>--name<span class="w"> </span>HubToSpoke1<span class="w"> </span>--resource-group<span class="w"> </span>MyResourceGroup<span class="w"> </span>--vnet-name<span class="w"> </span>HubVnet<span class="w"> </span>--set<span class="w"> </span>virtualNetworkGateway:UseRemoteGateways<span class="o">=</span><span class="nb">true</span>
+</span><span id="__span-0-21"><a href="#__codelineno-0-21" id="__codelineno-0-21" name="__codelineno-0-21"></a>az<span class="w"> </span>network<span class="w"> </span>vnet<span class="w"> </span>peering<span class="w"> </span>update<span class="w"> </span>--name<span class="w"> </span>HubToSpoke2<span class="w"> </span>--resource-group<span class="w"> </span>MyResourceGroup<span class="w"> </span>--vnet-name<span class="w"> </span>HubVnet<span class="w"> </span>--set<span class="w"> </span>virtualNetworkGateway:UseRemoteGateways<span class="o">=</span><span class="nb">true</span>
+</span><span id="__span-0-22"><a href="#__codelineno-0-22" id="__codelineno-0-22" name="__codelineno-0-22"></a>az<span class="w"> </span>network<span class="w"> </span>vnet<span class="w"> </span>peering<span class="w"> </span>update<span class="w"> </span>--name<span class="w"> </span>HubToSpoke3<span class="w"> </span>--resource-group<span class="w"> </span>MyResourceGroup<span class="w"> </span>--vnet-name<span class="w"> </span>HubVnet<span class="w"> </span>--set<span class="w"> </span>virtualNetworkGateway:UseRemoteGateways<span class="o">=</span><span class="nb">true</span>
 </span></code></pre></div>
 <h3 id="variant-of-the-hub-and-spoke-topology"><a class="toclink" href="../../2024/04/19/azure-network-hub-and-spoke-topology/#variant-of-the-hub-and-spoke-topology">Variant of the Hub and Spoke Topology</a></h3>
 <p>A variant of the Hub and Spoke topology is the Hub and Spoke with peering between spokes that is generally used to allow direct connectivity between the Spoke networks without going through the Hub. This can be useful in scenarios where direct connectivity between the Spoke networks is required, such as data replication or application communication.</p>
@@ -1399,8 +1532,8 @@ param(
     SPOKE1 -.- SPOKE2    
 </code></pre>
 In this case, it would be connecting the Spoke networks to each other via virtual network peering, for example:</p>
-<div class="language-sh highlight"><pre><span></span><code><span id="__span-3-1"><a href="#__codelineno-3-1" id="__codelineno-3-1" name="__codelineno-3-1"></a><span class="c1"># Connect Spoke1 to Spoke2</span>
-</span><span id="__span-3-2"><a href="#__codelineno-3-2" id="__codelineno-3-2" name="__codelineno-3-2"></a>az<span class="w"> </span>network<span class="w"> </span>vnet<span class="w"> </span>peering<span class="w"> </span>create<span class="w"> </span>--name<span class="w"> </span>Spoke1ToSpoke2<span class="w"> </span>--resource-group<span class="w"> </span>MyResourceGroup<span class="w"> </span>--vnet-name<span class="w"> </span>Spoke1Vnet<span class="w"> </span>--remote-vnet<span class="w"> </span>Spoke2Vnet<span class="w"> </span>--allow-vnet-access
+<div class="language-sh highlight"><pre><span></span><code><span id="__span-1-1"><a href="#__codelineno-1-1" id="__codelineno-1-1" name="__codelineno-1-1"></a><span class="c1"># Connect Spoke1 to Spoke2</span>
+</span><span id="__span-1-2"><a href="#__codelineno-1-2" id="__codelineno-1-2" name="__codelineno-1-2"></a>az<span class="w"> </span>network<span class="w"> </span>vnet<span class="w"> </span>peering<span class="w"> </span>create<span class="w"> </span>--name<span class="w"> </span>Spoke1ToSpoke2<span class="w"> </span>--resource-group<span class="w"> </span>MyResourceGroup<span class="w"> </span>--vnet-name<span class="w"> </span>Spoke1Vnet<span class="w"> </span>--remote-vnet<span class="w"> </span>Spoke2Vnet<span class="w"> </span>--allow-vnet-access
 </span></code></pre></div>
 <h3 id="scalability-and-performance"><a class="toclink" href="../../2024/04/19/azure-network-hub-and-spoke-topology/#scalability-and-performance">Scalability and Performance</a></h3>
 <p>The Hub and Spoke topology in Azure is highly scalable and can handle thousands of virtual networks and subnets. In terms of performance, the Hub and Spoke topology provides efficient and low-latency connectivity between the Spoke networks and the Hub.</p>
@@ -1685,473 +1818,65 @@ Custom Roles has the same structure as built-in roles:</p>
 <div class="md-post__meta md-meta">
 <ul class="md-meta__list">
 <li class="md-meta__item">
-<time datetime="2024-04-17 00:00:00">April 17, 2024</time></li>
+<time datetime="2024-04-18 00:00:00">April 18, 2024</time></li>
 <li class="md-meta__item">
             in
             
-              <a class="md-meta__link" href="../../category/tools/">Tools</a></li>
+              <a class="md-meta__link" href="../../category/azure/">Azure</a></li>
 <li class="md-meta__item">
             
-              6 min read
+              3 min read
             
           </li>
 </ul>
 </div>
 </header>
 <div class="md-post__content md-typeset">
-<h2 id="using-enterprise-azure-policy-as-code-epac"><a class="toclink" href="../../2024/04/17/using-enterprise-azure-policy-as-code-epac/">Using Enterprise Azure Policy as Code (EPAC)</a></h2>
-<p>In this blog post, we will show how to use Enterprise Azure Policy as Code (EPAC) to manage your Azure environment.</p>
-<h3 id="use-case"><a class="toclink" href="../../2024/04/17/using-enterprise-azure-policy-as-code-epac/#use-case">Use case</a></h3>
+<h2 id="azure-role-assignment-conditions"><a class="toclink" href="../../2024/04/18/azure-role-assignment-conditions/">Azure role assignment conditions</a></h2>
+<p>First of all, let's understand what is ABAc (Attribute-Based Access Control) and how it can be used in Azure.</p>
+<h3 id="what-is-abac"><a class="toclink" href="../../2024/04/18/azure-role-assignment-conditions/#what-is-abac">What is ABAC?</a></h3>
+<p>Attribute-Based Access Control (ABAC) is an access control model that uses attributes to determine access rights. In ABAC, access decisions are based on the attributes of the user, the resource, and the environment. This allows for fine-grained access control based on a wide range of attributes, such as user roles, resource types, and time of day.</p>
+<p>ABAC is a flexible and scalable access control model that can be used to enforce complex access policies. It allows organizations to define access control rules based on a wide range of attributes and to adapt those rules as their needs change.</p>
+<p>ABAC is build on Azure RBAC.</p>
+<h3 id="what-is-azure-role-assignment-conditions"><a class="toclink" href="../../2024/04/18/azure-role-assignment-conditions/#what-is-azure-role-assignment-conditions">What is Azure role assignment conditions?</a></h3>
+<p>Azure role assignment conditions allow you to define conditions that must be met for a role assignment to be effective. </p>
+<h3 id="how-to-configure-azure-role-assignment-conditions"><a class="toclink" href="../../2024/04/18/azure-role-assignment-conditions/#how-to-configure-azure-role-assignment-conditions">How to configure Azure role assignment conditions?</a></h3>
+<p>To configure Azure role assignment conditions, configure the role assignment as usual, and then click on the "Conditions" tab. Here you can define the conditions that must be met for the role assignment to be effective.</p>
+<p><img alt="alt text" src="../../2024/09/Screenshot%202024-09-18%20111639.png"/></p>
+<p>Options for configuring Conditions:</p>
 <ul>
-<li>Determine desired state strategy.</li>
-<li>We have some existing Azure Policies that we want to manage as code.</li>
-<li>For simplicity, we will suppose that we have a unique Centralized Team that manages the policies.</li>
-<li>We will use a Git repository to store the policies and the CI/CD process to deploy them.</li>
-<li>We doesn't have any exclude resources in the environment.</li>
-<li>How to handle Defender for Cloud Policy Assignments:</li>
-<li>We will use Defender for Cloud to manage the Policy Assignments for Defender Plans when a plan is enabled.</li>
-<li>EPAC will manage Defender for Cloud Security Policy Assignments at the management group level. This is the default behavior.</li>
-<li>Design your CI/CD process:</li>
-<li>We will use Release Flow</li>
+<li>Allow user to only assign selected roles to selected principals (fewer privileges)</li>
+<li>Allow user to assign all roles except privileged administrator roles Owner, UAA, RBAC (Recommended)</li>
+<li>Allow user to assign all roles (highly privileged)</li>
 </ul>
-<h4 id="management-groups-for-enterprise-scale-landing-zone"><a class="toclink" href="../../2024/04/17/using-enterprise-azure-policy-as-code-epac/#management-groups-for-enterprise-scale-landing-zone">Management Groups for Enterprise Scale Landing Zone</a></h4>
-<p>This is the common structure for the Management Groups in the Enterprise Scale Landing Zone, now Accelerator Landing Zone: </p>
-<pre class="mermaid"><code>    graph TD
-        A[Root Management Group] --&gt; B[Intermediary-Management-Group]
-        B --&gt; C[Decommissioned]
-        B --&gt; D[Landing Zones]
-        B --&gt; E[Platform]
-        B --&gt; F[Sandboxes]
-        D --&gt; G[Corp]
-        D --&gt; H[Online]
-        E --&gt; I[Connectivity]
-        E --&gt; J[Identity]
-        E --&gt; K[Management]
-</code></pre>
-<p>For this use case, we will use the <code>Landing Zones</code> Management Group for duplicate and old Management Group hierarchy (manage-azure-policy):</p>
-<pre class="mermaid"><code>  graph TD
-      A[Root Management Group] --&gt; B[epac-dev]
-      B --&gt; C[dev-decommissioned]
-      B --&gt; D[dev-landingzones]
-      B --&gt; E[dev-platform]
-      B --&gt; F[dev-sandbox]
-      D --&gt; G[dev-corp]
-      D --&gt; H[dev-online]
-      E --&gt; I[dev-connectivity]
-      E --&gt; J[dev-identity]
-      E --&gt; K[dev-management]
-      A[Root Management Group] --&gt; L[epac-prod]
-      L --&gt; M[prod-decommissioned]
-      L --&gt; N[prod-landingzones]
-      L --&gt; O[prod-platform]
-      L --&gt; P[prod-sandbox]
-      N --&gt; Q[prod-corp]
-      N --&gt; R[prod-online]
-      O --&gt; S[prod-connectivity]
-      O --&gt; T[prod-identity]
-      O --&gt; U[prod-management]
-      A[Root Management Group] --&gt; V[manage-azure-policy]
-
-      classDef dev fill:#f90,stroke:#333,stroke-width:2px;
-      classDef prod fill:#f9f,stroke:#333,stroke-width:2px;
-      class dev A,B,C,D,E,F,G,H,I,J,K;
-      class prod L,M,N,O,P,Q,R,S,T,U;   
-
-</code></pre>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>You could also use two different tenants for the different environments, but this is not the case for this use case.</p>
-</div>
-<p>You can create this Management Groups hierarcly using the Azure CLI with the following commands:</p>
-<div class="language-powershell highlight"><pre><span></span><code><span id="__span-11-1"><a href="#__codelineno-11-1" id="__codelineno-11-1" name="__codelineno-11-1"></a><span class="n">az</span> <span class="n">account</span> <span class="n">management-group</span> <span class="n">create</span> <span class="p">-</span><span class="n">-name</span> <span class="s2">"MyManagementGroup"</span>
-</span><span id="__span-11-2"><a href="#__codelineno-11-2" id="__codelineno-11-2" name="__codelineno-11-2"></a><span class="n">az</span> <span class="n">account</span> <span class="n">management-group</span> <span class="nb">move </span><span class="p">-</span><span class="n">-name</span> <span class="s2">"ChildGroup"</span> <span class="p">-</span><span class="n">-new-parent</span> <span class="s2">"NewParentGroup"</span>
-</span></code></pre></div>
-<p>For the use case, we will use the following commands:</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-12-1"><a href="#__codelineno-12-1" id="__codelineno-12-1" name="__codelineno-12-1"></a>az<span class="w"> </span>account<span class="w"> </span>management-group<span class="w"> </span>create<span class="w"> </span>--name<span class="w"> </span><span class="s2">"epac-dev"</span>
-</span><span id="__span-12-2"><a href="#__codelineno-12-2" id="__codelineno-12-2" name="__codelineno-12-2"></a>az<span class="w"> </span>account<span class="w"> </span>management-group<span class="w"> </span>create<span class="w"> </span>--name<span class="w"> </span><span class="s2">"dev-decommissioned"</span><span class="w"> </span>--parent<span class="w"> </span><span class="s2">"epac-dev"</span>
-</span><span id="__span-12-3"><a href="#__codelineno-12-3" id="__codelineno-12-3" name="__codelineno-12-3"></a>az<span class="w"> </span>account<span class="w"> </span>management-group<span class="w"> </span>create<span class="w"> </span>--name<span class="w"> </span><span class="s2">"dev-landingzones"</span><span class="w"> </span>--parent<span class="w"> </span><span class="s2">"epac-dev"</span>
-</span><span id="__span-12-4"><a href="#__codelineno-12-4" id="__codelineno-12-4" name="__codelineno-12-4"></a>az<span class="w"> </span>account<span class="w"> </span>management-group<span class="w"> </span>create<span class="w"> </span>--name<span class="w"> </span><span class="s2">"dev-platform"</span><span class="w"> </span>--parent<span class="w"> </span><span class="s2">"epac-dev"</span>
-</span><span id="__span-12-5"><a href="#__codelineno-12-5" id="__codelineno-12-5" name="__codelineno-12-5"></a>az<span class="w"> </span>account<span class="w"> </span>management-group<span class="w"> </span>create<span class="w"> </span>--name<span class="w"> </span><span class="s2">"dev-sandbox"</span><span class="w"> </span>--parent<span class="w"> </span><span class="s2">"dev-landingzones"</span>
-</span><span id="__span-12-6"><a href="#__codelineno-12-6" id="__codelineno-12-6" name="__codelineno-12-6"></a>az<span class="w"> </span>account<span class="w"> </span>management-group<span class="w"> </span>create<span class="w"> </span>--name<span class="w"> </span><span class="s2">"dev-corp"</span><span class="w"> </span>--parent<span class="w"> </span><span class="s2">"dev-landingzones"</span>
-</span><span id="__span-12-7"><a href="#__codelineno-12-7" id="__codelineno-12-7" name="__codelineno-12-7"></a>az<span class="w"> </span>account<span class="w"> </span>management-group<span class="w"> </span>create<span class="w"> </span>--name<span class="w"> </span><span class="s2">"dev-online"</span><span class="w"> </span>--parent<span class="w"> </span><span class="s2">"dev-landingzones"</span>
-</span><span id="__span-12-8"><a href="#__codelineno-12-8" id="__codelineno-12-8" name="__codelineno-12-8"></a>az<span class="w"> </span>account<span class="w"> </span>management-group<span class="w"> </span>create<span class="w"> </span>--name<span class="w"> </span><span class="s2">"dev-connectivity"</span><span class="w"> </span>--parent<span class="w"> </span><span class="s2">"dev-platform"</span>
-</span><span id="__span-12-9"><a href="#__codelineno-12-9" id="__codelineno-12-9" name="__codelineno-12-9"></a>az<span class="w"> </span>account<span class="w"> </span>management-group<span class="w"> </span>create<span class="w"> </span>--name<span class="w"> </span><span class="s2">"dev-identity"</span><span class="w"> </span>--parent<span class="w"> </span><span class="s2">"dev-platform"</span>
-</span><span id="__span-12-10"><a href="#__codelineno-12-10" id="__codelineno-12-10" name="__codelineno-12-10"></a>az<span class="w"> </span>account<span class="w"> </span>management-group<span class="w"> </span>create<span class="w"> </span>--name<span class="w"> </span><span class="s2">"dev-management"</span><span class="w"> </span>--parent<span class="w"> </span><span class="s2">"dev-platform"</span>
-</span><span id="__span-12-11"><a href="#__codelineno-12-11" id="__codelineno-12-11" name="__codelineno-12-11"></a>az<span class="w"> </span>account<span class="w"> </span>management-group<span class="w"> </span>create<span class="w"> </span>--name<span class="w"> </span><span class="s2">"epac-prod"</span>
-</span><span id="__span-12-12"><a href="#__codelineno-12-12" id="__codelineno-12-12" name="__codelineno-12-12"></a>az<span class="w"> </span>account<span class="w"> </span>management-group<span class="w"> </span>create<span class="w"> </span>--name<span class="w"> </span><span class="s2">"prod-decommissioned"</span><span class="w"> </span>--parent<span class="w"> </span><span class="s2">"epac-prod"</span>
-</span><span id="__span-12-13"><a href="#__codelineno-12-13" id="__codelineno-12-13" name="__codelineno-12-13"></a>az<span class="w"> </span>account<span class="w"> </span>management-group<span class="w"> </span>create<span class="w"> </span>--name<span class="w"> </span><span class="s2">"prod-landingzones"</span><span class="w"> </span>--parent<span class="w"> </span><span class="s2">"epac-prod"</span>
-</span><span id="__span-12-14"><a href="#__codelineno-12-14" id="__codelineno-12-14" name="__codelineno-12-14"></a>az<span class="w"> </span>account<span class="w"> </span>management-group<span class="w"> </span>create<span class="w"> </span>--name<span class="w"> </span><span class="s2">"prod-platform"</span><span class="w"> </span>--parent<span class="w"> </span><span class="s2">"epac-prod"</span>
-</span><span id="__span-12-15"><a href="#__codelineno-12-15" id="__codelineno-12-15" name="__codelineno-12-15"></a>az<span class="w"> </span>account<span class="w"> </span>management-group<span class="w"> </span>create<span class="w"> </span>--name<span class="w"> </span><span class="s2">"prod-sandbox"</span><span class="w"> </span>--parent<span class="w"> </span><span class="s2">"prod-landingzones"</span>
-</span><span id="__span-12-16"><a href="#__codelineno-12-16" id="__codelineno-12-16" name="__codelineno-12-16"></a>az<span class="w"> </span>account<span class="w"> </span>management-group<span class="w"> </span>create<span class="w"> </span>--name<span class="w"> </span><span class="s2">"prod-corp"</span><span class="w"> </span>--parent<span class="w"> </span><span class="s2">"prod-landingzones"</span>
-</span><span id="__span-12-17"><a href="#__codelineno-12-17" id="__codelineno-12-17" name="__codelineno-12-17"></a>az<span class="w"> </span>account<span class="w"> </span>management-group<span class="w"> </span>create<span class="w"> </span>--name<span class="w"> </span><span class="s2">"prod-online"</span><span class="w"> </span>--parent<span class="w"> </span><span class="s2">"prod-landingzones"</span>
-</span><span id="__span-12-18"><a href="#__codelineno-12-18" id="__codelineno-12-18" name="__codelineno-12-18"></a>az<span class="w"> </span>account<span class="w"> </span>management-group<span class="w"> </span>create<span class="w"> </span>--name<span class="w"> </span><span class="s2">"prod-connectivity"</span><span class="w"> </span>--parent<span class="w"> </span><span class="s2">"prod-platform"</span>
-</span><span id="__span-12-19"><a href="#__codelineno-12-19" id="__codelineno-12-19" name="__codelineno-12-19"></a>az<span class="w"> </span>account<span class="w"> </span>management-group<span class="w"> </span>create<span class="w"> </span>--name<span class="w"> </span><span class="s2">"prod-identity"</span><span class="w"> </span>--parent<span class="w"> </span><span class="s2">"prod-platform"</span>
-</span><span id="__span-12-20"><a href="#__codelineno-12-20" id="__codelineno-12-20" name="__codelineno-12-20"></a>az<span class="w"> </span>account<span class="w"> </span>management-group<span class="w"> </span>create<span class="w"> </span>--name<span class="w"> </span><span class="s2">"prod-management"</span><span class="w"> </span>--parent<span class="w"> </span><span class="s2">"prod-platform"</span>
-</span></code></pre></div>
-<h3 id="installation"><a class="toclink" href="../../2024/04/17/using-enterprise-azure-policy-as-code-epac/#installation">Installation</a></h3>
-<p>To install EPAC, follow these steps:</p>
-<div class="language-powershell highlight"><pre><span></span><code><span id="__span-13-1"><a href="#__codelineno-13-1" id="__codelineno-13-1" name="__codelineno-13-1"></a>    <span class="nb">Install-Module</span> <span class="n">Az</span> <span class="n">-Scope</span> <span class="n">CurrentUser</span>
-</span><span id="__span-13-2"><a href="#__codelineno-13-2" id="__codelineno-13-2" name="__codelineno-13-2"></a>    <span class="nb">Install-Module</span> <span class="n">EnterprisePolicyAsCode</span> <span class="n">-Scope</span> <span class="n">CurrentUser</span>
-</span></code></pre></div>
-<h3 id="create-an-empty-repository-in-github-and-clone-it"><a class="toclink" href="../../2024/04/17/using-enterprise-azure-policy-as-code-epac/#create-an-empty-repository-in-github-and-clone-it">Create an empty repository in github and clone it</a></h3>
-<p>Create a <a href="https://docs.github.com/en/repositories/creating-and-managing-repositories/quickstart-for-repositories">repository in github</a>  and clone it</p>
-<div class="language-powershell highlight"><pre><span></span><code><span id="__span-14-1"><a href="#__codelineno-14-1" id="__codelineno-14-1" name="__codelineno-14-1"></a>    <span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="p">://</span><span class="n">github</span><span class="p">.</span><span class="n">com</span><span class="p">/</span><span class="n">user</span><span class="p">/</span><span class="n">demo-EPAC</span><span class="p">.</span><span class="n">git</span>
-</span></code></pre></div>
-<p>Create a branch for the feature/firstcommit</p>
-<div class="language-powershell highlight"><pre><span></span><code><span id="__span-15-1"><a href="#__codelineno-15-1" id="__codelineno-15-1" name="__codelineno-15-1"></a>    <span class="n">git</span> <span class="n">checkout</span> <span class="n">-b</span> <span class="n">feature</span><span class="p">/</span><span class="n">firstcommit</span>
-</span></code></pre></div>
-<div class="admonition info">
-<p class="admonition-title">Note</p>
-<p>From this moment on, we will execute all commands within the repository directory.</p>
-</div>
-<h3 id="create-definitions"><a class="toclink" href="../../2024/04/17/using-enterprise-azure-policy-as-code-epac/#create-definitions">Create Definitions</a></h3>
-<div class="language-powershell highlight"><pre><span></span><code><span id="__span-16-1"><a href="#__codelineno-16-1" id="__codelineno-16-1" name="__codelineno-16-1"></a><span class="nb">New-EPACDefinitionFolder</span> <span class="n">-DefinitionsRootFolder</span> <span class="n">Definitions</span>
-</span></code></pre></div>
-<p>This command creates a folder structure for the definitions. The  <code>Definitions</code> folder Structure is as follows:</p>
+<p>The first one is the most restrictive, for example, allowing the user to only assign selected roles to selected principals. This is useful when you want to limit the privileges of a user to only a subset of roles and principals.</p>
+<p>These are the options available for "Allow user to only assign selected roles to selected principals (fewer privileges)":</p>
+<p><img alt="alt text" src="../../2024/09/Screenshot%202024-09-18%20111646.png"/></p>
 <ul>
-<li>Define the Azure environment(s) in file <code>global-settings.jsonc</code></li>
-<li>Create custom Policies (optional) in folder <code>policyDefinitions</code></li>
-<li>Create custom Policy Sets (optional) in folder <code>policySetDefinitions</code></li>
-<li>efine the Policy Assignments in folder <code>policyAssignments</code></li>
-<li>Define the Policy Exemptions (optional) in folder <code>policyExemptions</code></li>
-<li>Define Documentation in folder <code>policyDocumentations]</code></li>
+<li>Constrain roles:<ul>
+<li>Allow user to only assign roles you select</li>
 </ul>
-<h3 id="configure-global-settingsjsonc"><a class="toclink" href="../../2024/04/17/using-enterprise-azure-policy-as-code-epac/#configure-global-settingsjsonc">Configure global-settings.jsonc</a></h3>
-<p>global-settings.jsonc is the file where you define the Azure environment(s) that you want to manage with EPAC. The file should be located in the Definitions folder. Here is an example of the content of the file:</p>
-<div class="language-json highlight"><pre><span></span><code><span id="__span-17-1"><a href="#__codelineno-17-1" id="__codelineno-17-1" name="__codelineno-17-1"></a><span class="p">{</span>
-</span><span id="__span-17-2"><a href="#__codelineno-17-2" id="__codelineno-17-2" name="__codelineno-17-2"></a><span class="w">    </span><span class="nt">"$schema"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://raw.githubusercontent.com/Azure/enterprise-azure-policy-as-code/main/Schemas/global-settings-schema.json"</span><span class="p">,</span>
-</span><span id="__span-17-3"><a href="#__codelineno-17-3" id="__codelineno-17-3" name="__codelineno-17-3"></a><span class="w">    </span><span class="nt">"pacOwnerId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ff2ce5e1-da8a-4cfb-883b-aee9fbfb85d6"</span><span class="p">,</span>
-</span><span id="__span-17-4"><a href="#__codelineno-17-4" id="__codelineno-17-4" name="__codelineno-17-4"></a><span class="w">    </span><span class="nt">"pacEnvironments"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
-</span><span id="__span-17-5"><a href="#__codelineno-17-5" id="__codelineno-17-5" name="__codelineno-17-5"></a><span class="w">        </span><span class="p">{</span>
-</span><span id="__span-17-6"><a href="#__codelineno-17-6" id="__codelineno-17-6" name="__codelineno-17-6"></a><span class="w">            </span><span class="nt">"pacSelector"</span><span class="p">:</span><span class="w"> </span><span class="s2">"epac-dev"</span><span class="p">,</span>
-</span><span id="__span-17-7"><a href="#__codelineno-17-7" id="__codelineno-17-7" name="__codelineno-17-7"></a><span class="w">            </span><span class="nt">"cloud"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AzureCloud"</span><span class="p">,</span>
-</span><span id="__span-17-8"><a href="#__codelineno-17-8" id="__codelineno-17-8" name="__codelineno-17-8"></a><span class="w">            </span><span class="nt">"tenantId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"e18e4e7e-d0cc-40af-9907-84923ca55499"</span><span class="p">,</span>
-</span><span id="__span-17-9"><a href="#__codelineno-17-9" id="__codelineno-17-9" name="__codelineno-17-9"></a><span class="w">            </span><span class="nt">"deploymentRootScope"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/providers/Microsoft.Management/managementGroups/epac-dev"</span><span class="p">,</span>
-</span><span id="__span-17-10"><a href="#__codelineno-17-10" id="__codelineno-17-10" name="__codelineno-17-10"></a><span class="w">            </span><span class="nt">"desiredState"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-17-11"><a href="#__codelineno-17-11" id="__codelineno-17-11" name="__codelineno-17-11"></a><span class="w">                </span><span class="nt">"strategy"</span><span class="p">:</span><span class="w"> </span><span class="s2">"full"</span><span class="p">,</span>
-</span><span id="__span-17-12"><a href="#__codelineno-17-12" id="__codelineno-17-12" name="__codelineno-17-12"></a><span class="w">                </span><span class="nt">"keepDfcSecurityAssignments"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span>
-</span><span id="__span-17-13"><a href="#__codelineno-17-13" id="__codelineno-17-13" name="__codelineno-17-13"></a><span class="w">            </span><span class="p">},</span>
-</span><span id="__span-17-14"><a href="#__codelineno-17-14" id="__codelineno-17-14" name="__codelineno-17-14"></a><span class="w">            </span><span class="nt">"managedIdentityLocation"</span><span class="p">:</span><span class="w"> </span><span class="s2">"france"</span>
-</span><span id="__span-17-15"><a href="#__codelineno-17-15" id="__codelineno-17-15" name="__codelineno-17-15"></a><span class="w">        </span><span class="p">},</span>
-</span><span id="__span-17-16"><a href="#__codelineno-17-16" id="__codelineno-17-16" name="__codelineno-17-16"></a><span class="w">        </span><span class="p">{</span>
-</span><span id="__span-17-17"><a href="#__codelineno-17-17" id="__codelineno-17-17" name="__codelineno-17-17"></a><span class="w">            </span><span class="nt">"pacSelector"</span><span class="p">:</span><span class="w"> </span><span class="s2">"tenant"</span><span class="p">,</span>
-</span><span id="__span-17-18"><a href="#__codelineno-17-18" id="__codelineno-17-18" name="__codelineno-17-18"></a><span class="w">            </span><span class="nt">"cloud"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AzureCloud"</span><span class="p">,</span>
-</span><span id="__span-17-19"><a href="#__codelineno-17-19" id="__codelineno-17-19" name="__codelineno-17-19"></a><span class="w">            </span><span class="nt">"tenantId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"e18e4e7e-d0cc-40af-9907-84923ca55499"</span><span class="p">,</span>
-</span><span id="__span-17-20"><a href="#__codelineno-17-20" id="__codelineno-17-20" name="__codelineno-17-20"></a><span class="w">            </span><span class="nt">"deploymentRootScope"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/providers/Microsoft.Management/managementGroups/epac-prod"</span><span class="p">,</span>
-</span><span id="__span-17-21"><a href="#__codelineno-17-21" id="__codelineno-17-21" name="__codelineno-17-21"></a><span class="w">            </span><span class="nt">"desiredState"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-17-22"><a href="#__codelineno-17-22" id="__codelineno-17-22" name="__codelineno-17-22"></a><span class="w">                </span><span class="nt">"strategy"</span><span class="p">:</span><span class="w"> </span><span class="s2">"full"</span><span class="p">,</span>
-</span><span id="__span-17-23"><a href="#__codelineno-17-23" id="__codelineno-17-23" name="__codelineno-17-23"></a><span class="w">                </span><span class="nt">"keepDfcSecurityAssignments"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span>
-</span><span id="__span-17-24"><a href="#__codelineno-17-24" id="__codelineno-17-24" name="__codelineno-17-24"></a><span class="w">            </span><span class="p">},</span>
-</span><span id="__span-17-25"><a href="#__codelineno-17-25" id="__codelineno-17-25" name="__codelineno-17-25"></a><span class="w">            </span><span class="nt">"managedIdentityLocation"</span><span class="p">:</span><span class="w"> </span><span class="s2">"france"</span><span class="p">,</span>
-</span><span id="__span-17-26"><a href="#__codelineno-17-26" id="__codelineno-17-26" name="__codelineno-17-26"></a><span class="w">            </span><span class="nt">"globalNotScopes"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
-</span><span id="__span-17-27"><a href="#__codelineno-17-27" id="__codelineno-17-27" name="__codelineno-17-27"></a><span class="w">                </span><span class="s2">"/providers/Microsoft.Management/managementGroups/mg-Epac-Dev"</span><span class="p">,</span>
-</span><span id="__span-17-28"><a href="#__codelineno-17-28" id="__codelineno-17-28" name="__codelineno-17-28"></a><span class="w">                </span><span class="s2">"/providers/Microsoft.Management/managementGroups/manage-azure-policy"</span>
-</span><span id="__span-17-29"><a href="#__codelineno-17-29" id="__codelineno-17-29" name="__codelineno-17-29"></a><span class="w">            </span><span class="p">]</span>
-</span><span id="__span-17-30"><a href="#__codelineno-17-30" id="__codelineno-17-30" name="__codelineno-17-30"></a><span class="w">        </span><span class="p">},</span>
-</span><span id="__span-17-31"><a href="#__codelineno-17-31" id="__codelineno-17-31" name="__codelineno-17-31"></a><span class="w">        </span><span class="p">{</span>
-</span><span id="__span-17-32"><a href="#__codelineno-17-32" id="__codelineno-17-32" name="__codelineno-17-32"></a><span class="w">            </span><span class="nt">"pacSelector"</span><span class="p">:</span><span class="w"> </span><span class="s2">"manage-azure-policy"</span><span class="p">,</span>
-</span><span id="__span-17-33"><a href="#__codelineno-17-33" id="__codelineno-17-33" name="__codelineno-17-33"></a><span class="w">            </span><span class="nt">"cloud"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AzureCloud"</span><span class="p">,</span>
-</span><span id="__span-17-34"><a href="#__codelineno-17-34" id="__codelineno-17-34" name="__codelineno-17-34"></a><span class="w">            </span><span class="nt">"tenantId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"e18e4e7e-d0cc-40af-9907-84923ca55499"</span><span class="p">,</span>
-</span><span id="__span-17-35"><a href="#__codelineno-17-35" id="__codelineno-17-35" name="__codelineno-17-35"></a><span class="w">            </span><span class="nt">"deploymentRootScope"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/providers/Microsoft.Management/managementGroups/manage-azure-policy"</span><span class="p">,</span>
-</span><span id="__span-17-36"><a href="#__codelineno-17-36" id="__codelineno-17-36" name="__codelineno-17-36"></a><span class="w">            </span><span class="nt">"desiredState"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-17-37"><a href="#__codelineno-17-37" id="__codelineno-17-37" name="__codelineno-17-37"></a><span class="w">                </span><span class="nt">"strategy"</span><span class="p">:</span><span class="w"> </span><span class="s2">"full"</span><span class="p">,</span>
-</span><span id="__span-17-38"><a href="#__codelineno-17-38" id="__codelineno-17-38" name="__codelineno-17-38"></a><span class="w">                </span><span class="nt">"keepDfcSecurityAssignments"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span>
-</span><span id="__span-17-39"><a href="#__codelineno-17-39" id="__codelineno-17-39" name="__codelineno-17-39"></a><span class="w">            </span><span class="p">},</span>
-</span><span id="__span-17-40"><a href="#__codelineno-17-40" id="__codelineno-17-40" name="__codelineno-17-40"></a><span class="w">            </span><span class="nt">"managedIdentityLocation"</span><span class="p">:</span><span class="w"> </span><span class="s2">"france"</span>
-</span><span id="__span-17-41"><a href="#__codelineno-17-41" id="__codelineno-17-41" name="__codelineno-17-41"></a><span class="w">        </span><span class="p">}</span>
-</span><span id="__span-17-42"><a href="#__codelineno-17-42" id="__codelineno-17-42" name="__codelineno-17-42"></a><span class="w">    </span><span class="p">]</span>
-</span><span id="__span-17-43"><a href="#__codelineno-17-43" id="__codelineno-17-43" name="__codelineno-17-43"></a>
-</span><span id="__span-17-44"><a href="#__codelineno-17-44" id="__codelineno-17-44" name="__codelineno-17-44"></a><span class="p">}</span>
-</span></code></pre></div>
-<div class="admonition info">
-<p class="admonition-title">Info</p>
-<p>The pacOwner helps to identify who or what owns an Assignment or Policy definition deployment and needs to be unique to your EPAC environment. The pacOwnerId is used to identity policy resources that are deployed by your EPAC repository, or another EPAC isntance, legacy or another solution entirely.</p>
-<p>You can generate a new id with <code>New-Guid</code></p>
-</div>
-<h3 id="extracting-existing-policy-resources"><a class="toclink" href="../../2024/04/17/using-enterprise-azure-policy-as-code-epac/#extracting-existing-policy-resources">Extracting existing Policy Resources</a></h3>
-<div class="language-PowerShell highlight"><pre><span></span><code><span id="__span-18-1"><a href="#__codelineno-18-1" id="__codelineno-18-1" name="__codelineno-18-1"></a><span class="nb">Export-AzPolicyResources</span>
-</span></code></pre></div>
-<p>This command extracts all existing Policy Resources in the Azure environment(s) defined in the global-settings.jsonc file. The extracted resources are saved in the Output/Definitions folder. </p>
-<p>You needs review the extracted resources and move them to the correct folder in the Definitions folder.</p>
-<h3 id="syncing-alz-definitions"><a class="toclink" href="../../2024/04/17/using-enterprise-azure-policy-as-code-epac/#syncing-alz-definitions">Syncing ALZ Definitions</a></h3>
-<div class="language-powershell highlight"><pre><span></span><code><span id="__span-19-1"><a href="#__codelineno-19-1" id="__codelineno-19-1" name="__codelineno-19-1"></a><span class="nb">Sync-ALZPolicies</span> <span class="n">-DefinitionsRootFolder</span> <span class="p">.\</span><span class="n">Definitions</span> <span class="n">-CloudEnvironment</span> <span class="n">AzureCloud</span> <span class="c"># Also accepts AzureUSGovernment or AzureChinaCloud</span>
-</span></code></pre></div>
-<p>You can sync the ALZ Definitions manually or use a GitHub action creating <code>.github\workflows\alz-sync.yaml</code> in your repository with the following content:</p>
-<div class="language-yaml highlight"><pre><span></span><code><span id="__span-20-1"><a href="#__codelineno-20-1" id="__codelineno-20-1" name="__codelineno-20-1"></a><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Sync ALZ Policy Objects</span>
-</span><span id="__span-20-2"><a href="#__codelineno-20-2" id="__codelineno-20-2" name="__codelineno-20-2"></a>
-</span><span id="__span-20-3"><a href="#__codelineno-20-3" id="__codelineno-20-3" name="__codelineno-20-3"></a><span class="nt">env</span><span class="p">:</span>
-</span><span id="__span-20-4"><a href="#__codelineno-20-4" id="__codelineno-20-4" name="__codelineno-20-4"></a><span class="w">  </span><span class="nt">REVIEWER</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">anwather</span><span class="w"> </span><span class="c1"># Change this to your GitHub username</span>
-</span><span id="__span-20-5"><a href="#__codelineno-20-5" id="__codelineno-20-5" name="__codelineno-20-5"></a><span class="w">  </span><span class="nt">DefinitionsRootFolder</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Definitions</span><span class="w"> </span><span class="c1"># Change this to the folder where your policy definitions are stored</span>
-</span><span id="__span-20-6"><a href="#__codelineno-20-6" id="__codelineno-20-6" name="__codelineno-20-6"></a>
-</span><span id="__span-20-7"><a href="#__codelineno-20-7" id="__codelineno-20-7" name="__codelineno-20-7"></a><span class="nt">on</span><span class="p">:</span>
-</span><span id="__span-20-8"><a href="#__codelineno-20-8" id="__codelineno-20-8" name="__codelineno-20-8"></a><span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">workflow_dispatch</span>
-</span><span id="__span-20-9"><a href="#__codelineno-20-9" id="__codelineno-20-9" name="__codelineno-20-9"></a>
-</span><span id="__span-20-10"><a href="#__codelineno-20-10" id="__codelineno-20-10" name="__codelineno-20-10"></a><span class="nt">jobs</span><span class="p">:</span>
-</span><span id="__span-20-11"><a href="#__codelineno-20-11" id="__codelineno-20-11" name="__codelineno-20-11"></a><span class="w">    </span><span class="nt">sync</span><span class="p">:</span>
-</span><span id="__span-20-12"><a href="#__codelineno-20-12" id="__codelineno-20-12" name="__codelineno-20-12"></a><span class="w">        </span><span class="nt">runs-on</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ubuntu-latest</span>
-</span><span id="__span-20-13"><a href="#__codelineno-20-13" id="__codelineno-20-13" name="__codelineno-20-13"></a><span class="w">        </span><span class="nt">steps</span><span class="p">:</span>
-</span><span id="__span-20-14"><a href="#__codelineno-20-14" id="__codelineno-20-14" name="__codelineno-20-14"></a><span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Checkout</span>
-</span><span id="__span-20-15"><a href="#__codelineno-20-15" id="__codelineno-20-15" name="__codelineno-20-15"></a><span class="w">          </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">actions/checkout@v4</span>
-</span><span id="__span-20-16"><a href="#__codelineno-20-16" id="__codelineno-20-16" name="__codelineno-20-16"></a><span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">shell</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pwsh</span>
-</span><span id="__span-20-17"><a href="#__codelineno-20-17" id="__codelineno-20-17" name="__codelineno-20-17"></a><span class="w">          </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Install Required Modules</span>
-</span><span id="__span-20-18"><a href="#__codelineno-20-18" id="__codelineno-20-18" name="__codelineno-20-18"></a><span class="w">          </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span>
-</span><span id="__span-20-19"><a href="#__codelineno-20-19" id="__codelineno-20-19" name="__codelineno-20-19"></a><span class="w">            </span><span class="no">Install-Module EnterprisePolicyAsCode -Force</span>
-</span><span id="__span-20-20"><a href="#__codelineno-20-20" id="__codelineno-20-20" name="__codelineno-20-20"></a><span class="w">            </span><span class="no">Sync-ALZPolicies -DefinitionsRootFolder $env:DefinitionsRootFolder</span>
-</span><span id="__span-20-21"><a href="#__codelineno-20-21" id="__codelineno-20-21" name="__codelineno-20-21"></a><span class="w">            </span><span class="no">$branchName = "caf-sync-$(Get-Date -Format yyyy-MM-dd-HH-mm)"</span>
-</span><span id="__span-20-22"><a href="#__codelineno-20-22" id="__codelineno-20-22" name="__codelineno-20-22"></a><span class="w">            </span><span class="no">git config user.name "GitHub Actions Bot"</span>
-</span><span id="__span-20-23"><a href="#__codelineno-20-23" id="__codelineno-20-23" name="__codelineno-20-23"></a><span class="w">            </span><span class="no">git config user.email "&lt;&gt;"</span>
-</span><span id="__span-20-24"><a href="#__codelineno-20-24" id="__codelineno-20-24" name="__codelineno-20-24"></a><span class="w">            </span><span class="no">git checkout -b $branchName</span>
-</span><span id="__span-20-25"><a href="#__codelineno-20-25" id="__codelineno-20-25" name="__codelineno-20-25"></a><span class="w">            </span><span class="no">git add .</span>
-</span><span id="__span-20-26"><a href="#__codelineno-20-26" id="__codelineno-20-26" name="__codelineno-20-26"></a><span class="w">            </span><span class="no">git commit -m "Updated ALZ policy objects"</span>
-</span><span id="__span-20-27"><a href="#__codelineno-20-27" id="__codelineno-20-27" name="__codelineno-20-27"></a><span class="w">            </span><span class="no">git push --set-upstream origin $branchName</span>
-</span><span id="__span-20-28"><a href="#__codelineno-20-28" id="__codelineno-20-28" name="__codelineno-20-28"></a><span class="w">            </span><span class="no">gh pr create -B main -H $branchName --title "Verify Synced Policies - $branchName" -b "Checkout this PR branch and validate changes before merging." --reviewer $env:REVIEWER</span>
-</span><span id="__span-20-29"><a href="#__codelineno-20-29" id="__codelineno-20-29" name="__codelineno-20-29"></a><span class="w">        </span><span class="nt">env</span><span class="p">:</span>
-</span><span id="__span-20-30"><a href="#__codelineno-20-30" id="__codelineno-20-30" name="__codelineno-20-30"></a><span class="w">            </span><span class="nt">GITHUB_TOKEN</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${{ secrets.GITHUB_TOKEN }}</span>
-</span></code></pre></div>
-<h3 id="cicd-with-github-flow"><a class="toclink" href="../../2024/04/17/using-enterprise-azure-policy-as-code-epac/#cicd-with-github-flow">CI/CD with Github Flow</a></h3>
-<p>We will use the Github Flow to manage the CI/CD process. We will create a Github Actions to deploy the policies to the Azure environment(s) defined in the global-settings.jsonc file.</p>
-<p><img alt="Github Flow" src="../../2024/04/image.png"/></p>
-<p>We can open a second terminal and execute the following command to create the Github Actions in one upper level folder of our repository. This command will create the Github Actions in the <code>.github\workflows</code> folder of the repository. :</p>
-<div class="language-powershell highlight"><pre><span></span><code><span id="__span-21-1"><a href="#__codelineno-21-1" id="__codelineno-21-1" name="__codelineno-21-1"></a><span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="p">://</span><span class="n">github</span><span class="p">.</span><span class="n">com</span><span class="p">/</span><span class="n">Azure</span><span class="p">/</span><span class="n">enterprise-azure-policy</span><span class="o">-as</span><span class="n">-code</span>
-</span><span id="__span-21-2"><a href="#__codelineno-21-2" id="__codelineno-21-2" name="__codelineno-21-2"></a><span class="nb">cd </span><span class="n">enterprise-azure-policy</span><span class="o">-as</span><span class="n">-code</span>
-</span><span id="__span-21-3"><a href="#__codelineno-21-3" id="__codelineno-21-3" name="__codelineno-21-3"></a><span class="nb">New-PipelinesFromStarterKit</span> <span class="n">-StarterKitFolder</span> <span class="p">.\</span><span class="n">StarterKit</span> <span class="n">-PipelinesFolder</span> <span class="p">..\</span><span class="n">global-azure</span><span class="p">-</span><span class="n">2024-demo-EPAC</span><span class="p">\.</span><span class="n">github</span><span class="p">\</span><span class="n">workflows</span> <span class="n">-PipelineType</span> <span class="n">GitHubActions</span> <span class="n">-BranchingFlow</span> <span class="n">github</span> <span class="n">-ScriptType</span> <span class="n">Module</span> 
-</span></code></pre></div>
-<p>Now, we need to create some environments with secrets in the repository to use in the Github Actions. We need to create the following environments:</p>
-<table>
-<thead>
-<tr>
-<th>Environment</th>
-<th>Purpose</th>
-<th><a href="https://azure.github.io/enterprise-azure-policy-as-code/ci-cd-app-registrations/">App Registration</a> (SPN)</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>EPAC-DEV</td>
-<td>Plan and deploy to <code>epac-dev</code></td>
-<td>ci-cd-epac-dev-owner</td>
-</tr>
-<tr>
-<td>TENANT-PLAN</td>
-<td>Build deployment plan for <code>tenant</code></td>
-<td>ci-cd-root-policy-reader</td>
-</tr>
-<tr>
-<td>TENANT-DEPLOY-POLICY</td>
-<td>Deploy Policy resources for <code>tenant</code></td>
-<td>ci-cd-root-policy-contributor</td>
-</tr>
-<tr>
-<td>TENANT-DEPLOY-ROLES</td>
-<td>Deploy Roles for <code>tenant</code></td>
-<td>ci-cd-root-user-assignments</td>
-</tr>
-<tr>
-<td>TENANT-REMEDIATE-POLICY</td>
-<td>Remediate Policy resources for <code>tenant</code></td>
-<td>ci-cd-root-policy-contributor</td>
-</tr>
-</tbody>
-</table>
-<p>You need  to <a href="https://learn.microsoft.com/en-us/entra/workload-id/workload-identity-federation-create-trust?pivots=identity-wif-apps-methods-azp#configure-a-federated-identity-credential-on-an-app">Configure a federated identity credential on an app</a> too.</p>
-<h3 id="first-commit"><a class="toclink" href="../../2024/04/17/using-enterprise-azure-policy-as-code-epac/#first-commit">First Commit</a></h3>
-<p>Now we can commit the changes to the repository and make a pull request to the main branch.</p>
-<h3 id="references"><a class="toclink" href="../../2024/04/17/using-enterprise-azure-policy-as-code-epac/#references">References</a></h3>
+</li>
+<li>Constrain roles and principal types:<ul>
+<li>Allow user to only assign roles you select</li>
+<li>Allow user to only assign these roles to principal types you select (users, groups, or service principals)</li>
+</ul>
+</li>
+<li>Constrain roles and principals<ul>
+<li>Allow user to only assign roles you select</li>
+<li>Allow user to only assign these roles to principals you select</li>
+<li>Allow all except specific roles</li>
+<li>Allow user to assign all roles except the roles you select</li>
+</ul>
+</li>
+</ul>
+<h3 id="conclusion"><a class="toclink" href="../../2024/04/18/azure-role-assignment-conditions/#conclusion">Conclusion</a></h3>
+<p>Azure role assignment conditions provide a flexible and powerful way to control access to Azure resources. By defining conditions that must be met for a role assignment to be effective, you can enforce fine-grained access control policies that meet the specific needs of your organization. This allows you to limit the privileges of users, assign roles to specific principals, and control access to sensitive resources. Azure role assignment conditions are a valuable tool for organizations that need to enforce strict access control policies and protect their critical resources.</p>
+<h3 id="references"><a class="toclink" href="../../2024/04/18/azure-role-assignment-conditions/#references">References</a></h3>
 <ul>
-<li><a href="https://azure.github.io/enterprise-azure-policy-as-code/">EPAC official documentation</a>.</li>
-</ul>
-</div>
-</article>
-<article class="md-post md-post--excerpt">
-<header class="md-post__header">
-<nav class="md-post__authors md-typeset">
-<span class="md-author">
-<img alt="Rafael Fernández" src="https://avatars.githubusercontent.com/u/39990341"/>
-</span>
-</nav>
-<div class="md-post__meta md-meta">
-<ul class="md-meta__list">
-<li class="md-meta__item">
-<time datetime="2024-04-17 00:00:00">April 17, 2024</time></li>
-<li class="md-meta__item">
-            in
-            
-              <a class="md-meta__link" href="../../category/azure-services/">Azure Services</a></li>
-<li class="md-meta__item">
-            
-              1 min read
-            
-          </li>
-</ul>
-</div>
-</header>
-<div class="md-post__content md-typeset">
-<h2 id="cambio-de-nombres-de-los-niveles-de-servicio-de-microsoft-defender-para-cloud"><a class="toclink" href="../../2024/04/17/cambio-de-nombres-de-los-niveles-de-servicio-de-microsoft-defender-para-cloud/">Cambio de nombres de los niveles de servicio de Microsoft Defender para Cloud</a></h2>
-<p>No es nuevo pero me gustaría recordar que Microsoft ha cambiado los nombres de los niveles de servicio de Microsoft Defender para Cloud. A continuación, se muestra una tabla con los nombres anteriores y los nuevos nombres de los niveles de servicio de Microsoft Defender para Cloud:</p>
-<table>
-<thead>
-<tr>
-<th>Nombre ANTERIOR del nivel de servicio 2</th>
-<th>Nombre NUEVO del nivel de servicio 2</th>
-<th>Nivel de servicio: nivel de servicio 4 (sin cambios)</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Advanced Data Security</td>
-<td>Microsoft Defender for Cloud</td>
-<td>Defender para SQL</td>
-</tr>
-<tr>
-<td>Advanced Threat Protection</td>
-<td>Microsoft Defender for Cloud</td>
-<td>Defender para registros de contenedor</td>
-</tr>
-<tr>
-<td>Advanced Threat Protection</td>
-<td>Microsoft Defender for Cloud</td>
-<td>Defender para DNS</td>
-</tr>
-<tr>
-<td>Advanced Threat Protection</td>
-<td>Microsoft Defender for Cloud</td>
-<td>Defender para Key Vault</td>
-</tr>
-<tr>
-<td>Advanced Threat Protection</td>
-<td>Microsoft Defender for Cloud</td>
-<td>Defender para Kubernetes</td>
-</tr>
-<tr>
-<td>Advanced Threat Protection</td>
-<td>Microsoft Defender for Cloud</td>
-<td>Defender para MySQL</td>
-</tr>
-<tr>
-<td>Advanced Threat Protection</td>
-<td>Microsoft Defender for Cloud</td>
-<td>Defender para PostgreSQL</td>
-</tr>
-<tr>
-<td>Advanced Threat Protection</td>
-<td>Microsoft Defender for Cloud</td>
-<td>Defender para Resource Manager</td>
-</tr>
-<tr>
-<td>Advanced Threat Protection</td>
-<td>Microsoft Defender for Cloud</td>
-<td>Defender para Storage</td>
-</tr>
-<tr>
-<td>Azure Defender</td>
-<td>Microsoft Defender for Cloud</td>
-<td>Administración de superficie expuesta a ataques externos de Defender</td>
-</tr>
-<tr>
-<td>Azure Defender</td>
-<td>Microsoft Defender for Cloud</td>
-<td>Defender para Azure Cosmos DB</td>
-</tr>
-<tr>
-<td>Azure Defender</td>
-<td>Microsoft Defender for Cloud</td>
-<td>Defender para contenedores</td>
-</tr>
-<tr>
-<td>Azure Defender</td>
-<td>Microsoft Defender for Cloud</td>
-<td>Defender for MariaDB</td>
-</tr>
-<tr>
-<td>Security Center</td>
-<td>Microsoft Defender for Cloud</td>
-<td>Defender para App Service</td>
-</tr>
-<tr>
-<td>Security Center</td>
-<td>Microsoft Defender for Cloud</td>
-<td>Defender para servidores</td>
-</tr>
-<tr>
-<td>Security Center</td>
-<td>Microsoft Defender for Cloud</td>
-<td>Administración de la posición de seguridad en la nube de Defender</td>
-</tr>
-</tbody>
-</table>
-</div>
-</article>
-<article class="md-post md-post--excerpt">
-<header class="md-post__header">
-<nav class="md-post__authors md-typeset">
-<span class="md-author">
-<img alt="Rafael Fernández" src="https://avatars.githubusercontent.com/u/39990341"/>
-</span>
-</nav>
-<div class="md-post__meta md-meta">
-<ul class="md-meta__list">
-<li class="md-meta__item">
-<time datetime="2024-04-17 00:00:00">April 17, 2024</time></li>
-<li class="md-meta__item">
-            in
-            
-              <a class="md-meta__link" href="../../category/azure-services/">Azure Services</a></li>
-<li class="md-meta__item">
-            
-              2 min read
-            
-          </li>
-</ul>
-</div>
-</header>
-<div class="md-post__content md-typeset">
-<h2 id="azure-policy-useful-queries"><a class="toclink" href="../../2024/04/17/azure-policy-useful-queries/">Azure Policy useful queries</a></h2>
-<h3 id="policy-assignments-and-information-about-each-of-its-respective-definitions"><a class="toclink" href="../../2024/04/17/azure-policy-useful-queries/#policy-assignments-and-information-about-each-of-its-respective-definitions">Policy assignments and information about each of its respective definitions</a></h3>
-<div class="language-kusto highlight"><pre><span></span><code><span id="__span-0-1"><a href="#__codelineno-0-1" id="__codelineno-0-1" name="__codelineno-0-1"></a><span class="c">// Policy assignments and information about each of its respective definitions</span>
-</span><span id="__span-0-2"><a href="#__codelineno-0-2" id="__codelineno-0-2" name="__codelineno-0-2"></a><span class="c">// Gets policy assignments in your environment with the respective assignment name,definition associated, category of definition (if applicable), as well as whether the definition type is an initiative or a single policy.</span>
-</span><span id="__span-0-3"><a href="#__codelineno-0-3" id="__codelineno-0-3" name="__codelineno-0-3"></a>
-</span><span id="__span-0-4"><a href="#__codelineno-0-4" id="__codelineno-0-4" name="__codelineno-0-4"></a><span class="n">policyResources</span>
-</span><span id="__span-0-5"><a href="#__codelineno-0-5" id="__codelineno-0-5" name="__codelineno-0-5"></a><span class="p">|</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">type</span><span class="w"> </span><span class="p">=~</span><span class="s">'Microsoft.Authorization/PolicyAssignments'</span>
-</span><span id="__span-0-6"><a href="#__codelineno-0-6" id="__codelineno-0-6" name="__codelineno-0-6"></a><span class="p">|</span><span class="w"> </span><span class="k">project</span><span class="w"> </span><span class="n">policyAssignmentId</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">tolower</span><span class="p">(</span><span class="n">tostring</span><span class="p">(</span><span class="n">id</span><span class="p">)),</span><span class="w"> </span><span class="n">policyAssignmentDisplayName</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">tostring</span><span class="p">(</span><span class="n">properties</span><span class="err">.</span><span class="n">displayName</span><span class="p">),</span><span class="w"> </span><span class="n">policyAssignmentDefinitionId</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">tolower</span><span class="p">(</span><span class="n">properties</span><span class="err">.</span><span class="n">policyDefinitionId</span><span class="p">)</span>
-</span><span id="__span-0-7"><a href="#__codelineno-0-7" id="__codelineno-0-7" name="__codelineno-0-7"></a><span class="p">|</span><span class="w"> </span><span class="k">join</span><span class="w"> </span><span class="n">kind</span><span class="p">=</span><span class="n">leftouter</span><span class="p">(</span>
-</span><span id="__span-0-8"><a href="#__codelineno-0-8" id="__codelineno-0-8" name="__codelineno-0-8"></a><span class="w"> </span><span class="n">policyResources</span>
-</span><span id="__span-0-9"><a href="#__codelineno-0-9" id="__codelineno-0-9" name="__codelineno-0-9"></a><span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">type</span><span class="w"> </span><span class="p">=~</span><span class="s">'Microsoft.Authorization/PolicySetDefinitions'</span><span class="w"> </span><span class="k">or</span><span class="w"> </span><span class="n">type</span><span class="w"> </span><span class="p">=~</span><span class="s">'Microsoft.Authorization/PolicyDefinitions'</span>
-</span><span id="__span-0-10"><a href="#__codelineno-0-10" id="__codelineno-0-10" name="__codelineno-0-10"></a><span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="k">project</span><span class="w"> </span><span class="n">definitionId</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">tolower</span><span class="p">(</span><span class="n">id</span><span class="p">),</span><span class="w"> </span><span class="n">category</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">tostring</span><span class="p">(</span><span class="n">properties</span><span class="err">.</span><span class="n">metadata</span><span class="err">.</span><span class="n">category</span><span class="p">),</span><span class="w"> </span><span class="n">definitionType</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">iff</span><span class="p">(</span><span class="n">type</span><span class="w"> </span><span class="p">=~</span><span class="w"> </span><span class="s">'Microsoft.Authorization/PolicysetDefinitions'</span><span class="p">,</span><span class="w"> </span><span class="s">'initiative'</span><span class="p">,</span><span class="w"> </span><span class="s">'policy'</span><span class="p">)</span>
-</span><span id="__span-0-11"><a href="#__codelineno-0-11" id="__codelineno-0-11" name="__codelineno-0-11"></a><span class="p">)</span><span class="w"> </span><span class="k">on</span><span class="w"> </span><span class="err">$</span><span class="n">left</span><span class="err">.</span><span class="n">policyAssignmentDefinitionId</span><span class="w"> </span><span class="p">==</span><span class="w"> </span><span class="err">$</span><span class="n">right</span><span class="err">.</span><span class="n">definitionId</span>
-</span></code></pre></div>
-<ul>
-<li><a href="https://https://gist.github.com/timothywarner/8e5b6dea296f506871223883eb33059e">Original Gist</a></li>
-</ul>
-<h3 id="list-subscriptionid-and-subscriptionname"><a class="toclink" href="../../2024/04/17/azure-policy-useful-queries/#list-subscriptionid-and-subscriptionname">List SubscriptionId and SubscriptionName</a></h3>
-<div class="language-kusto highlight"><pre><span></span><code><span id="__span-1-1"><a href="#__codelineno-1-1" id="__codelineno-1-1" name="__codelineno-1-1"></a><span class="n">ResourceContainers</span>
-</span><span id="__span-1-2"><a href="#__codelineno-1-2" id="__codelineno-1-2" name="__codelineno-1-2"></a><span class="p">|</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">type</span><span class="w"> </span><span class="p">=~</span><span class="w"> </span><span class="s">'microsoft.resources/subscriptions'</span>
-</span><span id="__span-1-3"><a href="#__codelineno-1-3" id="__codelineno-1-3" name="__codelineno-1-3"></a><span class="p">|</span><span class="w"> </span><span class="k">project</span><span class="w"> </span><span class="n">subscriptionId</span><span class="p">,</span><span class="w"> </span><span class="n">subscriptionName</span><span class="p">=</span><span class="n">name</span>
-</span></code></pre></div>
-<h3 id="list-managementgroupid-and-managementgroupname"><a class="toclink" href="../../2024/04/17/azure-policy-useful-queries/#list-managementgroupid-and-managementgroupname">List ManagementGroupId and ManagementGroupName</a></h3>
-<div class="language-kusto highlight"><pre><span></span><code><span id="__span-2-1"><a href="#__codelineno-2-1" id="__codelineno-2-1" name="__codelineno-2-1"></a><span class="n">ResourceContainers</span>
-</span><span id="__span-2-2"><a href="#__codelineno-2-2" id="__codelineno-2-2" name="__codelineno-2-2"></a><span class="p">|</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">type</span><span class="w"> </span><span class="p">=~</span><span class="w"> </span><span class="s">'microsoft.management/managementgroups'</span>
-</span><span id="__span-2-3"><a href="#__codelineno-2-3" id="__codelineno-2-3" name="__codelineno-2-3"></a><span class="p">|</span><span class="w"> </span><span class="k">project</span><span class="w"> </span><span class="n">mgname</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="n">displayName</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">properties</span><span class="err">.</span><span class="n">displayName</span>
-</span></code></pre></div>
-<h3 id="policy-assignments-and-information-about-each-of-its-respective-definitions-displaying-the-scope-of-the-assignment-the-subscription-display-name-the-management-group-id-the-resource-group-name-the-definition-type-the-assignment-name-the-category-of-the-definition-and-the-policy-assignment-id"><a class="toclink" href="../../2024/04/17/azure-policy-useful-queries/#policy-assignments-and-information-about-each-of-its-respective-definitions-displaying-the-scope-of-the-assignment-the-subscription-display-name-the-management-group-id-the-resource-group-name-the-definition-type-the-assignment-name-the-category-of-the-definition-and-the-policy-assignment-id">Policy assignments and information about each of its respective definitions displaying the scope of the assignment, the subscription display name, the management group id, the resource group name, the definition type, the assignment name, the category of the definition, and the policy assignment ID.</a></h3>
-<div class="language-kusto highlight"><pre><span></span><code><span id="__span-3-1"><a href="#__codelineno-3-1" id="__codelineno-3-1" name="__codelineno-3-1"></a><span class="n">policyResources</span>
-</span><span id="__span-3-2"><a href="#__codelineno-3-2" id="__codelineno-3-2" name="__codelineno-3-2"></a><span class="p">|</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">type</span><span class="w"> </span><span class="p">=~</span><span class="s">'Microsoft.Authorization/PolicyAssignments'</span>
-</span><span id="__span-3-3"><a href="#__codelineno-3-3" id="__codelineno-3-3" name="__codelineno-3-3"></a><span class="p">|</span><span class="w"> </span><span class="k">project</span><span class="w"> </span><span class="n">policyAssignmentId</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">tolower</span><span class="p">(</span><span class="n">tostring</span><span class="p">(</span><span class="n">id</span><span class="p">)),</span><span class="w"> </span><span class="n">policyAssignmentDisplayName</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">tostring</span><span class="p">(</span><span class="n">properties</span><span class="err">.</span><span class="n">displayName</span><span class="p">),</span><span class="w"> </span><span class="n">policyAssignmentDefinitionId</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">tolower</span><span class="p">(</span><span class="n">properties</span><span class="err">.</span><span class="n">policyDefinitionId</span><span class="p">),</span><span class="w"> </span><span class="n">subscriptionId</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">tostring</span><span class="p">(</span><span class="n">subscriptionId</span><span class="p">),</span><span class="n">resourceGroup</span><span class="p">=</span><span class="n">tostring</span><span class="p">(</span><span class="n">resourceGroup</span><span class="p">),</span><span class="w"> </span><span class="n">AssignmentDefinition</span><span class="p">=</span><span class="n">properties</span>
-</span><span id="__span-3-4"><a href="#__codelineno-3-4" id="__codelineno-3-4" name="__codelineno-3-4"></a><span class="p">|</span><span class="w"> </span><span class="k">join</span><span class="w"> </span><span class="n">kind</span><span class="p">=</span><span class="n">leftouter</span><span class="p">(</span>
-</span><span id="__span-3-5"><a href="#__codelineno-3-5" id="__codelineno-3-5" name="__codelineno-3-5"></a><span class="w">    </span><span class="n">policyResources</span>
-</span><span id="__span-3-6"><a href="#__codelineno-3-6" id="__codelineno-3-6" name="__codelineno-3-6"></a><span class="w">    </span><span class="p">|</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">type</span><span class="w"> </span><span class="p">=~</span><span class="s">'Microsoft.Authorization/PolicySetDefinitions'</span><span class="w"> </span><span class="k">or</span><span class="w"> </span><span class="n">type</span><span class="w"> </span><span class="p">=~</span><span class="s">'Microsoft.Authorization/PolicyDefinitions'</span>
-</span><span id="__span-3-7"><a href="#__codelineno-3-7" id="__codelineno-3-7" name="__codelineno-3-7"></a><span class="w">    </span><span class="p">|</span><span class="w"> </span><span class="k">project</span><span class="w"> </span><span class="n">definitionId</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">tolower</span><span class="p">(</span><span class="n">id</span><span class="p">),</span><span class="w"> </span><span class="n">category</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">tostring</span><span class="p">(</span><span class="n">properties</span><span class="err">.</span><span class="n">metadata</span><span class="err">.</span><span class="n">category</span><span class="p">),</span><span class="w"> </span><span class="n">definitionType</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">iff</span><span class="p">(</span><span class="n">type</span><span class="w"> </span><span class="p">=~</span><span class="w"> </span><span class="s">'Microsoft.Authorization/PolicysetDefinitions'</span><span class="p">,</span><span class="w"> </span><span class="s">'initiative'</span><span class="p">,</span><span class="w"> </span><span class="s">'policy'</span><span class="p">),</span><span class="n">PolicyDefinition</span><span class="p">=</span><span class="n">properties</span>
-</span><span id="__span-3-8"><a href="#__codelineno-3-8" id="__codelineno-3-8" name="__codelineno-3-8"></a><span class="p">)</span><span class="w"> </span><span class="k">on</span><span class="w"> </span><span class="err">$</span><span class="n">left</span><span class="err">.</span><span class="n">policyAssignmentDefinitionId</span><span class="w"> </span><span class="p">==</span><span class="w"> </span><span class="err">$</span><span class="n">right</span><span class="err">.</span><span class="n">definitionId</span>
-</span><span id="__span-3-9"><a href="#__codelineno-3-9" id="__codelineno-3-9" name="__codelineno-3-9"></a><span class="p">|</span><span class="w"> </span><span class="k">extend</span><span class="w"> </span><span class="n">scope</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">iff</span><span class="p">(</span><span class="n">policyAssignmentId</span><span class="w"> </span><span class="k">contains</span><span class="w"> </span><span class="s">'/subscriptions/'</span><span class="p">,</span><span class="w"> </span><span class="s">'Subscription'</span><span class="p">,</span><span class="w"> </span><span class="n">iff</span><span class="p">(</span><span class="n">policyAssignmentId</span><span class="w"> </span><span class="k">contains</span><span class="w"> </span><span class="s">'/providers/microsoft.management/managementgroups'</span><span class="p">,</span><span class="w"> </span><span class="s">'Management Group'</span><span class="p">,</span><span class="w"> </span><span class="s">'Resource Group'</span><span class="p">))</span>
-</span><span id="__span-3-10"><a href="#__codelineno-3-10" id="__codelineno-3-10" name="__codelineno-3-10"></a><span class="p">|</span><span class="w"> </span><span class="k">join</span><span class="w"> </span><span class="n">kind</span><span class="p">=</span><span class="n">leftouter</span><span class="w"> </span><span class="p">(</span><span class="n">ResourceContainers</span>
-</span><span id="__span-3-11"><a href="#__codelineno-3-11" id="__codelineno-3-11" name="__codelineno-3-11"></a><span class="p">|</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">type</span><span class="w"> </span><span class="p">=~</span><span class="w"> </span><span class="s">'microsoft.resources/subscriptions'</span>
-</span><span id="__span-3-12"><a href="#__codelineno-3-12" id="__codelineno-3-12" name="__codelineno-3-12"></a><span class="p">|</span><span class="w"> </span><span class="k">project</span><span class="w"> </span><span class="n">subscriptionId</span><span class="p">,</span><span class="w"> </span><span class="n">subscriptionName</span><span class="p">=</span><span class="n">name</span><span class="p">)</span><span class="w"> </span><span class="k">on</span><span class="w"> </span><span class="err">$</span><span class="n">left</span><span class="err">.</span><span class="n">subscriptionId</span><span class="w"> </span><span class="p">==</span><span class="w"> </span><span class="err">$</span><span class="n">right</span><span class="err">.</span><span class="n">subscriptionId</span>
-</span><span id="__span-3-13"><a href="#__codelineno-3-13" id="__codelineno-3-13" name="__codelineno-3-13"></a><span class="p">|</span><span class="w"> </span><span class="k">extend</span><span class="w"> </span><span class="n">SubscriptionDisplayName</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">iff</span><span class="p">(</span><span class="n">isnotempty</span><span class="p">(</span><span class="n">subscriptionId</span><span class="p">),</span><span class="w"> </span><span class="n">subscriptionName</span><span class="p">,</span><span class="w"> </span><span class="s">''</span><span class="p">)</span>
-</span><span id="__span-3-14"><a href="#__codelineno-3-14" id="__codelineno-3-14" name="__codelineno-3-14"></a><span class="p">|</span><span class="w"> </span><span class="k">extend</span><span class="w"> </span><span class="n">ManagementGroupName</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">iff</span><span class="p">(</span><span class="n">policyAssignmentId</span><span class="w"> </span><span class="k">contains</span><span class="w"> </span><span class="s">'/providers/microsoft.management/'</span><span class="p">,</span><span class="w"> </span><span class="n">split</span><span class="p">(</span><span class="n">policyAssignmentId</span><span class="p">,</span><span class="w"> </span><span class="s">'/'</span><span class="p">)[</span><span class="mi">4</span><span class="p">],</span><span class="s">''</span><span class="p">)</span>
-</span><span id="__span-3-15"><a href="#__codelineno-3-15" id="__codelineno-3-15" name="__codelineno-3-15"></a><span class="p">|</span><span class="w"> </span><span class="k">extend</span><span class="w"> </span><span class="n">resourceGroupDisplayName</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">iff</span><span class="p">(</span><span class="n">isnotempty</span><span class="p">(</span><span class="n">resourceGroup</span><span class="p">),</span><span class="w"> </span><span class="n">resourceGroup</span><span class="p">,</span><span class="w"> </span><span class="s">''</span><span class="p">)</span>
-</span><span id="__span-3-16"><a href="#__codelineno-3-16" id="__codelineno-3-16" name="__codelineno-3-16"></a><span class="p">|</span><span class="w"> </span><span class="k">project</span><span class="w"> </span><span class="n">ManagementGroupName</span><span class="p">,</span><span class="n">SubscriptionDisplayName</span><span class="p">,</span><span class="n">resourceGroupDisplayName</span><span class="p">,</span><span class="w"> </span><span class="n">scope</span><span class="p">,</span><span class="n">definitionType</span><span class="p">,</span><span class="n">policyAssignmentDisplayName</span><span class="p">,</span><span class="w"> </span><span class="n">category</span><span class="p">,</span><span class="n">policyAssignmentId</span><span class="p">,</span><span class="w"> </span><span class="n">AssignmentDefinition</span><span class="p">,</span><span class="w"> </span><span class="n">PolicyDefinition</span>
-</span></code></pre></div>
-<ul class="task-list">
-<li class="task-list-item"><label class="task-list-control"><input disabled="" type="checkbox"><span class="task-list-indicator"></span></input></label> Add Management Group Display Name</li>
+<li><a href="https://learn.microsoft.com/en-us/azure/role-based-access-control/conditions-overview">What is Azure attribute-based access control (Azure ABAC)?</a></li>
+<li><a href="https://learn.microsoft.com/en-us/azure/role-based-access-control/conditions-format">Azure role assignment condition format and syntax</a></li>
+<li><a href="https://learn.microsoft.com/en-us/azure/role-based-access-control/delegate-role-assignments-examples?tabs=template">Examples to delegate Azure role assignment management with conditions</a></li>
 </ul>
 </div>
 </article>

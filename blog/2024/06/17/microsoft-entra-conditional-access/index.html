@@ -8,8 +8,8 @@
 <meta content="A blog about Azure, DevOps and other stuff" name="description"/>
 <meta content="Rafael Fernández" name="author"/>
 <link href="https://rfernandezdo.github.io/blog/2024/06/17/microsoft-entra-conditional-access/" rel="canonical"/>
-<link href="../../15/tagging-best-practices-in-azure/" rel="prev"/>
-<link href="../../../09/09/markmap/" rel="next"/>
+<link href="../../16/data-threat-modeling-in-azure-storage-accounts/" rel="prev"/>
+<link href="../../18/when-to-use-service-principals/" rel="next"/>
 <link href="../../../../../feed_rss_created.xml" rel="alternate" title="RSS feed" type="application/rss+xml"/>
 <link href="../../../../../feed_rss_updated.xml" rel="alternate" title="RSS feed of updated content" type="application/rss+xml"/>
 <link href="../../../../../assets/images/favicon.png" rel="icon"/>
@@ -764,8 +764,8 @@
 </ul>
 </li>
 <li><strong>Conditions</strong>: Control access based in signals from conditions.<ul>
-<li><strong>User risk</strong>: Control access based on the user risk level calculated by Microsoft Entra Identity Protection. User risk represents the probability that a given identity or account is compromised</li>
-<li><strong>Sign-in risk</strong>: Control access based on the sign-in risk level calculated by Microsoft Entra Identity Protection. Sign-in risk represents the probability that a given authentication request wasn't made by the identity owner.</li>
+<li><strong>User risk</strong>: Control access based on the user risk level calculated by Microsoft Entra Identity Protection. User risk represents the probability that a given identity or account is compromised, for example: Published credentials in Dark Web.</li>
+<li><strong>Sign-in risk</strong>: Control access based on the sign-in risk level calculated by Microsoft Entra Identity Protection. Sign-in risk represents the probability that a given authentication request wasn't made by the identity owner. For example, sign-in from a new location or new device.</li>
 <li><strong>Insider risk</strong>: Control access for users who are assigned specific risk levels from Adaptive Protection, a Microsoft Purview Insider Risk Management feature. Insider risk represents the probability that a given user is engaged in risky data-related activities.</li>
 <li><strong>Device Platform</strong>: Include and Exclude. Control access based on the platform of the device used to sign in.</li>
 <li><strong>Client apps</strong>: Include and Exclude. Control access based on the client apps used to sign in.</li>

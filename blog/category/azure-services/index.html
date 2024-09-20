@@ -636,6 +636,401 @@
 <div class="md-post__meta md-meta">
 <ul class="md-meta__list">
 <li class="md-meta__item">
+<time datetime="2024-06-16 00:00:00">June 16, 2024</time></li>
+<li class="md-meta__item">
+            in
+            
+              <a class="md-meta__link" href="./">Azure Services</a></li>
+<li class="md-meta__item">
+            
+              11 min read
+            
+          </li>
+</ul>
+</div>
+</header>
+<div class="md-post__content md-typeset">
+<h2 id="data-threat-modeling-in-azure-storage-accounts"><a class="toclink" href="../../2024/06/16/data-threat-modeling-in-azure-storage-accounts/">Data threat modeling in Azure storage accounts</a></h2>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>I apologize in advance if this is a crazy idea and there is some mistake!! I am just trying to learn and share knowledge.</p>
+</div>
+<p>Azure Storage Account is a service that provides scalable, secure, and reliable storage for data. It is used to store data such as blobs, files, tables, and queues. However, it is important to ensure that the data stored in Azure Storage Account is secure and protected from security threats. In this article, we will discuss how to perform data threat modeling in Azure storage accounts.</p>
+<h3 id="what-is-data-threat-modeling"><a class="toclink" href="../../2024/06/16/data-threat-modeling-in-azure-storage-accounts/#what-is-data-threat-modeling">What is data threat modeling?</a></h3>
+<p>Data threat modeling is a process of identifying and analyzing potential threats to data security. It helps organizations understand the risks to their data and develop strategies to mitigate those risks. Data threat modeling involves the following steps:</p>
+<ol>
+<li><strong>Identify assets</strong>: Identify the data assets stored in Azure storage accounts, such as blobs, files, tables, and queues.</li>
+<li><strong>Identify threats</strong>: Identify potential threats to the data assets, such as unauthorized access, data breaches, data leakage, malware, phishing attacks, insider threats, and data loss.</li>
+<li><strong>Assess risks</strong>: Assess the risks associated with each threat, such as the likelihood of the threat occurring and the impact of the threat on the data assets.</li>
+<li><strong>Develop mitigation strategies</strong>: Develop strategies to mitigate the risks, such as implementing security controls, access controls, encryption, monitoring, and auditing.</li>
+</ol>
+<p>By performing data threat modeling, organizations can identify and address security vulnerabilities in Azure storage accounts and protect their data from security threats.</p>
+<h3 id="identify-assets-in-azure-storage-accounts"><a class="toclink" href="../../2024/06/16/data-threat-modeling-in-azure-storage-accounts/#identify-assets-in-azure-storage-accounts">Identify assets in Azure storage accounts</a></h3>
+<p>Azure storage accounts can store various types of data assets, including:</p>
+<ul>
+<li><strong>Blobs</strong>: Binary large objects (blobs) are used to store unstructured data, such as images, videos, and documents.</li>
+<li><strong>Files</strong>: Files are used to store structured data, such as text files, configuration files, and log files.</li>
+<li><strong>Tables</strong>: Tables are used to store structured data in a tabular format, such as customer information, product information, and transaction data.</li>
+<li><strong>Queues</strong>: Queues are used to store messages for communication between applications, such as task messages, notification messages, and status messages.</li>
+<li><strong>Disks</strong>: Disks are used to store virtual machine disks, such as operating system disks and data disks.</li>
+</ul>
+<p>Identifying the data assets stored in Azure storage accounts is the first step in data threat modeling. It helps organizations understand the types of data stored in Azure storage accounts and the potential risks to those data assets.</p>
+<h3 id="identify-threats-to-data-in-azure-storage-accounts"><a class="toclink" href="../../2024/06/16/data-threat-modeling-in-azure-storage-accounts/#identify-threats-to-data-in-azure-storage-accounts">Identify threats to data in Azure storage accounts</a></h3>
+<p>There are several threats to data stored in Azure storage accounts, including:</p>
+<ul>
+<li><strong>Unauthorized access</strong>: Unauthorized users gaining access to Azure storage accounts and stealing data.</li>
+<li><strong>Data breaches</strong>: Data breaches can expose sensitive data stored in Azure storage accounts.</li>
+<li><strong>Data leakage</strong>: Data leakage can occur due to misconfigured access controls or insecure data transfer protocols.</li>
+<li><strong>Data loss</strong>: Data loss can occur due to accidental deletion, corruption, or hardware failure.</li>
+<li><strong>Ransomware</strong>: Ransomware can encrypt data stored in Azure storage accounts and demand a ransom for decryption.</li>
+<li><strong>DDoS attacks</strong>: DDoS attacks can disrupt access to data stored in Azure storage accounts.</li>
+<li><strong>Phishing attacks</strong>: Phishing attacks can trick users into providing their login credentials, which can be used to access and steal data.</li>
+<li><strong>Malware</strong>: Malware can be used to steal data from Azure storage accounts and transfer it to external servers.</li>
+<li><strong>Insider threats</strong>: Employees or contractors with access to sensitive data may intentionally or unintentionally exfiltrate data.</li>
+<li><strong>Data exfiltration</strong>: Unauthorized transfer of data from Azure storage accounts to external servers.</li>
+</ul>
+<p>For example, the flow of data exfiltration in Azure storage accounts can be summarized as follows:</p>
+<pre class="mermaid"><code>sequenceDiagram
+    participant User
+    participant Azure Storage Account
+    participant External Server
+
+    User-&gt;&gt;Azure Storage Account: Upload data
+    Azure Storage Account-&gt;&gt;External Server: Unauthorized transfer of data
+</code></pre>
+<p>In this flow, the user uploads data to the Azure Storage Account, and the data is then transferred to an external server without authorization. This unauthorized transfer of data is known as data exfiltration.</p>
+<h3 id="assess-risks-to-data-in-azure-storage-accounts"><a class="toclink" href="../../2024/06/16/data-threat-modeling-in-azure-storage-accounts/#assess-risks-to-data-in-azure-storage-accounts">Assess risks to data in Azure storage accounts</a></h3>
+<p>Assessing the risks associated with threats to data in Azure storage accounts is an important step in data threat modeling. Risks can be assessed based on the likelihood of the threat occurring and the impact of the threat on the data assets. Risks can be categorized as low, medium, or high based on the likelihood and impact of the threat.</p>
+<p>For example, the risk of unauthorized access to Azure storage accounts may be categorized as high if the likelihood of unauthorized access is high and the impact of unauthorized access on the data assets is high. Similarly, the risk of data leakage may be categorized as medium if the likelihood of data leakage is medium and the impact of data leakage on the data assets is medium.</p>
+<p>By assessing risks to data in Azure storage accounts, organizations can prioritize security measures and develop strategies to mitigate the risks.</p>
+<p>For example, the risk of data exfiltration in Azure storage accounts can be assessed as follows:</p>
+<pre class="mermaid"><code>pie
+    title Data Exfiltration Risk Assessment
+    "Unauthorized Access" : 30
+    "Data Breaches" : 20
+    "Data Leakage" : 15
+    "Malware" : 10
+    "Phishing Attacks" : 10
+    "Insider Threats" : 15
+</code></pre>
+<h3 id="develop-mitigation-strategies-for-data-in-azure-storage-accounts"><a class="toclink" href="../../2024/06/16/data-threat-modeling-in-azure-storage-accounts/#develop-mitigation-strategies-for-data-in-azure-storage-accounts">Develop mitigation strategies for data in Azure storage accounts</a></h3>
+<p>Developing mitigation strategies is an essential step in data threat modeling. Mitigation strategies help organizations protect their data assets from security threats and reduce the risks associated with those threats. Mitigation strategies could include the following:</p>
+<ol>
+<li><strong>Implement access controls</strong>: Implement access controls to restrict access to Azure storage accounts based on user roles and permissions.</li>
+<li><strong>Encrypt data</strong>: Encrypt data stored in Azure storage accounts to protect it from unauthorized access.</li>
+<li><strong>Monitor and audit access</strong>: Monitor and audit access to Azure storage accounts to detect unauthorized access and data exfiltration.</li>
+<li><strong>Implement security controls</strong>: Implement security controls, such as firewalls, network security groups, and intrusion detection systems, to protect data in Azure storage accounts.</li>
+<li><strong>Use secure transfer protocols</strong>: Use secure transfer protocols, such as HTTPS, to transfer data to and from Azure storage accounts.</li>
+<li><strong>Implement multi-factor authentication</strong>: Implement multi-factor authentication to protect user accounts from unauthorized access.</li>
+<li><strong>Train employees</strong>: Train employees on data security best practices to prevent data exfiltration and other security threats.</li>
+<li><strong>Backup data</strong>: Backup data stored in Azure storage accounts to prevent data loss due to accidental deletion or corruption.</li>
+<li><strong>Update software</strong>: Keep software and applications up to date to protect data stored in Azure storage accounts from security vulnerabilities.</li>
+<li><strong>Implement data loss prevention (DLP) policies</strong>: Implement DLP policies to prevent data leakage and unauthorized transfer of data from Azure storage accounts.</li>
+</ol>
+<p>As it is not an easy task, Microsoft provides us with tools for this, in the case of using a security framework we can always use the MCSB (Microsoft Cloud Security Baseline) which is a set of guidelines and best practices for securing Azure services, including Azure storage accounts. The MCSB provides recommendations for securing Azure storage accounts, such as enabling encryption, implementing access controls, monitoring access, and auditing activities:</p>
+<table>
+<thead>
+<tr>
+<th>Control Domain</th>
+<th>ASB Control ID</th>
+<th>ASB Control Title</th>
+<th>Responsibility</th>
+<th>Feature Name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Asset Management</td>
+<td>AM-2</td>
+<td>Use only approved services</td>
+<td>Customer</td>
+<td>Azure Policy Support</td>
+</tr>
+<tr>
+<td>Backup and recovery</td>
+<td>BR-1</td>
+<td>Ensure regular automated backups</td>
+<td>Customer</td>
+<td>Azure Backup</td>
+</tr>
+<tr>
+<td>Backup and recovery</td>
+<td>BR-1</td>
+<td>Ensure regular automated backups</td>
+<td>Customer</td>
+<td>Service Native Backup Capability</td>
+</tr>
+<tr>
+<td>Data Protection</td>
+<td>DP-1</td>
+<td>Discover, classify, and label sensitive data</td>
+<td>Customer</td>
+<td>Sensitive Data Discovery and Classification</td>
+</tr>
+<tr>
+<td>Data Protection</td>
+<td>DP-2</td>
+<td>Monitor anomalies and threats targeting sensitive data</td>
+<td>Customer</td>
+<td>Data Leakage/Loss Prevention</td>
+</tr>
+<tr>
+<td>Data Protection</td>
+<td>DP-3</td>
+<td>Encrypt sensitive data in transit</td>
+<td>Microsoft</td>
+<td>Data in Transit Encryption</td>
+</tr>
+<tr>
+<td>Data Protection</td>
+<td>DP-4</td>
+<td>Enable data at rest encryption by default</td>
+<td>Microsoft</td>
+<td>Data at Rest Encryption Using Platform Keys</td>
+</tr>
+<tr>
+<td>Data Protection</td>
+<td>DP-5</td>
+<td>Use customer-managed key option in data at rest encryption when required</td>
+<td>Customer</td>
+<td>Data at Rest Encryption Using CMK</td>
+</tr>
+<tr>
+<td>Data Protection</td>
+<td>DP-6</td>
+<td>Use a secure key management process</td>
+<td>Customer</td>
+<td>Key Management in Azure Key Vault</td>
+</tr>
+<tr>
+<td>Identity Management</td>
+<td>IM-1</td>
+<td>Use centralized identity and authentication system</td>
+<td>Microsoft</td>
+<td>Azure AD Authentication Required for Data Plane Access</td>
+</tr>
+<tr>
+<td>Identity Management</td>
+<td>IM-1</td>
+<td>Use centralized identity and authentication system</td>
+<td>Customer</td>
+<td>Local Authentication Methods for Data Plane Access</td>
+</tr>
+<tr>
+<td>Identity Management</td>
+<td>IM-3</td>
+<td>Manage application identities securely and automatically</td>
+<td>Customer</td>
+<td>Managed Identities</td>
+</tr>
+<tr>
+<td>Identity Management</td>
+<td>IM-3</td>
+<td>Manage application identities securely and automatically</td>
+<td>Customer</td>
+<td>Service Principals</td>
+</tr>
+<tr>
+<td>Identity Management</td>
+<td>IM-7</td>
+<td>Restrict resource access based on conditions</td>
+<td>Customer</td>
+<td>Conditional Access for Data Plane</td>
+</tr>
+<tr>
+<td>Identity Management</td>
+<td>IM-8</td>
+<td>Restrict the exposure of credential and secrets</td>
+<td>Customer</td>
+<td>Service Credential and Secrets Support Integration and Storage in Azure Key Vault</td>
+</tr>
+<tr>
+<td>Logging and threat detection</td>
+<td>LT-1</td>
+<td>Enable threat detection capabilities</td>
+<td>Customer</td>
+<td>Microsoft Defender for Service / Product Offering</td>
+</tr>
+<tr>
+<td>Logging and threat detection</td>
+<td>LT-4</td>
+<td>Enable network logging for security investigation</td>
+<td>Customer</td>
+<td>Azure Resource Logs</td>
+</tr>
+<tr>
+<td>Network Security</td>
+<td>NS-2</td>
+<td>Secure cloud services with network controls</td>
+<td>Customer</td>
+<td>Disable Public Network Access</td>
+</tr>
+<tr>
+<td>Network Security</td>
+<td>NS-2</td>
+<td>Secure cloud services with network controls</td>
+<td>Customer</td>
+<td>Azure Private Link</td>
+</tr>
+<tr>
+<td>Privileged Access</td>
+<td>PA-7</td>
+<td>Follow just enough administration(least privilege) principle</td>
+<td>Customer</td>
+<td>Azure RBAC for Data Plane</td>
+</tr>
+<tr>
+<td>Privileged Access</td>
+<td>PA-8</td>
+<td>Choose approval process for third-party support</td>
+<td>Customer</td>
+<td>Customer Lockbox</td>
+</tr>
+</tbody>
+</table>
+<p>And part of MCSB can be complemented with Azure Well Architected Framework, which provides guidance on best practices for designing and implementing secure, scalable, and reliable cloud solutions. The Well Architected Framework includes security best practices for Azure storage accounts, such as implementing security controls, access controls, encryption, monitoring, and auditing:</p>
+<ol>
+<li><strong>Enable Azure Defender for all your storage accounts</strong>: Azure Defender for Storage provides advanced threat protection for Azure storage accounts. It helps detect and respond to security threats in real-time.</li>
+<li><strong>Turn on soft delete for blob data</strong>: Soft delete helps protect your blob data from accidental deletion. It allows you to recover deleted data within a specified retention period.</li>
+<li><strong>Use Microsoft Entitlement Management to authorize access to blob data</strong>: Microsoft Entitlement Management provides fine-grained access control for Azure storage accounts. It allows you to define and enforce access policies based on user roles and permissions.</li>
+<li><strong>Consider the principle of least privilege</strong>: When assigning permissions to a Microsoft Entitlement security principal through Azure RBAC, follow the principle of least privilege. Only grant the minimum permissions required to perform the necessary tasks.</li>
+<li><strong>Use managed identities to access blob and queue data</strong>: Managed identities provide a secure way to access Azure storage accounts without storing credentials in your code.</li>
+<li><strong>Use blob versioning or immutable blobs</strong>: Blob versioning and immutable blobs help protect your business-critical data from accidental deletion or modification.</li>
+<li><strong>Restrict default internet access for storage accounts</strong>: Limit default internet access to Azure storage accounts to prevent unauthorized access.</li>
+<li><strong>Enable firewall rules</strong>: Use firewall rules to restrict network access to Azure storage accounts. Only allow trusted IP addresses to access the storage account.</li>
+<li><strong>Limit network access to specific networks</strong>: Limit network access to specific networks or IP ranges to prevent unauthorized access.</li>
+<li><strong>Allow trusted Microsoft services to access the storage account</strong>: Allow only trusted Microsoft services to access the storage account to prevent unauthorized access.</li>
+<li><strong>Enable the Secure transfer required option</strong>: Enable the Secure transfer required option on all your storage accounts to enforce secure connections.</li>
+<li><strong>Limit shared access signature (SAS) tokens to HTTPS connections only</strong>: Limit shared access signature (SAS) tokens to HTTPS connections only to prevent unauthorized access.</li>
+<li><strong>Avoid using Shared Key authorization</strong>: Avoid using Shared Key authorization to access storage accounts. Use Azure AD or SAS tokens instead.</li>
+<li><strong>Regenerate your account keys periodically</strong>: Regenerate your account keys periodically to prevent unauthorized access.</li>
+<li><strong>Create a revocation plan for SAS tokens</strong>: Create a revocation plan and have it in place for any SAS tokens that you issue to clients. This will help you revoke access to the storage account if necessary.</li>
+<li><strong>Use near-term expiration times on SAS tokens</strong>: Use near-term expiration times on impromptu SAS, service SAS, or account SAS to limit the exposure of the token.</li>
+</ol>
+<h3 id="mixed-strategies-for-data-protection-in-azure-storage-accounts"><a class="toclink" href="../../2024/06/16/data-threat-modeling-in-azure-storage-accounts/#mixed-strategies-for-data-protection-in-azure-storage-accounts">Mixed strategies for data protection in Azure storage accounts</a></h3>
+<p>Diagram of the mixed strategies for data protection in Azure storage accounts:</p>
+<pre class="mermaid"><code>graph LR
+    A[Asset Management] --&gt;B(AM-2)
+    B --&gt; C[Use only approved services]
+    C --&gt; D[Azure Policy] 
+    E[Backup and recovery] --&gt;F(BR-1)
+    F --&gt; G[Ensure regular automated backups]
+    G --&gt; H[Azure Backup]
+    G --&gt; I[Service Native Backup Capability]
+    I --&gt; I1["Azure Storage Account Configuration"]
+    I1 --&gt; I11["Turn on soft delete for blob data"]
+    I1 --&gt; I12["Use blob versioning or immutable blobs"]
+</code></pre>
+<pre class="mermaid"><code>graph LR
+    J[Data Protection] --&gt;K(DP-1)
+    K --&gt; L[Discover, classify, and label sensitive data]    
+    L --&gt; M[Sensitive Data Discovery and Classification]
+    M --&gt; M1["Microsoft Pureview"]       
+    J --&gt; N(DP-2)
+    N --&gt; O[Monitor anomalies and threats targeting sensitive data]
+    O --&gt; P[Data Leakage/Loss Prevention]
+    P --&gt; P1["Microsoft Defender for Storage"]
+    J --&gt; Q(DP-3)
+    Q --&gt; R[Encrypt sensitive data in transit]
+    R --&gt; S[Data in Transit Encryption]
+    S --&gt; S1["Azure Storage Account Configuration"]
+    S1 --&gt; S2["Enforce minimum TLS version"]
+    J --&gt; T(DP-4)
+    T --&gt; U[Enable data at rest encryption by default]
+    U --&gt; V[Data at Rest Encryption Using Platform Keys]
+    V --&gt; WW["Azure Storage Account Configuration"]    
+    J --&gt; W(DP-5)
+    W --&gt; X[Use customer-managed key option in data at rest encryption when required]
+    X --&gt; Y[Data at Rest Encryption Using CMK]
+    Y --&gt; WW["Azure Storage Account Configuration"]    
+    J --&gt; Z(DP-6)
+    Z --&gt; AA[Use a secure key management process]
+    AA --&gt; AB[Key Management in Azure Key Vault]
+    AB --&gt; AC["DEPRECATED"]
+</code></pre>
+<pre class="mermaid"><code>graph LR  
+    AC[Identity Management] --&gt;AD(IM-1)
+    AD --&gt; AE[Use centralized identity and authentication system]
+    AE --&gt; AE1["Microsoft Entra ID"]
+    AE --&gt; AF[Microsoft Entra ID Authentication Required for Data Plane Access]
+    AF --&gt; AF1["Azure Storage Account Configuration"]
+    AF1 --&gt; AF2["Disable Allow Shared Key authorization"]
+    AD --&gt; AG[Local Authentication Methods for Data Plane Access]
+    AG --&gt; AG1["Azure Storage Account Configuration"]
+    AG1 --&gt; AG2["Don't use SFTP if you don't need it"]
+    AC --&gt; AH(IM-3)
+    AH --&gt; AI[Manage application identities securely and automatically]
+    AI --&gt; AJ[Managed Identities]
+    AI --&gt; AK[Service Principals]
+    AK --&gt; AK1["Rotate or regenerate service principal credentials"]
+    AC --&gt; AL(IM-7)
+    AL --&gt; AM[Restrict resource access based on conditions]
+    AM --&gt; AN[Microsoft Entra Conditional Access for Data Plane]
+    AC --&gt; AO(IM-8)
+    AO --&gt; AP[Restrict the exposure of credential and secrets]    
+    AP --&gt; AQ[Service Credential and Secrets Support Integration and Storage in Azure Key Vault]    
+    AQ --&gt; AK1
+    click AK1 "https://github.com/Azure-Samples/KeyVault-Rotation-StorageAccountKey-PowerShell" "Open this in a new tab" _blank
+</code></pre>
+<p><pre class="mermaid"><code>graph LR
+AR[Logging and threat detection] --&gt;AS(LT-1)
+    AS --&gt; AT[Enable threat detection capabilities]
+    AT --&gt; AU[Microsoft Defender for Service / Product Offering]
+    AU --&gt; AU1["Microsoft Defender for Storage"]
+    AR --&gt; AV(LT-4)
+    AV --&gt; AW[Enable network logging for security investigation]
+    AW --&gt; AX[Azure Resource Logs]
+    AX --&gt; AX1["Azure Monitor"]
+    AX --&gt; AX2["Azure Activity Log"]
+    click AU1 "https://learn.microsoft.com/en-us/azure/defender-for-cloud/defender-for-storage-introduction" "Open this in a new tab" _blank
+</code></pre>
+<pre class="mermaid"><code>graph LR
+    AY[Network Security] --&gt;AZ(NS-2)
+    AZ --&gt; BA[Secure cloud services with network controls]
+    BA --&gt; BB["Azure Storage Account Configuration"]
+    BB --&gt; BB1[Disable Public Network Access]
+    BB --&gt; BB2[Allow trusted Microsoft services to access the storage account]
+    BA --&gt; BC[Azure Private Link]
+    BC --&gt; BC1["Azure Private Endpoint"]
+    BA --&gt; BD[Azure Network]
+    BD --&gt; BD1["Azure Service Endpoint"]
+    BA --&gt; BE["Network Security Perimeter"]
+</code></pre></p>
+<pre class="mermaid"><code>graph LR
+    BD[Privileged Access] --&gt;BE(PA-7)
+    BE --&gt; BF["Follow just enough administration(least privilege) principle"]
+    BF --&gt; BG[Azure RBAC for Data Plane]
+    BG --&gt; BG1["Azure RBAC"]
+    BG1 --&gt; BG2["Azure RBAC Roles"]
+    BD --&gt; BH(PA-8)
+    BH --&gt; BI[Choose approval process for third-party support]
+    BI --&gt; BJ[Customer Lockbox]
+click BG2 "https://learn.microsoft.com/en-us/azure/role-based-access-control/built-in-roles/storage" "Open this in a new tab" _blank
+</code></pre>
+<h3 id="example-of-mixed-strategies-for-data-protection-in-azure-storage-accounts"><a class="toclink" href="../../2024/06/16/data-threat-modeling-in-azure-storage-accounts/#example-of-mixed-strategies-for-data-protection-in-azure-storage-accounts">Example of mixed strategies for data protection in Azure storage accounts</a></h3>
+<p>The following example illustrates how to implement mixed strategies for data protection in Azure storage accounts:</p>
+<h3 id="conclusion"><a class="toclink" href="../../2024/06/16/data-threat-modeling-in-azure-storage-accounts/#conclusion">Conclusion</a></h3>
+<p>In conclusion, data threat modeling is an important process for identifying and addressing security vulnerabilities in Azure storage accounts. By identifying assets, threats, risks, and developing mitigation strategies, organizations can protect their data from security threats and ensure the security and integrity of their data assets. By following best practices and implementing security measures, organizations can prevent and detect data threats in Azure storage accounts and protect their data from security threats.</p>
+<h3 id="references"><a class="toclink" href="../../2024/06/16/data-threat-modeling-in-azure-storage-accounts/#references">References</a></h3>
+<ul>
+<li><a href="https://docs.microsoft.com/en-us/azure/storage/common/storage-account-overview">Azure Storage Account Documentation</a></li>
+<li><a href="https://learn.microsoft.com/en-us/azure/well-architected/service-guides/storage-accounts/security">Azure security baseline for Storage</a></li>
+<li><a href="https://learn.microsoft.com/en-us/azure/well-architected/service-guides/storage-accounts/security">Well Architected Framework - Storage Accounts and security</a></li>
+<li><a href="https://learn.microsoft.com/en-us/azure/defender-for-storage/overview">Microsoft Defender for Storage</a></li>
+<li><a href="https://center-for-threat-informed-defense.github.io/mappings-explorer/external/azure/">Azure MAPPINGS</a></li>
+</ul>
+</div>
+</article>
+<article class="md-post md-post--excerpt">
+<header class="md-post__header">
+<nav class="md-post__authors md-typeset">
+<span class="md-author">
+<img alt="Rafael Fernández" src="https://avatars.githubusercontent.com/u/39990341"/>
+</span>
+</nav>
+<div class="md-post__meta md-meta">
+<ul class="md-meta__list">
+<li class="md-meta__item">
 <time datetime="2024-06-15 00:00:00">June 15, 2024</time></li>
 <li class="md-meta__item">
             in
@@ -1615,147 +2010,6 @@ graph TD
 <ul>
 <li>https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/ready/landing-zone/design-area/resource-org-management-groups</li>
 <li>https://learn.microsoft.com/en-us/azure/governance/management-groups/overview</li>
-</ul>
-</div>
-</article>
-<article class="md-post md-post--excerpt">
-<header class="md-post__header">
-<nav class="md-post__authors md-typeset">
-<span class="md-author">
-<img alt="Rafael Fernández" src="https://avatars.githubusercontent.com/u/39990341"/>
-</span>
-</nav>
-<div class="md-post__meta md-meta">
-<ul class="md-meta__list">
-<li class="md-meta__item">
-<time datetime="2024-04-19 00:00:00">April 19, 2024</time></li>
-<li class="md-meta__item">
-            in
-            
-              <a class="md-meta__link" href="./">Azure Services</a></li>
-<li class="md-meta__item">
-            
-              5 min read
-            
-          </li>
-</ul>
-</div>
-</header>
-<div class="md-post__content md-typeset">
-<h2 id="azure-network-hub-and-spoke-topology"><a class="toclink" href="../../2024/04/19/azure-network-hub-and-spoke-topology/">Azure Network, Hub-and-Spoke Topology</a></h2>
-<p>Hub and Spoke is a network topology where a central Hub is connected to multiple Spokes. The Hub acts as a central point of connectivity and control, while the Spokes are isolated networks that connect to the Hub. This topology is common in Azure to simplify the connectivity and management of virtual networks.</p>
-<pre class="mermaid"><code>graph TD
-    HUB(("Central Hub"))
-    SPOKE1[Spoke1]
-    SPOKE2[Spoke2]
-    SPOKE3[Spoke3]
-    SPOKEN[Spoke...]
-    HUB --- SPOKE1
-    HUB --- SPOKE2
-    HUB --- SPOKE3
-    HUB --- SPOKEN
-</code></pre>
-<h3 id="key-features-of-the-hub-and-spoke-topology"><a class="toclink" href="../../2024/04/19/azure-network-hub-and-spoke-topology/#key-features-of-the-hub-and-spoke-topology">Key Features of the Hub and Spoke Topology</a></h3>
-<ol>
-<li>
-<p><strong>Centralized Connectivity:</strong> The Hub centralizes the connectivity between the Spoke networks. This simplifies the administration and maintenance of the network.</p>
-</li>
-<li>
-<p><strong>Traffic Control:</strong> The Hub acts as a traffic control point between the Spoke networks. This allows for centralized application of security and routing policies.</p>
-</li>
-<li>
-<p><strong>Scalability:</strong> The Hub and Spoke topology is highly scalable and can grow to meet the organization's connectivity needs.</p>
-</li>
-<li>
-<p><strong>Resilience:</strong> The Hub and Spoke topology provides redundancy and resilience in case of network failures.</p>
-</li>
-</ol>
-<h3 id="how-to-use-the-hub-and-spoke-topology-in-azure"><a class="toclink" href="../../2024/04/19/azure-network-hub-and-spoke-topology/#how-to-use-the-hub-and-spoke-topology-in-azure">How to Use the Hub and Spoke Topology in Azure</a></h3>
-<p>To implement the Hub and Spoke topology in Azure, follow these steps:</p>
-<div class="language-sh highlight"><pre><span></span><code><span id="__span-0-1"><a href="#__codelineno-0-1" id="__codelineno-0-1" name="__codelineno-0-1"></a><span class="c1"># Step 1: Create a virtual network for the Hub</span>
-</span><span id="__span-0-2"><a href="#__codelineno-0-2" id="__codelineno-0-2" name="__codelineno-0-2"></a>az<span class="w"> </span>network<span class="w"> </span>vnet<span class="w"> </span>create<span class="w"> </span>--name<span class="w"> </span>HubVnet<span class="w"> </span>--resource-group<span class="w"> </span>MyResourceGroup<span class="w"> </span>--location<span class="w"> </span>eastus<span class="w"> </span>--address-prefix
-</span><span id="__span-0-3"><a href="#__codelineno-0-3" id="__codelineno-0-3" name="__codelineno-0-3"></a>
-</span><span id="__span-0-4"><a href="#__codelineno-0-4" id="__codelineno-0-4" name="__codelineno-0-4"></a><span class="c1"># Step 2: Create virtual networks for the Spokes</span>
-</span><span id="__span-0-5"><a href="#__codelineno-0-5" id="__codelineno-0-5" name="__codelineno-0-5"></a>az<span class="w"> </span>network<span class="w"> </span>vnet<span class="w"> </span>create<span class="w"> </span>--name<span class="w"> </span>Spoke1Vnet<span class="w"> </span>--resource-group<span class="w"> </span>MyResourceGroup<span class="w"> </span>--location<span class="w"> </span>eastus<span class="w"> </span>--address-prefix
-</span><span id="__span-0-6"><a href="#__codelineno-0-6" id="__codelineno-0-6" name="__codelineno-0-6"></a>az<span class="w"> </span>network<span class="w"> </span>vnet<span class="w"> </span>create<span class="w"> </span>--name<span class="w"> </span>Spoke2Vnet<span class="w"> </span>--resource-group<span class="w"> </span>MyResourceGroup<span class="w"> </span>--location<span class="w"> </span>eastus<span class="w"> </span>--address-prefix
-</span><span id="__span-0-7"><a href="#__codelineno-0-7" id="__codelineno-0-7" name="__codelineno-0-7"></a>az<span class="w"> </span>network<span class="w"> </span>vnet<span class="w"> </span>create<span class="w"> </span>--name<span class="w"> </span>Spoke3Vnet<span class="w"> </span>--resource-group<span class="w"> </span>MyResourceGroup<span class="w"> </span>--location<span class="w"> </span>eastus<span class="w"> </span>--address-prefix
-</span><span id="__span-0-8"><a href="#__codelineno-0-8" id="__codelineno-0-8" name="__codelineno-0-8"></a>
-</span><span id="__span-0-9"><a href="#__codelineno-0-9" id="__codelineno-0-9" name="__codelineno-0-9"></a><span class="c1"># Step 3: Connect the Spokes to the Hub</span>
-</span><span id="__span-0-10"><a href="#__codelineno-0-10" id="__codelineno-0-10" name="__codelineno-0-10"></a>az<span class="w"> </span>network<span class="w"> </span>vnet<span class="w"> </span>peering<span class="w"> </span>create<span class="w"> </span>--name<span class="w"> </span>Spoke1ToHub<span class="w"> </span>--resource-group<span class="w"> </span>MyResourceGroup<span class="w"> </span>--vnet-name<span class="w"> </span>Spoke1Vnet<span class="w"> </span>--remote-vnet<span class="w"> </span>HubVnet<span class="w"> </span>--allow-vnet-access
-</span><span id="__span-0-11"><a href="#__codelineno-0-11" id="__codelineno-0-11" name="__codelineno-0-11"></a>az<span class="w"> </span>network<span class="w"> </span>vnet<span class="w"> </span>peering<span class="w"> </span>create<span class="w"> </span>--name<span class="w"> </span>Spoke2ToHub<span class="w"> </span>--resource-group<span class="w"> </span>MyResourceGroup<span class="w"> </span>--vnet-name<span class="w"> </span>Spoke2Vnet<span class="w"> </span>--remote-vnet<span class="w"> </span>HubVnet<span class="w"> </span>--allow-vnet-access
-</span><span id="__span-0-12"><a href="#__codelineno-0-12" id="__codelineno-0-12" name="__codelineno-0-12"></a>az<span class="w"> </span>network<span class="w"> </span>vnet<span class="w"> </span>peering<span class="w"> </span>create<span class="w"> </span>--name<span class="w"> </span>Spoke3ToHub<span class="w"> </span>--resource-group<span class="w"> </span>MyResourceGroup<span class="w"> </span>--vnet-name<span class="w"> </span>Spoke3Vnet<span class="w"> </span>--remote-vnet<span class="w"> </span>HubVnet<span class="w"> </span>--allow-vnet-access
-</span><span id="__span-0-13"><a href="#__codelineno-0-13" id="__codelineno-0-13" name="__codelineno-0-13"></a>
-</span><span id="__span-0-14"><a href="#__codelineno-0-14" id="__codelineno-0-14" name="__codelineno-0-14"></a><span class="c1"># Step 4: Configure routing between the Hub and the Spokes</span>
-</span><span id="__span-0-15"><a href="#__codelineno-0-15" id="__codelineno-0-15" name="__codelineno-0-15"></a>az<span class="w"> </span>network<span class="w"> </span>vnet<span class="w"> </span>peering<span class="w"> </span>update<span class="w"> </span>--name<span class="w"> </span>Spoke1ToHub<span class="w"> </span>--resource-group<span class="w"> </span>MyResourceGroup<span class="w"> </span>--vnet-name<span class="w"> </span>Spoke1Vnet<span class="w"> </span>--set<span class="w"> </span>virtualNetworkGateway:AllowGatewayTransit<span class="o">=</span><span class="nb">true</span>
-</span><span id="__span-0-16"><a href="#__codelineno-0-16" id="__codelineno-0-16" name="__codelineno-0-16"></a>az<span class="w"> </span>network<span class="w"> </span>vnet<span class="w"> </span>peering<span class="w"> </span>update<span class="w"> </span>--name<span class="w"> </span>Spoke2ToHub<span class="w"> </span>--resource-group<span class="w"> </span>MyResourceGroup<span class="w"> </span>--vnet-name<span class="w"> </span>Spoke2Vnet<span class="w"> </span>--set<span class="w"> </span>virtualNetworkGateway:AllowGatewayTransit<span class="o">=</span><span class="nb">true</span>
-</span><span id="__span-0-17"><a href="#__codelineno-0-17" id="__codelineno-0-17" name="__codelineno-0-17"></a>az<span class="w"> </span>network<span class="w"> </span>vnet<span class="w"> </span>peering<span class="w"> </span>update<span class="w"> </span>--name<span class="w"> </span>Spoke3ToHub<span class="w"> </span>--resource-group<span class="w"> </span>MyResourceGroup<span class="w"> </span>--vnet-name<span class="w"> </span>Spoke3Vnet<span class="w"> </span>--set<span class="w"> </span>virtualNetworkGateway:AllowGatewayTransit<span class="o">=</span><span class="nb">true</span>
-</span><span id="__span-0-18"><a href="#__codelineno-0-18" id="__codelineno-0-18" name="__codelineno-0-18"></a>
-</span><span id="__span-0-19"><a href="#__codelineno-0-19" id="__codelineno-0-19" name="__codelineno-0-19"></a><span class="c1"># Step 5: Configure routing in the Hub</span>
-</span><span id="__span-0-20"><a href="#__codelineno-0-20" id="__codelineno-0-20" name="__codelineno-0-20"></a>az<span class="w"> </span>network<span class="w"> </span>vnet<span class="w"> </span>peering<span class="w"> </span>update<span class="w"> </span>--name<span class="w"> </span>HubToSpoke1<span class="w"> </span>--resource-group<span class="w"> </span>MyResourceGroup<span class="w"> </span>--vnet-name<span class="w"> </span>HubVnet<span class="w"> </span>--set<span class="w"> </span>virtualNetworkGateway:UseRemoteGateways<span class="o">=</span><span class="nb">true</span>
-</span><span id="__span-0-21"><a href="#__codelineno-0-21" id="__codelineno-0-21" name="__codelineno-0-21"></a>az<span class="w"> </span>network<span class="w"> </span>vnet<span class="w"> </span>peering<span class="w"> </span>update<span class="w"> </span>--name<span class="w"> </span>HubToSpoke2<span class="w"> </span>--resource-group<span class="w"> </span>MyResourceGroup<span class="w"> </span>--vnet-name<span class="w"> </span>HubVnet<span class="w"> </span>--set<span class="w"> </span>virtualNetworkGateway:UseRemoteGateways<span class="o">=</span><span class="nb">true</span>
-</span><span id="__span-0-22"><a href="#__codelineno-0-22" id="__codelineno-0-22" name="__codelineno-0-22"></a>az<span class="w"> </span>network<span class="w"> </span>vnet<span class="w"> </span>peering<span class="w"> </span>update<span class="w"> </span>--name<span class="w"> </span>HubToSpoke3<span class="w"> </span>--resource-group<span class="w"> </span>MyResourceGroup<span class="w"> </span>--vnet-name<span class="w"> </span>HubVnet<span class="w"> </span>--set<span class="w"> </span>virtualNetworkGateway:UseRemoteGateways<span class="o">=</span><span class="nb">true</span>
-</span></code></pre></div>
-<h3 id="variant-of-the-hub-and-spoke-topology"><a class="toclink" href="../../2024/04/19/azure-network-hub-and-spoke-topology/#variant-of-the-hub-and-spoke-topology">Variant of the Hub and Spoke Topology</a></h3>
-<p>A variant of the Hub and Spoke topology is the Hub and Spoke with peering between spokes that is generally used to allow direct connectivity between the Spoke networks without going through the Hub. This can be useful in scenarios where direct connectivity between the Spoke networks is required, such as data replication or application communication.</p>
-<p><pre class="mermaid"><code>graph TD
-    HUB(("Central Hub"))
-    SPOKE1[Spoke1]
-    SPOKE2[Spoke2]
-    SPOKE3[Spoke3]
-    SPOKEN[Spoke...]
-    HUB --- SPOKE1
-    HUB --- SPOKE2
-    HUB --- SPOKE3
-    HUB --- SPOKEN
-    SPOKE1 -.- SPOKE2    
-</code></pre>
-In this case, it would be connecting the Spoke networks to each other via virtual network peering, for example:</p>
-<div class="language-sh highlight"><pre><span></span><code><span id="__span-1-1"><a href="#__codelineno-1-1" id="__codelineno-1-1" name="__codelineno-1-1"></a><span class="c1"># Connect Spoke1 to Spoke2</span>
-</span><span id="__span-1-2"><a href="#__codelineno-1-2" id="__codelineno-1-2" name="__codelineno-1-2"></a>az<span class="w"> </span>network<span class="w"> </span>vnet<span class="w"> </span>peering<span class="w"> </span>create<span class="w"> </span>--name<span class="w"> </span>Spoke1ToSpoke2<span class="w"> </span>--resource-group<span class="w"> </span>MyResourceGroup<span class="w"> </span>--vnet-name<span class="w"> </span>Spoke1Vnet<span class="w"> </span>--remote-vnet<span class="w"> </span>Spoke2Vnet<span class="w"> </span>--allow-vnet-access
-</span></code></pre></div>
-<h3 id="scalability-and-performance"><a class="toclink" href="../../2024/04/19/azure-network-hub-and-spoke-topology/#scalability-and-performance">Scalability and Performance</a></h3>
-<p>The Hub and Spoke topology in Azure is highly scalable and can handle thousands of virtual networks and subnets. In terms of performance, the Hub and Spoke topology provides efficient and low-latency connectivity between the Spoke networks and the Hub.</p>
-<h3 id="security-and-compliance"><a class="toclink" href="../../2024/04/19/azure-network-hub-and-spoke-topology/#security-and-compliance">Security and Compliance</a></h3>
-<p>The Hub and Spoke topology in Azure provides centralized control over network security and compliance. Security and routing policies can be applied centrally at the Hub, ensuring consistency and compliance with the organization's network policies.</p>
-<h3 id="monitoring-and-logging"><a class="toclink" href="../../2024/04/19/azure-network-hub-and-spoke-topology/#monitoring-and-logging">Monitoring and Logging</a></h3>
-<p>Use Network Watcher to monitor and diagnose network problems in the Hub and Spoke topology. Network Watcher provides the following tools: </p>
-<ul>
-<li>Monitoring<ul>
-<li><a href="https://docs.microsoft.com/en-us/azure/network-watcher/view-network-topology">Topology view</a> shows you the resources in your virtual network and the relationships between them.</li>
-<li><a href="https://docs.microsoft.com/en-us/azure/network-watcher/connection-monitor-overview">Connection monitor</a> allows you to monitor connectivity and latency between endpoints within and outside of Azure.</li>
-</ul>
-</li>
-<li>Network diagnostic tools<ul>
-<li><a href="https://docs.microsoft.com/en-us/azure/network-watcher/network-watcher-ip-flow-verify-overview">IP flow verify</a> helps you detect traffic filtering issues at the virtual machine level.</li>
-<li><a href="https://docs.microsoft.com/en-us/azure/network-watcher/network-watcher-network-configuration-diagnostics-overview">NSG diagnostics</a> helps you detect traffic filtering issues at the virtual machine, virtual machine scale set, or application gateway level.</li>
-<li><a href="https://docs.microsoft.com/en-us/azure/network-watcher/network-watcher-next-hop-overview">Next hop</a> helps you verify traffic routes and detect routing issues.</li>
-<li><a href="https://docs.microsoft.com/en-us/azure/network-watcher/network-watcher-connectivity-portal">Connection troubleshoot</a> enables a one-time check of connectivity and latency between a virtual machine and the Bastion host, application gateway, or another virtual machine.</li>
-<li><a href="https://docs.microsoft.com/en-us/azure/network-watcher/network-watcher-packet-capture-overview">Packet capture</a> allows you to capture traffic from your virtual machine.</li>
-<li><a href="https://docs.microsoft.com/en-us/azure/network-watcher/network-watcher-troubleshoot-overview">VPN troubleshoot</a> runs multiple diagnostic checks on your gateways and VPN connections to help debug issues.</li>
-</ul>
-</li>
-<li>Traffic<ul>
-<li><a href="https://docs.microsoft.com/en-us/azure/network-watcher/network-watcher-nsg-flow-logging-overview">Network security group flow logs</a> and <a href="https://docs.microsoft.com/en-us/azure/network-watcher/vnet-flow-logs-overview">virtual network flow logs</a> let you log network traffic passing through your network security groups (NSGs) and virtual networks respectively.</li>
-<li><a href="https://docs.microsoft.com/en-us/azure/network-watcher/traffic-analytics">Traffic analytics</a> processes data from your network security group flow log allowing you to visualize, query, analyze, and understand your network traffic.</li>
-</ul>
-</li>
-</ul>
-<p>Virtual network flow logs have recently been released which allows for monitoring network traffic in Azure virtual networks.</p>
-<h3 id="use-cases-and-examples"><a class="toclink" href="../../2024/04/19/azure-network-hub-and-spoke-topology/#use-cases-and-examples">Use Cases and Examples</a></h3>
-<p>The Hub and Spoke topology is ideal for organizations that require centralized connectivity and traffic control between multiple virtual networks in Azure. For example, an organization with multiple branches or departments can use the Hub and Spoke topology to securely and efficiently connect their virtual networks in the cloud.</p>
-<h3 id="best-practices-and-tips"><a class="toclink" href="../../2024/04/19/azure-network-hub-and-spoke-topology/#best-practices-and-tips">Best Practices and Tips</a></h3>
-<p>When implementing the Hub and Spoke topology in Azure, it is recommended to follow these best practices:</p>
-<ul>
-<li><strong>Security:</strong> Apply consistent security policies at the Hub and Spokes to ensure network protection.</li>
-<li><strong>Resilience:</strong> Configure redundancy and resilience in the topology to ensure network availability in case of failures.</li>
-<li><strong>Monitoring:</strong> Use monitoring tools like Azure Monitor to monitor network traffic and detect potential performance issues.</li>
-</ul>
-<h3 id="conclusion"><a class="toclink" href="../../2024/04/19/azure-network-hub-and-spoke-topology/#conclusion">Conclusion</a></h3>
-<p>The Hub and Spoke topology is an effective way to simplify the connectivity and management of virtual networks in Azure. It provides centralized control over network connectivity and traffic, making it easier to implement security and routing policies consistently across the network. By following the recommended best practices and tips, organizations can make the most of the Hub and Spoke topology to meet their cloud connectivity needs.</p>
-<h3 id="references"><a class="toclink" href="../../2024/04/19/azure-network-hub-and-spoke-topology/#references">References</a></h3>
-<ul>
-<li><a href="https://docs.microsoft.com/en-us/azure/network-watcher/frequently-asked-questions">Network Watcher frequently asked questions (FAQ)</a></li>
-<li><a href="https://docs.microsoft.com/en-us/azure/architecture/reference-architectures/hybrid-networking/hub-spoke">Azure Topology</a></li>
 </ul>
 </div>
 </article>
