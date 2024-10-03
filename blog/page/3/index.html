@@ -241,6 +241,13 @@
           </label>
 <ul class="md-nav__list" data-md-scrollfix="">
 <li class="md-nav__item">
+<a class="md-nav__link" href="../../2024/10/">
+<span class="md-ellipsis">
+    2024/10
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
 <a class="md-nav__link" href="../../2024/09/">
 <span class="md-ellipsis">
     2024/09
@@ -408,6 +415,13 @@
 <a class="md-nav__link" href="../../category/microsoft-entra/">
 <span class="md-ellipsis">
     Microsoft Entra
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../category/microsoft-entra-external-id/">
+<span class="md-ellipsis">
+    Microsoft Entra External ID
   </span>
 </a>
 </li>
@@ -625,6 +639,326 @@
 <header class="md-typeset">
 <h1 id="blog">Blog</h1>
 </header>
+<article class="md-post md-post--excerpt">
+<header class="md-post__header">
+<nav class="md-post__authors md-typeset">
+<span class="md-author">
+<img alt="Rafael Fernández" src="https://avatars.githubusercontent.com/u/39990341"/>
+</span>
+</nav>
+<div class="md-post__meta md-meta">
+<ul class="md-meta__list">
+<li class="md-meta__item">
+<time datetime="2024-04-30 00:00:00">April 30, 2024</time></li>
+<li class="md-meta__item">
+            in
+            
+              <a class="md-meta__link" href="../../category/devops/">DevOps</a></li>
+<li class="md-meta__item">
+            
+              2 min read
+            
+          </li>
+</ul>
+</div>
+</header>
+<div class="md-post__content md-typeset">
+<h2 id="repository-strategy-fork-vs-branch"><a class="toclink" href="../../2024/04/30/repository-strategy-fork-vs-branch/">Repository Strategy: Fork vs Branch</a></h2>
+<p>In this post, I will explain the different ways to contribute to a Git repository: Fork vs Branch.</p>
+<h3 id="fork"><a class="toclink" href="../../2024/04/30/repository-strategy-fork-vs-branch/#fork">Fork</a></h3>
+<p>A fork is a copy of a repository that you can make changes to without affecting the original repository. When you fork a repository, you create a new repository in your GitHub account that is a copy of the original repository.</p>
+<p>The benefits of forking a repository include:</p>
+<ul>
+<li><strong>Isolation</strong>: You can work on your changes without affecting the original repository.</li>
+<li><strong>Collaboration</strong>: You can make changes to the forked repository and submit a pull request to the original repository to merge your changes.  </li>
+<li><strong>Ownership</strong>: You have full control over the forked repository and can manage it as you see fit.</li>
+</ul>
+<p>The challenges of forking a repository include:</p>
+<ul>
+<li><strong>Synchronization</strong>: Keeping the forked repository up to date with the original repository can be challenging.</li>
+<li><strong>Conflicts</strong>: Multiple contributors working on the same codebase can lead to conflicts and merge issues.</li>
+<li><strong>Visibility</strong>: Changes made to the forked repository are not visible in the original repository until they are merged.</li>
+</ul>
+<h3 id="branch"><a class="toclink" href="../../2024/04/30/repository-strategy-fork-vs-branch/#branch">Branch</a></h3>
+<p>A branch is a parallel version of a repository that allows you to work on changes without affecting the main codebase. When you create a branch, you can make changes to the code and submit a pull request to merge the changes back into the main branch.</p>
+<p>The benefits of using branches include:</p>
+<ul>
+<li><strong>Flexibility</strong>: You can work on different features or bug fixes in separate branches without affecting each other.</li>
+<li><strong>Collaboration</strong>: You can work with other developers on the same codebase by creating branches and submitting pull requests.</li>
+<li><strong>Visibility</strong>: Changes made in branches are visible to other developers, making it easier to review and merge changes.</li>
+</ul>
+<p>The challenges of using branches include:</p>
+<ul>
+<li><strong>Conflicts</strong>: Multiple developers working on the same branch can lead to conflicts and merge issues.</li>
+<li><strong>Complexity</strong>: Managing multiple branches can be challenging, especially in large projects.</li>
+<li><strong>Versioning</strong>: Branches are versioned separately, making it harder to track changes across the project.</li>
+</ul>
+<h3 id="fork-vs-branch"><a class="toclink" href="../../2024/04/30/repository-strategy-fork-vs-branch/#fork-vs-branch">Fork vs Branch</a></h3>
+<p>The decision to fork or branch a repository depends on the project's requirements and the collaboration model.</p>
+<ul>
+<li>
+<p><strong>Fork</strong>: Use a fork when you want to work on changes independently of the original repository or when you want to contribute to a project that you do not have write access to.</p>
+</li>
+<li>
+<p><strong>Branch</strong>: Use a branch when you want to work on changes that will be merged back into the main codebase or when you want to collaborate with other developers on the same codebase.</p>
+</li>
+</ul>
+<p>For my IaC project with Terraform, I will use branches to work on different features and bug fixes and submit pull requests to merge the changes back into the main branch. This approach will allow me to collaborate with other developers and keep the codebase clean and organized.</p>
+</div>
+</article>
+<article class="md-post md-post--excerpt">
+<header class="md-post__header">
+<nav class="md-post__authors md-typeset">
+<span class="md-author">
+<img alt="Rafael Fernández" src="https://avatars.githubusercontent.com/u/39990341"/>
+</span>
+</nav>
+<div class="md-post__meta md-meta">
+<ul class="md-meta__list">
+<li class="md-meta__item">
+<time datetime="2024-04-29 00:00:00">April 29, 2024</time></li>
+<li class="md-meta__item">
+            in
+            
+              <a class="md-meta__link" href="../../category/devops/">DevOps</a></li>
+<li class="md-meta__item">
+            
+              2 min read
+            
+          </li>
+</ul>
+</div>
+</header>
+<div class="md-post__content md-typeset">
+<h2 id="repository-strategy-monorepo-vs-multi-repo"><a class="toclink" href="../../2024/04/29/repository-strategy-monorepo-vs-multi-repo/">Repository Strategy: Monorepo vs Multi-repo</a></h2>
+<p>In this post, I will explain the repository strategy that I will use for my Infrastructure as Code (IaC) project with Terraform. </p>
+<h3 id="monorepo"><a class="toclink" href="../../2024/04/29/repository-strategy-monorepo-vs-multi-repo/#monorepo">Monorepo</a></h3>
+<p>A monorepo is a single repository that contains all the code for a project. </p>
+<p>The benefits of using a monorepo include:</p>
+<ul>
+<li><strong>Simplicity</strong>: All the code is in one place, making it easier to manage and maintain.</li>
+<li><strong>Consistency</strong>: Developers can easily see all the code related to a project and ensure that it follows the same standards and conventions.</li>
+<li><strong>Reusability</strong>: Code can be shared across different parts of the project, reducing duplication and improving consistency.</li>
+<li><strong>Versioning</strong>: All the code is versioned together, making it easier to track changes and roll back if necessary.</li>
+</ul>
+<p>The challenges of using a monorepo include:</p>
+<ul>
+<li><strong>Complexity</strong>: A monorepo can become large and complex, making it harder to navigate and understand.</li>
+<li><strong>Build times</strong>: Building and testing a monorepo can take longer than building and testing smaller repositories.</li>
+<li><strong>Conflicts</strong>: Multiple developers working on the same codebase can lead to conflicts and merge issues.</li>
+</ul>
+<h3 id="multi-repo"><a class="toclink" href="../../2024/04/29/repository-strategy-monorepo-vs-multi-repo/#multi-repo">Multi-repo</a></h3>
+<p>A multi-repo is a set of separate repositories that contain the code for different parts of a project.</p>
+<p>The benefits of using a multi-repo include:</p>
+<ul>
+<li><strong>Isolation</strong>: Each repository is independent, making it easier to manage and maintain.</li>
+<li><strong>Flexibility</strong>: Developers can work on different parts of the project without affecting each other.</li>
+<li><strong>Scalability</strong>: As the project grows, new repositories can be added to manage the code more effectively.</li>
+</ul>
+<p>The challenges of using a multi-repo include:</p>
+<ul>
+<li><strong>Complexity</strong>: Managing multiple repositories can be more challenging than managing a single repository.</li>
+<li><strong>Consistency</strong>: Ensuring that all the repositories follow the same standards and conventions can be difficult.</li>
+<li><strong>Versioning</strong>: Each repository is versioned separately, making it harder to track changes across the project.</li>
+</ul>
+<h3 id="conclusion"><a class="toclink" href="../../2024/04/29/repository-strategy-monorepo-vs-multi-repo/#conclusion">Conclusion</a></h3>
+<p>For my IaC project with Terraform, I will use a monorepo approach to manage all the Terraform modules and configurations for my project.</p>
+</div>
+</article>
+<article class="md-post md-post--excerpt">
+<header class="md-post__header">
+<nav class="md-post__authors md-typeset">
+<span class="md-author">
+<img alt="Rafael Fernández" src="https://avatars.githubusercontent.com/u/39990341"/>
+</span>
+</nav>
+<div class="md-post__meta md-meta">
+<ul class="md-meta__list">
+<li class="md-meta__item">
+<time datetime="2024-04-28 00:00:00">April 28, 2024</time></li>
+<li class="md-meta__item">
+            in
+            
+              <a class="md-meta__link" href="../../category/devops/">DevOps</a></li>
+<li class="md-meta__item">
+            
+              3 min read
+            
+          </li>
+</ul>
+</div>
+</header>
+<div class="md-post__content md-typeset">
+<h2 id="terraform-configuration-language"><a class="toclink" href="../../2024/04/28/terraform-configuration-language/">Terraform: Configuration Language</a></h2>
+<p>After deciding to use Terraform for my Infrastructure as Code (IaC) project,  Terraform configuration language must be understanded to define the desired state of my infrastructure.</p>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>I will update this post with more information about Terraform configuration language in the future.</p>
+</div>
+<p>Terraform uses a declarative configuration language to define the desired state of your infrastructure. This configuration language is designed to be human-readable and easy to understand, making it accessible to both developers and operations teams.</p>
+<h3 id="declarative-vs-imperative"><a class="toclink" href="../../2024/04/28/terraform-configuration-language/#declarative-vs-imperative">Declarative vs. Imperative</a></h3>
+<p>Terraform's configuration language is declarative, meaning that you define the desired state of your infrastructure without specifying the exact steps needed to achieve that state. This is in contrast to imperative languages, where you specify the exact sequence of steps needed to achieve a desired outcome.</p>
+<p>For example, in an imperative language, you might write a script that creates a virtual machine by executing a series of commands to provision the necessary resources. In a declarative language like Terraform, you would simply define the desired state of the virtual machine (e.g., its size, image, and network configuration) and let Terraform figure out the steps needed to achieve that state.</p>
+<h3 id="configuration-blocks"><a class="toclink" href="../../2024/04/28/terraform-configuration-language/#configuration-blocks">Configuration Blocks</a></h3>
+<p>Terraform uses configuration blocks to define different aspects of your infrastructure. Each block has a specific purpose and contains configuration settings that define how that aspect of your infrastructure should be provisioned.</p>
+<p>For example, you might use a <code>provider</code> block to define the cloud provider you want to use, a <code>resource</code> block to define a specific resource (e.g., a virtual machine or storage account), or a <code>variable</code> block to define input variables that can be passed to your configuration.</p>
+<div class="language-hcl highlight"><pre><span></span><code><span id="__span-20-1"><a href="#__codelineno-20-1" id="__codelineno-20-1" name="__codelineno-20-1"></a><span class="kr">provider</span><span class="w"> </span><span class="nv">"azurerm"</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-20-2"><a href="#__codelineno-20-2" id="__codelineno-20-2" name="__codelineno-20-2"></a><span class="w">  </span><span class="nb">features</span><span class="w"> </span><span class="p">{}</span>
+</span><span id="__span-20-3"><a href="#__codelineno-20-3" id="__codelineno-20-3" name="__codelineno-20-3"></a><span class="p">}</span>
+</span><span id="__span-20-4"><a href="#__codelineno-20-4" id="__codelineno-20-4" name="__codelineno-20-4"></a>
+</span><span id="__span-20-5"><a href="#__codelineno-20-5" id="__codelineno-20-5" name="__codelineno-20-5"></a><span class="kr">resource</span><span class="w"> </span><span class="nc">"azurerm_resource_group"</span><span class="w"> </span><span class="nv">"example"</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-20-6"><a href="#__codelineno-20-6" id="__codelineno-20-6" name="__codelineno-20-6"></a><span class="w">  </span><span class="na">name</span><span class="w">     </span><span class="o">=</span><span class="w"> </span><span class="s2">"example-resources"</span>
+</span><span id="__span-20-7"><a href="#__codelineno-20-7" id="__codelineno-20-7" name="__codelineno-20-7"></a><span class="w">  </span><span class="na">location</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"East US"</span>
+</span><span id="__span-20-8"><a href="#__codelineno-20-8" id="__codelineno-20-8" name="__codelineno-20-8"></a><span class="p">}</span>
+</span><span id="__span-20-9"><a href="#__codelineno-20-9" id="__codelineno-20-9" name="__codelineno-20-9"></a>
+</span><span id="__span-20-10"><a href="#__codelineno-20-10" id="__codelineno-20-10" name="__codelineno-20-10"></a><span class="kr">variable</span><span class="w"> </span><span class="nv">"location"</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-20-11"><a href="#__codelineno-20-11" id="__codelineno-20-11" name="__codelineno-20-11"></a><span class="w">  </span><span class="na">type</span><span class="w">    </span><span class="o">=</span><span class="w"> </span><span class="kt">string</span>
+</span><span id="__span-20-12"><a href="#__codelineno-20-12" id="__codelineno-20-12" name="__codelineno-20-12"></a><span class="w">  </span><span class="na">default</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"East US"</span>
+</span><span id="__span-20-13"><a href="#__codelineno-20-13" id="__codelineno-20-13" name="__codelineno-20-13"></a><span class="p">}</span>
+</span></code></pre></div>
+<h3 id="variables"><a class="toclink" href="../../2024/04/28/terraform-configuration-language/#variables">Variables</a></h3>
+<p>Terraform allows you to define variables that can be used to parameterize your configuration. Variables can be used to pass values into your configuration, making it easier to reuse and customize your infrastructure definitions.</p>
+<div class="language-hcl highlight"><pre><span></span><code><span id="__span-21-1"><a href="#__codelineno-21-1" id="__codelineno-21-1" name="__codelineno-21-1"></a><span class="kr">variable</span><span class="w"> </span><span class="nv">"location"</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-21-2"><a href="#__codelineno-21-2" id="__codelineno-21-2" name="__codelineno-21-2"></a><span class="w">  </span><span class="na">type</span><span class="w">    </span><span class="o">=</span><span class="w"> </span><span class="kt">string</span>
+</span><span id="__span-21-3"><a href="#__codelineno-21-3" id="__codelineno-21-3" name="__codelineno-21-3"></a><span class="w">  </span><span class="na">default</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"East US"</span>
+</span><span id="__span-21-4"><a href="#__codelineno-21-4" id="__codelineno-21-4" name="__codelineno-21-4"></a><span class="p">}</span>
+</span><span id="__span-21-5"><a href="#__codelineno-21-5" id="__codelineno-21-5" name="__codelineno-21-5"></a>
+</span><span id="__span-21-6"><a href="#__codelineno-21-6" id="__codelineno-21-6" name="__codelineno-21-6"></a><span class="kr">resource</span><span class="w"> </span><span class="nc">"azurerm_resource_group"</span><span class="w"> </span><span class="nv">"example"</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-21-7"><a href="#__codelineno-21-7" id="__codelineno-21-7" name="__codelineno-21-7"></a><span class="w">  </span><span class="na">name</span><span class="w">     </span><span class="o">=</span><span class="w"> </span><span class="s2">"example-resources"</span>
+</span><span id="__span-21-8"><a href="#__codelineno-21-8" id="__codelineno-21-8" name="__codelineno-21-8"></a><span class="w">  </span><span class="na">location</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">var.location</span>
+</span><span id="__span-21-9"><a href="#__codelineno-21-9" id="__codelineno-21-9" name="__codelineno-21-9"></a><span class="p">}</span>
+</span></code></pre></div>
+<h3 id="locals"><a class="toclink" href="../../2024/04/28/terraform-configuration-language/#locals">locals</a></h3>
+<p>Terraform allows you to define local values that can be used within your configuration. Locals are similar to variables but are only available within the current module or configuration block.</p>
+<div class="language-hcl highlight"><pre><span></span><code><span id="__span-22-1"><a href="#__codelineno-22-1" id="__codelineno-22-1" name="__codelineno-22-1"></a><span class="kr">variable</span><span class="w"> </span><span class="nv">"location"</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-22-2"><a href="#__codelineno-22-2" id="__codelineno-22-2" name="__codelineno-22-2"></a><span class="w">  </span><span class="na">type</span><span class="w">    </span><span class="o">=</span><span class="w"> </span><span class="kt">string</span>
+</span><span id="__span-22-3"><a href="#__codelineno-22-3" id="__codelineno-22-3" name="__codelineno-22-3"></a><span class="w">  </span><span class="na">default</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"East US"</span>
+</span><span id="__span-22-4"><a href="#__codelineno-22-4" id="__codelineno-22-4" name="__codelineno-22-4"></a><span class="p">}</span>
+</span><span id="__span-22-5"><a href="#__codelineno-22-5" id="__codelineno-22-5" name="__codelineno-22-5"></a>
+</span><span id="__span-22-6"><a href="#__codelineno-22-6" id="__codelineno-22-6" name="__codelineno-22-6"></a><span class="nb">locals</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-22-7"><a href="#__codelineno-22-7" id="__codelineno-22-7" name="__codelineno-22-7"></a><span class="w">  </span><span class="na">resource_group_name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"example-resources"</span>
+</span><span id="__span-22-8"><a href="#__codelineno-22-8" id="__codelineno-22-8" name="__codelineno-22-8"></a><span class="p">}</span>
+</span><span id="__span-22-9"><a href="#__codelineno-22-9" id="__codelineno-22-9" name="__codelineno-22-9"></a>
+</span><span id="__span-22-10"><a href="#__codelineno-22-10" id="__codelineno-22-10" name="__codelineno-22-10"></a><span class="kr">resource</span><span class="w"> </span><span class="nc">"azurerm_resource_group"</span><span class="w"> </span><span class="nv">"example"</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-22-11"><a href="#__codelineno-22-11" id="__codelineno-22-11" name="__codelineno-22-11"></a><span class="w">  </span><span class="na">name</span><span class="w">     </span><span class="o">=</span><span class="w"> </span><span class="nv">local.resource_group_name</span>
+</span><span id="__span-22-12"><a href="#__codelineno-22-12" id="__codelineno-22-12" name="__codelineno-22-12"></a><span class="w">  </span><span class="na">location</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">var.location</span>
+</span><span id="__span-22-13"><a href="#__codelineno-22-13" id="__codelineno-22-13" name="__codelineno-22-13"></a><span class="p">}</span>
+</span></code></pre></div>
+<h3 id="data-sources"><a class="toclink" href="../../2024/04/28/terraform-configuration-language/#data-sources">Data Sources</a></h3>
+<p>Terraform allows you to define data sources that can be used to query external resources and retrieve information that can be used in your configuration. Data sources are read-only and can be used to fetch information about existing resources, such as virtual networks, storage accounts, or database instances.</p>
+<div class="language-hcl highlight"><pre><span></span><code><span id="__span-23-1"><a href="#__codelineno-23-1" id="__codelineno-23-1" name="__codelineno-23-1"></a><span class="kr">data</span><span class="w"> </span><span class="nc">"azurerm_resource_group"</span><span class="w"> </span><span class="nv">"example"</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-23-2"><a href="#__codelineno-23-2" id="__codelineno-23-2" name="__codelineno-23-2"></a><span class="w">  </span><span class="na">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"example-resources"</span>
+</span><span id="__span-23-3"><a href="#__codelineno-23-3" id="__codelineno-23-3" name="__codelineno-23-3"></a><span class="p">}</span>
+</span><span id="__span-23-4"><a href="#__codelineno-23-4" id="__codelineno-23-4" name="__codelineno-23-4"></a>
+</span><span id="__span-23-5"><a href="#__codelineno-23-5" id="__codelineno-23-5" name="__codelineno-23-5"></a><span class="kr">resource</span><span class="w"> </span><span class="nc">"azurerm_virtual_network"</span><span class="w"> </span><span class="nv">"example"</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-23-6"><a href="#__codelineno-23-6" id="__codelineno-23-6" name="__codelineno-23-6"></a><span class="w">  </span><span class="na">name</span><span class="w">                </span><span class="o">=</span><span class="w"> </span><span class="s2">"example-network"</span>
+</span><span id="__span-23-7"><a href="#__codelineno-23-7" id="__codelineno-23-7" name="__codelineno-23-7"></a><span class="w">  </span><span class="na">location</span><span class="w">            </span><span class="o">=</span><span class="w"> </span><span class="nv">data.azurerm_resource_group.example.location</span>
+</span><span id="__span-23-8"><a href="#__codelineno-23-8" id="__codelineno-23-8" name="__codelineno-23-8"></a><span class="w">  </span><span class="na">resource_group_name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">data.azurerm_resource_group.example.name</span>
+</span><span id="__span-23-9"><a href="#__codelineno-23-9" id="__codelineno-23-9" name="__codelineno-23-9"></a><span class="p">}</span>
+</span></code></pre></div>
+<h3 id="functions"><a class="toclink" href="../../2024/04/28/terraform-configuration-language/#functions">Functions</a></h3>
+<h4 id="try"><a class="toclink" href="../../2024/04/28/terraform-configuration-language/#try">try</a></h4>
+<p>The <code>try</code> function allows you to provide a default value in case an expression returns an error. This can be useful when working with optional values that may or may not be present.</p>
+<div class="language-hcl highlight"><pre><span></span><code><span id="__span-24-1"><a href="#__codelineno-24-1" id="__codelineno-24-1" name="__codelineno-24-1"></a><span class="kr">variable</span><span class="w"> </span><span class="nv">"optional_value"</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-24-2"><a href="#__codelineno-24-2" id="__codelineno-24-2" name="__codelineno-24-2"></a><span class="w">  </span><span class="na">type</span><span class="w">    </span><span class="o">=</span><span class="w"> </span><span class="kt">string</span>
+</span><span id="__span-24-3"><a href="#__codelineno-24-3" id="__codelineno-24-3" name="__codelineno-24-3"></a><span class="w">  </span><span class="na">default</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">null</span>
+</span><span id="__span-24-4"><a href="#__codelineno-24-4" id="__codelineno-24-4" name="__codelineno-24-4"></a><span class="p">}</span>
+</span><span id="__span-24-5"><a href="#__codelineno-24-5" id="__codelineno-24-5" name="__codelineno-24-5"></a>
+</span><span id="__span-24-6"><a href="#__codelineno-24-6" id="__codelineno-24-6" name="__codelineno-24-6"></a><span class="nb">locals</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-24-7"><a href="#__codelineno-24-7" id="__codelineno-24-7" name="__codelineno-24-7"></a><span class="w">  </span><span class="na">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">try</span><span class="p">(</span><span class="nv">var.optional_value</span><span class="p">,</span><span class="w"> </span><span class="s2">"default_value"</span><span class="p">)</span>
+</span><span id="__span-24-8"><a href="#__codelineno-24-8" id="__codelineno-24-8" name="__codelineno-24-8"></a><span class="p">}</span>
+</span></code></pre></div>
+<h3 id="debugging-terraform"><a class="toclink" href="../../2024/04/28/terraform-configuration-language/#debugging-terraform">Debugging Terraform</a></h3>
+<p>You can use the <code>TF_LOG</code> environment variable to enable debug logging in Terraform. This can be useful when troubleshooting issues with your infrastructure or understanding how Terraform is executing your configuration.</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-25-1"><a href="#__codelineno-25-1" id="__codelineno-25-1" name="__codelineno-25-1"></a><span class="nb">export</span><span class="w"> </span><span class="nv">TF_LOG</span><span class="o">=</span>DEBUG
+</span><span id="__span-25-2"><a href="#__codelineno-25-2" id="__codelineno-25-2" name="__codelineno-25-2"></a>terraform<span class="w"> </span>plan
+</span></code></pre></div>
+<p>TOu can use the following decreasing verbosity levels log:  TRACE, DEBUG, INFO, WARN or ERROR</p>
+<p>To persist logged output logs in a file:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-26-1"><a href="#__codelineno-26-1" id="__codelineno-26-1" name="__codelineno-26-1"></a><span class="nb">export</span><span class="w"> </span><span class="nv">TF_LOG_PATH</span><span class="o">=</span><span class="s2">"terraform.log"</span>
+</span></code></pre></div>
+<p>To separare logs for Terraform and provider, you can use the following environment variables <strong>TF_LOG_CORE</strong> and <strong>TF_LOG_PROVIDER</strong> respectively. For example, to enable debug logging for both Terraform and the Azure provider, you can use the following environment variables:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-27-1"><a href="#__codelineno-27-1" id="__codelineno-27-1" name="__codelineno-27-1"></a><span class="nb">export</span><span class="w"> </span><span class="nv">TF_LOG_CORE</span><span class="o">=</span>DEBUG
+</span><span id="__span-27-2"><a href="#__codelineno-27-2" id="__codelineno-27-2" name="__codelineno-27-2"></a><span class="nb">export</span><span class="w"> </span><span class="nv">TF_LOG_PATH</span><span class="o">=</span><span class="s2">"terraform.log"</span>
+</span></code></pre></div>
+<p>or </p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-28-1"><a href="#__codelineno-28-1" id="__codelineno-28-1" name="__codelineno-28-1"></a><span class="nb">export</span><span class="w"> </span><span class="nv">TF_LOG_PROVIDER</span><span class="o">=</span>DEBUG
+</span><span id="__span-28-2"><a href="#__codelineno-28-2" id="__codelineno-28-2" name="__codelineno-28-2"></a><span class="nb">export</span><span class="w"> </span><span class="nv">TF_LOG_PATH</span><span class="o">=</span><span class="s2">"provider.log"</span>
+</span></code></pre></div>
+<p>To disable debug logging, you can unset the <code>TF_LOG</code> environment variable:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-29-1"><a href="#__codelineno-29-1" id="__codelineno-29-1" name="__codelineno-29-1"></a><span class="nb">unset</span><span class="w"> </span>TF_LOG
+</span></code></pre></div>
+<h3 id="references"><a class="toclink" href="../../2024/04/28/terraform-configuration-language/#references">References</a></h3>
+<ul>
+<li><a href="https://www.terraform.io/docs/language/index.html">Terraform Configuration Language</a></li>
+<li><a href="https://www.terraform.io/docs/language/functions/index.html">Terraform Functions</a></li>
+<li><a href="https://www.terraform.io/docs/internals/debugging.html">Terraform Debugging</a></li>
+</ul>
+</div>
+</article>
+<article class="md-post md-post--excerpt">
+<header class="md-post__header">
+<nav class="md-post__authors md-typeset">
+<span class="md-author">
+<img alt="Rafael Fernández" src="https://avatars.githubusercontent.com/u/39990341"/>
+</span>
+</nav>
+<div class="md-post__meta md-meta">
+<ul class="md-meta__list">
+<li class="md-meta__item">
+<time datetime="2024-04-28 00:00:00">April 28, 2024</time></li>
+<li class="md-meta__item">
+            in
+            
+              <a class="md-meta__link" href="../../category/devops/">DevOps</a></li>
+<li class="md-meta__item">
+            
+              1 min read
+            
+          </li>
+</ul>
+</div>
+</header>
+<div class="md-post__content md-typeset">
+<h2 id="terraform-set-your-local-environment-developer"><a class="toclink" href="../../2024/04/28/terraform-set-your-local-environment-developer/">Terraform: Set your local environment developer</a></h2>
+<p>I wil use Ubuntu in WSL v2 as my local environment for my IaC project with Terraform. I will install the following tools:</p>
+<ul>
+<li>vscode</li>
+<li>Trunk</li>
+<li>tenv</li>
+<li>az cli</li>
+</ul>
+<h3 id="az-cli"><a class="toclink" href="../../2024/04/28/terraform-set-your-local-environment-developer/#az-cli">az cli</a></h3>
+<p>I will use the Azure CLI to interact with Azure resources from the command line. I will install the Azure CLI using the following commands:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-6-1"><a href="#__codelineno-6-1" id="__codelineno-6-1" name="__codelineno-6-1"></a>curl<span class="w"> </span>-sL<span class="w"> </span>https://aka.ms/InstallAzureCLIDeb<span class="w"> </span><span class="p">|</span><span class="w"> </span>sudo<span class="w"> </span>bash
+</span></code></pre></div>
+<h3 id="vscode"><a class="toclink" href="../../2024/04/28/terraform-set-your-local-environment-developer/#vscode">vscode</a></h3>
+<p>I will use Visual Studio Code as my code editor for my IaC project with Terraform. I will install the following extensions:</p>
+<ul>
+<li>Terraform</li>
+<li>Azure Terraform</li>
+<li>Azure Account</li>
+<li>Trunk</li>
+</ul>
+<h3 id="tenv"><a class="toclink" href="../../2024/04/28/terraform-set-your-local-environment-developer/#tenv">tenv</a></h3>
+<p><code>tenv</code> is a tool that allows you to manage multiple Terraform environments with ease. It provides a simple way to switch between different environments, such as development, staging, and production, by managing environment variables and state files for each environment.</p>
+<h4 id="installation"><a class="toclink" href="../../2024/04/28/terraform-set-your-local-environment-developer/#installation">Installation</a></h4>
+<p>You can install <code>tenv</code> using <code>go get</code>:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-7-1"><a href="#__codelineno-7-1" id="__codelineno-7-1" name="__codelineno-7-1"></a><span class="nv">LATEST_VERSION</span><span class="o">=</span><span class="k">$(</span>curl<span class="w"> </span>--silent<span class="w"> </span>https://api.github.com/repos/tofuutils/tenv/releases/latest<span class="w"> </span><span class="p">|</span><span class="w"> </span>jq<span class="w"> </span>-r<span class="w"> </span>.tag_name<span class="k">)</span>
+</span><span id="__span-7-2"><a href="#__codelineno-7-2" id="__codelineno-7-2" name="__codelineno-7-2"></a>curl<span class="w"> </span>-O<span class="w"> </span>-L<span class="w"> </span><span class="s2">"https://github.com/tofuutils/tenv/releases/latest/download/tenv_</span><span class="si">${</span><span class="nv">LATEST_VERSION</span><span class="si">}</span><span class="s2">_amd64.deb"</span>
+</span><span id="__span-7-3"><a href="#__codelineno-7-3" id="__codelineno-7-3" name="__codelineno-7-3"></a>sudo<span class="w"> </span>dpkg<span class="w"> </span>-i<span class="w"> </span><span class="s2">"tenv_</span><span class="si">${</span><span class="nv">LATEST_VERSION</span><span class="si">}</span><span class="s2">_amd64.deb"</span>
+</span></code></pre></div>
+<h4 id="usage"><a class="toclink" href="../../2024/04/28/terraform-set-your-local-environment-developer/#usage">Usage</a></h4>
+<p>To create a new environment, you can use the <code>tenv create</code> command:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-8-1"><a href="#__codelineno-8-1" id="__codelineno-8-1" name="__codelineno-8-1"></a><span class="c1"># to install the latest version of Terraform</span>
+</span><span id="__span-8-2"><a href="#__codelineno-8-2" id="__codelineno-8-2" name="__codelineno-8-2"></a>tenv<span class="w"> </span>tf<span class="w"> </span>install<span class="w"> </span>
+</span></code></pre></div>
+<h3 id="references"><a class="toclink" href="../../2024/04/28/terraform-set-your-local-environment-developer/#references">References</a></h3>
+<ul>
+<li><a href="https://github.com/tofuutils/tenv">tenv</a></li>
+</ul>
+</div>
+</article>
 <article class="md-post md-post--excerpt">
 <header class="md-post__header">
 <nav class="md-post__authors md-typeset">
@@ -1440,448 +1774,8 @@ param(
 }</p>
 </div>
 </article>
-<article class="md-post md-post--excerpt">
-<header class="md-post__header">
-<nav class="md-post__authors md-typeset">
-<span class="md-author">
-<img alt="Rafael Fernández" src="https://avatars.githubusercontent.com/u/39990341"/>
-</span>
-</nav>
-<div class="md-post__meta md-meta">
-<ul class="md-meta__list">
-<li class="md-meta__item">
-<time datetime="2024-04-19 00:00:00">April 19, 2024</time></li>
-<li class="md-meta__item">
-            in
-            
-              <a class="md-meta__link" href="../../category/azure-services/">Azure Services</a></li>
-<li class="md-meta__item">
-            
-              5 min read
-            
-          </li>
-</ul>
-</div>
-</header>
-<div class="md-post__content md-typeset">
-<h2 id="azure-network-hub-and-spoke-topology"><a class="toclink" href="../../2024/04/19/azure-network-hub-and-spoke-topology/">Azure Network, Hub-and-Spoke Topology</a></h2>
-<p>Hub and Spoke is a network topology where a central Hub is connected to multiple Spokes. The Hub acts as a central point of connectivity and control, while the Spokes are isolated networks that connect to the Hub. This topology is common in Azure to simplify the connectivity and management of virtual networks.</p>
-<pre class="mermaid"><code>graph TD
-    HUB(("Central Hub"))
-    SPOKE1[Spoke1]
-    SPOKE2[Spoke2]
-    SPOKE3[Spoke3]
-    SPOKEN[Spoke...]
-    HUB --- SPOKE1
-    HUB --- SPOKE2
-    HUB --- SPOKE3
-    HUB --- SPOKEN
-</code></pre>
-<h3 id="key-features-of-the-hub-and-spoke-topology"><a class="toclink" href="../../2024/04/19/azure-network-hub-and-spoke-topology/#key-features-of-the-hub-and-spoke-topology">Key Features of the Hub and Spoke Topology</a></h3>
-<ol>
-<li>
-<p><strong>Centralized Connectivity:</strong> The Hub centralizes the connectivity between the Spoke networks. This simplifies the administration and maintenance of the network.</p>
-</li>
-<li>
-<p><strong>Traffic Control:</strong> The Hub acts as a traffic control point between the Spoke networks. This allows for centralized application of security and routing policies.</p>
-</li>
-<li>
-<p><strong>Scalability:</strong> The Hub and Spoke topology is highly scalable and can grow to meet the organization's connectivity needs.</p>
-</li>
-<li>
-<p><strong>Resilience:</strong> The Hub and Spoke topology provides redundancy and resilience in case of network failures.</p>
-</li>
-</ol>
-<h3 id="how-to-use-the-hub-and-spoke-topology-in-azure"><a class="toclink" href="../../2024/04/19/azure-network-hub-and-spoke-topology/#how-to-use-the-hub-and-spoke-topology-in-azure">How to Use the Hub and Spoke Topology in Azure</a></h3>
-<p>To implement the Hub and Spoke topology in Azure, follow these steps:</p>
-<div class="language-sh highlight"><pre><span></span><code><span id="__span-0-1"><a href="#__codelineno-0-1" id="__codelineno-0-1" name="__codelineno-0-1"></a><span class="c1"># Step 1: Create a virtual network for the Hub</span>
-</span><span id="__span-0-2"><a href="#__codelineno-0-2" id="__codelineno-0-2" name="__codelineno-0-2"></a>az<span class="w"> </span>network<span class="w"> </span>vnet<span class="w"> </span>create<span class="w"> </span>--name<span class="w"> </span>HubVnet<span class="w"> </span>--resource-group<span class="w"> </span>MyResourceGroup<span class="w"> </span>--location<span class="w"> </span>eastus<span class="w"> </span>--address-prefix
-</span><span id="__span-0-3"><a href="#__codelineno-0-3" id="__codelineno-0-3" name="__codelineno-0-3"></a>
-</span><span id="__span-0-4"><a href="#__codelineno-0-4" id="__codelineno-0-4" name="__codelineno-0-4"></a><span class="c1"># Step 2: Create virtual networks for the Spokes</span>
-</span><span id="__span-0-5"><a href="#__codelineno-0-5" id="__codelineno-0-5" name="__codelineno-0-5"></a>az<span class="w"> </span>network<span class="w"> </span>vnet<span class="w"> </span>create<span class="w"> </span>--name<span class="w"> </span>Spoke1Vnet<span class="w"> </span>--resource-group<span class="w"> </span>MyResourceGroup<span class="w"> </span>--location<span class="w"> </span>eastus<span class="w"> </span>--address-prefix
-</span><span id="__span-0-6"><a href="#__codelineno-0-6" id="__codelineno-0-6" name="__codelineno-0-6"></a>az<span class="w"> </span>network<span class="w"> </span>vnet<span class="w"> </span>create<span class="w"> </span>--name<span class="w"> </span>Spoke2Vnet<span class="w"> </span>--resource-group<span class="w"> </span>MyResourceGroup<span class="w"> </span>--location<span class="w"> </span>eastus<span class="w"> </span>--address-prefix
-</span><span id="__span-0-7"><a href="#__codelineno-0-7" id="__codelineno-0-7" name="__codelineno-0-7"></a>az<span class="w"> </span>network<span class="w"> </span>vnet<span class="w"> </span>create<span class="w"> </span>--name<span class="w"> </span>Spoke3Vnet<span class="w"> </span>--resource-group<span class="w"> </span>MyResourceGroup<span class="w"> </span>--location<span class="w"> </span>eastus<span class="w"> </span>--address-prefix
-</span><span id="__span-0-8"><a href="#__codelineno-0-8" id="__codelineno-0-8" name="__codelineno-0-8"></a>
-</span><span id="__span-0-9"><a href="#__codelineno-0-9" id="__codelineno-0-9" name="__codelineno-0-9"></a><span class="c1"># Step 3: Connect the Spokes to the Hub</span>
-</span><span id="__span-0-10"><a href="#__codelineno-0-10" id="__codelineno-0-10" name="__codelineno-0-10"></a>az<span class="w"> </span>network<span class="w"> </span>vnet<span class="w"> </span>peering<span class="w"> </span>create<span class="w"> </span>--name<span class="w"> </span>Spoke1ToHub<span class="w"> </span>--resource-group<span class="w"> </span>MyResourceGroup<span class="w"> </span>--vnet-name<span class="w"> </span>Spoke1Vnet<span class="w"> </span>--remote-vnet<span class="w"> </span>HubVnet<span class="w"> </span>--allow-vnet-access
-</span><span id="__span-0-11"><a href="#__codelineno-0-11" id="__codelineno-0-11" name="__codelineno-0-11"></a>az<span class="w"> </span>network<span class="w"> </span>vnet<span class="w"> </span>peering<span class="w"> </span>create<span class="w"> </span>--name<span class="w"> </span>Spoke2ToHub<span class="w"> </span>--resource-group<span class="w"> </span>MyResourceGroup<span class="w"> </span>--vnet-name<span class="w"> </span>Spoke2Vnet<span class="w"> </span>--remote-vnet<span class="w"> </span>HubVnet<span class="w"> </span>--allow-vnet-access
-</span><span id="__span-0-12"><a href="#__codelineno-0-12" id="__codelineno-0-12" name="__codelineno-0-12"></a>az<span class="w"> </span>network<span class="w"> </span>vnet<span class="w"> </span>peering<span class="w"> </span>create<span class="w"> </span>--name<span class="w"> </span>Spoke3ToHub<span class="w"> </span>--resource-group<span class="w"> </span>MyResourceGroup<span class="w"> </span>--vnet-name<span class="w"> </span>Spoke3Vnet<span class="w"> </span>--remote-vnet<span class="w"> </span>HubVnet<span class="w"> </span>--allow-vnet-access
-</span><span id="__span-0-13"><a href="#__codelineno-0-13" id="__codelineno-0-13" name="__codelineno-0-13"></a>
-</span><span id="__span-0-14"><a href="#__codelineno-0-14" id="__codelineno-0-14" name="__codelineno-0-14"></a><span class="c1"># Step 4: Configure routing between the Hub and the Spokes</span>
-</span><span id="__span-0-15"><a href="#__codelineno-0-15" id="__codelineno-0-15" name="__codelineno-0-15"></a>az<span class="w"> </span>network<span class="w"> </span>vnet<span class="w"> </span>peering<span class="w"> </span>update<span class="w"> </span>--name<span class="w"> </span>Spoke1ToHub<span class="w"> </span>--resource-group<span class="w"> </span>MyResourceGroup<span class="w"> </span>--vnet-name<span class="w"> </span>Spoke1Vnet<span class="w"> </span>--set<span class="w"> </span>virtualNetworkGateway:AllowGatewayTransit<span class="o">=</span><span class="nb">true</span>
-</span><span id="__span-0-16"><a href="#__codelineno-0-16" id="__codelineno-0-16" name="__codelineno-0-16"></a>az<span class="w"> </span>network<span class="w"> </span>vnet<span class="w"> </span>peering<span class="w"> </span>update<span class="w"> </span>--name<span class="w"> </span>Spoke2ToHub<span class="w"> </span>--resource-group<span class="w"> </span>MyResourceGroup<span class="w"> </span>--vnet-name<span class="w"> </span>Spoke2Vnet<span class="w"> </span>--set<span class="w"> </span>virtualNetworkGateway:AllowGatewayTransit<span class="o">=</span><span class="nb">true</span>
-</span><span id="__span-0-17"><a href="#__codelineno-0-17" id="__codelineno-0-17" name="__codelineno-0-17"></a>az<span class="w"> </span>network<span class="w"> </span>vnet<span class="w"> </span>peering<span class="w"> </span>update<span class="w"> </span>--name<span class="w"> </span>Spoke3ToHub<span class="w"> </span>--resource-group<span class="w"> </span>MyResourceGroup<span class="w"> </span>--vnet-name<span class="w"> </span>Spoke3Vnet<span class="w"> </span>--set<span class="w"> </span>virtualNetworkGateway:AllowGatewayTransit<span class="o">=</span><span class="nb">true</span>
-</span><span id="__span-0-18"><a href="#__codelineno-0-18" id="__codelineno-0-18" name="__codelineno-0-18"></a>
-</span><span id="__span-0-19"><a href="#__codelineno-0-19" id="__codelineno-0-19" name="__codelineno-0-19"></a><span class="c1"># Step 5: Configure routing in the Hub</span>
-</span><span id="__span-0-20"><a href="#__codelineno-0-20" id="__codelineno-0-20" name="__codelineno-0-20"></a>az<span class="w"> </span>network<span class="w"> </span>vnet<span class="w"> </span>peering<span class="w"> </span>update<span class="w"> </span>--name<span class="w"> </span>HubToSpoke1<span class="w"> </span>--resource-group<span class="w"> </span>MyResourceGroup<span class="w"> </span>--vnet-name<span class="w"> </span>HubVnet<span class="w"> </span>--set<span class="w"> </span>virtualNetworkGateway:UseRemoteGateways<span class="o">=</span><span class="nb">true</span>
-</span><span id="__span-0-21"><a href="#__codelineno-0-21" id="__codelineno-0-21" name="__codelineno-0-21"></a>az<span class="w"> </span>network<span class="w"> </span>vnet<span class="w"> </span>peering<span class="w"> </span>update<span class="w"> </span>--name<span class="w"> </span>HubToSpoke2<span class="w"> </span>--resource-group<span class="w"> </span>MyResourceGroup<span class="w"> </span>--vnet-name<span class="w"> </span>HubVnet<span class="w"> </span>--set<span class="w"> </span>virtualNetworkGateway:UseRemoteGateways<span class="o">=</span><span class="nb">true</span>
-</span><span id="__span-0-22"><a href="#__codelineno-0-22" id="__codelineno-0-22" name="__codelineno-0-22"></a>az<span class="w"> </span>network<span class="w"> </span>vnet<span class="w"> </span>peering<span class="w"> </span>update<span class="w"> </span>--name<span class="w"> </span>HubToSpoke3<span class="w"> </span>--resource-group<span class="w"> </span>MyResourceGroup<span class="w"> </span>--vnet-name<span class="w"> </span>HubVnet<span class="w"> </span>--set<span class="w"> </span>virtualNetworkGateway:UseRemoteGateways<span class="o">=</span><span class="nb">true</span>
-</span></code></pre></div>
-<h3 id="variant-of-the-hub-and-spoke-topology"><a class="toclink" href="../../2024/04/19/azure-network-hub-and-spoke-topology/#variant-of-the-hub-and-spoke-topology">Variant of the Hub and Spoke Topology</a></h3>
-<p>A variant of the Hub and Spoke topology is the Hub and Spoke with peering between spokes that is generally used to allow direct connectivity between the Spoke networks without going through the Hub. This can be useful in scenarios where direct connectivity between the Spoke networks is required, such as data replication or application communication.</p>
-<p><pre class="mermaid"><code>graph TD
-    HUB(("Central Hub"))
-    SPOKE1[Spoke1]
-    SPOKE2[Spoke2]
-    SPOKE3[Spoke3]
-    SPOKEN[Spoke...]
-    HUB --- SPOKE1
-    HUB --- SPOKE2
-    HUB --- SPOKE3
-    HUB --- SPOKEN
-    SPOKE1 -.- SPOKE2    
-</code></pre>
-In this case, it would be connecting the Spoke networks to each other via virtual network peering, for example:</p>
-<div class="language-sh highlight"><pre><span></span><code><span id="__span-1-1"><a href="#__codelineno-1-1" id="__codelineno-1-1" name="__codelineno-1-1"></a><span class="c1"># Connect Spoke1 to Spoke2</span>
-</span><span id="__span-1-2"><a href="#__codelineno-1-2" id="__codelineno-1-2" name="__codelineno-1-2"></a>az<span class="w"> </span>network<span class="w"> </span>vnet<span class="w"> </span>peering<span class="w"> </span>create<span class="w"> </span>--name<span class="w"> </span>Spoke1ToSpoke2<span class="w"> </span>--resource-group<span class="w"> </span>MyResourceGroup<span class="w"> </span>--vnet-name<span class="w"> </span>Spoke1Vnet<span class="w"> </span>--remote-vnet<span class="w"> </span>Spoke2Vnet<span class="w"> </span>--allow-vnet-access
-</span></code></pre></div>
-<h3 id="scalability-and-performance"><a class="toclink" href="../../2024/04/19/azure-network-hub-and-spoke-topology/#scalability-and-performance">Scalability and Performance</a></h3>
-<p>The Hub and Spoke topology in Azure is highly scalable and can handle thousands of virtual networks and subnets. In terms of performance, the Hub and Spoke topology provides efficient and low-latency connectivity between the Spoke networks and the Hub.</p>
-<h3 id="security-and-compliance"><a class="toclink" href="../../2024/04/19/azure-network-hub-and-spoke-topology/#security-and-compliance">Security and Compliance</a></h3>
-<p>The Hub and Spoke topology in Azure provides centralized control over network security and compliance. Security and routing policies can be applied centrally at the Hub, ensuring consistency and compliance with the organization's network policies.</p>
-<h3 id="monitoring-and-logging"><a class="toclink" href="../../2024/04/19/azure-network-hub-and-spoke-topology/#monitoring-and-logging">Monitoring and Logging</a></h3>
-<p>Use Network Watcher to monitor and diagnose network problems in the Hub and Spoke topology. Network Watcher provides the following tools: </p>
-<ul>
-<li>Monitoring<ul>
-<li><a href="https://docs.microsoft.com/en-us/azure/network-watcher/view-network-topology">Topology view</a> shows you the resources in your virtual network and the relationships between them.</li>
-<li><a href="https://docs.microsoft.com/en-us/azure/network-watcher/connection-monitor-overview">Connection monitor</a> allows you to monitor connectivity and latency between endpoints within and outside of Azure.</li>
-</ul>
-</li>
-<li>Network diagnostic tools<ul>
-<li><a href="https://docs.microsoft.com/en-us/azure/network-watcher/network-watcher-ip-flow-verify-overview">IP flow verify</a> helps you detect traffic filtering issues at the virtual machine level.</li>
-<li><a href="https://docs.microsoft.com/en-us/azure/network-watcher/network-watcher-network-configuration-diagnostics-overview">NSG diagnostics</a> helps you detect traffic filtering issues at the virtual machine, virtual machine scale set, or application gateway level.</li>
-<li><a href="https://docs.microsoft.com/en-us/azure/network-watcher/network-watcher-next-hop-overview">Next hop</a> helps you verify traffic routes and detect routing issues.</li>
-<li><a href="https://docs.microsoft.com/en-us/azure/network-watcher/network-watcher-connectivity-portal">Connection troubleshoot</a> enables a one-time check of connectivity and latency between a virtual machine and the Bastion host, application gateway, or another virtual machine.</li>
-<li><a href="https://docs.microsoft.com/en-us/azure/network-watcher/network-watcher-packet-capture-overview">Packet capture</a> allows you to capture traffic from your virtual machine.</li>
-<li><a href="https://docs.microsoft.com/en-us/azure/network-watcher/network-watcher-troubleshoot-overview">VPN troubleshoot</a> runs multiple diagnostic checks on your gateways and VPN connections to help debug issues.</li>
-</ul>
-</li>
-<li>Traffic<ul>
-<li><a href="https://docs.microsoft.com/en-us/azure/network-watcher/network-watcher-nsg-flow-logging-overview">Network security group flow logs</a> and <a href="https://docs.microsoft.com/en-us/azure/network-watcher/vnet-flow-logs-overview">virtual network flow logs</a> let you log network traffic passing through your network security groups (NSGs) and virtual networks respectively.</li>
-<li><a href="https://docs.microsoft.com/en-us/azure/network-watcher/traffic-analytics">Traffic analytics</a> processes data from your network security group flow log allowing you to visualize, query, analyze, and understand your network traffic.</li>
-</ul>
-</li>
-</ul>
-<p>Virtual network flow logs have recently been released which allows for monitoring network traffic in Azure virtual networks.</p>
-<h3 id="use-cases-and-examples"><a class="toclink" href="../../2024/04/19/azure-network-hub-and-spoke-topology/#use-cases-and-examples">Use Cases and Examples</a></h3>
-<p>The Hub and Spoke topology is ideal for organizations that require centralized connectivity and traffic control between multiple virtual networks in Azure. For example, an organization with multiple branches or departments can use the Hub and Spoke topology to securely and efficiently connect their virtual networks in the cloud.</p>
-<h3 id="best-practices-and-tips"><a class="toclink" href="../../2024/04/19/azure-network-hub-and-spoke-topology/#best-practices-and-tips">Best Practices and Tips</a></h3>
-<p>When implementing the Hub and Spoke topology in Azure, it is recommended to follow these best practices:</p>
-<ul>
-<li><strong>Security:</strong> Apply consistent security policies at the Hub and Spokes to ensure network protection.</li>
-<li><strong>Resilience:</strong> Configure redundancy and resilience in the topology to ensure network availability in case of failures.</li>
-<li><strong>Monitoring:</strong> Use monitoring tools like Azure Monitor to monitor network traffic and detect potential performance issues.</li>
-</ul>
-<h3 id="conclusion"><a class="toclink" href="../../2024/04/19/azure-network-hub-and-spoke-topology/#conclusion">Conclusion</a></h3>
-<p>The Hub and Spoke topology is an effective way to simplify the connectivity and management of virtual networks in Azure. It provides centralized control over network connectivity and traffic, making it easier to implement security and routing policies consistently across the network. By following the recommended best practices and tips, organizations can make the most of the Hub and Spoke topology to meet their cloud connectivity needs.</p>
-<h3 id="references"><a class="toclink" href="../../2024/04/19/azure-network-hub-and-spoke-topology/#references">References</a></h3>
-<ul>
-<li><a href="https://docs.microsoft.com/en-us/azure/network-watcher/frequently-asked-questions">Network Watcher frequently asked questions (FAQ)</a></li>
-<li><a href="https://docs.microsoft.com/en-us/azure/architecture/reference-architectures/hybrid-networking/hub-spoke">Azure Topology</a></li>
-</ul>
-</div>
-</article>
-<article class="md-post md-post--excerpt">
-<header class="md-post__header">
-<nav class="md-post__authors md-typeset">
-<span class="md-author">
-<img alt="Rafael Fernández" src="https://avatars.githubusercontent.com/u/39990341"/>
-</span>
-</nav>
-<div class="md-post__meta md-meta">
-<ul class="md-meta__list">
-<li class="md-meta__item">
-<time datetime="2024-04-19 00:00:00">April 19, 2024</time></li>
-<li class="md-meta__item">
-            in
-            
-              <a class="md-meta__link" href="../../category/azure/">Azure</a></li>
-<li class="md-meta__item">
-            
-              2 min read
-            
-          </li>
-</ul>
-</div>
-</header>
-<div class="md-post__content md-typeset">
-<h2 id="azure-role-based-access-control-rbac"><a class="toclink" href="../../2024/04/19/azure-role-based-access-control-rbac/">Azure Role-Based Access Control (RBAC)</a></h2>
-<p>Azure Role-Based Access Control (RBAC) is a system that provides fine-grained access management of resources in Azure. This allows administrators to grant only the amount of access that users need to perform their jobs.</p>
-<h3 id="overview"><a class="toclink" href="../../2024/04/19/azure-role-based-access-control-rbac/#overview">Overview</a></h3>
-<p>In Azure RBAC, you can assign roles to user accounts, groups, service principals, and managed identities at different scopes. The scope could be a management group, subscription, resource group, or a single resource. </p>
-<p>Here are some key terms you should know:</p>
-<ul>
-<li><strong>Role</strong>: A collection of permissions. For example, the "Virtual Machine Contributor" role allows the user to create and manage virtual machines.</li>
-<li><strong>Scope</strong>: The set of resources that the access applies to. </li>
-<li><strong>Assignment</strong>: The act of granting a role to a security principal at a particular scope.</li>
-</ul>
-<h3 id="built-in-roles"><a class="toclink" href="../../2024/04/19/azure-role-based-access-control-rbac/#built-in-roles">Built-in Roles</a></h3>
-<p>Azure provides several built-in roles that you can assign to users, groups, service principals, and managed identities. Here are a few examples:</p>
-<ul>
-<li><strong>Owner</strong>: Has full access to all resources including the right to delegate access to others.</li>
-<li><strong>Contributor</strong>: Can create and manage all types of Azure resources but can’t grant access to others.</li>
-<li><strong>Reader</strong>: Can view existing Azure resources.</li>
-</ul>
-<div class="language-json highlight"><pre><span></span><code><span id="__span-2-1"><a href="#__codelineno-2-1" id="__codelineno-2-1" name="__codelineno-2-1"></a><span class="p">{</span>
-</span><span id="__span-2-2"><a href="#__codelineno-2-2" id="__codelineno-2-2" name="__codelineno-2-2"></a><span class="w">  </span><span class="nt">"Name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Contributor"</span><span class="p">,</span>
-</span><span id="__span-2-3"><a href="#__codelineno-2-3" id="__codelineno-2-3" name="__codelineno-2-3"></a><span class="w">  </span><span class="nt">"Id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"b24988ac-6180-42a0-ab88-20f7382dd24c"</span><span class="p">,</span>
-</span><span id="__span-2-4"><a href="#__codelineno-2-4" id="__codelineno-2-4" name="__codelineno-2-4"></a><span class="w">  </span><span class="nt">"IsCustom"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
-</span><span id="__span-2-5"><a href="#__codelineno-2-5" id="__codelineno-2-5" name="__codelineno-2-5"></a><span class="w">  </span><span class="nt">"Description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Lets you manage everything except access to resources."</span><span class="p">,</span>
-</span><span id="__span-2-6"><a href="#__codelineno-2-6" id="__codelineno-2-6" name="__codelineno-2-6"></a><span class="w">  </span><span class="nt">"Actions"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
-</span><span id="__span-2-7"><a href="#__codelineno-2-7" id="__codelineno-2-7" name="__codelineno-2-7"></a><span class="w">    </span><span class="s2">"*"</span>
-</span><span id="__span-2-8"><a href="#__codelineno-2-8" id="__codelineno-2-8" name="__codelineno-2-8"></a><span class="w">  </span><span class="p">],</span>
-</span><span id="__span-2-9"><a href="#__codelineno-2-9" id="__codelineno-2-9" name="__codelineno-2-9"></a><span class="w">  </span><span class="nt">"NotActions"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
-</span><span id="__span-2-10"><a href="#__codelineno-2-10" id="__codelineno-2-10" name="__codelineno-2-10"></a><span class="w">    </span><span class="s2">"Microsoft.Authorization/*/Delete"</span><span class="p">,</span>
-</span><span id="__span-2-11"><a href="#__codelineno-2-11" id="__codelineno-2-11" name="__codelineno-2-11"></a><span class="w">    </span><span class="s2">"Microsoft.Authorization/*/Write"</span><span class="p">,</span>
-</span><span id="__span-2-12"><a href="#__codelineno-2-12" id="__codelineno-2-12" name="__codelineno-2-12"></a><span class="w">    </span><span class="s2">"Microsoft.Authorization/elevateAccess/Action"</span>
-</span><span id="__span-2-13"><a href="#__codelineno-2-13" id="__codelineno-2-13" name="__codelineno-2-13"></a><span class="w">  </span><span class="p">],</span>
-</span><span id="__span-2-14"><a href="#__codelineno-2-14" id="__codelineno-2-14" name="__codelineno-2-14"></a><span class="w">  </span><span class="nt">"DataActions"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span>
-</span><span id="__span-2-15"><a href="#__codelineno-2-15" id="__codelineno-2-15" name="__codelineno-2-15"></a><span class="w">  </span><span class="nt">"NotDataActions"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span>
-</span><span id="__span-2-16"><a href="#__codelineno-2-16" id="__codelineno-2-16" name="__codelineno-2-16"></a><span class="w">  </span><span class="nt">"AssignableScopes"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
-</span><span id="__span-2-17"><a href="#__codelineno-2-17" id="__codelineno-2-17" name="__codelineno-2-17"></a><span class="w">    </span><span class="s2">"/"</span>
-</span><span id="__span-2-18"><a href="#__codelineno-2-18" id="__codelineno-2-18" name="__codelineno-2-18"></a><span class="w">  </span><span class="p">]</span>
-</span><span id="__span-2-19"><a href="#__codelineno-2-19" id="__codelineno-2-19" name="__codelineno-2-19"></a><span class="p">}</span>
-</span></code></pre></div>
-<h3 id="custom-roles"><a class="toclink" href="../../2024/04/19/azure-role-based-access-control-rbac/#custom-roles">Custom Roles</a></h3>
-<p>If the built-in roles don't meet your specific needs, you can create your own custom roles. Just like built-in roles, you can assign permissions to custom roles and then assign those roles to users.</p>
-<p><div class="language-json highlight"><pre><span></span><code><span id="__span-3-1"><a href="#__codelineno-3-1" id="__codelineno-3-1" name="__codelineno-3-1"></a><span class="p">{</span>
-</span><span id="__span-3-2"><a href="#__codelineno-3-2" id="__codelineno-3-2" name="__codelineno-3-2"></a><span class="w">  </span><span class="nt">"Name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Custom Role"</span><span class="p">,</span>
-</span><span id="__span-3-3"><a href="#__codelineno-3-3" id="__codelineno-3-3" name="__codelineno-3-3"></a><span class="w">  </span><span class="nt">"Id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"00000000-0000-0000-0000-000000000000"</span><span class="p">,</span>
-</span><span id="__span-3-4"><a href="#__codelineno-3-4" id="__codelineno-3-4" name="__codelineno-3-4"></a><span class="w">  </span><span class="nt">"IsCustom"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
-</span><span id="__span-3-5"><a href="#__codelineno-3-5" id="__codelineno-3-5" name="__codelineno-3-5"></a><span class="w">  </span><span class="nt">"Description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Custom role description"</span><span class="p">,</span>
-</span><span id="__span-3-6"><a href="#__codelineno-3-6" id="__codelineno-3-6" name="__codelineno-3-6"></a><span class="w">  </span><span class="nt">"Actions"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
-</span><span id="__span-3-7"><a href="#__codelineno-3-7" id="__codelineno-3-7" name="__codelineno-3-7"></a><span class="w">    </span><span class="s2">"Microsoft.Compute/virtualMachines/start/action"</span><span class="p">,</span>
-</span><span id="__span-3-8"><a href="#__codelineno-3-8" id="__codelineno-3-8" name="__codelineno-3-8"></a><span class="w">    </span><span class="s2">"Microsoft.Compute/virtualMachines/restart/action"</span>
-</span><span id="__span-3-9"><a href="#__codelineno-3-9" id="__codelineno-3-9" name="__codelineno-3-9"></a><span class="w">  </span><span class="p">],</span>
-</span><span id="__span-3-10"><a href="#__codelineno-3-10" id="__codelineno-3-10" name="__codelineno-3-10"></a><span class="w">  </span><span class="nt">"NotActions"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span>
-</span><span id="__span-3-11"><a href="#__codelineno-3-11" id="__codelineno-3-11" name="__codelineno-3-11"></a><span class="w">  </span><span class="nt">"DataActions"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span>
-</span><span id="__span-3-12"><a href="#__codelineno-3-12" id="__codelineno-3-12" name="__codelineno-3-12"></a><span class="w">  </span><span class="nt">"NotDataActions"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span>
-</span><span id="__span-3-13"><a href="#__codelineno-3-13" id="__codelineno-3-13" name="__codelineno-3-13"></a><span class="w">  </span><span class="nt">"AssignableScopes"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
-</span><span id="__span-3-14"><a href="#__codelineno-3-14" id="__codelineno-3-14" name="__codelineno-3-14"></a><span class="w">    </span><span class="s2">"/subscriptions/{subscriptionId}"</span>
-</span><span id="__span-3-15"><a href="#__codelineno-3-15" id="__codelineno-3-15" name="__codelineno-3-15"></a><span class="w">  </span><span class="p">]</span>
-</span><span id="__span-3-16"><a href="#__codelineno-3-16" id="__codelineno-3-16" name="__codelineno-3-16"></a><span class="p">}</span>
-</span></code></pre></div>
-Custom Roles has the same structure as built-in roles:</p>
-<ul>
-<li><strong>Name</strong>: The name of the custom role.</li>
-<li><strong>Id</strong>: A unique identifier for the custom role.</li>
-<li><strong>IsCustom</strong>: Indicates whether the role is custom or built-in.</li>
-<li><strong>Description</strong>: A description of the custom role.</li>
-<li><strong>Actions</strong>: The list of actions that the role can perform.</li>
-<li><strong>NotActions</strong>: The list of actions that the role cannot perform.</li>
-<li><strong>DataActions</strong>: The list of data actions that the role can perform.</li>
-<li><strong>NotDataActions</strong>: The list of data actions that the role cannot perform.</li>
-<li><strong>AssignableScopes</strong>: The list of scopes where the role can be assigned.</li>
-</ul>
-<p>You can check how to create a custom role <a href="https://learn.microsoft.com/en-us/azure/role-based-access-control/custom-roles#custom-role-properties">here</a> and not forget to check limitations <a href="https://learn.microsoft.com/en-us/azure/role-based-access-control/custom-roles#custom-role-limits">here</a>.</p>
-<h3 id="recommendations"><a class="toclink" href="../../2024/04/19/azure-role-based-access-control-rbac/#recommendations">Recommendations</a></h3>
-<p>Here are some best practices for managing access with Azure RBAC:</p>
-<ul>
-<li><strong>Use the principle of least privilege</strong>: Only grant the permissions that users need to do their jobs.</li>
-<li><strong>Use built-in roles when possible</strong>: <a href="https://learn.microsoft.com/en-us/azure/role-based-access-control/built-in-roles">Built-in roles</a> are already defined and tested by Microsoft. Only create custom roles when necessary.</li>
-<li><strong>Regularly review role assignments</strong>: Make sure that users have the appropriate level of access for their job. Remove any unnecessary role assignments.</li>
-</ul>
-<h3 id="conclusion"><a class="toclink" href="../../2024/04/19/azure-role-based-access-control-rbac/#conclusion">Conclusion</a></h3>
-<p>Azure RBAC is a powerful tool for managing access to your Azure resources. By understanding its core concepts and how to apply them, you can ensure that users have the appropriate level of access for their job.</p>
-</div>
-</article>
-<article class="md-post md-post--excerpt">
-<header class="md-post__header">
-<nav class="md-post__authors md-typeset">
-<span class="md-author">
-<img alt="Rafael Fernández" src="https://avatars.githubusercontent.com/u/39990341"/>
-</span>
-</nav>
-<div class="md-post__meta md-meta">
-<ul class="md-meta__list">
-<li class="md-meta__item">
-<time datetime="2024-04-18 00:00:00">April 18, 2024</time></li>
-<li class="md-meta__item">
-            in
-            
-              <a class="md-meta__link" href="../../category/azure-services/">Azure Services</a></li>
-<li class="md-meta__item">
-            
-              3 min read
-            
-          </li>
-</ul>
-</div>
-</header>
-<div class="md-post__content md-typeset">
-<h2 id="kusto-query-language-kql-for-azure-resource-graph"><a class="toclink" href="../../2024/04/18/kusto-query-language-kql-for-azure-resource-graph/">Kusto Query Language (KQL) for Azure Resource Graph</a></h2>
-<p>Azure Graph is a powerful tool provided by Microsoft to query data across all your Azure resources. It uses the Kusto Query Language (KQL), a read-only language similar to SQL, designed to query vast amounts of data in Azure services.</p>
-<div class="admonition important">
-<p class="admonition-title">Important</p>
-<p>Only a subset of KQL is supported in Azure Resource Graph. For more information, see the <a href="https://learn.microsoft.com/en-us/azure/governance/resource-graph/concepts/query-language#supported-kql-language-elements">Azure Resource Graph Supported KQL Language Elements</a>.</p>
-</div>
-<h3 id="what-is-kql"><a class="toclink" href="../../2024/04/18/kusto-query-language-kql-for-azure-resource-graph/#what-is-kql"><strong>What is KQL?</strong></a></h3>
-<p>KQL stands for Kusto Query Language. It's a request to process data and return results. The syntax is easy to read and author, making it ideal for data exploration and ad-hoc data mining tasks.</p>
-<h3 id="using-kql-with-azure-graph"><a class="toclink" href="../../2024/04/18/kusto-query-language-kql-for-azure-resource-graph/#using-kql-with-azure-graph"><strong>Using KQL with Azure Graph</strong></a></h3>
-<p>Azure Graph allows you to use KQL to create complex queries that fetch information from your Azure resources. You can filter, sort, aggregate, and join data from different resources using KQL.</p>
-<p>Here's an example of how you might use KQL to query Azure Graph:</p>
-<div class="language-kql highlight"><pre><span></span><code><span id="__span-0-1"><a href="#__codelineno-0-1" id="__codelineno-0-1" name="__codelineno-0-1"></a><span class="n">Resources</span>
-</span><span id="__span-0-2"><a href="#__codelineno-0-2" id="__codelineno-0-2" name="__codelineno-0-2"></a><span class="p">|</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">type</span><span class="w"> </span><span class="p">=~</span><span class="w"> </span><span class="s">'microsoft.web/sites'</span>
-</span><span id="__span-0-3"><a href="#__codelineno-0-3" id="__codelineno-0-3" name="__codelineno-0-3"></a><span class="p">|</span><span class="w"> </span><span class="k">project</span><span class="w"> </span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="n">location</span><span class="p">,</span><span class="w"> </span><span class="n">resourceGroup</span>
-</span></code></pre></div>
-<p>This query retrieves all Azure Web Apps (websites) and projects their <code>name</code>, <code>location</code>, and <code>resourceGroup</code>.</p>
-<h3 id="key-characteristics-of-kql"><a class="toclink" href="../../2024/04/18/kusto-query-language-kql-for-azure-resource-graph/#key-characteristics-of-kql"><strong>Key Characteristics of KQL</strong></a></h3>
-<ol>
-<li><strong>Case Sensitivity</strong>: Unlike SQL, KQL is case-sensitive. So 'Name' and 'name' would be considered different identifiers.</li>
-<li><strong>Schema-Free</strong>: Kusto (Azure Data Explorer) doesn't require a fixed schema, allowing storage of diverse types of data.</li>
-<li><strong>Extensibility</strong>: While KQL has a wide array of functions, you can also create custom functions as per your needs.</li>
-</ol>
-<h3 id="common-operators-in-kql"><a class="toclink" href="../../2024/04/18/kusto-query-language-kql-for-azure-resource-graph/#common-operators-in-kql"><strong>Common Operators in KQL</strong></a></h3>
-<ul>
-<li><code>|</code> : This operator creates a pipeline where the output of one command becomes the input of another.</li>
-<li><code>where</code> : Filters rows based on specified conditions.</li>
-<li><code>summarize</code> : Groups rows and calculates aggregate expressions.</li>
-<li><code>join</code> : Combines rows from two tables based on a common column.</li>
-<li><code>project</code> : Selects specific columns from the input.</li>
-<li><code>extend</code> : Adds new columns to the input.</li>
-<li><code>order by</code> : Sorts rows based on specified columns.</li>
-</ul>
-<h3 id="kql-query-examples"><a class="toclink" href="../../2024/04/18/kusto-query-language-kql-for-azure-resource-graph/#kql-query-examples"><strong>KQL Query Examples</strong></a></h3>
-<h4 id="1-list-all-azure-resources-in-a-subscription"><a class="toclink" href="../../2024/04/18/kusto-query-language-kql-for-azure-resource-graph/#1-list-all-azure-resources-in-a-subscription"><strong>1. List all Azure resources in a subscription</strong></a></h4>
-<div class="language-kql highlight"><pre><span></span><code><span id="__span-1-1"><a href="#__codelineno-1-1" id="__codelineno-1-1" name="__codelineno-1-1"></a><span class="n">Resources</span>
-</span></code></pre></div>
-<h4 id="2-list-all-azure-resources-in-a-resource-group"><a class="toclink" href="../../2024/04/18/kusto-query-language-kql-for-azure-resource-graph/#2-list-all-azure-resources-in-a-resource-group"><strong>2. List all Azure resources in a resource group</strong></a></h4>
-<div class="language-kql highlight"><pre><span></span><code><span id="__span-2-1"><a href="#__codelineno-2-1" id="__codelineno-2-1" name="__codelineno-2-1"></a><span class="n">Resources</span>
-</span><span id="__span-2-2"><a href="#__codelineno-2-2" id="__codelineno-2-2" name="__codelineno-2-2"></a><span class="p">|</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">resourceGroup</span><span class="w"> </span><span class="p">==</span><span class="w"> </span><span class="s">'myResourceGroup'</span>
-</span></code></pre></div>
-<h4 id="3-list-all-azure-resources-of-a-specific-type"><a class="toclink" href="../../2024/04/18/kusto-query-language-kql-for-azure-resource-graph/#3-list-all-azure-resources-of-a-specific-type"><strong>3. List all Azure resources of a specific type</strong></a></h4>
-<div class="language-kql highlight"><pre><span></span><code><span id="__span-3-1"><a href="#__codelineno-3-1" id="__codelineno-3-1" name="__codelineno-3-1"></a><span class="n">Resources</span>
-</span><span id="__span-3-2"><a href="#__codelineno-3-2" id="__codelineno-3-2" name="__codelineno-3-2"></a><span class="p">|</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">type</span><span class="w"> </span><span class="p">=~</span><span class="w"> </span><span class="s">'Microsoft.Compute/virtualMachines'</span>
-</span></code></pre></div>
-<h3 id="pagination-in-kql"><a class="toclink" href="../../2024/04/18/kusto-query-language-kql-for-azure-resource-graph/#pagination-in-kql"><strong>Pagination in KQL</strong></a></h3>
-<p>KQL supports pagination using the <code>limit</code> and <code>offset</code> operators. You can use these operators to control the number of rows returned and skip a certain number of rows.</p>
-<div class="language-kql highlight"><pre><span></span><code><span id="__span-4-1"><a href="#__codelineno-4-1" id="__codelineno-4-1" name="__codelineno-4-1"></a><span class="n">Resources</span>
-</span><span id="__span-4-2"><a href="#__codelineno-4-2" id="__codelineno-4-2" name="__codelineno-4-2"></a><span class="p">|</span><span class="w"> </span><span class="k">limit</span><span class="w"> </span><span class="mi">10</span>
-</span><span id="__span-4-3"><a href="#__codelineno-4-3" id="__codelineno-4-3" name="__codelineno-4-3"></a><span class="p">|</span><span class="w"> </span><span class="n">offset</span><span class="w"> </span><span class="mi">5</span>
-</span></code></pre></div>
-<p>If you exceed payload limits, you can paginate Azure Resource Graph query results with powershell:</p>
-<div class="language-powershell highlight"><pre><span></span><code><span id="__span-5-1"><a href="#__codelineno-5-1" id="__codelineno-5-1" name="__codelineno-5-1"></a><span class="nv">$kqlQuery</span> <span class="p">=</span> <span class="s2">"policyResources | where type =~'Microsoft.Authorization/PolicySetDefinitions' or type =~'Microsoft.Authorization/PolicyDefinitions' | project definitionId = tolower(id), category = tostring(properties.metadata.category), definitionType = iff(type =~ 'Microsoft.Authorization/PolicysetDefinitions', 'initiative', 'policy'),PolicyDefinition=properties"</span>
-</span><span id="__span-5-2"><a href="#__codelineno-5-2" id="__codelineno-5-2" name="__codelineno-5-2"></a>
-</span><span id="__span-5-3"><a href="#__codelineno-5-3" id="__codelineno-5-3" name="__codelineno-5-3"></a><span class="nv">$batchSize</span> <span class="p">=</span> <span class="n">5</span>
-</span><span id="__span-5-4"><a href="#__codelineno-5-4" id="__codelineno-5-4" name="__codelineno-5-4"></a><span class="nv">$skipResult</span> <span class="p">=</span> <span class="n">0</span>
-</span><span id="__span-5-5"><a href="#__codelineno-5-5" id="__codelineno-5-5" name="__codelineno-5-5"></a>
-</span><span id="__span-5-6"><a href="#__codelineno-5-6" id="__codelineno-5-6" name="__codelineno-5-6"></a><span class="no">[System.Collections.Generic.List[string]]</span><span class="nv">$kqlResult</span>
-</span><span id="__span-5-7"><a href="#__codelineno-5-7" id="__codelineno-5-7" name="__codelineno-5-7"></a>
-</span><span id="__span-5-8"><a href="#__codelineno-5-8" id="__codelineno-5-8" name="__codelineno-5-8"></a><span class="k">while</span> <span class="p">(</span><span class="nv">$true</span><span class="p">)</span> <span class="p">{</span>
-</span><span id="__span-5-9"><a href="#__codelineno-5-9" id="__codelineno-5-9" name="__codelineno-5-9"></a>
-</span><span id="__span-5-10"><a href="#__codelineno-5-10" id="__codelineno-5-10" name="__codelineno-5-10"></a>  <span class="k">if</span> <span class="p">(</span><span class="nv">$skipResult</span> <span class="o">-gt</span> <span class="n">0</span><span class="p">)</span> <span class="p">{</span>
-</span><span id="__span-5-11"><a href="#__codelineno-5-11" id="__codelineno-5-11" name="__codelineno-5-11"></a>    <span class="nv">$graphResult</span> <span class="p">=</span> <span class="nb">Search-AzGraph</span> <span class="n">-Query</span> <span class="nv">$kqlQuery</span> <span class="n">-First</span> <span class="nv">$batchSize</span> <span class="n">-SkipToken</span> <span class="nv">$graphResult</span><span class="p">.</span><span class="n">SkipToken</span>
-</span><span id="__span-5-12"><a href="#__codelineno-5-12" id="__codelineno-5-12" name="__codelineno-5-12"></a>  <span class="p">}</span>
-</span><span id="__span-5-13"><a href="#__codelineno-5-13" id="__codelineno-5-13" name="__codelineno-5-13"></a>  <span class="k">else</span> <span class="p">{</span>
-</span><span id="__span-5-14"><a href="#__codelineno-5-14" id="__codelineno-5-14" name="__codelineno-5-14"></a>    <span class="nv">$graphResult</span> <span class="p">=</span> <span class="nb">Search-AzGraph</span> <span class="n">-Query</span> <span class="nv">$kqlQuery</span> <span class="n">-First</span> <span class="nv">$batchSize</span>
-</span><span id="__span-5-15"><a href="#__codelineno-5-15" id="__codelineno-5-15" name="__codelineno-5-15"></a>  <span class="p">}</span>
-</span><span id="__span-5-16"><a href="#__codelineno-5-16" id="__codelineno-5-16" name="__codelineno-5-16"></a>
-</span><span id="__span-5-17"><a href="#__codelineno-5-17" id="__codelineno-5-17" name="__codelineno-5-17"></a>  <span class="nv">$kqlResult</span> <span class="p">+=</span> <span class="nv">$graphResult</span><span class="p">.</span><span class="n">data</span>
-</span><span id="__span-5-18"><a href="#__codelineno-5-18" id="__codelineno-5-18" name="__codelineno-5-18"></a>
-</span><span id="__span-5-19"><a href="#__codelineno-5-19" id="__codelineno-5-19" name="__codelineno-5-19"></a>  <span class="k">if</span> <span class="p">(</span><span class="nv">$graphResult</span><span class="p">.</span><span class="n">data</span><span class="p">.</span><span class="n">Count</span> <span class="o">-lt</span> <span class="nv">$batchSize</span><span class="p">)</span> <span class="p">{</span>
-</span><span id="__span-5-20"><a href="#__codelineno-5-20" id="__codelineno-5-20" name="__codelineno-5-20"></a>    <span class="k">break</span><span class="p">;</span>
-</span><span id="__span-5-21"><a href="#__codelineno-5-21" id="__codelineno-5-21" name="__codelineno-5-21"></a>  <span class="p">}</span>
-</span><span id="__span-5-22"><a href="#__codelineno-5-22" id="__codelineno-5-22" name="__codelineno-5-22"></a>  <span class="nv">$skipResult</span> <span class="p">+=</span> <span class="nv">$skipResult</span> <span class="p">+</span> <span class="nv">$batchSize</span>
-</span><span id="__span-5-23"><a href="#__codelineno-5-23" id="__codelineno-5-23" name="__codelineno-5-23"></a><span class="p">}</span>
-</span></code></pre></div>
-<h3 id="best-practices-for-writing-kql-queries"><a class="toclink" href="../../2024/04/18/kusto-query-language-kql-for-azure-resource-graph/#best-practices-for-writing-kql-queries"><strong>Best Practices for Writing KQL Queries</strong></a></h3>
-<ol>
-<li><strong>Use <code>project</code> to Select Columns</strong>: Only select the columns you need to reduce the amount of data returned.</li>
-<li><strong>Use <code>where</code> to Filter Rows</strong>: Apply filters to reduce the number of rows processed.</li>
-<li><strong>Use <code>summarize</code> to Aggregate Data</strong>: Aggregate data to reduce the number of rows returned.</li>
-<li><strong>Use <code>join</code> to Combine Data</strong>: Combine data from different tables using the <code>join</code> operator.</li>
-<li><strong>Use <code>order by</code> to Sort Data</strong>: Sort data based on specific columns to make it easier to read.</li>
-</ol>
-<h3 id="limitations-of-kql"><a class="toclink" href="../../2024/04/18/kusto-query-language-kql-for-azure-resource-graph/#limitations-of-kql"><strong>Limitations of KQL</strong></a></h3>
-<ol>
-<li><strong>No DDL Operations</strong>: KQL doesn't support Data Definition Language (DDL) operations like creating tables or indexes.</li>
-<li><strong>No DML Operations</strong>: KQL doesn't support Data Manipulation Language (DML) operations like inserting, updating, or deleting data.</li>
-<li><strong>Limited Data Types</strong>: KQL has a limited set of data types compared to SQL.</li>
-<li><strong>No Transactions</strong>: KQL doesn't support transactions, so you can't group multiple operations into a single transaction.</li>
-</ol>
-<h3 id="conclusion"><a class="toclink" href="../../2024/04/18/kusto-query-language-kql-for-azure-resource-graph/#conclusion"><strong>Conclusion</strong></a></h3>
-<p>KQL is a potent tool for querying large datasets in Azure. Its SQL-like syntax makes it accessible for anyone familiar with SQL, and its rich set of features makes it a flexible solution for a variety of data processing needs. Practice writing KQL queries to uncover valuable insights from your Azure resources!</p>
-<h3 id="references"><a class="toclink" href="../../2024/04/18/kusto-query-language-kql-for-azure-resource-graph/#references">References</a></h3>
-<ul>
-<li><a href="https://docs.microsoft.com/en-us/azure/data-explorer/kusto/query/sqlcheatsheet">SQL to Kusto Query Language cheat sheet</a></li>
-<li><a href="https://portal.azure.com/#view/Microsoft_OperationsManagementSuite_Workspace/LogsDemo.ReactView">Demo for play</a></li>
-</ul>
-</div>
-</article>
-<article class="md-post md-post--excerpt">
-<header class="md-post__header">
-<nav class="md-post__authors md-typeset">
-<span class="md-author">
-<img alt="Rafael Fernández" src="https://avatars.githubusercontent.com/u/39990341"/>
-</span>
-</nav>
-<div class="md-post__meta md-meta">
-<ul class="md-meta__list">
-<li class="md-meta__item">
-<time datetime="2024-04-18 00:00:00">April 18, 2024</time></li>
-<li class="md-meta__item">
-            in
-            
-              <a class="md-meta__link" href="../../category/azure/">Azure</a></li>
-<li class="md-meta__item">
-            
-              3 min read
-            
-          </li>
-</ul>
-</div>
-</header>
-<div class="md-post__content md-typeset">
-<h2 id="azure-role-assignment-conditions"><a class="toclink" href="../../2024/04/18/azure-role-assignment-conditions/">Azure role assignment conditions</a></h2>
-<p>First of all, let's understand what is ABAc (Attribute-Based Access Control) and how it can be used in Azure.</p>
-<h3 id="what-is-abac"><a class="toclink" href="../../2024/04/18/azure-role-assignment-conditions/#what-is-abac">What is ABAC?</a></h3>
-<p>Attribute-Based Access Control (ABAC) is an access control model that uses attributes to determine access rights. In ABAC, access decisions are based on the attributes of the user, the resource, and the environment. This allows for fine-grained access control based on a wide range of attributes, such as user roles, resource types, and time of day.</p>
-<p>ABAC is a flexible and scalable access control model that can be used to enforce complex access policies. It allows organizations to define access control rules based on a wide range of attributes and to adapt those rules as their needs change.</p>
-<p>ABAC is build on Azure RBAC.</p>
-<h3 id="what-is-azure-role-assignment-conditions"><a class="toclink" href="../../2024/04/18/azure-role-assignment-conditions/#what-is-azure-role-assignment-conditions">What is Azure role assignment conditions?</a></h3>
-<p>Azure role assignment conditions allow you to define conditions that must be met for a role assignment to be effective. </p>
-<h3 id="how-to-configure-azure-role-assignment-conditions"><a class="toclink" href="../../2024/04/18/azure-role-assignment-conditions/#how-to-configure-azure-role-assignment-conditions">How to configure Azure role assignment conditions?</a></h3>
-<p>To configure Azure role assignment conditions, configure the role assignment as usual, and then click on the "Conditions" tab. Here you can define the conditions that must be met for the role assignment to be effective.</p>
-<p><img alt="alt text" src="../../2024/09/Screenshot%202024-09-18%20111639.png"/></p>
-<p>Options for configuring Conditions:</p>
-<ul>
-<li>Allow user to only assign selected roles to selected principals (fewer privileges)</li>
-<li>Allow user to assign all roles except privileged administrator roles Owner, UAA, RBAC (Recommended)</li>
-<li>Allow user to assign all roles (highly privileged)</li>
-</ul>
-<p>The first one is the most restrictive, for example, allowing the user to only assign selected roles to selected principals. This is useful when you want to limit the privileges of a user to only a subset of roles and principals.</p>
-<p>These are the options available for "Allow user to only assign selected roles to selected principals (fewer privileges)":</p>
-<p><img alt="alt text" src="../../2024/09/Screenshot%202024-09-18%20111646.png"/></p>
-<ul>
-<li>Constrain roles:<ul>
-<li>Allow user to only assign roles you select</li>
-</ul>
-</li>
-<li>Constrain roles and principal types:<ul>
-<li>Allow user to only assign roles you select</li>
-<li>Allow user to only assign these roles to principal types you select (users, groups, or service principals)</li>
-</ul>
-</li>
-<li>Constrain roles and principals<ul>
-<li>Allow user to only assign roles you select</li>
-<li>Allow user to only assign these roles to principals you select</li>
-<li>Allow all except specific roles</li>
-<li>Allow user to assign all roles except the roles you select</li>
-</ul>
-</li>
-</ul>
-<h3 id="conclusion"><a class="toclink" href="../../2024/04/18/azure-role-assignment-conditions/#conclusion">Conclusion</a></h3>
-<p>Azure role assignment conditions provide a flexible and powerful way to control access to Azure resources. By defining conditions that must be met for a role assignment to be effective, you can enforce fine-grained access control policies that meet the specific needs of your organization. This allows you to limit the privileges of users, assign roles to specific principals, and control access to sensitive resources. Azure role assignment conditions are a valuable tool for organizations that need to enforce strict access control policies and protect their critical resources.</p>
-<h3 id="references"><a class="toclink" href="../../2024/04/18/azure-role-assignment-conditions/#references">References</a></h3>
-<ul>
-<li><a href="https://learn.microsoft.com/en-us/azure/role-based-access-control/conditions-overview">What is Azure attribute-based access control (Azure ABAC)?</a></li>
-<li><a href="https://learn.microsoft.com/en-us/azure/role-based-access-control/conditions-format">Azure role assignment condition format and syntax</a></li>
-<li><a href="https://learn.microsoft.com/en-us/azure/role-based-access-control/delegate-role-assignments-examples?tabs=template">Examples to delegate Azure role assignment management with conditions</a></li>
-</ul>
-</div>
-</article>
 <nav class="md-pagination">
-<a class="md-pagination__link" href="../../">1</a> <a class="md-pagination__link" href="../2/">2</a> <span class="md-pagination__current">3</span> <a class="md-pagination__link" href="../4/">4</a> <a class="md-pagination__link" href="../5/">5</a> <a class="md-pagination__link" href="../6/">6</a>
+<a class="md-pagination__link" href="../../">1</a> <a class="md-pagination__link" href="../2/">2</a> <span class="md-pagination__current">3</span> <a class="md-pagination__link" href="../4/">4</a> <a class="md-pagination__link" href="../5/">5</a> <span class="md-pagination__dots">..</span> <a class="md-pagination__link" href="../7/">7</a>
 </nav>
 </div>
 </div>

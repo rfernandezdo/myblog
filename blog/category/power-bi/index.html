@@ -241,6 +241,13 @@
           </label>
 <ul class="md-nav__list" data-md-scrollfix="">
 <li class="md-nav__item">
+<a class="md-nav__link" href="../../2024/10/">
+<span class="md-ellipsis">
+    2024/10
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
 <a class="md-nav__link" href="../../2024/09/">
 <span class="md-ellipsis">
     2024/09
@@ -408,6 +415,13 @@
 <a class="md-nav__link" href="../microsoft-entra/">
 <span class="md-ellipsis">
     Microsoft Entra
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../microsoft-entra-external-id/">
+<span class="md-ellipsis">
+    Microsoft Entra External ID
   </span>
 </a>
 </li>
@@ -697,7 +711,7 @@
 <p>To set up a VNet data gateway, follow these steps:</p>
 <h4 id="register-microsoftpowerplatform-as-a-resource-provider"><a class="toclink" href="../../2024/06/11/securely-connect-power-bi-to-data-sources-with-a-vnet-data-gateway/#register-microsoftpowerplatform-as-a-resource-provider">Register Microsoft.PowerPlatform as a resource provider</a></h4>
 <p>Before you can create a VNet data gateway, you need to register the Microsoft.PowerPlatform resource provider. This can be done using the Azure portal or the Azure CLI.</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-6-1"><a href="#__codelineno-6-1" id="__codelineno-6-1" name="__codelineno-6-1"></a>az provider register --namespace Microsoft.PowerPlatform
+<div class="language-text highlight"><pre><span></span><code><span id="__span-4-1"><a href="#__codelineno-4-1" id="__codelineno-4-1" name="__codelineno-4-1"></a>az provider register --namespace Microsoft.PowerPlatform
 </span></code></pre></div>
 <h4 id="associate-the-subnet-to-microsoft-power-platform"><a class="toclink" href="../../2024/06/11/securely-connect-power-bi-to-data-sources-with-a-vnet-data-gateway/#associate-the-subnet-to-microsoft-power-platform">Associate the subnet to Microsoft Power Platform</a></h4>
 <p>Create a VNet in your Azure subscription and a subnet where the VNet data gateway will be deployed. Next, you need to delegate subnet to service <strong>Microsoft.PowerPlatform/vnetaccesslinks</strong>. </p>
@@ -710,15 +724,15 @@
 </ul>
 </div>
 <p>This can be done using the Azure portal or the Azure CLI.</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-7-1"><a href="#__codelineno-7-1" id="__codelineno-7-1" name="__codelineno-7-1"></a># Create a VNet and address prefix 10.0.0.0/24
-</span><span id="__span-7-2"><a href="#__codelineno-7-2" id="__codelineno-7-2" name="__codelineno-7-2"></a>az network vnet create --name MyVNet --resource-group MyResourceGroup --location eastus --address-prefixes 10.0.0.0/24
-</span><span id="__span-7-3"><a href="#__codelineno-7-3" id="__codelineno-7-3" name="__codelineno-7-3"></a>
-</span><span id="__span-7-4"><a href="#__codelineno-7-4" id="__codelineno-7-4" name="__codelineno-7-4"></a>
-</span><span id="__span-7-5"><a href="#__codelineno-7-5" id="__codelineno-7-5" name="__codelineno-7-5"></a># Create a Netwrok Security Group
-</span><span id="__span-7-6"><a href="#__codelineno-7-6" id="__codelineno-7-6" name="__codelineno-7-6"></a>az network nsg create --name MyNsg --resource-group MyResourceGroup --location eastus
-</span><span id="__span-7-7"><a href="#__codelineno-7-7" id="__codelineno-7-7" name="__codelineno-7-7"></a>
-</span><span id="__span-7-8"><a href="#__codelineno-7-8" id="__codelineno-7-8" name="__codelineno-7-8"></a># Create a subnet with delegation to Microsoft.PowerPlatform/vnetaccesslinks and associate the NSG
-</span><span id="__span-7-9"><a href="#__codelineno-7-9" id="__codelineno-7-9" name="__codelineno-7-9"></a>az network vnet subnet create --name MySubnet --vnet-name MyVNet --resource-group MyResourceGroup --address-prefixes 10.0.0.1/27 --network-security-group MyNsg --delegations Microsoft.PowerPlatform/vnetaccesslinks
+<div class="language-text highlight"><pre><span></span><code><span id="__span-5-1"><a href="#__codelineno-5-1" id="__codelineno-5-1" name="__codelineno-5-1"></a># Create a VNet and address prefix 10.0.0.0/24
+</span><span id="__span-5-2"><a href="#__codelineno-5-2" id="__codelineno-5-2" name="__codelineno-5-2"></a>az network vnet create --name MyVNet --resource-group MyResourceGroup --location eastus --address-prefixes 10.0.0.0/24
+</span><span id="__span-5-3"><a href="#__codelineno-5-3" id="__codelineno-5-3" name="__codelineno-5-3"></a>
+</span><span id="__span-5-4"><a href="#__codelineno-5-4" id="__codelineno-5-4" name="__codelineno-5-4"></a>
+</span><span id="__span-5-5"><a href="#__codelineno-5-5" id="__codelineno-5-5" name="__codelineno-5-5"></a># Create a Netwrok Security Group
+</span><span id="__span-5-6"><a href="#__codelineno-5-6" id="__codelineno-5-6" name="__codelineno-5-6"></a>az network nsg create --name MyNsg --resource-group MyResourceGroup --location eastus
+</span><span id="__span-5-7"><a href="#__codelineno-5-7" id="__codelineno-5-7" name="__codelineno-5-7"></a>
+</span><span id="__span-5-8"><a href="#__codelineno-5-8" id="__codelineno-5-8" name="__codelineno-5-8"></a># Create a subnet with delegation to Microsoft.PowerPlatform/vnetaccesslinks and associate the NSG
+</span><span id="__span-5-9"><a href="#__codelineno-5-9" id="__codelineno-5-9" name="__codelineno-5-9"></a>az network vnet subnet create --name MySubnet --vnet-name MyVNet --resource-group MyResourceGroup --address-prefixes 10.0.0.1/27 --network-security-group MyNsg --delegations Microsoft.PowerPlatform/vnetaccesslinks
 </span></code></pre></div>
 <h4 id="create-a-vnet-data-gateway"><a class="toclink" href="../../2024/06/11/securely-connect-power-bi-to-data-sources-with-a-vnet-data-gateway/#create-a-vnet-data-gateway">Create a VNet data gateway</a></h4>
 <div class="admonition note">

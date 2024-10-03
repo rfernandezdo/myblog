@@ -241,6 +241,13 @@
           </label>
 <ul class="md-nav__list" data-md-scrollfix="">
 <li class="md-nav__item">
+<a class="md-nav__link" href="2024/10/">
+<span class="md-ellipsis">
+    2024/10
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
 <a class="md-nav__link" href="2024/09/">
 <span class="md-ellipsis">
     2024/09
@@ -408,6 +415,13 @@
 <a class="md-nav__link" href="category/microsoft-entra/">
 <span class="md-ellipsis">
     Microsoft Entra
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="category/microsoft-entra-external-id/">
+<span class="md-ellipsis">
+    Microsoft Entra External ID
   </span>
 </a>
 </li>
@@ -625,6 +639,250 @@
 <header class="md-typeset">
 <h1 id="blog">Blog</h1>
 </header>
+<article class="md-post md-post--excerpt">
+<header class="md-post__header">
+<nav class="md-post__authors md-typeset">
+<span class="md-author">
+<img alt="Rafael Fernández" src="https://avatars.githubusercontent.com/u/39990341"/>
+</span>
+</nav>
+<div class="md-post__meta md-meta">
+<ul class="md-meta__list">
+<li class="md-meta__item">
+<time datetime="2024-10-03 00:00:00">October 3, 2024</time></li>
+<li class="md-meta__item">
+            in
+            
+              <a class="md-meta__link" href="category/devops/">DevOps</a></li>
+<li class="md-meta__item">
+            
+              2 min read
+            
+          </li>
+</ul>
+</div>
+</header>
+<div class="md-post__content md-typeset">
+<h2 id="terraform-import-block"><a class="toclink" href="2024/10/03/terraform-import-block/">terraform import block</a></h2>
+<p>Sometimes you need to import existing infrastructure into Terraform. This is useful when you have existing resources that you want to manage with Terraform, or when you want to migrate from another tool to Terraform.</p>
+<p>Other times, you may need to import resources that were created outside of Terraform, such as manually created resources or resources created by another tool. For example: </p>
+<p>"Error: unexpected status 409 (409 Conflict) with error: RoleDefinitionWithSameNameExists: A custom role with the same name already exists in this directory. Use a different name"</p>
+<p>In my case, I had to import a custom role that was created outside of Terraform. Here's how I did it:</p>
+<ol>
+<li>Create a new Terraform configuration file for the resource you want to import. In my case, I created a new file called <code>custom_role.tf</code> with the following content:</li>
+</ol>
+<div class="language-hcl highlight"><pre><span></span><code><span id="__span-0-1"><a href="#__codelineno-0-1" id="__codelineno-0-1" name="__codelineno-0-1"></a><span class="kr">resource</span><span class="w"> </span><span class="nc">"azurerm_role_definition"</span><span class="w"> </span><span class="nv">"custom_role"</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-0-2"><a href="#__codelineno-0-2" id="__codelineno-0-2" name="__codelineno-0-2"></a><span class="w">  </span><span class="na">name</span><span class="w">        </span><span class="o">=</span><span class="w"> </span><span class="s2">"CustomRole"</span>
+</span><span id="__span-0-3"><a href="#__codelineno-0-3" id="__codelineno-0-3" name="__codelineno-0-3"></a><span class="w">  </span><span class="na">scope</span><span class="w">       </span><span class="o">=</span><span class="w"> </span><span class="s2">"/providers/Microsoft.Management/managementGroups/00000000-0000-0000-0000-000000000000"</span>
+</span><span id="__span-0-4"><a href="#__codelineno-0-4" id="__codelineno-0-4" name="__codelineno-0-4"></a><span class="w">  </span><span class="nb">permissions</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-0-5"><a href="#__codelineno-0-5" id="__codelineno-0-5" name="__codelineno-0-5"></a><span class="w">    </span><span class="na">actions</span><span class="w">     </span><span class="o">=</span><span class="w"> </span><span class="p">[</span>
+</span><span id="__span-0-6"><a href="#__codelineno-0-6" id="__codelineno-0-6" name="__codelineno-0-6"></a><span class="w">      </span><span class="s2">"Microsoft.Storage/storageAccounts/listKeys/action"</span><span class="p">,</span>
+</span><span id="__span-0-7"><a href="#__codelineno-0-7" id="__codelineno-0-7" name="__codelineno-0-7"></a><span class="w">      </span><span class="s2">"Microsoft.Storage/storageAccounts/read"</span>
+</span><span id="__span-0-8"><a href="#__codelineno-0-8" id="__codelineno-0-8" name="__codelineno-0-8"></a><span class="w">    </span><span class="p">]</span>
+</span><span id="__span-0-9"><a href="#__codelineno-0-9" id="__codelineno-0-9" name="__codelineno-0-9"></a>
+</span><span id="__span-0-10"><a href="#__codelineno-0-10" id="__codelineno-0-10" name="__codelineno-0-10"></a><span class="w">    </span><span class="na">data_actions</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[]</span>
+</span><span id="__span-0-11"><a href="#__codelineno-0-11" id="__codelineno-0-11" name="__codelineno-0-11"></a>
+</span><span id="__span-0-12"><a href="#__codelineno-0-12" id="__codelineno-0-12" name="__codelineno-0-12"></a><span class="w">    </span><span class="na">not_data_actions</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[]</span>
+</span><span id="__span-0-13"><a href="#__codelineno-0-13" id="__codelineno-0-13" name="__codelineno-0-13"></a><span class="w">  </span><span class="p">}</span>
+</span><span id="__span-0-14"><a href="#__codelineno-0-14" id="__codelineno-0-14" name="__codelineno-0-14"></a><span class="w">  </span><span class="na">assignable_scopes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span>
+</span><span id="__span-0-15"><a href="#__codelineno-0-15" id="__codelineno-0-15" name="__codelineno-0-15"></a><span class="w">    </span><span class="s2">"/providers/Microsoft.Management/managementGroups/00000000-0000-0000-0000-000000000000"</span>
+</span><span id="__span-0-16"><a href="#__codelineno-0-16" id="__codelineno-0-16" name="__codelineno-0-16"></a><span class="w">  </span><span class="p">]</span>
+</span><span id="__span-0-17"><a href="#__codelineno-0-17" id="__codelineno-0-17" name="__codelineno-0-17"></a><span class="p">}</span>
+</span></code></pre></div>
+<ol>
+<li>Add a import block to the configuration file with the resource type and name you want to import. In my case, I added the following block to the <code>custom_role.tf</code> file:</li>
+</ol>
+<div class="language-hcl highlight"><pre><span></span><code><span id="__span-1-1"><a href="#__codelineno-1-1" id="__codelineno-1-1" name="__codelineno-1-1"></a><span class="nb">import</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-1-2"><a href="#__codelineno-1-2" id="__codelineno-1-2" name="__codelineno-1-2"></a><span class="w">  </span><span class="na">to</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">azurerm_role_definition.custom_role</span>
+</span><span id="__span-1-3"><a href="#__codelineno-1-3" id="__codelineno-1-3" name="__codelineno-1-3"></a><span class="w">  </span><span class="na">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"/providers/Microsoft.Authorization/roleDefinitions/11111111-1111-1111-1111-111111111111"|/providers/Microsoft.Management/managementGroups/00000000-0000-0000-0000-000000000000""</span>
+</span><span id="__span-1-4"><a href="#__codelineno-1-4" id="__codelineno-1-4" name="__codelineno-1-4"></a>
+</span><span id="__span-1-5"><a href="#__codelineno-1-5" id="__codelineno-1-5" name="__codelineno-1-5"></a><span class="p">}</span>
+</span></code></pre></div>
+<ol>
+<li>Run the <code>terraform</code>plan` command to see the changes that Terraform will make to the resource. In my case, the output looked like this:</li>
+</ol>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a href="#__codelineno-2-1" id="__codelineno-2-1" name="__codelineno-2-1"></a>.
+</span><span id="__span-2-2"><a href="#__codelineno-2-2" id="__codelineno-2-2" name="__codelineno-2-2"></a>.
+</span><span id="__span-2-3"><a href="#__codelineno-2-3" id="__codelineno-2-3" name="__codelineno-2-3"></a>.
+</span><span id="__span-2-4"><a href="#__codelineno-2-4" id="__codelineno-2-4" name="__codelineno-2-4"></a>Terraform<span class="w"> </span>used<span class="w"> </span>the<span class="w"> </span>selected<span class="w"> </span>providers<span class="w"> </span>to<span class="w"> </span>generate<span class="w"> </span>the<span class="w"> </span>following<span class="w"> </span>execution<span class="w"> </span>plan.<span class="w"> </span>Resource<span class="w"> </span>actions<span class="w"> </span>are<span class="w"> </span>indicated<span class="w"> </span>with<span class="w"> </span>the<span class="w"> </span>following<span class="w"> </span>symbols:
+</span><span id="__span-2-5"><a href="#__codelineno-2-5" id="__codelineno-2-5" name="__codelineno-2-5"></a><span class="w">  </span>~<span class="w"> </span>update<span class="w"> </span><span class="k">in</span>-place
+</span><span id="__span-2-6"><a href="#__codelineno-2-6" id="__codelineno-2-6" name="__codelineno-2-6"></a>.
+</span><span id="__span-2-7"><a href="#__codelineno-2-7" id="__codelineno-2-7" name="__codelineno-2-7"></a>.
+</span><span id="__span-2-8"><a href="#__codelineno-2-8" id="__codelineno-2-8" name="__codelineno-2-8"></a>.
+</span></code></pre></div>
+<ol>
+<li>Run the <code>terraform apply</code> command to import the resource into Terraform. In my case, the output looked like this after a long 9 minutes:</li>
+</ol>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-3-1"><a href="#__codelineno-3-1" id="__codelineno-3-1" name="__codelineno-3-1"></a>...
+</span><span id="__span-3-2"><a href="#__codelineno-3-2" id="__codelineno-3-2" name="__codelineno-3-2"></a>Apply<span class="w"> </span>complete!<span class="w"> </span>Resources:<span class="w"> </span><span class="m">1</span><span class="w"> </span>imported,<span class="w"> </span><span class="m">0</span><span class="w"> </span>added,<span class="w"> </span><span class="m">1</span><span class="w"> </span>changed,<span class="w"> </span><span class="m">0</span><span class="w"> </span>destroyed.
+</span></code></pre></div>
+<ol>
+<li>Verify that the resource was imported successfully by running the <code>terraform show</code> command. In my case, the output looked like this:</li>
+</ol>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-4-1"><a href="#__codelineno-4-1" id="__codelineno-4-1" name="__codelineno-4-1"></a>terraform<span class="w"> </span>show
+</span></code></pre></div>
+<p>You can use the <code>terraform import</code> command to import existing infrastructure into Terraform too but I prefer to use the <code>import</code> block because it's more readable and easier to manage.</p>
+<h3 id="conclusion"><a class="toclink" href="2024/10/03/terraform-import-block/#conclusion">Conclusion</a></h3>
+<p>That's it! You've successfully imported an existing resource into Terraform. Now you can manage it with Terraform just like any other resource.</p>
+<p>Happy coding! 🚀</p>
+</div>
+</article>
+<article class="md-post md-post--excerpt">
+<header class="md-post__header">
+<nav class="md-post__authors md-typeset">
+<span class="md-author">
+<img alt="Rafael Fernández" src="https://avatars.githubusercontent.com/u/39990341"/>
+</span>
+</nav>
+<div class="md-post__meta md-meta">
+<ul class="md-meta__list">
+<li class="md-meta__item">
+<time datetime="2024-09-22 00:00:00">September 22, 2024</time></li>
+<li class="md-meta__item">
+            in
+            
+              <a class="md-meta__link" href="category/microsoft-entra/">Microsoft Entra</a>, 
+              <a class="md-meta__link" href="category/security/">Security</a></li>
+<li class="md-meta__item">
+            
+              2 min read
+            
+          </li>
+</ul>
+</div>
+</header>
+<div class="md-post__content md-typeset">
+<h2 id="microsoft-entra-id-protection"><a class="toclink" href="2024/09/22/microsoft-entra-id-protection/">Microsoft Entra ID Protection</a></h2>
+<p>Microsoft Entra offers a comprehensive set of security features to protect your organization's data and resources. One of these features is <strong>ID Protection</strong>, which helps you secure your users' identities and prevent unauthorized access to your organization's data. Here are some key benefits of using <strong>ID Protection</strong> in Microsoft Entra:</p>
+<ul>
+<li>
+<p><strong>Multi-factor authentication (MFA)</strong>: <strong>ID Protection</strong> enables you to enforce multi-factor authentication for all users in your organization. This adds an extra layer of security to your users' accounts and helps prevent unauthorized access.</p>
+</li>
+<li>
+<p><strong>Conditional access policies</strong>: With <strong>ID Protection</strong>, you can create conditional access policies that define the conditions under which users can access your organization's resources. For example, you can require users to use multi-factor authentication when accessing sensitive data or restrict access to certain applications based on the user's location.</p>
+</li>
+<li>
+<p><strong>Risk-based policies</strong>: <strong>ID Protection</strong> uses advanced machine learning algorithms to detect suspicious activities and risky sign-in attempts. You can create risk-based policies that automatically block or allow access based on the risk level associated with the sign-in attempt.</p>
+</li>
+<li>
+<p><strong>Identity protection reports</strong>: <strong>ID Protection</strong> provides detailed reports and insights into your organization's identity security posture. You can use these reports to identify security risks, monitor user activity, and take proactive measures to protect your organization's data.</p>
+</li>
+</ul>
+<p>By using <strong>ID Protection</strong> in Microsoft Entra, you can enhance the security of your organization's data and resources and protect your users' identities from cyber threats. If you want to learn more about <strong>ID Protection</strong> and other security features in Microsoft Entra, contact us today! </p>
+<p>I hope this helps!</p>
+</div>
+</article>
+<article class="md-post md-post--excerpt">
+<header class="md-post__header">
+<nav class="md-post__authors md-typeset">
+<span class="md-author">
+<img alt="Rafael Fernández" src="https://avatars.githubusercontent.com/u/39990341"/>
+</span>
+</nav>
+<div class="md-post__meta md-meta">
+<ul class="md-meta__list">
+<li class="md-meta__item">
+<time datetime="2024-09-22 00:00:00">September 22, 2024</time></li>
+<li class="md-meta__item">
+            in
+            
+              <a class="md-meta__link" href="category/microsoft-entra-id/">Microsoft Entra ID</a></li>
+<li class="md-meta__item">
+            
+              1 min read
+            
+          </li>
+</ul>
+</div>
+</header>
+<div class="md-post__content md-typeset">
+<h2 id="microsoft-entra-attribute-duplicate-attribute-resiliency"><a class="toclink" href="2024/09/22/microsoft-entra-attribute-duplicate-attribute-resiliency/">Microsoft Entra Attribute Duplicate Attribute Resiliency</a></h2>
+<p>Microsoft Entra Attribute Duplicate Attribute Resiliency feature is also being rolled out as the default behavior of Microsoft Entra ID. This will reduce the number of synchronization errors seen by Microsoft Entra Connect (as well as other sync clients) by making Microsoft Entra ID more resilient in the way it handles duplicated ProxyAddresses and UserPrincipalName attributes present in on premises AD environments. This feature does not fix the duplication errors. So the data still needs to be fixed. But it allows provisioning of new objects which are otherwise blocked from being provisioned due to duplicated values in Microsoft Entra ID. This will also reduce the number of synchronization errors returned to the synchronization client. If this feature is enabled for your Tenant, you will not see the InvalidSoftMatch synchronization errors seen during provisioning of new objects.</p>
+<h3 id="behavior-with-duplicate-attribute-resiliency"><a class="toclink" href="2024/09/22/microsoft-entra-attribute-duplicate-attribute-resiliency/#behavior-with-duplicate-attribute-resiliency">Behavior with Duplicate Attribute Resiliency</a></h3>
+<pre class="mermaid"><code>graph TD
+    A[Start] --&gt; B[Provision or Update Object]
+    B --&gt; C{Duplicate Attribute?}
+    C -- Yes --&gt; D[Quarantine Duplicate Attribute]
+    D --&gt; E{Is Attribute Required?}
+    E -- Yes --&gt; F[Assign Placeholder Value]
+    F --&gt; G[Send Error Report Email]
+    E -- No --&gt; H[Proceed with Object Creation/Update]
+    H --&gt; G
+    G --&gt; I[Export Succeeds]
+    I --&gt; J[Sync Client Does Not Log Error]
+    J --&gt; K[Sync Client Does Not Retry Operation]
+    K --&gt; L[Background Timer Task Every Hour]
+    L --&gt; M[Check for Resolved Conflicts]
+    M --&gt; N[Remove Attributes from Quarantine]
+    C -- No --&gt; H
+</code></pre>
+</div>
+</article>
+<article class="md-post md-post--excerpt">
+<header class="md-post__header">
+<nav class="md-post__authors md-typeset">
+<span class="md-author">
+<img alt="Rafael Fernández" src="https://avatars.githubusercontent.com/u/39990341"/>
+</span>
+</nav>
+<div class="md-post__meta md-meta">
+<ul class="md-meta__list">
+<li class="md-meta__item">
+<time datetime="2024-09-21 00:00:00">September 21, 2024</time></li>
+<li class="md-meta__item">
+            in
+            
+              <a class="md-meta__link" href="category/microsoft-entra-external-id/">Microsoft Entra External ID</a></li>
+<li class="md-meta__item">
+            
+              1 min read
+            
+          </li>
+</ul>
+</div>
+</header>
+<div class="md-post__content md-typeset">
+<h2 id="differences-between-b2b-direct-connect-and-b2b-collaboration-in-english"><a class="toclink" href="2024/09/21/differences-between-b2b-direct-connect-and-b2b-collaboration-in-english/">Differences between <strong>B2B Direct Connect</strong> and <strong>B2B Collaboration</strong> in English</a></h2>
+<p>Microsoft Entra offers two ways to collaborate with external users: <strong>B2B Direct Connect</strong> and <strong>B2B Collaboration</strong>. Both features allow organizations to share resources with external users while maintaining control over access and security. However, they differ in functionality, access, and integration. Here is a comparison between <strong>B2B Direct Connect</strong> and <strong>B2B Collaboration</strong>:</p>
+<table>
+<thead>
+<tr>
+<th><strong>Feature</strong></th>
+<th><strong>B2B Direct Connect</strong></th>
+<th><strong>B2B Collaboration</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Definition</strong></td>
+<td>Mutual trust relationship between two Microsoft Entra organizations</td>
+<td>Invite external users to access resources using their own credentials</td>
+</tr>
+<tr>
+<td><strong>Functionality</strong></td>
+<td>Seamless collaboration using origin credentials and shared channels in Teams</td>
+<td>External users receive an invitation and access resources after authentication</td>
+</tr>
+<tr>
+<td><strong>Applications</strong></td>
+<td>Shared channels in Microsoft Teams</td>
+<td>Wide range of applications and services within the Microsoft ecosystem</td>
+</tr>
+<tr>
+<td><strong>Access</strong></td>
+<td>Single sign-on (SSO) with origin credentials</td>
+<td>Authentication each time resources are accessed, unless direct federation is set up</td>
+</tr>
+<tr>
+<td><strong>Integration</strong></td>
+<td>Deep and continuous integration between two organizations</td>
+<td>Flexible way to invite and manage external users</td>
+</tr>
+</tbody>
+</table>
+<p>I hope this helps! </p>
+</div>
+</article>
 <article class="md-post md-post--excerpt">
 <header class="md-post__header">
 <nav class="md-post__authors md-typeset">
@@ -1497,660 +1755,8 @@ click BG2 "https://learn.microsoft.com/en-us/azure/role-based-access-control/bui
 <p>Curiosly, restrict managed disks from being imported or exported, it's not a compliance check in the Microsoft cloud security benchmark but it's a good practice to follow.</p>
 </div>
 </article>
-<article class="md-post md-post--excerpt">
-<header class="md-post__header">
-<nav class="md-post__authors md-typeset">
-<span class="md-author">
-<img alt="Rafael Fernández" src="https://avatars.githubusercontent.com/u/39990341"/>
-</span>
-</nav>
-<div class="md-post__meta md-meta">
-<ul class="md-meta__list">
-<li class="md-meta__item">
-<time datetime="2024-06-12 00:00:00">June 12, 2024</time></li>
-<li class="md-meta__item">
-            in
-            
-              <a class="md-meta__link" href="category/microsoft-entra-id/">Microsoft Entra ID</a></li>
-<li class="md-meta__item">
-            
-              8 min read
-            
-          </li>
-</ul>
-</div>
-</header>
-<div class="md-post__content md-typeset">
-<h2 id="microsoft-entra-id-privileged-identity-management"><a class="toclink" href="2024/06/12/microsoft-entra-id-privileged-identity-management/">Microsoft Entra ID Privileged Identity Management</a></h2>
-<p>In this post, I will show you how to use Microsoft Entra ID Privileged Identity Management (PIM) to manage and monitor access to privileged roles in your organization.</p>
-<h3 id="what-is-microsoft-entra-id-privileged-identity-management"><a class="toclink" href="2024/06/12/microsoft-entra-id-privileged-identity-management/#what-is-microsoft-entra-id-privileged-identity-management">What is Microsoft Entra ID Privileged Identity Management?</a></h3>
-<p>Microsoft Entra ID Privileged Identity Management (PIM) is a service that helps you manage, control, and monitor access within your organization. It provides just-in-time privileged access to Azure AD and Azure resources, along with access reviews and monitoring capabilities.</p>
-<h3 id="reasons-to-use-microsoft-entra-id-pim"><a class="toclink" href="2024/06/12/microsoft-entra-id-privileged-identity-management/#reasons-to-use-microsoft-entra-id-pim">Reasons to Use Microsoft Entra ID PIM</a></h3>
-<p>There are several reasons to use Microsoft Entra ID PIM:</p>
-<ul>
-<li><strong>Security</strong>: Microsoft Entra ID PIM helps you reduce the risk of unauthorized access to privileged roles.</li>
-<li><strong>Compliance</strong>: Microsoft Entra ID PIM helps you meet compliance requirements by providing access reviews and monitoring capabilities.</li>
-<li><strong>Efficiency</strong>: Microsoft Entra ID PIM provides just-in-time access to privileged roles, reducing the risk of unauthorized access.</li>
-<li><strong>Monitoring</strong>: Microsoft Entra ID PIM provides monitoring and alerts that help you detect and respond to suspicious activities.</li>
-<li><strong>Traceability</strong>: Microsoft Entra ID PIM provides an audit trail of all access requests and approvals, helping you track who has access to privileged roles.</li>
-</ul>
-<p>Maybe you can't use Microsoft Entra ID PIM to log all changess that the users do in the system, but you can use <a href="https://techcommunity.microsoft.com/t5/azure-governance-and-management/announcing-the-general-availability-of-change-actor/ba-p/4171801">Actor Change</a> for that.</p>
-<h3 id="key-features-of-microsoft-entra-id-pim"><a class="toclink" href="2024/06/12/microsoft-entra-id-privileged-identity-management/#key-features-of-microsoft-entra-id-pim">Key Features of Microsoft Entra ID PIM</a></h3>
-<p>Microsoft Entra ID PIM offers several key features that help you manage and monitor access to privileged roles:</p>
-<ul>
-<li>Provide just-in-time privileged access to Microsoft Entra ID and Azure resources.</li>
-<li>Assign time-bound access to resources using start and end dates.</li>
-<li>Require approval to activate privileged roles.</li>
-<li>Enforce multifactor authentication to activate any role.</li>
-<li>Use justification to understand why users activate.</li>
-<li>Get notifications when users activate privileged roles.</li>
-<li>Conduct access reviews to ensure users still need roles.</li>
-<li>Download audit history for internal or external audit.</li>
-<li>Prevent removal of the last active Global Administrator and Privileged Role Administrator role assignments.</li>
-</ul>
-<h3 id="how-to-use-microsoft-entra-id-pim"><a class="toclink" href="2024/06/12/microsoft-entra-id-privileged-identity-management/#how-to-use-microsoft-entra-id-pim">How to Use Microsoft Entra ID PIM</a></h3>
-<p>We can manage three types of "things" in Microsoft Entra ID PIM:</p>
-<ul>
-<li><strong>Microsoft Entra roles.</strong> Microsoft Entra roles are also referred to as directory roles. They include built-in and custom roles to manage Microsoft Entra ID and other Microsoft 365 online services.</li>
-<li><strong>PIM for Groups.</strong> To set up just-in-time access to the member and owner role of a Microsoft Entra security group. PIM for Groups provides an alternative way to set up PIM for Microsoft Entra roles and Azure roles. It also allows you to set up PIM for other permissions across Microsoft online services like Intune, Azure Key Vaults, and Microsoft Entra ID Protection.</li>
-<li><strong>Azure roles.</strong> Azure's role-based access control roles that grant access to management groups, subscriptions, resource groups, and resources.</li>
-</ul>
-<h4 id="microsoft-entra-id-roles"><a class="toclink" href="2024/06/12/microsoft-entra-id-privileged-identity-management/#microsoft-entra-id-roles">Microsoft Entra ID roles</a></h4>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>If you want to use groups, you need create eligible groups, for now the maximum number of eligible groups is 500.</p>
-</div>
-<p>In the Microsoft Entra ID portal, you can manage Microsoft Entra ID roles by selecting the "Roles" tab. Here you can see all the roles that are available to you, as well as the roles that you have activated.</p>
-<p>You can made the following actions:</p>
-<ul>
-<li><strong>Assign</strong>: Create assignments for Microsoft Entra ID roles, update existing assignments to ensure that users have just-in-time access to privileged roles.</li>
-<li><strong>Activate</strong>: Activate your eligible assignments to get just-in-time access to privileged roles. </li>
-<li><strong>Approve</strong>: List, approve, or deny activation requests for Microsoft Entra ID roles.</li>
-<li><strong>Audit</strong>: View and export a history of all assignments and activations done in PIM so you can identify attacks and stay compliant.</li>
-</ul>
-<p>Ok, let's see how to assign a role to a group.</p>
-<p>In the "Roles" tab, click on the role that you want to assign. </p>
-<p>In Role settings, edit the settings for the role, modify Activation, Assignment, and Notification settings and then click "Update. These are the default settings:</p>
-<p><strong>Activation</strong></p>
-<table>
-<thead>
-<tr>
-<th>Setting</th>
-<th>State</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td></td>
-<td></td>
-</tr>
-</tbody>
-</table>
-<table>
-<thead>
-<tr>
-<th>Activation maximum duration (hours)</th>
-<th>8 hour(s)</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>On activation, require</td>
-<td>None</td>
-</tr>
-<tr>
-<td>Require justification on activation</td>
-<td>Yes</td>
-</tr>
-<tr>
-<td>Require ticket information on activation</td>
-<td>No</td>
-</tr>
-<tr>
-<td>Require approval to activate</td>
-<td>No</td>
-</tr>
-<tr>
-<td>Approvers</td>
-<td>None</td>
-</tr>
-</tbody>
-</table>
-<p><strong>Assignment</strong></p>
-<table>
-<thead>
-<tr>
-<th>Setting</th>
-<th>State</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td></td>
-<td></td>
-</tr>
-</tbody>
-</table>
-<table>
-<thead>
-<tr>
-<th>Allow permanent eligible assignment</th>
-<th>Yes</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Expire eligible assignments after</td>
-<td>-</td>
-</tr>
-<tr>
-<td>Allow permanent active assignment</td>
-<td>Yes</td>
-</tr>
-<tr>
-<td>Expire active assignments after</td>
-<td>-</td>
-</tr>
-<tr>
-<td>Require Azure Multi-Factor Authentication on active assignment</td>
-<td>No</td>
-</tr>
-<tr>
-<td>Require justification on active assignment</td>
-<td>Yes</td>
-</tr>
-</tbody>
-</table>
-<p><strong>Send notifications when members are assigned as eligible to this role:</strong></p>
-<table>
-<thead>
-<tr>
-<th>Type</th>
-<th>Default recipients</th>
-<th>Additional recipients</th>
-<th>Critical emails only</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-</tbody>
-</table>
-<table>
-<thead>
-<tr>
-<th>Role assignment alert</th>
-<th>Admin</th>
-<th>None</th>
-<th>False</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Notification to the assigned user (assignee)</td>
-<td>Assignee</td>
-<td>None</td>
-<td>False</td>
-</tr>
-<tr>
-<td>Request to approve a role assignment renewal/extension</td>
-<td>Approver</td>
-<td>None</td>
-<td>False</td>
-</tr>
-</tbody>
-</table>
-<p><strong>Send notifications when members are assigned as active to this role:</strong></p>
-<table>
-<thead>
-<tr>
-<th>Type</th>
-<th>Default recipients</th>
-<th>Additional recipients</th>
-<th>Critical emails only</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-</tbody>
-</table>
-<table>
-<thead>
-<tr>
-<th>Role assignment alert</th>
-<th>Admin</th>
-<th>None</th>
-<th>False</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Notification to the assigned user (assignee)</td>
-<td>Assignee</td>
-<td>None</td>
-<td>False</td>
-</tr>
-<tr>
-<td>Request to approve a role assignment renewal/extension</td>
-<td>Approver</td>
-<td>None</td>
-<td>False</td>
-</tr>
-</tbody>
-</table>
-<p><strong>Send notifications when eligible members activate this role:</strong></p>
-<table>
-<thead>
-<tr>
-<th>Type</th>
-<th>Default recipients</th>
-<th>Additional recipients</th>
-<th>Critical emails only</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-</tbody>
-</table>
-<table>
-<thead>
-<tr>
-<th>Role activation alert</th>
-<th>Admin</th>
-<th>None</th>
-<th>False</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Notification to activated user (requestor)</td>
-<td>Requestor</td>
-<td>None</td>
-<td>False</td>
-</tr>
-<tr>
-<td>Request to approve an activation</td>
-<td>Approver</td>
-<td>None</td>
-<td>False</td>
-</tr>
-</tbody>
-</table>
-<p>In the "Assignments" tab, click on "Add assignments". In Membership, select the scope type: Application, Device, Directory, Group, Service Principal or User (It's dependes of each role)  and select the identity related that you want to assign the role to. We are going to select Directory and a eligible group,  and then click "Next". </p>
-<div class="admonition info">
-<p class="admonition-title">Info</p>
-<p>App registrations are supported in PIM for Microsoft Entra ID roles but only in active assignments. </p>
-</div>
-<p>In the "Settings" tab, you can set the Assigment type: Eligible or I need to do something to activate and Active or I don't need to do nothing to activate my role. You can configure too if you want that the duration of the assignment is permanent or if you want to expire the assignment after a certain period of time. Once you're done, click "Assign".</p>
-<p>You can set the activation settings, assignment settings, and notification settings for the assignment. Once you're done, click "Assign".</p>
-<h4 id="pim-for-groups"><a class="toclink" href="2024/06/12/microsoft-entra-id-privileged-identity-management/#pim-for-groups">PIM for Groups</a></h4>
-<p>In the Microsoft Entra ID portal, you can manage PIM for Groups by selecting the "Groups" tab. </p>
-<p>First you need to discover the groups that you want to manage. In the "Groups" tab, click on "Discover groups". In the "Discover groups" pane, you can search for groups by name. Once you've found the group you want to manage, click on "Add to PIM".</p>
-<div class="admonition info">
-<p class="admonition-title">Info</p>
-<p>You must be an owner of the group or have Microsoft Entra role that allows to discover and manage group in PIM.</p>
-</div>
-<p>Now, in the "Groups" tab, you can see all the groups that you have discovered.</p>
-<p>In the "Groups" tab, click on the group that you want to manage. You can made the following actions under manage:</p>
-<ul>
-<li><strong>Assign</strong>: Create assignments for the member and owner role of the group, update existing assignments to ensure that users have just-in-time access to privileged roles.</li>
-<li><strong>Activate</strong>: Activate your eligible assignments to get just-in-time access to privileged roles.</li>
-<li><strong>Approve</strong>: List, approve, or deny activation requests for the member and owner role of the group.</li>
-<li><strong>Audit</strong>: View and export a history of all assignments and activations done in PIM so you can identify attacks and stay compliant.</li>
-</ul>
-<p>Ok, let's see how to assign a role to a group.</p>
-<p>In the "Groups" tab, click on the group that you want to assign a role to. </p>
-<p>In Role settings, edit the settings for the role, modify Activation, Assignment, and Notification settings for members or users, these settings are the same that we saw in the Microsoft Entra ID roles section.</p>
-<p>In the "Assignments" tab, click on "Add assignments". In Select role, select the scope type: Member or Owner and in Select members select the identity related that you want to assign the role to or groupm, if you select a group, you doesn't need a eligible group,  and then click "Next".</p>
-<p>In the "Settings" tab, you can set the Assigment type: Eligible or I need to do something to activate and Active or I don't need to do nothing to activate my role. You can configure too if you want that the duration of the assignment is permanent or if you want to expire the assignment after a certain period of time. Once you're done, click "Assign".</p>
-<div class="admonition info">
-<p class="admonition-title">Info</p>
-<p>App registrations are supported in PIM for Groups but only in active assignments. I think that this is very useful for IaC for example because you can assign a role to a service principal and you can activate the role when you need it.</p>
-</div>
-<p>Example of a sequence diagram of the activation process for a group:</p>
-<pre class="mermaid"><code>sequenceDiagram
-    participant User
-    participant PIM
-    participant Approver
-    participant MFA
-    participant Group
-
-    User-&gt;&gt;PIM: Logs in
-    User-&gt;&gt;PIM: Navigates to PIM and selects "My roles"
-    User-&gt;&gt;PIM: Selects eligible group
-    User-&gt;&gt;PIM: Requests activation
-    PIM-&gt;&gt;MFA: Requests multi-factor authentication
-    MFA--&gt;&gt;User: MFA request
-    User-&gt;&gt;MFA: Provides MFA credentials
-    MFA--&gt;&gt;PIM: MFA confirmation
-    PIM-&gt;&gt;User: Requests justification
-    User-&gt;&gt;PIM: Provides justification
-    PIM-&gt;&gt;Approver: Sends approval request
-    Approver--&gt;&gt;PIM: Approval
-    PIM--&gt;&gt;User: Activation confirmation
-    PIM-&gt;&gt;Group: Activates temporary membership
-    Group--&gt;&gt;PIM: Activation confirmation
-    PIM--&gt;&gt;User: Access granted
-</code></pre>
-<h4 id="azure-roles"><a class="toclink" href="2024/06/12/microsoft-entra-id-privileged-identity-management/#azure-roles">Azure roles</a></h4>
-<p>In the Microsoft Entra ID portal, you can manage Azure roles by selecting the "Azure resources" tab. Here you can see all the Azure roles that are available to you by scope, as well as the roles that you have activated.</p>
-<p>First you need to select the Azure resource that you want to manage: Management groups, Subscriptions, Resource groups or Resources and follow Manage Resource.</p>
-<p>Once here, same as the other sections, you can made the following actions for this scope:</p>
-<ul>
-<li><strong>Assign</strong>: Create assignments for the member and owner role of the group, update existing assignments to ensure that users have just-in-time access to privileged roles.</li>
-<li><strong>Activate</strong>: Activate your eligible assignments to get just-in-time access to privileged roles.</li>
-<li><strong>Approve</strong>: List, approve, or deny activation requests for the member and owner role of the group.</li>
-<li><strong>Audit</strong>: View and export a history of all assignments and activations done in PIM so you can identify attacks and stay compliant.</li>
-</ul>
-<p>Ok, let's see how to assign a role to a identity in a scope.</p>
-<div class="admonition info">
-<p class="admonition-title">Info</p>
-<p>We already have a scope selected</p>
-</div>
-<p>In the "Assignments" tab, click on "Add assignments". In Select role, select the role that you want to assign and in Select members select the identity related that you want to assign the role to or group, if you select a group, you doesn't need a eligible group,  and then click "Next".</p>
-<p>In the "Settings" tab, you can set the Assigment type: Eligible or I need to do something to activate and Active or I don't need to do nothing to activate my role. You can configure too if you want that the duration of the assignment is permanent or if you want to expire the assignment after a certain period of time. Once you're done, click "Assign".</p>
-<div class="admonition info">
-<p class="admonition-title">Info</p>
-<p>App registrations are supported in PIM for Azure roles but only in active assignments. I think that this is very useful for IaC for example because you can assign a role to a service principal and you can activate the role when you need it.</p>
-</div>
-<p>Don't forget review settings for the role, modify Activation, Assignment, and Notification settings for members or users, these settings are the same that we saw in the Microsoft Entra ID roles section.</p>
-<h3 id="conclusion"><a class="toclink" href="2024/06/12/microsoft-entra-id-privileged-identity-management/#conclusion">Conclusion</a></h3>
-<p>Microsoft Entra ID Privileged Identity Management (PIM) is a powerful service that helps you manage and monitor access to privileged roles in your organization. By using Microsoft Entra ID PIM, you can reduce the risk of unauthorized access, meet compliance requirements, and improve the efficiency of your organization. I hope this post has helped you understand how to use Microsoft Entra ID PIM and how it can benefit your organization.</p>
-<p>If you want to play with Microsoft Enter ID PIM, you can use a test on a new tenant or the current one if you haven't used it before.</p>
-</div>
-</article>
-<article class="md-post md-post--excerpt">
-<header class="md-post__header">
-<nav class="md-post__authors md-typeset">
-<span class="md-author">
-<img alt="Rafael Fernández" src="https://avatars.githubusercontent.com/u/39990341"/>
-</span>
-</nav>
-<div class="md-post__meta md-meta">
-<ul class="md-meta__list">
-<li class="md-meta__item">
-<time datetime="2024-06-11 00:00:00">June 11, 2024</time></li>
-<li class="md-meta__item">
-            in
-            
-              <a class="md-meta__link" href="category/azure-services/">Azure Services</a>, 
-              <a class="md-meta__link" href="category/power-bi/">Power BI</a></li>
-<li class="md-meta__item">
-            
-              4 min read
-            
-          </li>
-</ul>
-</div>
-</header>
-<div class="md-post__content md-typeset">
-<h2 id="securely-connect-power-bi-to-data-sources-with-a-vnet-data-gateway"><a class="toclink" href="2024/06/11/securely-connect-power-bi-to-data-sources-with-a-vnet-data-gateway/">Securely connect Power BI to data sources with a VNet data gateway</a></h2>
-<p>In this post, I will show you how to securely connect Power BI to your Azure data services using a Virtual Network (VNet) data gateway.</p>
-<h3 id="what-is-a-virtual-network-vnet-data-gateway"><a class="toclink" href="2024/06/11/securely-connect-power-bi-to-data-sources-with-a-vnet-data-gateway/#what-is-a-virtual-network-vnet-data-gateway">What is a Virtual Network (VNet) data gateway?</a></h3>
-<p>The virtual network (VNet) data gateway helps you to connect from Microsoft Cloud services to your Azure data services within a VNet without the need of an on-premises data gateway. The VNet data gateway securely communicates with the data source, executes queries, and transmits results back to the service.</p>
-<h3 id="the-role-of-a-vnet-data-gateway"><a class="toclink" href="2024/06/11/securely-connect-power-bi-to-data-sources-with-a-vnet-data-gateway/#the-role-of-a-vnet-data-gateway">The Role of a VNet Data Gateway</a></h3>
-<p>A VNet data gateway acts as a bridge that allows for the secure flow of data between the Power Platform and external data sources that reside within a virtual network. This includes services such as SQL databases, file storage solutions, and other cloud-based resources. The gateway ensures that data can be transferred securely and reliably, without exposing the network to potential threats or breaches.</p>
-<h3 id="how-it-works"><a class="toclink" href="2024/06/11/securely-connect-power-bi-to-data-sources-with-a-vnet-data-gateway/#how-it-works">How It Works</a></h3>
-<pre class="mermaid"><code>graph LR
-    User([User]) --&gt;|Semantic Models| SM[Semantic Models]
-    User --&gt;|"Dataflows (Gen2)"| DF["Dataflows (Gen2)"]
-    User --&gt;|Paginated Reports| PR[Paginated Reports]
-    SM --&gt; PPVS[Power Platform VNET Service]
-    DF --&gt; PPVS
-    PR --&gt; PPVS
-    PPVS --&gt; MCVG[Managed Container<br/>for VNet Gateway]
-    MCVG --&gt;|Interfaces with| SQLDB[(SQL Databases)]
-    MCVG --&gt;|Interfaces with| FS[(File Storage)]
-    MCVG --&gt;|Interfaces with| CS[(Cloud Services)]
-    MCVG -.-&gt;|Secured by| SEC{{Security Features}}
-
-    subgraph VNET_123
-    SQLDB
-    FS
-    CS
-    SEC
-    end
-
-    classDef filled fill:#f96,stroke:#333,stroke-width:2px;
-    classDef user fill:#bbf,stroke:#f66,stroke-width:2px,stroke-dasharray: 5, 5;
-    class User user
-    class SM,DF,PR,PPVS,MCVG,SQLDB,FS,CS,SEC filled
-</code></pre>
-<p>The process begins with a user leveraging Power Platform services like Semantic Models, Dataflows (Gen2), and Paginated Reports. These services are designed to handle various data-related tasks, from analysis to visualization. They connect to the Power Platform VNET Service, which is the heart of the operation, orchestrating the flow of data through the managed container for the VNet gateway.</p>
-<p>This managed container is a secure environment specifically designed for the VNet gateway’s operations. It’s isolated from the public internet, ensuring that the data remains protected within the confines of the virtual network. Within this secure environment, the VNet gateway interfaces with the necessary external resources, such as SQL databases and cloud storage, all while maintaining strict security protocols symbolized by the padlock icon in our diagram.</p>
-<p>If you need to connect to services on others VNets, you can use <a href="https://docs.microsoft.com/en-us/azure/virtual-network/virtual-network-peering-overview">VNet peering</a> to connect the VNets, and maybe access to on-premises resources using <a href="https://docs.microsoft.com/en-us/azure/expressroute/expressroute-introduction">ExpressRoute</a> or other VPN solutions.</p>
-<h3 id="the-benefits"><a class="toclink" href="2024/06/11/securely-connect-power-bi-to-data-sources-with-a-vnet-data-gateway/#the-benefits">The Benefits</a></h3>
-<p>By utilizing a VNet data gateway, organizations can enjoy several benefits:</p>
-<ul>
-<li>Enhanced Security: The gateway provides a secure path for data, safeguarding sensitive information and complying with organizational security policies.</li>
-<li>Network Isolation: The managed container and the virtual network setup ensure that the data does not traverse public internet spaces, reducing exposure to vulnerabilities.</li>
-<li>Seamless Integration: The gateway facilitates smooth integration between Power Platform services and external data sources, enabling efficient data processing and analysis.</li>
-</ul>
-<h3 id="getting-started"><a class="toclink" href="2024/06/11/securely-connect-power-bi-to-data-sources-with-a-vnet-data-gateway/#getting-started">Getting Started</a></h3>
-<p>To set up a VNet data gateway, follow these steps:</p>
-<h4 id="register-microsoftpowerplatform-as-a-resource-provider"><a class="toclink" href="2024/06/11/securely-connect-power-bi-to-data-sources-with-a-vnet-data-gateway/#register-microsoftpowerplatform-as-a-resource-provider">Register Microsoft.PowerPlatform as a resource provider</a></h4>
-<p>Before you can create a VNet data gateway, you need to register the Microsoft.PowerPlatform resource provider. This can be done using the Azure portal or the Azure CLI.</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a href="#__codelineno-0-1" id="__codelineno-0-1" name="__codelineno-0-1"></a>az provider register --namespace Microsoft.PowerPlatform
-</span></code></pre></div>
-<h4 id="associate-the-subnet-to-microsoft-power-platform"><a class="toclink" href="2024/06/11/securely-connect-power-bi-to-data-sources-with-a-vnet-data-gateway/#associate-the-subnet-to-microsoft-power-platform">Associate the subnet to Microsoft Power Platform</a></h4>
-<p>Create a VNet in your Azure subscription and a subnet where the VNet data gateway will be deployed. Next, you need to delegate subnet to service <strong>Microsoft.PowerPlatform/vnetaccesslinks</strong>. </p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<ul>
-<li>This subnet can't be shared with other services.</li>
-<li>Five IP addresses are reserved in the subnet for basic functionality. You need to reserve additional IP addresses for the VNet data gateway, add more IPs for future gateways.</li>
-<li>You need a role with the Microsoft.Network/virtualNetworks/subnets/join/action permission</li>
-</ul>
-</div>
-<p>This can be done using the Azure portal or the Azure CLI.</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a href="#__codelineno-1-1" id="__codelineno-1-1" name="__codelineno-1-1"></a># Create a VNet and address prefix 10.0.0.0/24
-</span><span id="__span-1-2"><a href="#__codelineno-1-2" id="__codelineno-1-2" name="__codelineno-1-2"></a>az network vnet create --name MyVNet --resource-group MyResourceGroup --location eastus --address-prefixes 10.0.0.0/24
-</span><span id="__span-1-3"><a href="#__codelineno-1-3" id="__codelineno-1-3" name="__codelineno-1-3"></a>
-</span><span id="__span-1-4"><a href="#__codelineno-1-4" id="__codelineno-1-4" name="__codelineno-1-4"></a>
-</span><span id="__span-1-5"><a href="#__codelineno-1-5" id="__codelineno-1-5" name="__codelineno-1-5"></a># Create a Netwrok Security Group
-</span><span id="__span-1-6"><a href="#__codelineno-1-6" id="__codelineno-1-6" name="__codelineno-1-6"></a>az network nsg create --name MyNsg --resource-group MyResourceGroup --location eastus
-</span><span id="__span-1-7"><a href="#__codelineno-1-7" id="__codelineno-1-7" name="__codelineno-1-7"></a>
-</span><span id="__span-1-8"><a href="#__codelineno-1-8" id="__codelineno-1-8" name="__codelineno-1-8"></a># Create a subnet with delegation to Microsoft.PowerPlatform/vnetaccesslinks and associate the NSG
-</span><span id="__span-1-9"><a href="#__codelineno-1-9" id="__codelineno-1-9" name="__codelineno-1-9"></a>az network vnet subnet create --name MySubnet --vnet-name MyVNet --resource-group MyResourceGroup --address-prefixes 10.0.0.1/27 --network-security-group MyNsg --delegations Microsoft.PowerPlatform/vnetaccesslinks
-</span></code></pre></div>
-<h4 id="create-a-vnet-data-gateway"><a class="toclink" href="2024/06/11/securely-connect-power-bi-to-data-sources-with-a-vnet-data-gateway/#create-a-vnet-data-gateway">Create a VNet data gateway</a></h4>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>A Microsoft Power Platform User with with Microsoft.Network/virtualNetworks/subnets/join/action permission on the VNet is required. Network Contributor role is not necessary.</p>
-</div>
-<ol>
-<li>Sign in to the <a href="https://app.powerbi.com/">Power BI homepage</a>.</li>
-<li>In the top navigation bar, select the settings gear icon on the right.</li>
-<li>From the drop down, select the Manage connections and gateways page, in Resources and extensions.</li>
-<li>Select <strong>Create a virtual network data gateway.</strong>.</li>
-<li>Select the license capacity, subscription, resource group, VNet and the Subnet. Only subnets that are delegated to Microsoft Power Platform are displayed in the drop-down list. VNET data gateways require a <a href="https://learn.microsoft.com/en-us/power-bi/enterprise/service-premium-what-is">Power BI Premium capacity</a> license (A4 SKU or higher or any P SKU) or <a href="https://learn.microsoft.com/en-us/fabric/enterprise/buy-subscription">Fabric license</a> to be used (any SKU).</li>
-<li>By default, we provide a unique name for this data gateway, but you could optionally update it.</li>
-<li>Select <strong>Save</strong>. This VNet data gateway is now displayed in your <strong>Virtual network data gateways</strong> tab. A VNet data gateway is a managed gateway that could be used for controlling access to this resource for Power platform users.</li>
-</ol>
-<h3 id="conclusion"><a class="toclink" href="2024/06/11/securely-connect-power-bi-to-data-sources-with-a-vnet-data-gateway/#conclusion">Conclusion</a></h3>
-<p>The VNet data gateway is a powerful tool that enables secure data transfer between the Power Platform and external data sources residing within a virtual network. By leveraging this gateway, organizations can ensure that their data remains protected and compliant with security standards, all while facilitating seamless integration and analysis of data. If you are looking to enhance the security and reliability of your data connections, consider implementing a VNet data gateway in your environment.</p>
-</div>
-</article>
-<article class="md-post md-post--excerpt">
-<header class="md-post__header">
-<nav class="md-post__authors md-typeset">
-<span class="md-author">
-<img alt="Rafael Fernández" src="https://avatars.githubusercontent.com/u/39990341"/>
-</span>
-</nav>
-<div class="md-post__meta md-meta">
-<ul class="md-meta__list">
-<li class="md-meta__item">
-<time datetime="2024-06-10 00:00:00">June 10, 2024</time></li>
-<li class="md-meta__item">
-            in
-            
-              <a class="md-meta__link" href="category/devops/">DevOps</a></li>
-<li class="md-meta__item">
-            
-              2 min read
-            
-          </li>
-</ul>
-</div>
-</header>
-<div class="md-post__content md-typeset">
-<h2 id="implementing-policy-as-code-with-open-policy-agent"><a class="toclink" href="2024/06/10/implementing-policy-as-code-with-open-policy-agent/">Implementing policy as code with Open Policy Agent</a></h2>
-<p>In this post, I will show you how to implement policy as code with Open Policy Agent (OPA) and Azure.</p>
-<h3 id="what-is-open-policy-agent"><a class="toclink" href="2024/06/10/implementing-policy-as-code-with-open-policy-agent/#what-is-open-policy-agent">What is Open Policy Agent?</a></h3>
-<p>Open Policy Agent (OPA) is an open-source, general-purpose policy engine that enables you to define and enforce policies across your cloud-native stack. OPA provides a high-level declarative language called Rego that you can use to write policies that are easy to understand and maintain.</p>
-<h3 id="why-use-open-policy-agent"><a class="toclink" href="2024/06/10/implementing-policy-as-code-with-open-policy-agent/#why-use-open-policy-agent">Why use Open Policy Agent?</a></h3>
-<p>There are several reasons to use OPA:</p>
-<ul>
-<li><strong>Consistency</strong>: OPA allows you to define policies in a single place and enforce them consistently across your cloud-native stack.</li>
-<li><strong>Flexibility</strong>: OPA provides a flexible policy language that allows you to define policies that are tailored to your specific requirements.</li>
-<li><strong>Auditability</strong>: OPA provides a transparent and auditable way to enforce policies, making it easy to understand why a policy decision was made.</li>
-<li><strong>Integration</strong>: OPA integrates with a wide range of cloud-native tools and platforms, making it easy to enforce policies across your entire stack.</li>
-</ul>
-<h3 id="getting-started-with-open-policy-agent"><a class="toclink" href="2024/06/10/implementing-policy-as-code-with-open-policy-agent/#getting-started-with-open-policy-agent">Getting started with Open Policy Agent</a></h3>
-<p>To get started with OPA, you need to install the OPA CLI and write some policies in Rego.</p>
-<p>You can install the OPA CLI by downloading the binary from the <a href="https://github.com/open-policy-agent/opa/releases">OPA GitHub releases page</a>, you can check the <a href="https://www.openpolicyagent.org/docs/latest/#running-opa">installation guide</a> for more details.</p>
-<p>Once you have installed the OPA CLI, you can write policies in Rego. Rego is a high-level declarative language that allows you to define policies in a clear and concise way.</p>
-<p>Here's a simple example of a policy that enforces a naming convention for Azure resources:</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a href="#__codelineno-0-1" id="__codelineno-0-1" name="__codelineno-0-1"></a>package azure.resources
-</span><span id="__span-0-2"><a href="#__codelineno-0-2" id="__codelineno-0-2" name="__codelineno-0-2"></a>
-</span><span id="__span-0-3"><a href="#__codelineno-0-3" id="__codelineno-0-3" name="__codelineno-0-3"></a>default allow = false
-</span><span id="__span-0-4"><a href="#__codelineno-0-4" id="__codelineno-0-4" name="__codelineno-0-4"></a>
-</span><span id="__span-0-5"><a href="#__codelineno-0-5" id="__codelineno-0-5" name="__codelineno-0-5"></a>allow {
-</span><span id="__span-0-6"><a href="#__codelineno-0-6" id="__codelineno-0-6" name="__codelineno-0-6"></a>    input.resource.type == "Microsoft.Compute/virtualMachines"
-</span><span id="__span-0-7"><a href="#__codelineno-0-7" id="__codelineno-0-7" name="__codelineno-0-7"></a>    input.resource.name == "my-vm"
-</span><span id="__span-0-8"><a href="#__codelineno-0-8" id="__codelineno-0-8" name="__codelineno-0-8"></a>}
-</span></code></pre></div>
-<p>This policy allows resources of type <code>Microsoft.Compute/virtualMachines</code> with the name <code>my-vm</code>. You can write more complex policies that enforce a wide range of requirements, such as resource tagging, network security, and access control.</p>
-<h3 id="integrating-open-policy-agent-with-azure"><a class="toclink" href="2024/06/10/implementing-policy-as-code-with-open-policy-agent/#integrating-open-policy-agent-with-azure">Integrating Open Policy Agent with Azure</a></h3>
-<p>To integrate OPA with Azure, you can use the Azure Policy service, which allows you to define and enforce policies across your Azure resources. You can use OPA to define custom policies that are not supported by Azure Policy out of the box, or to enforce policies across multiple cloud providers.</p>
-<h3 id="conclusion"><a class="toclink" href="2024/06/10/implementing-policy-as-code-with-open-policy-agent/#conclusion">Conclusion</a></h3>
-<p>Open Policy Agent is a powerful tool that allows you to define and enforce policies across your cloud-native stack. By using OPA, you can ensure that your infrastructure is secure, compliant, and consistent, and that your policies are easy to understand and maintain. I hope this post has given you a good introduction to OPA and how you can use it to implement policy as code in your cloud-native environment.</p>
-<h3 id="additional-resources"><a class="toclink" href="2024/06/10/implementing-policy-as-code-with-open-policy-agent/#additional-resources">Additional resources</a></h3>
-<p>I have created a <a href="https://github.com/rfernandezdo/rego-examples">GitHub repository</a> with some examples of policies written in Rego that you can use as a starting point for your own policies.</p>
-<h3 id="references"><a class="toclink" href="2024/06/10/implementing-policy-as-code-with-open-policy-agent/#references">References</a></h3>
-<ul>
-<li><a href="https://www.openpolicyagent.org/">Open Policy Agent</a></li>
-<li><a href="https://docs.microsoft.com/en-us/azure/governance/policy/overview">Azure Policy</a></li>
-<li><a href="https://www.openpolicyagent.org/docs/latest/policy-language/">Rego language</a></li>
-</ul>
-</div>
-</article>
-<article class="md-post md-post--excerpt">
-<header class="md-post__header">
-<nav class="md-post__authors md-typeset">
-<span class="md-author">
-<img alt="Rafael Fernández" src="https://avatars.githubusercontent.com/u/39990341"/>
-</span>
-</nav>
-<div class="md-post__meta md-meta">
-<ul class="md-meta__list">
-<li class="md-meta__item">
-<time datetime="2024-06-09 00:00:00">June 9, 2024</time></li>
-<li class="md-meta__item">
-            in
-            
-              <a class="md-meta__link" href="category/azure-services/">Azure Services</a>, 
-              <a class="md-meta__link" href="category/finops/">FinOps</a></li>
-<li class="md-meta__item">
-            
-              4 min read
-            
-          </li>
-</ul>
-</div>
-</header>
-<div class="md-post__content md-typeset">
-<h2 id="finops-for-azure-optimizing-your-cloud-spend"><a class="toclink" href="2024/06/09/finops-for-azure-optimizing-your-cloud-spend/">FinOps for Azure: Optimizing Your Cloud Spend</a></h2>
-<p>In the cloud era, optimizing cloud spend has become a critical aspect of financial management. FinOps, a set of financial operations practices, empowers organizations to get the most out of their Azure investment. This blog post dives into the core principles of FinOps, explores the benefits it offers, and outlines practical strategies for implementing FinOps in your Azure environment.</p>
-<h3 id="understanding-the-cloud-cost-challenge"><a class="toclink" href="2024/06/09/finops-for-azure-optimizing-your-cloud-spend/#understanding-the-cloud-cost-challenge">Understanding the Cloud Cost Challenge</a></h3>
-<p>Traditional IT expenditure followed a capital expenditure (capex) model, where businesses purchased hardware and software upfront. Cloud computing introduces a paradigm shift with the operational expenditure (opex) model. Here, businesses pay for resources as they consume them, leading to variable and unpredictable costs.</p>
-<p>FinOps tackles this challenge by providing a framework for managing cloud finances. It encompasses three key pillars:</p>
-<ul>
-<li><strong>People:</strong> Establish a FinOps team or designate individuals responsible for overseeing cloud costs. This team should possess a blend of cloud technical expertise, financial acumen, and business process knowledge.</li>
-<li><strong>Process:</strong>  Define processes for budgeting, forecasting, and monitoring cloud expenses. This involves setting spending limits, creating chargeback models for different departments, and regularly reviewing cost reports.</li>
-<li><strong>Tools:</strong> Leverage Azure Cost Management, a suite of tools that provides granular insights into your Azure spending. It enables cost allocation by resource, service, department, or any other relevant dimension.</li>
-</ul>
-<p>It's essential to adopt a FinOps mindset that encourages collaboration between finance, IT, and business teams to drive cost efficiency and value realization in the cloud.</p>
-<p>It's important to note that FinOps is not just about cost-cutting; it's about optimizing cloud spending to align with business objectives and maximize ROI.</p>
-<h3 id="azure-cost-management-optimizing-your-azure-spending"><a class="toclink" href="2024/06/09/finops-for-azure-optimizing-your-cloud-spend/#azure-cost-management-optimizing-your-azure-spending">Azure Cost Management: Optimizing Your Azure Spending</a></h3>
-<p>Azure Cost Management empowers you to analyze your Azure spending patterns and identify cost-saving opportunities. Here's a glimpse into its key functionalities:</p>
-<ul>
-<li><strong>Cost Views:</strong> Generate comprehensive reports that categorize your Azure spending by various attributes like resource group, service, or department.</li>
-<li><strong>Cost Alerts:</strong> Set up proactive alerts to notify you when your spending exceeds predefined thresholds.</li>
-<li><strong>Reservations:</strong> Purchase reserved instances of frequently used Azure resources for significant upfront discounts.</li>
-<li><strong>Recommendations:</strong> Azure Cost Management analyzes your usage patterns and recommends potential cost-saving measures, such as rightsizing resources or leveraging spot instances.</li>
-</ul>
-<h3 id="the-power-of-tags-and-azure-policy"><a class="toclink" href="2024/06/09/finops-for-azure-optimizing-your-cloud-spend/#the-power-of-tags-and-azure-policy">The Power of Tags and Azure Policy</a></h3>
-<p>Tags are metadata labels that you can attach to your Azure resources to categorize and track them effectively. They play a pivotal role in FinOps by enabling you to:</p>
-<ul>
-<li>Associate costs with specific departments, projects, or applications.</li>
-<li>Identify unused or underutilized resources for potential cost savings.</li>
-<li>Simplify cost allocation and chargeback processes.</li>
-</ul>
-<p>Azure Policy helps enforce tagging standards and governance rules across your Azure environment. You can define policies that mandate specific tags for all resources, ensuring consistent cost allocation and data accuracy.</p>
-<h3 id="benefits-of-implementing-finops"><a class="toclink" href="2024/06/09/finops-for-azure-optimizing-your-cloud-spend/#benefits-of-implementing-finops">Benefits of Implementing FinOps</a></h3>
-<p>A well-defined FinOps strategy empowers you to:</p>
-<ul>
-<li><strong>Gain Visibility into Cloud Spending:</strong>  Obtain a clear picture of your Azure expenditures, enabling informed budgeting and cost control decisions.</li>
-<li><strong>Optimize Cloud Costs:</strong> Identify and eliminate wasteful spending through cost-saving recommendations and proactive measures.</li>
-<li><strong>Improve Cloud Governance:</strong>  Enforce tagging policies and spending limits to ensure responsible cloud resource utilization.</li>
-<li><strong>Align Cloud Spending with Business Value:</strong>  Make data-driven decisions about cloud investments that support your business objectives.</li>
-</ul>
-<h3 id="getting-started-with-finops-in-azure"><a class="toclink" href="2024/06/09/finops-for-azure-optimizing-your-cloud-spend/#getting-started-with-finops-in-azure">Getting Started with FinOps in Azure</a></h3>
-<p>Implementing FinOps doesn't necessitate a complex overhaul. Here's a recommended approach:</p>
-<ol>
-<li><strong>Establish a FinOps Team:</strong>  Assemble a cross-functional team comprising representatives from finance, IT, and business departments.</li>
-<li><strong>Set Clear Goals and Objectives:</strong>  Define your FinOps goals, whether it's reducing costs by a specific percentage or improving budget forecasting accuracy.</li>
-<li><strong>Leverage Azure Cost Management:</strong>  Start by exploring Azure Cost Management to understand your current spending patterns.</li>
-<li><strong>Implement Basic Tagging Standards:</strong>  Enforce basic tagging policies to categorize your Azure resources for cost allocation purposes.</li>
-<li><strong>Continuously Monitor and Refine:</strong>  Regularly review your cloud cost reports and identify areas for further optimization.</li>
-</ol>
-<p>By following these steps and embracing a FinOps culture, you can effectively manage your Azure expenses and derive maximum value from your cloud investment.</p>
-<h3 id="toolchain-for-finops-in-azure"><a class="toclink" href="2024/06/09/finops-for-azure-optimizing-your-cloud-spend/#toolchain-for-finops-in-azure">Toolchain for FinOps in Azure</a></h3>
-<p>To streamline your FinOps practices in Azure, consider leveraging the following tools:</p>
-<pre class="mermaid"><code>graph LR
-A[Financial Operations Practices] --&gt; B{Cloud Spend Optimization}
-B --&gt; C{Cost Visibility}
-B --&gt; D{Cost Optimization}
-B --&gt; E{Governance}
-C --&gt; F{Azure Cost Management}
-D --&gt; G{Azure Advisor}
-E --&gt; H{Azure Policy}
-F --&gt; I{Cost Views}
-F --&gt; J{Cost Alerts}
-G --&gt; K{Cost Recommendations}
-H --&gt; L{Tag Enforcement}
-</code></pre>
-<p>This toolchain combines Azure Cost Management, Azure Advisor, and Azure Policy to provide a comprehensive suite of capabilities for managing your Azure spending effectively.</p>
-<p><strong>Highly recommended</strong>, you can check <a href="https://microsoft.github.io/finops-toolkit/">FinOps toolkit</a>, it's a set of tools and best practices to help you implement FinOps in your organization, it includes tools for cost allocation, budgeting, and forecasting, as well as best practices for FinOps implementation.</p>
-<h3 id="conclusion"><a class="toclink" href="2024/06/09/finops-for-azure-optimizing-your-cloud-spend/#conclusion">Conclusion</a></h3>
-<p>FinOps is an essential practice for organizations leveraging Azure. It empowers you to make informed decisions about your cloud finances, optimize spending, and achieve your business goals. As an Azure Solutions Architect, I recommend that you establish a FinOps practice within your organization to unlock the full potential of Azure and achieve financial efficiency in the cloud.</p>
-<p>This blog post provides a foundational understanding of FinOps in Azure. </p>
-<p>By embracing FinOps, you can transform your cloud cost management practices and drive business success in the cloud era.</p>
-<h3 id="references"><a class="toclink" href="2024/06/09/finops-for-azure-optimizing-your-cloud-spend/#references">References</a></h3>
-<ul>
-<li><a href="https://www.youtube.com/watch?v=YHUptdFtozQ">Thanks John Savill</a></li>
-<li><a href="https://microsoft.github.io/finops-toolkit/">FinOps toolkit</a></li>
-</ul>
-</div>
-</article>
 <nav class="md-pagination">
-<span class="md-pagination__current">1</span> <a class="md-pagination__link" href="page/2/">2</a> <a class="md-pagination__link" href="page/3/">3</a> <span class="md-pagination__dots">..</span> <a class="md-pagination__link" href="page/6/">6</a>
+<span class="md-pagination__current">1</span> <a class="md-pagination__link" href="page/2/">2</a> <a class="md-pagination__link" href="page/3/">3</a> <span class="md-pagination__dots">..</span> <a class="md-pagination__link" href="page/7/">7</a>
 </nav>
 </div>
 </div>

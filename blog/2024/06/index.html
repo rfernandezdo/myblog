@@ -241,6 +241,13 @@
           </label>
 <ul class="md-nav__list" data-md-scrollfix="">
 <li class="md-nav__item">
+<a class="md-nav__link" href="../10/">
+<span class="md-ellipsis">
+    2024/10
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
 <a class="md-nav__link" href="../09/">
 <span class="md-ellipsis">
     2024/09
@@ -486,6 +493,13 @@
 <a class="md-nav__link" href="../../category/microsoft-entra/">
 <span class="md-ellipsis">
     Microsoft Entra
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../category/microsoft-entra-external-id/">
+<span class="md-ellipsis">
+    Microsoft Entra External ID
   </span>
 </a>
 </li>
@@ -1939,7 +1953,7 @@ click BG2 "https://learn.microsoft.com/en-us/azure/role-based-access-control/bui
 <p>To set up a VNet data gateway, follow these steps:</p>
 <h4 id="register-microsoftpowerplatform-as-a-resource-provider"><a class="toclink" href="11/securely-connect-power-bi-to-data-sources-with-a-vnet-data-gateway/#register-microsoftpowerplatform-as-a-resource-provider">Register Microsoft.PowerPlatform as a resource provider</a></h4>
 <p>Before you can create a VNet data gateway, you need to register the Microsoft.PowerPlatform resource provider. This can be done using the Azure portal or the Azure CLI.</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a href="#__codelineno-2-1" id="__codelineno-2-1" name="__codelineno-2-1"></a>az provider register --namespace Microsoft.PowerPlatform
+<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a href="#__codelineno-0-1" id="__codelineno-0-1" name="__codelineno-0-1"></a>az provider register --namespace Microsoft.PowerPlatform
 </span></code></pre></div>
 <h4 id="associate-the-subnet-to-microsoft-power-platform"><a class="toclink" href="11/securely-connect-power-bi-to-data-sources-with-a-vnet-data-gateway/#associate-the-subnet-to-microsoft-power-platform">Associate the subnet to Microsoft Power Platform</a></h4>
 <p>Create a VNet in your Azure subscription and a subnet where the VNet data gateway will be deployed. Next, you need to delegate subnet to service <strong>Microsoft.PowerPlatform/vnetaccesslinks</strong>. </p>
@@ -1952,15 +1966,15 @@ click BG2 "https://learn.microsoft.com/en-us/azure/role-based-access-control/bui
 </ul>
 </div>
 <p>This can be done using the Azure portal or the Azure CLI.</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a href="#__codelineno-3-1" id="__codelineno-3-1" name="__codelineno-3-1"></a># Create a VNet and address prefix 10.0.0.0/24
-</span><span id="__span-3-2"><a href="#__codelineno-3-2" id="__codelineno-3-2" name="__codelineno-3-2"></a>az network vnet create --name MyVNet --resource-group MyResourceGroup --location eastus --address-prefixes 10.0.0.0/24
-</span><span id="__span-3-3"><a href="#__codelineno-3-3" id="__codelineno-3-3" name="__codelineno-3-3"></a>
-</span><span id="__span-3-4"><a href="#__codelineno-3-4" id="__codelineno-3-4" name="__codelineno-3-4"></a>
-</span><span id="__span-3-5"><a href="#__codelineno-3-5" id="__codelineno-3-5" name="__codelineno-3-5"></a># Create a Netwrok Security Group
-</span><span id="__span-3-6"><a href="#__codelineno-3-6" id="__codelineno-3-6" name="__codelineno-3-6"></a>az network nsg create --name MyNsg --resource-group MyResourceGroup --location eastus
-</span><span id="__span-3-7"><a href="#__codelineno-3-7" id="__codelineno-3-7" name="__codelineno-3-7"></a>
-</span><span id="__span-3-8"><a href="#__codelineno-3-8" id="__codelineno-3-8" name="__codelineno-3-8"></a># Create a subnet with delegation to Microsoft.PowerPlatform/vnetaccesslinks and associate the NSG
-</span><span id="__span-3-9"><a href="#__codelineno-3-9" id="__codelineno-3-9" name="__codelineno-3-9"></a>az network vnet subnet create --name MySubnet --vnet-name MyVNet --resource-group MyResourceGroup --address-prefixes 10.0.0.1/27 --network-security-group MyNsg --delegations Microsoft.PowerPlatform/vnetaccesslinks
+<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a href="#__codelineno-1-1" id="__codelineno-1-1" name="__codelineno-1-1"></a># Create a VNet and address prefix 10.0.0.0/24
+</span><span id="__span-1-2"><a href="#__codelineno-1-2" id="__codelineno-1-2" name="__codelineno-1-2"></a>az network vnet create --name MyVNet --resource-group MyResourceGroup --location eastus --address-prefixes 10.0.0.0/24
+</span><span id="__span-1-3"><a href="#__codelineno-1-3" id="__codelineno-1-3" name="__codelineno-1-3"></a>
+</span><span id="__span-1-4"><a href="#__codelineno-1-4" id="__codelineno-1-4" name="__codelineno-1-4"></a>
+</span><span id="__span-1-5"><a href="#__codelineno-1-5" id="__codelineno-1-5" name="__codelineno-1-5"></a># Create a Netwrok Security Group
+</span><span id="__span-1-6"><a href="#__codelineno-1-6" id="__codelineno-1-6" name="__codelineno-1-6"></a>az network nsg create --name MyNsg --resource-group MyResourceGroup --location eastus
+</span><span id="__span-1-7"><a href="#__codelineno-1-7" id="__codelineno-1-7" name="__codelineno-1-7"></a>
+</span><span id="__span-1-8"><a href="#__codelineno-1-8" id="__codelineno-1-8" name="__codelineno-1-8"></a># Create a subnet with delegation to Microsoft.PowerPlatform/vnetaccesslinks and associate the NSG
+</span><span id="__span-1-9"><a href="#__codelineno-1-9" id="__codelineno-1-9" name="__codelineno-1-9"></a>az network vnet subnet create --name MySubnet --vnet-name MyVNet --resource-group MyResourceGroup --address-prefixes 10.0.0.1/27 --network-security-group MyNsg --delegations Microsoft.PowerPlatform/vnetaccesslinks
 </span></code></pre></div>
 <h4 id="create-a-vnet-data-gateway"><a class="toclink" href="11/securely-connect-power-bi-to-data-sources-with-a-vnet-data-gateway/#create-a-vnet-data-gateway">Create a VNet data gateway</a></h4>
 <div class="admonition note">
@@ -2021,14 +2035,14 @@ click BG2 "https://learn.microsoft.com/en-us/azure/role-based-access-control/bui
 <p>You can install the OPA CLI by downloading the binary from the <a href="https://github.com/open-policy-agent/opa/releases">OPA GitHub releases page</a>, you can check the <a href="https://www.openpolicyagent.org/docs/latest/#running-opa">installation guide</a> for more details.</p>
 <p>Once you have installed the OPA CLI, you can write policies in Rego. Rego is a high-level declarative language that allows you to define policies in a clear and concise way.</p>
 <p>Here's a simple example of a policy that enforces a naming convention for Azure resources:</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a href="#__codelineno-1-1" id="__codelineno-1-1" name="__codelineno-1-1"></a>package azure.resources
-</span><span id="__span-1-2"><a href="#__codelineno-1-2" id="__codelineno-1-2" name="__codelineno-1-2"></a>
-</span><span id="__span-1-3"><a href="#__codelineno-1-3" id="__codelineno-1-3" name="__codelineno-1-3"></a>default allow = false
-</span><span id="__span-1-4"><a href="#__codelineno-1-4" id="__codelineno-1-4" name="__codelineno-1-4"></a>
-</span><span id="__span-1-5"><a href="#__codelineno-1-5" id="__codelineno-1-5" name="__codelineno-1-5"></a>allow {
-</span><span id="__span-1-6"><a href="#__codelineno-1-6" id="__codelineno-1-6" name="__codelineno-1-6"></a>    input.resource.type == "Microsoft.Compute/virtualMachines"
-</span><span id="__span-1-7"><a href="#__codelineno-1-7" id="__codelineno-1-7" name="__codelineno-1-7"></a>    input.resource.name == "my-vm"
-</span><span id="__span-1-8"><a href="#__codelineno-1-8" id="__codelineno-1-8" name="__codelineno-1-8"></a>}
+<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a href="#__codelineno-0-1" id="__codelineno-0-1" name="__codelineno-0-1"></a>package azure.resources
+</span><span id="__span-0-2"><a href="#__codelineno-0-2" id="__codelineno-0-2" name="__codelineno-0-2"></a>
+</span><span id="__span-0-3"><a href="#__codelineno-0-3" id="__codelineno-0-3" name="__codelineno-0-3"></a>default allow = false
+</span><span id="__span-0-4"><a href="#__codelineno-0-4" id="__codelineno-0-4" name="__codelineno-0-4"></a>
+</span><span id="__span-0-5"><a href="#__codelineno-0-5" id="__codelineno-0-5" name="__codelineno-0-5"></a>allow {
+</span><span id="__span-0-6"><a href="#__codelineno-0-6" id="__codelineno-0-6" name="__codelineno-0-6"></a>    input.resource.type == "Microsoft.Compute/virtualMachines"
+</span><span id="__span-0-7"><a href="#__codelineno-0-7" id="__codelineno-0-7" name="__codelineno-0-7"></a>    input.resource.name == "my-vm"
+</span><span id="__span-0-8"><a href="#__codelineno-0-8" id="__codelineno-0-8" name="__codelineno-0-8"></a>}
 </span></code></pre></div>
 <p>This policy allows resources of type <code>Microsoft.Compute/virtualMachines</code> with the name <code>my-vm</code>. You can write more complex policies that enforce a wide range of requirements, such as resource tagging, network security, and access control.</p>
 <h3 id="integrating-open-policy-agent-with-azure"><a class="toclink" href="10/implementing-policy-as-code-with-open-policy-agent/#integrating-open-policy-agent-with-azure">Integrating Open Policy Agent with Azure</a></h3>

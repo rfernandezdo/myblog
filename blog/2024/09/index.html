@@ -8,7 +8,7 @@
 <meta content="A blog about Azure, DevOps and other stuff" name="description"/>
 <meta content="Rafael Fernández" name="author"/>
 <link href="https://rfernandezdo.github.io/blog/2024/09/" rel="canonical"/>
-<link href="../../category/windows/" rel="prev"/>
+<link href="../10/" rel="prev"/>
 <link href="../06/" rel="next"/>
 <link href="../../../feed_rss_created.xml" rel="alternate" title="RSS feed" type="application/rss+xml"/>
 <link href="../../../feed_rss_updated.xml" rel="alternate" title="RSS feed of updated content" type="application/rss+xml"/>
@@ -240,6 +240,13 @@
             Archive
           </label>
 <ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../10/">
+<span class="md-ellipsis">
+    2024/10
+  </span>
+</a>
+</li>
 <li class="md-nav__item md-nav__item--active">
 <input class="md-nav__toggle md-toggle" id="__toc" type="checkbox"/>
 <label class="md-nav__link md-nav__link--active" for="__toc">
@@ -259,6 +266,27 @@
       Table of contents
     </label>
 <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#microsoft-entra-id-protection">
+<span class="md-ellipsis">
+      Microsoft Entra ID Protection
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#microsoft-entra-attribute-duplicate-attribute-resiliency">
+<span class="md-ellipsis">
+      Microsoft Entra Attribute Duplicate Attribute Resiliency
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#differences-between-b2b-direct-connect-and-b2b-collaboration-in-english">
+<span class="md-ellipsis">
+      Differences between B2B Direct Connect and B2B Collaboration in English
+    </span>
+</a>
+</li>
 <li class="md-nav__item">
 <a class="md-nav__link" href="#markmap">
 <span class="md-ellipsis">
@@ -430,6 +458,13 @@
 <a class="md-nav__link" href="../../category/microsoft-entra/">
 <span class="md-ellipsis">
     Microsoft Entra
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../category/microsoft-entra-external-id/">
+<span class="md-ellipsis">
+    Microsoft Entra External ID
   </span>
 </a>
 </li>
@@ -657,6 +692,162 @@
 <div class="md-post__meta md-meta">
 <ul class="md-meta__list">
 <li class="md-meta__item">
+<time datetime="2024-09-22 00:00:00">September 22, 2024</time></li>
+<li class="md-meta__item">
+            in
+            
+              <a class="md-meta__link" href="../../category/microsoft-entra/">Microsoft Entra</a>, 
+              <a class="md-meta__link" href="../../category/security/">Security</a></li>
+<li class="md-meta__item">
+            
+              2 min read
+            
+          </li>
+</ul>
+</div>
+</header>
+<div class="md-post__content md-typeset">
+<h2 id="microsoft-entra-id-protection"><a class="toclink" href="22/microsoft-entra-id-protection/">Microsoft Entra ID Protection</a></h2>
+<p>Microsoft Entra offers a comprehensive set of security features to protect your organization's data and resources. One of these features is <strong>ID Protection</strong>, which helps you secure your users' identities and prevent unauthorized access to your organization's data. Here are some key benefits of using <strong>ID Protection</strong> in Microsoft Entra:</p>
+<ul>
+<li>
+<p><strong>Multi-factor authentication (MFA)</strong>: <strong>ID Protection</strong> enables you to enforce multi-factor authentication for all users in your organization. This adds an extra layer of security to your users' accounts and helps prevent unauthorized access.</p>
+</li>
+<li>
+<p><strong>Conditional access policies</strong>: With <strong>ID Protection</strong>, you can create conditional access policies that define the conditions under which users can access your organization's resources. For example, you can require users to use multi-factor authentication when accessing sensitive data or restrict access to certain applications based on the user's location.</p>
+</li>
+<li>
+<p><strong>Risk-based policies</strong>: <strong>ID Protection</strong> uses advanced machine learning algorithms to detect suspicious activities and risky sign-in attempts. You can create risk-based policies that automatically block or allow access based on the risk level associated with the sign-in attempt.</p>
+</li>
+<li>
+<p><strong>Identity protection reports</strong>: <strong>ID Protection</strong> provides detailed reports and insights into your organization's identity security posture. You can use these reports to identify security risks, monitor user activity, and take proactive measures to protect your organization's data.</p>
+</li>
+</ul>
+<p>By using <strong>ID Protection</strong> in Microsoft Entra, you can enhance the security of your organization's data and resources and protect your users' identities from cyber threats. If you want to learn more about <strong>ID Protection</strong> and other security features in Microsoft Entra, contact us today! </p>
+<p>I hope this helps!</p>
+</div>
+</article>
+<article class="md-post md-post--excerpt">
+<header class="md-post__header">
+<nav class="md-post__authors md-typeset">
+<span class="md-author">
+<img alt="Rafael Fernández" src="https://avatars.githubusercontent.com/u/39990341"/>
+</span>
+</nav>
+<div class="md-post__meta md-meta">
+<ul class="md-meta__list">
+<li class="md-meta__item">
+<time datetime="2024-09-22 00:00:00">September 22, 2024</time></li>
+<li class="md-meta__item">
+            in
+            
+              <a class="md-meta__link" href="../../category/microsoft-entra-id/">Microsoft Entra ID</a></li>
+<li class="md-meta__item">
+            
+              1 min read
+            
+          </li>
+</ul>
+</div>
+</header>
+<div class="md-post__content md-typeset">
+<h2 id="microsoft-entra-attribute-duplicate-attribute-resiliency"><a class="toclink" href="22/microsoft-entra-attribute-duplicate-attribute-resiliency/">Microsoft Entra Attribute Duplicate Attribute Resiliency</a></h2>
+<p>Microsoft Entra Attribute Duplicate Attribute Resiliency feature is also being rolled out as the default behavior of Microsoft Entra ID. This will reduce the number of synchronization errors seen by Microsoft Entra Connect (as well as other sync clients) by making Microsoft Entra ID more resilient in the way it handles duplicated ProxyAddresses and UserPrincipalName attributes present in on premises AD environments. This feature does not fix the duplication errors. So the data still needs to be fixed. But it allows provisioning of new objects which are otherwise blocked from being provisioned due to duplicated values in Microsoft Entra ID. This will also reduce the number of synchronization errors returned to the synchronization client. If this feature is enabled for your Tenant, you will not see the InvalidSoftMatch synchronization errors seen during provisioning of new objects.</p>
+<h3 id="behavior-with-duplicate-attribute-resiliency"><a class="toclink" href="22/microsoft-entra-attribute-duplicate-attribute-resiliency/#behavior-with-duplicate-attribute-resiliency">Behavior with Duplicate Attribute Resiliency</a></h3>
+<pre class="mermaid"><code>graph TD
+    A[Start] --&gt; B[Provision or Update Object]
+    B --&gt; C{Duplicate Attribute?}
+    C -- Yes --&gt; D[Quarantine Duplicate Attribute]
+    D --&gt; E{Is Attribute Required?}
+    E -- Yes --&gt; F[Assign Placeholder Value]
+    F --&gt; G[Send Error Report Email]
+    E -- No --&gt; H[Proceed with Object Creation/Update]
+    H --&gt; G
+    G --&gt; I[Export Succeeds]
+    I --&gt; J[Sync Client Does Not Log Error]
+    J --&gt; K[Sync Client Does Not Retry Operation]
+    K --&gt; L[Background Timer Task Every Hour]
+    L --&gt; M[Check for Resolved Conflicts]
+    M --&gt; N[Remove Attributes from Quarantine]
+    C -- No --&gt; H
+</code></pre>
+</div>
+</article>
+<article class="md-post md-post--excerpt">
+<header class="md-post__header">
+<nav class="md-post__authors md-typeset">
+<span class="md-author">
+<img alt="Rafael Fernández" src="https://avatars.githubusercontent.com/u/39990341"/>
+</span>
+</nav>
+<div class="md-post__meta md-meta">
+<ul class="md-meta__list">
+<li class="md-meta__item">
+<time datetime="2024-09-21 00:00:00">September 21, 2024</time></li>
+<li class="md-meta__item">
+            in
+            
+              <a class="md-meta__link" href="../../category/microsoft-entra-external-id/">Microsoft Entra External ID</a></li>
+<li class="md-meta__item">
+            
+              1 min read
+            
+          </li>
+</ul>
+</div>
+</header>
+<div class="md-post__content md-typeset">
+<h2 id="differences-between-b2b-direct-connect-and-b2b-collaboration-in-english"><a class="toclink" href="21/differences-between-b2b-direct-connect-and-b2b-collaboration-in-english/">Differences between <strong>B2B Direct Connect</strong> and <strong>B2B Collaboration</strong> in English</a></h2>
+<p>Microsoft Entra offers two ways to collaborate with external users: <strong>B2B Direct Connect</strong> and <strong>B2B Collaboration</strong>. Both features allow organizations to share resources with external users while maintaining control over access and security. However, they differ in functionality, access, and integration. Here is a comparison between <strong>B2B Direct Connect</strong> and <strong>B2B Collaboration</strong>:</p>
+<table>
+<thead>
+<tr>
+<th><strong>Feature</strong></th>
+<th><strong>B2B Direct Connect</strong></th>
+<th><strong>B2B Collaboration</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Definition</strong></td>
+<td>Mutual trust relationship between two Microsoft Entra organizations</td>
+<td>Invite external users to access resources using their own credentials</td>
+</tr>
+<tr>
+<td><strong>Functionality</strong></td>
+<td>Seamless collaboration using origin credentials and shared channels in Teams</td>
+<td>External users receive an invitation and access resources after authentication</td>
+</tr>
+<tr>
+<td><strong>Applications</strong></td>
+<td>Shared channels in Microsoft Teams</td>
+<td>Wide range of applications and services within the Microsoft ecosystem</td>
+</tr>
+<tr>
+<td><strong>Access</strong></td>
+<td>Single sign-on (SSO) with origin credentials</td>
+<td>Authentication each time resources are accessed, unless direct federation is set up</td>
+</tr>
+<tr>
+<td><strong>Integration</strong></td>
+<td>Deep and continuous integration between two organizations</td>
+<td>Flexible way to invite and manage external users</td>
+</tr>
+</tbody>
+</table>
+<p>I hope this helps! </p>
+</div>
+</article>
+<article class="md-post md-post--excerpt">
+<header class="md-post__header">
+<nav class="md-post__authors md-typeset">
+<span class="md-author">
+<img alt="Rafael Fernández" src="https://avatars.githubusercontent.com/u/39990341"/>
+</span>
+</nav>
+<div class="md-post__meta md-meta">
+<ul class="md-meta__list">
+<li class="md-meta__item">
 <time datetime="2024-09-09 00:00:00">September 9, 2024</time></li>
 <li class="md-meta__item">
             in
@@ -778,7 +969,10 @@
 <script src="../../../assets/javascripts/bundle.56dfad97.min.js"></script>
 <script src="https://unpkg.com/tablesort@5.3.0/dist/tablesort.min.js"></script>
 <script src="../../../javascripts/tablesort.js"></script>
-<script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+<script type="module">import mermaid from "https://unpkg.com/mermaid@11.2.0/dist/mermaid.esm.min.mjs";
+window.mermaidConfig = {default: {
+    startOnLoad: false
+}};</script><script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
 document$.subscribe(() => { lightbox.reload() });
 </script></body>
 </html>

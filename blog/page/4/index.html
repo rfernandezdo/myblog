@@ -241,6 +241,13 @@
           </label>
 <ul class="md-nav__list" data-md-scrollfix="">
 <li class="md-nav__item">
+<a class="md-nav__link" href="../../2024/10/">
+<span class="md-ellipsis">
+    2024/10
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
 <a class="md-nav__link" href="../../2024/09/">
 <span class="md-ellipsis">
     2024/09
@@ -408,6 +415,13 @@
 <a class="md-nav__link" href="../../category/microsoft-entra/">
 <span class="md-ellipsis">
     Microsoft Entra
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../category/microsoft-entra-external-id/">
+<span class="md-ellipsis">
+    Microsoft Entra External ID
   </span>
 </a>
 </li>
@@ -625,6 +639,446 @@
 <header class="md-typeset">
 <h1 id="blog">Blog</h1>
 </header>
+<article class="md-post md-post--excerpt">
+<header class="md-post__header">
+<nav class="md-post__authors md-typeset">
+<span class="md-author">
+<img alt="Rafael Fernández" src="https://avatars.githubusercontent.com/u/39990341"/>
+</span>
+</nav>
+<div class="md-post__meta md-meta">
+<ul class="md-meta__list">
+<li class="md-meta__item">
+<time datetime="2024-04-19 00:00:00">April 19, 2024</time></li>
+<li class="md-meta__item">
+            in
+            
+              <a class="md-meta__link" href="../../category/azure-services/">Azure Services</a></li>
+<li class="md-meta__item">
+            
+              5 min read
+            
+          </li>
+</ul>
+</div>
+</header>
+<div class="md-post__content md-typeset">
+<h2 id="azure-network-hub-and-spoke-topology"><a class="toclink" href="../../2024/04/19/azure-network-hub-and-spoke-topology/">Azure Network, Hub-and-Spoke Topology</a></h2>
+<p>Hub and Spoke is a network topology where a central Hub is connected to multiple Spokes. The Hub acts as a central point of connectivity and control, while the Spokes are isolated networks that connect to the Hub. This topology is common in Azure to simplify the connectivity and management of virtual networks.</p>
+<pre class="mermaid"><code>graph TD
+    HUB(("Central Hub"))
+    SPOKE1[Spoke1]
+    SPOKE2[Spoke2]
+    SPOKE3[Spoke3]
+    SPOKEN[Spoke...]
+    HUB --- SPOKE1
+    HUB --- SPOKE2
+    HUB --- SPOKE3
+    HUB --- SPOKEN
+</code></pre>
+<h3 id="key-features-of-the-hub-and-spoke-topology"><a class="toclink" href="../../2024/04/19/azure-network-hub-and-spoke-topology/#key-features-of-the-hub-and-spoke-topology">Key Features of the Hub and Spoke Topology</a></h3>
+<ol>
+<li>
+<p><strong>Centralized Connectivity:</strong> The Hub centralizes the connectivity between the Spoke networks. This simplifies the administration and maintenance of the network.</p>
+</li>
+<li>
+<p><strong>Traffic Control:</strong> The Hub acts as a traffic control point between the Spoke networks. This allows for centralized application of security and routing policies.</p>
+</li>
+<li>
+<p><strong>Scalability:</strong> The Hub and Spoke topology is highly scalable and can grow to meet the organization's connectivity needs.</p>
+</li>
+<li>
+<p><strong>Resilience:</strong> The Hub and Spoke topology provides redundancy and resilience in case of network failures.</p>
+</li>
+</ol>
+<h3 id="how-to-use-the-hub-and-spoke-topology-in-azure"><a class="toclink" href="../../2024/04/19/azure-network-hub-and-spoke-topology/#how-to-use-the-hub-and-spoke-topology-in-azure">How to Use the Hub and Spoke Topology in Azure</a></h3>
+<p>To implement the Hub and Spoke topology in Azure, follow these steps:</p>
+<div class="language-sh highlight"><pre><span></span><code><span id="__span-0-1"><a href="#__codelineno-0-1" id="__codelineno-0-1" name="__codelineno-0-1"></a><span class="c1"># Step 1: Create a virtual network for the Hub</span>
+</span><span id="__span-0-2"><a href="#__codelineno-0-2" id="__codelineno-0-2" name="__codelineno-0-2"></a>az<span class="w"> </span>network<span class="w"> </span>vnet<span class="w"> </span>create<span class="w"> </span>--name<span class="w"> </span>HubVnet<span class="w"> </span>--resource-group<span class="w"> </span>MyResourceGroup<span class="w"> </span>--location<span class="w"> </span>eastus<span class="w"> </span>--address-prefix
+</span><span id="__span-0-3"><a href="#__codelineno-0-3" id="__codelineno-0-3" name="__codelineno-0-3"></a>
+</span><span id="__span-0-4"><a href="#__codelineno-0-4" id="__codelineno-0-4" name="__codelineno-0-4"></a><span class="c1"># Step 2: Create virtual networks for the Spokes</span>
+</span><span id="__span-0-5"><a href="#__codelineno-0-5" id="__codelineno-0-5" name="__codelineno-0-5"></a>az<span class="w"> </span>network<span class="w"> </span>vnet<span class="w"> </span>create<span class="w"> </span>--name<span class="w"> </span>Spoke1Vnet<span class="w"> </span>--resource-group<span class="w"> </span>MyResourceGroup<span class="w"> </span>--location<span class="w"> </span>eastus<span class="w"> </span>--address-prefix
+</span><span id="__span-0-6"><a href="#__codelineno-0-6" id="__codelineno-0-6" name="__codelineno-0-6"></a>az<span class="w"> </span>network<span class="w"> </span>vnet<span class="w"> </span>create<span class="w"> </span>--name<span class="w"> </span>Spoke2Vnet<span class="w"> </span>--resource-group<span class="w"> </span>MyResourceGroup<span class="w"> </span>--location<span class="w"> </span>eastus<span class="w"> </span>--address-prefix
+</span><span id="__span-0-7"><a href="#__codelineno-0-7" id="__codelineno-0-7" name="__codelineno-0-7"></a>az<span class="w"> </span>network<span class="w"> </span>vnet<span class="w"> </span>create<span class="w"> </span>--name<span class="w"> </span>Spoke3Vnet<span class="w"> </span>--resource-group<span class="w"> </span>MyResourceGroup<span class="w"> </span>--location<span class="w"> </span>eastus<span class="w"> </span>--address-prefix
+</span><span id="__span-0-8"><a href="#__codelineno-0-8" id="__codelineno-0-8" name="__codelineno-0-8"></a>
+</span><span id="__span-0-9"><a href="#__codelineno-0-9" id="__codelineno-0-9" name="__codelineno-0-9"></a><span class="c1"># Step 3: Connect the Spokes to the Hub</span>
+</span><span id="__span-0-10"><a href="#__codelineno-0-10" id="__codelineno-0-10" name="__codelineno-0-10"></a>az<span class="w"> </span>network<span class="w"> </span>vnet<span class="w"> </span>peering<span class="w"> </span>create<span class="w"> </span>--name<span class="w"> </span>Spoke1ToHub<span class="w"> </span>--resource-group<span class="w"> </span>MyResourceGroup<span class="w"> </span>--vnet-name<span class="w"> </span>Spoke1Vnet<span class="w"> </span>--remote-vnet<span class="w"> </span>HubVnet<span class="w"> </span>--allow-vnet-access
+</span><span id="__span-0-11"><a href="#__codelineno-0-11" id="__codelineno-0-11" name="__codelineno-0-11"></a>az<span class="w"> </span>network<span class="w"> </span>vnet<span class="w"> </span>peering<span class="w"> </span>create<span class="w"> </span>--name<span class="w"> </span>Spoke2ToHub<span class="w"> </span>--resource-group<span class="w"> </span>MyResourceGroup<span class="w"> </span>--vnet-name<span class="w"> </span>Spoke2Vnet<span class="w"> </span>--remote-vnet<span class="w"> </span>HubVnet<span class="w"> </span>--allow-vnet-access
+</span><span id="__span-0-12"><a href="#__codelineno-0-12" id="__codelineno-0-12" name="__codelineno-0-12"></a>az<span class="w"> </span>network<span class="w"> </span>vnet<span class="w"> </span>peering<span class="w"> </span>create<span class="w"> </span>--name<span class="w"> </span>Spoke3ToHub<span class="w"> </span>--resource-group<span class="w"> </span>MyResourceGroup<span class="w"> </span>--vnet-name<span class="w"> </span>Spoke3Vnet<span class="w"> </span>--remote-vnet<span class="w"> </span>HubVnet<span class="w"> </span>--allow-vnet-access
+</span><span id="__span-0-13"><a href="#__codelineno-0-13" id="__codelineno-0-13" name="__codelineno-0-13"></a>
+</span><span id="__span-0-14"><a href="#__codelineno-0-14" id="__codelineno-0-14" name="__codelineno-0-14"></a><span class="c1"># Step 4: Configure routing between the Hub and the Spokes</span>
+</span><span id="__span-0-15"><a href="#__codelineno-0-15" id="__codelineno-0-15" name="__codelineno-0-15"></a>az<span class="w"> </span>network<span class="w"> </span>vnet<span class="w"> </span>peering<span class="w"> </span>update<span class="w"> </span>--name<span class="w"> </span>Spoke1ToHub<span class="w"> </span>--resource-group<span class="w"> </span>MyResourceGroup<span class="w"> </span>--vnet-name<span class="w"> </span>Spoke1Vnet<span class="w"> </span>--set<span class="w"> </span>virtualNetworkGateway:AllowGatewayTransit<span class="o">=</span><span class="nb">true</span>
+</span><span id="__span-0-16"><a href="#__codelineno-0-16" id="__codelineno-0-16" name="__codelineno-0-16"></a>az<span class="w"> </span>network<span class="w"> </span>vnet<span class="w"> </span>peering<span class="w"> </span>update<span class="w"> </span>--name<span class="w"> </span>Spoke2ToHub<span class="w"> </span>--resource-group<span class="w"> </span>MyResourceGroup<span class="w"> </span>--vnet-name<span class="w"> </span>Spoke2Vnet<span class="w"> </span>--set<span class="w"> </span>virtualNetworkGateway:AllowGatewayTransit<span class="o">=</span><span class="nb">true</span>
+</span><span id="__span-0-17"><a href="#__codelineno-0-17" id="__codelineno-0-17" name="__codelineno-0-17"></a>az<span class="w"> </span>network<span class="w"> </span>vnet<span class="w"> </span>peering<span class="w"> </span>update<span class="w"> </span>--name<span class="w"> </span>Spoke3ToHub<span class="w"> </span>--resource-group<span class="w"> </span>MyResourceGroup<span class="w"> </span>--vnet-name<span class="w"> </span>Spoke3Vnet<span class="w"> </span>--set<span class="w"> </span>virtualNetworkGateway:AllowGatewayTransit<span class="o">=</span><span class="nb">true</span>
+</span><span id="__span-0-18"><a href="#__codelineno-0-18" id="__codelineno-0-18" name="__codelineno-0-18"></a>
+</span><span id="__span-0-19"><a href="#__codelineno-0-19" id="__codelineno-0-19" name="__codelineno-0-19"></a><span class="c1"># Step 5: Configure routing in the Hub</span>
+</span><span id="__span-0-20"><a href="#__codelineno-0-20" id="__codelineno-0-20" name="__codelineno-0-20"></a>az<span class="w"> </span>network<span class="w"> </span>vnet<span class="w"> </span>peering<span class="w"> </span>update<span class="w"> </span>--name<span class="w"> </span>HubToSpoke1<span class="w"> </span>--resource-group<span class="w"> </span>MyResourceGroup<span class="w"> </span>--vnet-name<span class="w"> </span>HubVnet<span class="w"> </span>--set<span class="w"> </span>virtualNetworkGateway:UseRemoteGateways<span class="o">=</span><span class="nb">true</span>
+</span><span id="__span-0-21"><a href="#__codelineno-0-21" id="__codelineno-0-21" name="__codelineno-0-21"></a>az<span class="w"> </span>network<span class="w"> </span>vnet<span class="w"> </span>peering<span class="w"> </span>update<span class="w"> </span>--name<span class="w"> </span>HubToSpoke2<span class="w"> </span>--resource-group<span class="w"> </span>MyResourceGroup<span class="w"> </span>--vnet-name<span class="w"> </span>HubVnet<span class="w"> </span>--set<span class="w"> </span>virtualNetworkGateway:UseRemoteGateways<span class="o">=</span><span class="nb">true</span>
+</span><span id="__span-0-22"><a href="#__codelineno-0-22" id="__codelineno-0-22" name="__codelineno-0-22"></a>az<span class="w"> </span>network<span class="w"> </span>vnet<span class="w"> </span>peering<span class="w"> </span>update<span class="w"> </span>--name<span class="w"> </span>HubToSpoke3<span class="w"> </span>--resource-group<span class="w"> </span>MyResourceGroup<span class="w"> </span>--vnet-name<span class="w"> </span>HubVnet<span class="w"> </span>--set<span class="w"> </span>virtualNetworkGateway:UseRemoteGateways<span class="o">=</span><span class="nb">true</span>
+</span></code></pre></div>
+<h3 id="variant-of-the-hub-and-spoke-topology"><a class="toclink" href="../../2024/04/19/azure-network-hub-and-spoke-topology/#variant-of-the-hub-and-spoke-topology">Variant of the Hub and Spoke Topology</a></h3>
+<p>A variant of the Hub and Spoke topology is the Hub and Spoke with peering between spokes that is generally used to allow direct connectivity between the Spoke networks without going through the Hub. This can be useful in scenarios where direct connectivity between the Spoke networks is required, such as data replication or application communication.</p>
+<p><pre class="mermaid"><code>graph TD
+    HUB(("Central Hub"))
+    SPOKE1[Spoke1]
+    SPOKE2[Spoke2]
+    SPOKE3[Spoke3]
+    SPOKEN[Spoke...]
+    HUB --- SPOKE1
+    HUB --- SPOKE2
+    HUB --- SPOKE3
+    HUB --- SPOKEN
+    SPOKE1 -.- SPOKE2    
+</code></pre>
+In this case, it would be connecting the Spoke networks to each other via virtual network peering, for example:</p>
+<div class="language-sh highlight"><pre><span></span><code><span id="__span-1-1"><a href="#__codelineno-1-1" id="__codelineno-1-1" name="__codelineno-1-1"></a><span class="c1"># Connect Spoke1 to Spoke2</span>
+</span><span id="__span-1-2"><a href="#__codelineno-1-2" id="__codelineno-1-2" name="__codelineno-1-2"></a>az<span class="w"> </span>network<span class="w"> </span>vnet<span class="w"> </span>peering<span class="w"> </span>create<span class="w"> </span>--name<span class="w"> </span>Spoke1ToSpoke2<span class="w"> </span>--resource-group<span class="w"> </span>MyResourceGroup<span class="w"> </span>--vnet-name<span class="w"> </span>Spoke1Vnet<span class="w"> </span>--remote-vnet<span class="w"> </span>Spoke2Vnet<span class="w"> </span>--allow-vnet-access
+</span></code></pre></div>
+<h3 id="scalability-and-performance"><a class="toclink" href="../../2024/04/19/azure-network-hub-and-spoke-topology/#scalability-and-performance">Scalability and Performance</a></h3>
+<p>The Hub and Spoke topology in Azure is highly scalable and can handle thousands of virtual networks and subnets. In terms of performance, the Hub and Spoke topology provides efficient and low-latency connectivity between the Spoke networks and the Hub.</p>
+<h3 id="security-and-compliance"><a class="toclink" href="../../2024/04/19/azure-network-hub-and-spoke-topology/#security-and-compliance">Security and Compliance</a></h3>
+<p>The Hub and Spoke topology in Azure provides centralized control over network security and compliance. Security and routing policies can be applied centrally at the Hub, ensuring consistency and compliance with the organization's network policies.</p>
+<h3 id="monitoring-and-logging"><a class="toclink" href="../../2024/04/19/azure-network-hub-and-spoke-topology/#monitoring-and-logging">Monitoring and Logging</a></h3>
+<p>Use Network Watcher to monitor and diagnose network problems in the Hub and Spoke topology. Network Watcher provides the following tools: </p>
+<ul>
+<li>Monitoring<ul>
+<li><a href="https://docs.microsoft.com/en-us/azure/network-watcher/view-network-topology">Topology view</a> shows you the resources in your virtual network and the relationships between them.</li>
+<li><a href="https://docs.microsoft.com/en-us/azure/network-watcher/connection-monitor-overview">Connection monitor</a> allows you to monitor connectivity and latency between endpoints within and outside of Azure.</li>
+</ul>
+</li>
+<li>Network diagnostic tools<ul>
+<li><a href="https://docs.microsoft.com/en-us/azure/network-watcher/network-watcher-ip-flow-verify-overview">IP flow verify</a> helps you detect traffic filtering issues at the virtual machine level.</li>
+<li><a href="https://docs.microsoft.com/en-us/azure/network-watcher/network-watcher-network-configuration-diagnostics-overview">NSG diagnostics</a> helps you detect traffic filtering issues at the virtual machine, virtual machine scale set, or application gateway level.</li>
+<li><a href="https://docs.microsoft.com/en-us/azure/network-watcher/network-watcher-next-hop-overview">Next hop</a> helps you verify traffic routes and detect routing issues.</li>
+<li><a href="https://docs.microsoft.com/en-us/azure/network-watcher/network-watcher-connectivity-portal">Connection troubleshoot</a> enables a one-time check of connectivity and latency between a virtual machine and the Bastion host, application gateway, or another virtual machine.</li>
+<li><a href="https://docs.microsoft.com/en-us/azure/network-watcher/network-watcher-packet-capture-overview">Packet capture</a> allows you to capture traffic from your virtual machine.</li>
+<li><a href="https://docs.microsoft.com/en-us/azure/network-watcher/network-watcher-troubleshoot-overview">VPN troubleshoot</a> runs multiple diagnostic checks on your gateways and VPN connections to help debug issues.</li>
+</ul>
+</li>
+<li>Traffic<ul>
+<li><a href="https://docs.microsoft.com/en-us/azure/network-watcher/network-watcher-nsg-flow-logging-overview">Network security group flow logs</a> and <a href="https://docs.microsoft.com/en-us/azure/network-watcher/vnet-flow-logs-overview">virtual network flow logs</a> let you log network traffic passing through your network security groups (NSGs) and virtual networks respectively.</li>
+<li><a href="https://docs.microsoft.com/en-us/azure/network-watcher/traffic-analytics">Traffic analytics</a> processes data from your network security group flow log allowing you to visualize, query, analyze, and understand your network traffic.</li>
+</ul>
+</li>
+</ul>
+<p>Virtual network flow logs have recently been released which allows for monitoring network traffic in Azure virtual networks.</p>
+<h3 id="use-cases-and-examples"><a class="toclink" href="../../2024/04/19/azure-network-hub-and-spoke-topology/#use-cases-and-examples">Use Cases and Examples</a></h3>
+<p>The Hub and Spoke topology is ideal for organizations that require centralized connectivity and traffic control between multiple virtual networks in Azure. For example, an organization with multiple branches or departments can use the Hub and Spoke topology to securely and efficiently connect their virtual networks in the cloud.</p>
+<h3 id="best-practices-and-tips"><a class="toclink" href="../../2024/04/19/azure-network-hub-and-spoke-topology/#best-practices-and-tips">Best Practices and Tips</a></h3>
+<p>When implementing the Hub and Spoke topology in Azure, it is recommended to follow these best practices:</p>
+<ul>
+<li><strong>Security:</strong> Apply consistent security policies at the Hub and Spokes to ensure network protection.</li>
+<li><strong>Resilience:</strong> Configure redundancy and resilience in the topology to ensure network availability in case of failures.</li>
+<li><strong>Monitoring:</strong> Use monitoring tools like Azure Monitor to monitor network traffic and detect potential performance issues.</li>
+</ul>
+<h3 id="conclusion"><a class="toclink" href="../../2024/04/19/azure-network-hub-and-spoke-topology/#conclusion">Conclusion</a></h3>
+<p>The Hub and Spoke topology is an effective way to simplify the connectivity and management of virtual networks in Azure. It provides centralized control over network connectivity and traffic, making it easier to implement security and routing policies consistently across the network. By following the recommended best practices and tips, organizations can make the most of the Hub and Spoke topology to meet their cloud connectivity needs.</p>
+<h3 id="references"><a class="toclink" href="../../2024/04/19/azure-network-hub-and-spoke-topology/#references">References</a></h3>
+<ul>
+<li><a href="https://docs.microsoft.com/en-us/azure/network-watcher/frequently-asked-questions">Network Watcher frequently asked questions (FAQ)</a></li>
+<li><a href="https://docs.microsoft.com/en-us/azure/architecture/reference-architectures/hybrid-networking/hub-spoke">Azure Topology</a></li>
+</ul>
+</div>
+</article>
+<article class="md-post md-post--excerpt">
+<header class="md-post__header">
+<nav class="md-post__authors md-typeset">
+<span class="md-author">
+<img alt="Rafael Fernández" src="https://avatars.githubusercontent.com/u/39990341"/>
+</span>
+</nav>
+<div class="md-post__meta md-meta">
+<ul class="md-meta__list">
+<li class="md-meta__item">
+<time datetime="2024-04-19 00:00:00">April 19, 2024</time></li>
+<li class="md-meta__item">
+            in
+            
+              <a class="md-meta__link" href="../../category/azure/">Azure</a></li>
+<li class="md-meta__item">
+            
+              2 min read
+            
+          </li>
+</ul>
+</div>
+</header>
+<div class="md-post__content md-typeset">
+<h2 id="azure-role-based-access-control-rbac"><a class="toclink" href="../../2024/04/19/azure-role-based-access-control-rbac/">Azure Role-Based Access Control (RBAC)</a></h2>
+<p>Azure Role-Based Access Control (RBAC) is a system that provides fine-grained access management of resources in Azure. This allows administrators to grant only the amount of access that users need to perform their jobs.</p>
+<h3 id="overview"><a class="toclink" href="../../2024/04/19/azure-role-based-access-control-rbac/#overview">Overview</a></h3>
+<p>In Azure RBAC, you can assign roles to user accounts, groups, service principals, and managed identities at different scopes. The scope could be a management group, subscription, resource group, or a single resource. </p>
+<p>Here are some key terms you should know:</p>
+<ul>
+<li><strong>Role</strong>: A collection of permissions. For example, the "Virtual Machine Contributor" role allows the user to create and manage virtual machines.</li>
+<li><strong>Scope</strong>: The set of resources that the access applies to. </li>
+<li><strong>Assignment</strong>: The act of granting a role to a security principal at a particular scope.</li>
+</ul>
+<h3 id="built-in-roles"><a class="toclink" href="../../2024/04/19/azure-role-based-access-control-rbac/#built-in-roles">Built-in Roles</a></h3>
+<p>Azure provides several built-in roles that you can assign to users, groups, service principals, and managed identities. Here are a few examples:</p>
+<ul>
+<li><strong>Owner</strong>: Has full access to all resources including the right to delegate access to others.</li>
+<li><strong>Contributor</strong>: Can create and manage all types of Azure resources but can’t grant access to others.</li>
+<li><strong>Reader</strong>: Can view existing Azure resources.</li>
+</ul>
+<div class="language-json highlight"><pre><span></span><code><span id="__span-2-1"><a href="#__codelineno-2-1" id="__codelineno-2-1" name="__codelineno-2-1"></a><span class="p">{</span>
+</span><span id="__span-2-2"><a href="#__codelineno-2-2" id="__codelineno-2-2" name="__codelineno-2-2"></a><span class="w">  </span><span class="nt">"Name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Contributor"</span><span class="p">,</span>
+</span><span id="__span-2-3"><a href="#__codelineno-2-3" id="__codelineno-2-3" name="__codelineno-2-3"></a><span class="w">  </span><span class="nt">"Id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"b24988ac-6180-42a0-ab88-20f7382dd24c"</span><span class="p">,</span>
+</span><span id="__span-2-4"><a href="#__codelineno-2-4" id="__codelineno-2-4" name="__codelineno-2-4"></a><span class="w">  </span><span class="nt">"IsCustom"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+</span><span id="__span-2-5"><a href="#__codelineno-2-5" id="__codelineno-2-5" name="__codelineno-2-5"></a><span class="w">  </span><span class="nt">"Description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Lets you manage everything except access to resources."</span><span class="p">,</span>
+</span><span id="__span-2-6"><a href="#__codelineno-2-6" id="__codelineno-2-6" name="__codelineno-2-6"></a><span class="w">  </span><span class="nt">"Actions"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+</span><span id="__span-2-7"><a href="#__codelineno-2-7" id="__codelineno-2-7" name="__codelineno-2-7"></a><span class="w">    </span><span class="s2">"*"</span>
+</span><span id="__span-2-8"><a href="#__codelineno-2-8" id="__codelineno-2-8" name="__codelineno-2-8"></a><span class="w">  </span><span class="p">],</span>
+</span><span id="__span-2-9"><a href="#__codelineno-2-9" id="__codelineno-2-9" name="__codelineno-2-9"></a><span class="w">  </span><span class="nt">"NotActions"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+</span><span id="__span-2-10"><a href="#__codelineno-2-10" id="__codelineno-2-10" name="__codelineno-2-10"></a><span class="w">    </span><span class="s2">"Microsoft.Authorization/*/Delete"</span><span class="p">,</span>
+</span><span id="__span-2-11"><a href="#__codelineno-2-11" id="__codelineno-2-11" name="__codelineno-2-11"></a><span class="w">    </span><span class="s2">"Microsoft.Authorization/*/Write"</span><span class="p">,</span>
+</span><span id="__span-2-12"><a href="#__codelineno-2-12" id="__codelineno-2-12" name="__codelineno-2-12"></a><span class="w">    </span><span class="s2">"Microsoft.Authorization/elevateAccess/Action"</span>
+</span><span id="__span-2-13"><a href="#__codelineno-2-13" id="__codelineno-2-13" name="__codelineno-2-13"></a><span class="w">  </span><span class="p">],</span>
+</span><span id="__span-2-14"><a href="#__codelineno-2-14" id="__codelineno-2-14" name="__codelineno-2-14"></a><span class="w">  </span><span class="nt">"DataActions"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span>
+</span><span id="__span-2-15"><a href="#__codelineno-2-15" id="__codelineno-2-15" name="__codelineno-2-15"></a><span class="w">  </span><span class="nt">"NotDataActions"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span>
+</span><span id="__span-2-16"><a href="#__codelineno-2-16" id="__codelineno-2-16" name="__codelineno-2-16"></a><span class="w">  </span><span class="nt">"AssignableScopes"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+</span><span id="__span-2-17"><a href="#__codelineno-2-17" id="__codelineno-2-17" name="__codelineno-2-17"></a><span class="w">    </span><span class="s2">"/"</span>
+</span><span id="__span-2-18"><a href="#__codelineno-2-18" id="__codelineno-2-18" name="__codelineno-2-18"></a><span class="w">  </span><span class="p">]</span>
+</span><span id="__span-2-19"><a href="#__codelineno-2-19" id="__codelineno-2-19" name="__codelineno-2-19"></a><span class="p">}</span>
+</span></code></pre></div>
+<h3 id="custom-roles"><a class="toclink" href="../../2024/04/19/azure-role-based-access-control-rbac/#custom-roles">Custom Roles</a></h3>
+<p>If the built-in roles don't meet your specific needs, you can create your own custom roles. Just like built-in roles, you can assign permissions to custom roles and then assign those roles to users.</p>
+<p><div class="language-json highlight"><pre><span></span><code><span id="__span-3-1"><a href="#__codelineno-3-1" id="__codelineno-3-1" name="__codelineno-3-1"></a><span class="p">{</span>
+</span><span id="__span-3-2"><a href="#__codelineno-3-2" id="__codelineno-3-2" name="__codelineno-3-2"></a><span class="w">  </span><span class="nt">"Name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Custom Role"</span><span class="p">,</span>
+</span><span id="__span-3-3"><a href="#__codelineno-3-3" id="__codelineno-3-3" name="__codelineno-3-3"></a><span class="w">  </span><span class="nt">"Id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"00000000-0000-0000-0000-000000000000"</span><span class="p">,</span>
+</span><span id="__span-3-4"><a href="#__codelineno-3-4" id="__codelineno-3-4" name="__codelineno-3-4"></a><span class="w">  </span><span class="nt">"IsCustom"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+</span><span id="__span-3-5"><a href="#__codelineno-3-5" id="__codelineno-3-5" name="__codelineno-3-5"></a><span class="w">  </span><span class="nt">"Description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Custom role description"</span><span class="p">,</span>
+</span><span id="__span-3-6"><a href="#__codelineno-3-6" id="__codelineno-3-6" name="__codelineno-3-6"></a><span class="w">  </span><span class="nt">"Actions"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+</span><span id="__span-3-7"><a href="#__codelineno-3-7" id="__codelineno-3-7" name="__codelineno-3-7"></a><span class="w">    </span><span class="s2">"Microsoft.Compute/virtualMachines/start/action"</span><span class="p">,</span>
+</span><span id="__span-3-8"><a href="#__codelineno-3-8" id="__codelineno-3-8" name="__codelineno-3-8"></a><span class="w">    </span><span class="s2">"Microsoft.Compute/virtualMachines/restart/action"</span>
+</span><span id="__span-3-9"><a href="#__codelineno-3-9" id="__codelineno-3-9" name="__codelineno-3-9"></a><span class="w">  </span><span class="p">],</span>
+</span><span id="__span-3-10"><a href="#__codelineno-3-10" id="__codelineno-3-10" name="__codelineno-3-10"></a><span class="w">  </span><span class="nt">"NotActions"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span>
+</span><span id="__span-3-11"><a href="#__codelineno-3-11" id="__codelineno-3-11" name="__codelineno-3-11"></a><span class="w">  </span><span class="nt">"DataActions"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span>
+</span><span id="__span-3-12"><a href="#__codelineno-3-12" id="__codelineno-3-12" name="__codelineno-3-12"></a><span class="w">  </span><span class="nt">"NotDataActions"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span>
+</span><span id="__span-3-13"><a href="#__codelineno-3-13" id="__codelineno-3-13" name="__codelineno-3-13"></a><span class="w">  </span><span class="nt">"AssignableScopes"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+</span><span id="__span-3-14"><a href="#__codelineno-3-14" id="__codelineno-3-14" name="__codelineno-3-14"></a><span class="w">    </span><span class="s2">"/subscriptions/{subscriptionId}"</span>
+</span><span id="__span-3-15"><a href="#__codelineno-3-15" id="__codelineno-3-15" name="__codelineno-3-15"></a><span class="w">  </span><span class="p">]</span>
+</span><span id="__span-3-16"><a href="#__codelineno-3-16" id="__codelineno-3-16" name="__codelineno-3-16"></a><span class="p">}</span>
+</span></code></pre></div>
+Custom Roles has the same structure as built-in roles:</p>
+<ul>
+<li><strong>Name</strong>: The name of the custom role.</li>
+<li><strong>Id</strong>: A unique identifier for the custom role.</li>
+<li><strong>IsCustom</strong>: Indicates whether the role is custom or built-in.</li>
+<li><strong>Description</strong>: A description of the custom role.</li>
+<li><strong>Actions</strong>: The list of actions that the role can perform.</li>
+<li><strong>NotActions</strong>: The list of actions that the role cannot perform.</li>
+<li><strong>DataActions</strong>: The list of data actions that the role can perform.</li>
+<li><strong>NotDataActions</strong>: The list of data actions that the role cannot perform.</li>
+<li><strong>AssignableScopes</strong>: The list of scopes where the role can be assigned.</li>
+</ul>
+<p>You can check how to create a custom role <a href="https://learn.microsoft.com/en-us/azure/role-based-access-control/custom-roles#custom-role-properties">here</a> and not forget to check limitations <a href="https://learn.microsoft.com/en-us/azure/role-based-access-control/custom-roles#custom-role-limits">here</a>.</p>
+<h3 id="recommendations"><a class="toclink" href="../../2024/04/19/azure-role-based-access-control-rbac/#recommendations">Recommendations</a></h3>
+<p>Here are some best practices for managing access with Azure RBAC:</p>
+<ul>
+<li><strong>Use the principle of least privilege</strong>: Only grant the permissions that users need to do their jobs.</li>
+<li><strong>Use built-in roles when possible</strong>: <a href="https://learn.microsoft.com/en-us/azure/role-based-access-control/built-in-roles">Built-in roles</a> are already defined and tested by Microsoft. Only create custom roles when necessary.</li>
+<li><strong>Regularly review role assignments</strong>: Make sure that users have the appropriate level of access for their job. Remove any unnecessary role assignments.</li>
+</ul>
+<h3 id="conclusion"><a class="toclink" href="../../2024/04/19/azure-role-based-access-control-rbac/#conclusion">Conclusion</a></h3>
+<p>Azure RBAC is a powerful tool for managing access to your Azure resources. By understanding its core concepts and how to apply them, you can ensure that users have the appropriate level of access for their job.</p>
+</div>
+</article>
+<article class="md-post md-post--excerpt">
+<header class="md-post__header">
+<nav class="md-post__authors md-typeset">
+<span class="md-author">
+<img alt="Rafael Fernández" src="https://avatars.githubusercontent.com/u/39990341"/>
+</span>
+</nav>
+<div class="md-post__meta md-meta">
+<ul class="md-meta__list">
+<li class="md-meta__item">
+<time datetime="2024-04-18 00:00:00">April 18, 2024</time></li>
+<li class="md-meta__item">
+            in
+            
+              <a class="md-meta__link" href="../../category/azure-services/">Azure Services</a></li>
+<li class="md-meta__item">
+            
+              3 min read
+            
+          </li>
+</ul>
+</div>
+</header>
+<div class="md-post__content md-typeset">
+<h2 id="kusto-query-language-kql-for-azure-resource-graph"><a class="toclink" href="../../2024/04/18/kusto-query-language-kql-for-azure-resource-graph/">Kusto Query Language (KQL) for Azure Resource Graph</a></h2>
+<p>Azure Graph is a powerful tool provided by Microsoft to query data across all your Azure resources. It uses the Kusto Query Language (KQL), a read-only language similar to SQL, designed to query vast amounts of data in Azure services.</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>Only a subset of KQL is supported in Azure Resource Graph. For more information, see the <a href="https://learn.microsoft.com/en-us/azure/governance/resource-graph/concepts/query-language#supported-kql-language-elements">Azure Resource Graph Supported KQL Language Elements</a>.</p>
+</div>
+<h3 id="what-is-kql"><a class="toclink" href="../../2024/04/18/kusto-query-language-kql-for-azure-resource-graph/#what-is-kql"><strong>What is KQL?</strong></a></h3>
+<p>KQL stands for Kusto Query Language. It's a request to process data and return results. The syntax is easy to read and author, making it ideal for data exploration and ad-hoc data mining tasks.</p>
+<h3 id="using-kql-with-azure-graph"><a class="toclink" href="../../2024/04/18/kusto-query-language-kql-for-azure-resource-graph/#using-kql-with-azure-graph"><strong>Using KQL with Azure Graph</strong></a></h3>
+<p>Azure Graph allows you to use KQL to create complex queries that fetch information from your Azure resources. You can filter, sort, aggregate, and join data from different resources using KQL.</p>
+<p>Here's an example of how you might use KQL to query Azure Graph:</p>
+<div class="language-kql highlight"><pre><span></span><code><span id="__span-0-1"><a href="#__codelineno-0-1" id="__codelineno-0-1" name="__codelineno-0-1"></a><span class="n">Resources</span>
+</span><span id="__span-0-2"><a href="#__codelineno-0-2" id="__codelineno-0-2" name="__codelineno-0-2"></a><span class="p">|</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">type</span><span class="w"> </span><span class="p">=~</span><span class="w"> </span><span class="s">'microsoft.web/sites'</span>
+</span><span id="__span-0-3"><a href="#__codelineno-0-3" id="__codelineno-0-3" name="__codelineno-0-3"></a><span class="p">|</span><span class="w"> </span><span class="k">project</span><span class="w"> </span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="n">location</span><span class="p">,</span><span class="w"> </span><span class="n">resourceGroup</span>
+</span></code></pre></div>
+<p>This query retrieves all Azure Web Apps (websites) and projects their <code>name</code>, <code>location</code>, and <code>resourceGroup</code>.</p>
+<h3 id="key-characteristics-of-kql"><a class="toclink" href="../../2024/04/18/kusto-query-language-kql-for-azure-resource-graph/#key-characteristics-of-kql"><strong>Key Characteristics of KQL</strong></a></h3>
+<ol>
+<li><strong>Case Sensitivity</strong>: Unlike SQL, KQL is case-sensitive. So 'Name' and 'name' would be considered different identifiers.</li>
+<li><strong>Schema-Free</strong>: Kusto (Azure Data Explorer) doesn't require a fixed schema, allowing storage of diverse types of data.</li>
+<li><strong>Extensibility</strong>: While KQL has a wide array of functions, you can also create custom functions as per your needs.</li>
+</ol>
+<h3 id="common-operators-in-kql"><a class="toclink" href="../../2024/04/18/kusto-query-language-kql-for-azure-resource-graph/#common-operators-in-kql"><strong>Common Operators in KQL</strong></a></h3>
+<ul>
+<li><code>|</code> : This operator creates a pipeline where the output of one command becomes the input of another.</li>
+<li><code>where</code> : Filters rows based on specified conditions.</li>
+<li><code>summarize</code> : Groups rows and calculates aggregate expressions.</li>
+<li><code>join</code> : Combines rows from two tables based on a common column.</li>
+<li><code>project</code> : Selects specific columns from the input.</li>
+<li><code>extend</code> : Adds new columns to the input.</li>
+<li><code>order by</code> : Sorts rows based on specified columns.</li>
+</ul>
+<h3 id="kql-query-examples"><a class="toclink" href="../../2024/04/18/kusto-query-language-kql-for-azure-resource-graph/#kql-query-examples"><strong>KQL Query Examples</strong></a></h3>
+<h4 id="1-list-all-azure-resources-in-a-subscription"><a class="toclink" href="../../2024/04/18/kusto-query-language-kql-for-azure-resource-graph/#1-list-all-azure-resources-in-a-subscription"><strong>1. List all Azure resources in a subscription</strong></a></h4>
+<div class="language-kql highlight"><pre><span></span><code><span id="__span-1-1"><a href="#__codelineno-1-1" id="__codelineno-1-1" name="__codelineno-1-1"></a><span class="n">Resources</span>
+</span></code></pre></div>
+<h4 id="2-list-all-azure-resources-in-a-resource-group"><a class="toclink" href="../../2024/04/18/kusto-query-language-kql-for-azure-resource-graph/#2-list-all-azure-resources-in-a-resource-group"><strong>2. List all Azure resources in a resource group</strong></a></h4>
+<div class="language-kql highlight"><pre><span></span><code><span id="__span-2-1"><a href="#__codelineno-2-1" id="__codelineno-2-1" name="__codelineno-2-1"></a><span class="n">Resources</span>
+</span><span id="__span-2-2"><a href="#__codelineno-2-2" id="__codelineno-2-2" name="__codelineno-2-2"></a><span class="p">|</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">resourceGroup</span><span class="w"> </span><span class="p">==</span><span class="w"> </span><span class="s">'myResourceGroup'</span>
+</span></code></pre></div>
+<h4 id="3-list-all-azure-resources-of-a-specific-type"><a class="toclink" href="../../2024/04/18/kusto-query-language-kql-for-azure-resource-graph/#3-list-all-azure-resources-of-a-specific-type"><strong>3. List all Azure resources of a specific type</strong></a></h4>
+<div class="language-kql highlight"><pre><span></span><code><span id="__span-3-1"><a href="#__codelineno-3-1" id="__codelineno-3-1" name="__codelineno-3-1"></a><span class="n">Resources</span>
+</span><span id="__span-3-2"><a href="#__codelineno-3-2" id="__codelineno-3-2" name="__codelineno-3-2"></a><span class="p">|</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">type</span><span class="w"> </span><span class="p">=~</span><span class="w"> </span><span class="s">'Microsoft.Compute/virtualMachines'</span>
+</span></code></pre></div>
+<h3 id="pagination-in-kql"><a class="toclink" href="../../2024/04/18/kusto-query-language-kql-for-azure-resource-graph/#pagination-in-kql"><strong>Pagination in KQL</strong></a></h3>
+<p>KQL supports pagination using the <code>limit</code> and <code>offset</code> operators. You can use these operators to control the number of rows returned and skip a certain number of rows.</p>
+<div class="language-kql highlight"><pre><span></span><code><span id="__span-4-1"><a href="#__codelineno-4-1" id="__codelineno-4-1" name="__codelineno-4-1"></a><span class="n">Resources</span>
+</span><span id="__span-4-2"><a href="#__codelineno-4-2" id="__codelineno-4-2" name="__codelineno-4-2"></a><span class="p">|</span><span class="w"> </span><span class="k">limit</span><span class="w"> </span><span class="mi">10</span>
+</span><span id="__span-4-3"><a href="#__codelineno-4-3" id="__codelineno-4-3" name="__codelineno-4-3"></a><span class="p">|</span><span class="w"> </span><span class="n">offset</span><span class="w"> </span><span class="mi">5</span>
+</span></code></pre></div>
+<p>If you exceed payload limits, you can paginate Azure Resource Graph query results with powershell:</p>
+<div class="language-powershell highlight"><pre><span></span><code><span id="__span-5-1"><a href="#__codelineno-5-1" id="__codelineno-5-1" name="__codelineno-5-1"></a><span class="nv">$kqlQuery</span> <span class="p">=</span> <span class="s2">"policyResources | where type =~'Microsoft.Authorization/PolicySetDefinitions' or type =~'Microsoft.Authorization/PolicyDefinitions' | project definitionId = tolower(id), category = tostring(properties.metadata.category), definitionType = iff(type =~ 'Microsoft.Authorization/PolicysetDefinitions', 'initiative', 'policy'),PolicyDefinition=properties"</span>
+</span><span id="__span-5-2"><a href="#__codelineno-5-2" id="__codelineno-5-2" name="__codelineno-5-2"></a>
+</span><span id="__span-5-3"><a href="#__codelineno-5-3" id="__codelineno-5-3" name="__codelineno-5-3"></a><span class="nv">$batchSize</span> <span class="p">=</span> <span class="n">5</span>
+</span><span id="__span-5-4"><a href="#__codelineno-5-4" id="__codelineno-5-4" name="__codelineno-5-4"></a><span class="nv">$skipResult</span> <span class="p">=</span> <span class="n">0</span>
+</span><span id="__span-5-5"><a href="#__codelineno-5-5" id="__codelineno-5-5" name="__codelineno-5-5"></a>
+</span><span id="__span-5-6"><a href="#__codelineno-5-6" id="__codelineno-5-6" name="__codelineno-5-6"></a><span class="no">[System.Collections.Generic.List[string]]</span><span class="nv">$kqlResult</span>
+</span><span id="__span-5-7"><a href="#__codelineno-5-7" id="__codelineno-5-7" name="__codelineno-5-7"></a>
+</span><span id="__span-5-8"><a href="#__codelineno-5-8" id="__codelineno-5-8" name="__codelineno-5-8"></a><span class="k">while</span> <span class="p">(</span><span class="nv">$true</span><span class="p">)</span> <span class="p">{</span>
+</span><span id="__span-5-9"><a href="#__codelineno-5-9" id="__codelineno-5-9" name="__codelineno-5-9"></a>
+</span><span id="__span-5-10"><a href="#__codelineno-5-10" id="__codelineno-5-10" name="__codelineno-5-10"></a>  <span class="k">if</span> <span class="p">(</span><span class="nv">$skipResult</span> <span class="o">-gt</span> <span class="n">0</span><span class="p">)</span> <span class="p">{</span>
+</span><span id="__span-5-11"><a href="#__codelineno-5-11" id="__codelineno-5-11" name="__codelineno-5-11"></a>    <span class="nv">$graphResult</span> <span class="p">=</span> <span class="nb">Search-AzGraph</span> <span class="n">-Query</span> <span class="nv">$kqlQuery</span> <span class="n">-First</span> <span class="nv">$batchSize</span> <span class="n">-SkipToken</span> <span class="nv">$graphResult</span><span class="p">.</span><span class="n">SkipToken</span>
+</span><span id="__span-5-12"><a href="#__codelineno-5-12" id="__codelineno-5-12" name="__codelineno-5-12"></a>  <span class="p">}</span>
+</span><span id="__span-5-13"><a href="#__codelineno-5-13" id="__codelineno-5-13" name="__codelineno-5-13"></a>  <span class="k">else</span> <span class="p">{</span>
+</span><span id="__span-5-14"><a href="#__codelineno-5-14" id="__codelineno-5-14" name="__codelineno-5-14"></a>    <span class="nv">$graphResult</span> <span class="p">=</span> <span class="nb">Search-AzGraph</span> <span class="n">-Query</span> <span class="nv">$kqlQuery</span> <span class="n">-First</span> <span class="nv">$batchSize</span>
+</span><span id="__span-5-15"><a href="#__codelineno-5-15" id="__codelineno-5-15" name="__codelineno-5-15"></a>  <span class="p">}</span>
+</span><span id="__span-5-16"><a href="#__codelineno-5-16" id="__codelineno-5-16" name="__codelineno-5-16"></a>
+</span><span id="__span-5-17"><a href="#__codelineno-5-17" id="__codelineno-5-17" name="__codelineno-5-17"></a>  <span class="nv">$kqlResult</span> <span class="p">+=</span> <span class="nv">$graphResult</span><span class="p">.</span><span class="n">data</span>
+</span><span id="__span-5-18"><a href="#__codelineno-5-18" id="__codelineno-5-18" name="__codelineno-5-18"></a>
+</span><span id="__span-5-19"><a href="#__codelineno-5-19" id="__codelineno-5-19" name="__codelineno-5-19"></a>  <span class="k">if</span> <span class="p">(</span><span class="nv">$graphResult</span><span class="p">.</span><span class="n">data</span><span class="p">.</span><span class="n">Count</span> <span class="o">-lt</span> <span class="nv">$batchSize</span><span class="p">)</span> <span class="p">{</span>
+</span><span id="__span-5-20"><a href="#__codelineno-5-20" id="__codelineno-5-20" name="__codelineno-5-20"></a>    <span class="k">break</span><span class="p">;</span>
+</span><span id="__span-5-21"><a href="#__codelineno-5-21" id="__codelineno-5-21" name="__codelineno-5-21"></a>  <span class="p">}</span>
+</span><span id="__span-5-22"><a href="#__codelineno-5-22" id="__codelineno-5-22" name="__codelineno-5-22"></a>  <span class="nv">$skipResult</span> <span class="p">+=</span> <span class="nv">$skipResult</span> <span class="p">+</span> <span class="nv">$batchSize</span>
+</span><span id="__span-5-23"><a href="#__codelineno-5-23" id="__codelineno-5-23" name="__codelineno-5-23"></a><span class="p">}</span>
+</span></code></pre></div>
+<h3 id="best-practices-for-writing-kql-queries"><a class="toclink" href="../../2024/04/18/kusto-query-language-kql-for-azure-resource-graph/#best-practices-for-writing-kql-queries"><strong>Best Practices for Writing KQL Queries</strong></a></h3>
+<ol>
+<li><strong>Use <code>project</code> to Select Columns</strong>: Only select the columns you need to reduce the amount of data returned.</li>
+<li><strong>Use <code>where</code> to Filter Rows</strong>: Apply filters to reduce the number of rows processed.</li>
+<li><strong>Use <code>summarize</code> to Aggregate Data</strong>: Aggregate data to reduce the number of rows returned.</li>
+<li><strong>Use <code>join</code> to Combine Data</strong>: Combine data from different tables using the <code>join</code> operator.</li>
+<li><strong>Use <code>order by</code> to Sort Data</strong>: Sort data based on specific columns to make it easier to read.</li>
+</ol>
+<h3 id="limitations-of-kql"><a class="toclink" href="../../2024/04/18/kusto-query-language-kql-for-azure-resource-graph/#limitations-of-kql"><strong>Limitations of KQL</strong></a></h3>
+<ol>
+<li><strong>No DDL Operations</strong>: KQL doesn't support Data Definition Language (DDL) operations like creating tables or indexes.</li>
+<li><strong>No DML Operations</strong>: KQL doesn't support Data Manipulation Language (DML) operations like inserting, updating, or deleting data.</li>
+<li><strong>Limited Data Types</strong>: KQL has a limited set of data types compared to SQL.</li>
+<li><strong>No Transactions</strong>: KQL doesn't support transactions, so you can't group multiple operations into a single transaction.</li>
+</ol>
+<h3 id="conclusion"><a class="toclink" href="../../2024/04/18/kusto-query-language-kql-for-azure-resource-graph/#conclusion"><strong>Conclusion</strong></a></h3>
+<p>KQL is a potent tool for querying large datasets in Azure. Its SQL-like syntax makes it accessible for anyone familiar with SQL, and its rich set of features makes it a flexible solution for a variety of data processing needs. Practice writing KQL queries to uncover valuable insights from your Azure resources!</p>
+<h3 id="references"><a class="toclink" href="../../2024/04/18/kusto-query-language-kql-for-azure-resource-graph/#references">References</a></h3>
+<ul>
+<li><a href="https://docs.microsoft.com/en-us/azure/data-explorer/kusto/query/sqlcheatsheet">SQL to Kusto Query Language cheat sheet</a></li>
+<li><a href="https://portal.azure.com/#view/Microsoft_OperationsManagementSuite_Workspace/LogsDemo.ReactView">Demo for play</a></li>
+</ul>
+</div>
+</article>
+<article class="md-post md-post--excerpt">
+<header class="md-post__header">
+<nav class="md-post__authors md-typeset">
+<span class="md-author">
+<img alt="Rafael Fernández" src="https://avatars.githubusercontent.com/u/39990341"/>
+</span>
+</nav>
+<div class="md-post__meta md-meta">
+<ul class="md-meta__list">
+<li class="md-meta__item">
+<time datetime="2024-04-18 00:00:00">April 18, 2024</time></li>
+<li class="md-meta__item">
+            in
+            
+              <a class="md-meta__link" href="../../category/azure/">Azure</a></li>
+<li class="md-meta__item">
+            
+              3 min read
+            
+          </li>
+</ul>
+</div>
+</header>
+<div class="md-post__content md-typeset">
+<h2 id="azure-role-assignment-conditions"><a class="toclink" href="../../2024/04/18/azure-role-assignment-conditions/">Azure role assignment conditions</a></h2>
+<p>First of all, let's understand what is ABAc (Attribute-Based Access Control) and how it can be used in Azure.</p>
+<h3 id="what-is-abac"><a class="toclink" href="../../2024/04/18/azure-role-assignment-conditions/#what-is-abac">What is ABAC?</a></h3>
+<p>Attribute-Based Access Control (ABAC) is an access control model that uses attributes to determine access rights. In ABAC, access decisions are based on the attributes of the user, the resource, and the environment. This allows for fine-grained access control based on a wide range of attributes, such as user roles, resource types, and time of day.</p>
+<p>ABAC is a flexible and scalable access control model that can be used to enforce complex access policies. It allows organizations to define access control rules based on a wide range of attributes and to adapt those rules as their needs change.</p>
+<p>ABAC is build on Azure RBAC.</p>
+<h3 id="what-is-azure-role-assignment-conditions"><a class="toclink" href="../../2024/04/18/azure-role-assignment-conditions/#what-is-azure-role-assignment-conditions">What is Azure role assignment conditions?</a></h3>
+<p>Azure role assignment conditions allow you to define conditions that must be met for a role assignment to be effective. </p>
+<h3 id="how-to-configure-azure-role-assignment-conditions"><a class="toclink" href="../../2024/04/18/azure-role-assignment-conditions/#how-to-configure-azure-role-assignment-conditions">How to configure Azure role assignment conditions?</a></h3>
+<p>To configure Azure role assignment conditions, configure the role assignment as usual, and then click on the "Conditions" tab. Here you can define the conditions that must be met for the role assignment to be effective.</p>
+<p><img alt="alt text" src="../../2024/09/Screenshot%202024-09-18%20111639.png"/></p>
+<p>Options for configuring Conditions:</p>
+<ul>
+<li>Allow user to only assign selected roles to selected principals (fewer privileges)</li>
+<li>Allow user to assign all roles except privileged administrator roles Owner, UAA, RBAC (Recommended)</li>
+<li>Allow user to assign all roles (highly privileged)</li>
+</ul>
+<p>The first one is the most restrictive, for example, allowing the user to only assign selected roles to selected principals. This is useful when you want to limit the privileges of a user to only a subset of roles and principals.</p>
+<p>These are the options available for "Allow user to only assign selected roles to selected principals (fewer privileges)":</p>
+<p><img alt="alt text" src="../../2024/09/Screenshot%202024-09-18%20111646.png"/></p>
+<ul>
+<li>Constrain roles:<ul>
+<li>Allow user to only assign roles you select</li>
+</ul>
+</li>
+<li>Constrain roles and principal types:<ul>
+<li>Allow user to only assign roles you select</li>
+<li>Allow user to only assign these roles to principal types you select (users, groups, or service principals)</li>
+</ul>
+</li>
+<li>Constrain roles and principals<ul>
+<li>Allow user to only assign roles you select</li>
+<li>Allow user to only assign these roles to principals you select</li>
+<li>Allow all except specific roles</li>
+<li>Allow user to assign all roles except the roles you select</li>
+</ul>
+</li>
+</ul>
+<h3 id="conclusion"><a class="toclink" href="../../2024/04/18/azure-role-assignment-conditions/#conclusion">Conclusion</a></h3>
+<p>Azure role assignment conditions provide a flexible and powerful way to control access to Azure resources. By defining conditions that must be met for a role assignment to be effective, you can enforce fine-grained access control policies that meet the specific needs of your organization. This allows you to limit the privileges of users, assign roles to specific principals, and control access to sensitive resources. Azure role assignment conditions are a valuable tool for organizations that need to enforce strict access control policies and protect their critical resources.</p>
+<h3 id="references"><a class="toclink" href="../../2024/04/18/azure-role-assignment-conditions/#references">References</a></h3>
+<ul>
+<li><a href="https://learn.microsoft.com/en-us/azure/role-based-access-control/conditions-overview">What is Azure attribute-based access control (Azure ABAC)?</a></li>
+<li><a href="https://learn.microsoft.com/en-us/azure/role-based-access-control/conditions-format">Azure role assignment condition format and syntax</a></li>
+<li><a href="https://learn.microsoft.com/en-us/azure/role-based-access-control/delegate-role-assignments-examples?tabs=template">Examples to delegate Azure role assignment management with conditions</a></li>
+</ul>
+</div>
+</article>
 <article class="md-post md-post--excerpt">
 <header class="md-post__header">
 <nav class="md-post__authors md-typeset">
@@ -1489,585 +1943,8 @@ Microsoft.Compute (for Azure Update Manager and automatic extension upgrades)</p
 <p>You can find more information about Microsoft certifications on the <a href="https://aka.ms/CertificationsPoster">Microsoft Certification Poster</a> and in the <a href="https://learn.microsoft.com/en-us/certifications/">Microsoft Learning</a> website.</p>
 </div>
 </article>
-<article class="md-post md-post--excerpt">
-<header class="md-post__header">
-<nav class="md-post__authors md-typeset">
-<span class="md-author">
-<img alt="Rafael Fernández" src="https://avatars.githubusercontent.com/u/39990341"/>
-</span>
-</nav>
-<div class="md-post__meta md-meta">
-<ul class="md-meta__list">
-<li class="md-meta__item">
-<time datetime="2024-04-04 00:00:00">April 4, 2024</time></li>
-<li class="md-meta__item">
-            in
-            
-              <a class="md-meta__link" href="../../category/security/">Security</a></li>
-<li class="md-meta__item">
-            
-              4 min read
-            
-          </li>
-</ul>
-</div>
-</header>
-<div class="md-post__content md-typeset">
-<h2 id="privileged-access-management-pam-strategy-with-microsoft-entra-id-and-some-azure-services"><a class="toclink" href="../../2024/04/04/privileged-access-management-pam-strategy-with-microsoft-entra-id-and-some-azure-services/">Privileged Access Management (PAM) Strategy with Microsoft Entra ID and some Azure Services</a></h2>
-<p>Today, I'd like to share a brief of a recommended strategy for Privileged Access Management (PAM) of other vendors with Microsoft Entra ID and some Azure Services. This strategy is divided into seven phases:</p>
-<pre class="mermaid"><code>
-graph LR;
-    A[Phase 1: Set Policy] 
-    C[Phase 2: The Process of Discovery]
-    E[Phase 3: Protect Credentials]
-    G[Phase 4: Secure Privileged Access]
-    I[Phase 5: Least Privilege]
-    K[Phase 6: Control All Applications]
-    M[Phase 7: Detect and Respond]
-
-    A--&gt;C
-    C--&gt;E
-    E--&gt;G
-    G--&gt;I
-    I--&gt;K
-    K--&gt;M
-    M--&gt;A
-
-    classDef phase fill:#f9f,stroke:#333,stroke-width:2px;
-    class A,C,E,G,I,K,M phase;
-
-
-</code></pre>
-<div class="admonition info">
-<p class="admonition-title">Info</p>
-<p>Be hybrid, be secure with a single control plane, use Azure ARC to inherit the same security and compliance policies across your on-premises, multi-cloud, and edge environments as in Azure.</p>
-</div>
-<h3 id="phase-1-set-policy"><a class="toclink" href="../../2024/04/04/privileged-access-management-pam-strategy-with-microsoft-entra-id-and-some-azure-services/#phase-1-set-policy"><strong>Phase 1: Set Policy</strong></a></h3>
-<p>The first step in any PAM strategy is to establish a clear policy. This policy should define who has access to what, when they have access, and what they can do with that access. It should also include guidelines for password management and multi-factor authentication. For example:</p>
-<ul>
-<li>Define clear access control policies.</li>
-<li>Establish guidelines for password management and multi-factor authentication.</li>
-<li>Regularly review and update the policy to reflect changes in the organization.</li>
-</ul>
-<p>How to implement this:</p>
-<ul>
-<li>Use <strong>Azure Policy</strong> to define and manage policies for your Azure environment.</li>
-<li>Use <strong>Microsoft Entra multifactor authentication</strong> for implementing multi-factor authentication.</li>
-</ul>
-<h3 id="phase-2-the-process-of-discovery"><a class="toclink" href="../../2024/04/04/privileged-access-management-pam-strategy-with-microsoft-entra-id-and-some-azure-services/#phase-2-the-process-of-discovery"><strong>Phase 2: The Process of Discovery</strong></a></h3>
-<p>In this phase, we identify all the privileged accounts across the organization. This includes service accounts, local administrative accounts, domain administrative accounts, emergency accounts, and application accounts. For example:</p>
-<ul>
-<li>Use automated tools to identify all privileged accounts across the organization.</li>
-<li>Regularly update the inventory of privileged accounts.</li>
-<li>Identify any accounts that are no longer in use and deactivate them.</li>
-</ul>
-<p>How to implement this:</p>
-<ul>
-<li>Use <strong>Microsoft Entra Privileged Identity Management</strong> to discover, restrict and monitor administrators and their access to resources and provide just-in-time access when needed.</li>
-</ul>
-<h3 id="phase-3-protect-credentials"><a class="toclink" href="../../2024/04/04/privileged-access-management-pam-strategy-with-microsoft-entra-id-and-some-azure-services/#phase-3-protect-credentials"><strong>Phase 3: Protect Credentials</strong></a></h3>
-<p>Once we've identified all privileged accounts, we need to ensure that these credentials are stored securely. This could involve using a secure vault, regularly rotating passwords, and using unique passwords for each account. For example:</p>
-<ul>
-<li>Store credentials in a secure vault.</li>
-<li>Implement regular password rotation.</li>
-<li>Use unique passwords for each account.</li>
-</ul>
-<p>How to implement this:</p>
-<ul>
-<li>Use <strong>Azure Key Vault</strong> to safeguard cryptographic keys and other secrets used by your apps and services and <a href="https://learn.microsoft.com/en-us/azure/key-vault/secrets/tutorial-rotation-dual?tabs=azure-cli">rotate secrets regularly</a>.</li>
-<li>Implement <strong>Microsoft Entra ID Password Protection</strong> to protect against weak passwords that can be easily guessed or cracked.</li>
-</ul>
-<h3 id="phase-4-secure-privileged-access"><a class="toclink" href="../../2024/04/04/privileged-access-management-pam-strategy-with-microsoft-entra-id-and-some-azure-services/#phase-4-secure-privileged-access"><strong>Phase 4: Secure Privileged Access</strong></a></h3>
-<p>Securing privileged access involves implementing controls to prevent unauthorized access. This could include limiting the number of privileged accounts, implementing least privilege, and using just-in-time access. For example:</p>
-<ul>
-<li>Limit the number of privileged accounts.</li>
-<li>Implement just-in-time access, where access is granted only for the duration of a task.</li>
-<li>Use session recording and monitoring for privileged access.</li>
-</ul>
-<p>How to implement this:</p>
-<ul>
-<li>Use <strong>Microsoft Entra ID Conditional Access</strong> to enforce controls on the access to apps in your environment based on specific conditions.</li>
-<li>Implement <strong>Microsoft Entra Privileged Identity Management</strong> for just-in-time access.</li>
-</ul>
-<h3 id="phase-5-least-privilege"><a class="toclink" href="../../2024/04/04/privileged-access-management-pam-strategy-with-microsoft-entra-id-and-some-azure-services/#phase-5-least-privilege"><strong>Phase 5: Least Privilege</strong></a></h3>
-<p>The principle of least privilege involves giving users the minimum levels of access — or permissions — they need to complete their job functions. By limiting the access rights of users, the risk of a security breach is reduced. For example:</p>
-<ul>
-<li>Implement role-based access control (RBAC) in Azure to grant the minimum necessary access to users.</li>
-<li>Regularly review user roles and access rights.</li>
-<li>Implement a process for revoking access when it's no longer needed.</li>
-</ul>
-<p>How to implement this:</p>
-<ul>
-<li>Implement <strong>Role-Based Access Control (RBAC)</strong> in Azure to grant the minimum necessary access to users.</li>
-<li>Use <strong>Microsoft Entra ID Access Reviews</strong> to efficiently manage group memberships, access to enterprise applications, and role assignments.</li>
-</ul>
-<h3 id="phase-6-control-all-applications"><a class="toclink" href="../../2024/04/04/privileged-access-management-pam-strategy-with-microsoft-entra-id-and-some-azure-services/#phase-6-control-all-applications"><strong>Phase 6: Control All Applications</strong></a></h3>
-<p>In this phase, we ensure that all applications, whether on-premises or in the cloud, are controlled and monitored. This includes implementing application control policies and monitoring application usage. For example:</p>
-<ul>
-<li>Implement application control policies that dictate what applications can be run on systems.</li>
-<li>Monitor application usage and block unauthorized applications.</li>
-<li>Regularly update and patch all applications to reduce vulnerabilities.</li>
-</ul>
-<p>How to implement this:</p>
-<ul>
-<li>Use <strong>Microsoft Entra Application Proxy</strong> to control and secure access to on-premises and cloud apps.</li>
-<li>Enable Change Tracking and Inventory in <strong>Azure Automation</strong> to track changes to your Azure VMs. Use desired state configuration to ensure that your VMs are configured correctly.</li>
-<li>Implement <strong>Microsoft Intune</strong> to manage and secure your devices and applications.</li>
-</ul>
-<h3 id="phase-7-detect-and-respond"><a class="toclink" href="../../2024/04/04/privileged-access-management-pam-strategy-with-microsoft-entra-id-and-some-azure-services/#phase-7-detect-and-respond"><strong>Phase 7: Detect and Respond</strong></a></h3>
-<p>The final phase involves setting up systems to detect and respond to any suspicious activity. This could involve setting up alerts for unusual activity, regularly auditing access logs, and having a response plan in place for when a breach occurs. For example:</p>
-<ul>
-<li>Set up alerts for unusual activity.</li>
-<li>Regularly audit access logs.</li>
-<li>Have a response plan in place for when a breach occurs, including steps for containment, eradication, and recovery.</li>
-</ul>
-<p>How to implement this:</p>
-<ul>
-<li>Use <strong>Microsoft Defender for Cloud</strong> for increased visibility into your security state and to detect and respond to threats.</li>
-<li>Implement <strong>Azure Sentinel</strong>, Microsoft's cloud-native SIEM solution, for intelligent security analytics.</li>
-</ul>
-<p>By following these seven phases, you can create a robust PAM strategy that protects your organization from security breaches and helps you maintain compliance with various regulations.</p>
-<p>Remember, a good PAM strategy is not a one-time effort but an ongoing process that needs to be regularly reviewed and updated. Microsoft and Azure services provide a robust set of tools to help you implement and manage your PAM strategy effectively.</p>
-</div>
-</article>
-<article class="md-post md-post--excerpt">
-<header class="md-post__header">
-<nav class="md-post__authors md-typeset">
-<span class="md-author">
-<img alt="Rafael Fernández" src="https://avatars.githubusercontent.com/u/39990341"/>
-</span>
-</nav>
-<div class="md-post__meta md-meta">
-<ul class="md-meta__list">
-<li class="md-meta__item">
-<time datetime="2024-03-02 00:00:00">March 2, 2024</time></li>
-<li class="md-meta__item">
-            in
-            
-              <a class="md-meta__link" href="../../category/azure-services/">Azure Services</a></li>
-<li class="md-meta__item">
-            
-              2 min read
-            
-          </li>
-</ul>
-</div>
-</header>
-<div class="md-post__content md-typeset">
-<h2 id="azure-policy-management-best-practices"><a class="toclink" href="../../2024/03/02/azure-policy-management-best-practices/">Azure Policy Management Best Practices</a></h2>
-<ol>
-<li>
-<p><strong>Version Control</strong>: Store your policy definitions in a version-controlled repository. This practice ensures that you can track changes, collaborate effectively, and roll back to previous versions if needed.</p>
-</li>
-<li>
-<p><strong>Automated Testing</strong>: Incorporate policy testing into your CI/CD pipelines. Automated tests can help you catch policy violations early in the development process, reducing the risk of non-compliance.</p>
-</li>
-<li>
-<p><strong>Policy Documentation</strong>: Document your policies clearly, including their purpose, scope, and expected behavior. This documentation helps stakeholders understand the policies and their impact on Azure resources.</p>
-</li>
-<li>
-<p><strong>Policy Assignment</strong>: Assign policies at the appropriate scope (e.g., Management Group, Subscription, Resource Group) based on your organizational requirements. Avoid assigning policies at a broader scope than necessary to prevent unintended consequences.</p>
-</li>
-<li>
-<p><strong>Policy Exemptions</strong>: Use policy exemptions judiciously. Document the reasons for exemptions and periodically review them to ensure they are still valid.</p>
-</li>
-<li>
-<p><strong>Policy Enforcement</strong>: Monitor policy compliance regularly and take corrective action for non-compliant resources. Use Azure Policy's built-in compliance reports and alerts to track policy violations.</p>
-</li>
-<li>
-<p><strong>Policy Remediation</strong>: Implement automated remediation tasks for policy violations where possible. Azure Policy's remediation tasks can help bring non-compliant resources back into compliance automatically.</p>
-</li>
-<li>
-<p><strong>Policy Monitoring</strong>: Continuously monitor policy effectiveness and adjust policies as needed. Regularly review policy violations, exemptions, and compliance trends to refine your policy implementation.</p>
-</li>
-<li>
-<p><strong>Policy Governance</strong>: Establish a governance framework for Azure Policy that includes policy creation, assignment, monitoring, and enforcement processes. Define roles and responsibilities for policy management to ensure accountability.</p>
-</li>
-<li>
-<p><strong>Policy Lifecycle Management</strong>: Define a policy lifecycle management process that covers policy creation, testing, deployment, monitoring, and retirement. Regularly review and update policies to align with changing organizational requirements.</p>
-</li>
-<li>
-<p><strong>Unique source of truth</strong>: Use EPAC, terraform, ARM,.... but use an unique source of truth for your policies.</p>
-</li>
-</ol>
-<p>By following these best practices, you can effectively manage Azure policies and ensure compliance with organizational standards across your Azure environment. Azure Policy plays a crucial role in maintaining governance, security, and compliance, and adopting these practices can help you maximize its benefits.</p>
-</div>
-</article>
-<article class="md-post md-post--excerpt">
-<header class="md-post__header">
-<nav class="md-post__authors md-typeset">
-<span class="md-author">
-<img alt="Rafael Fernández" src="https://avatars.githubusercontent.com/u/39990341"/>
-</span>
-</nav>
-<div class="md-post__meta md-meta">
-<ul class="md-meta__list">
-<li class="md-meta__item">
-<time datetime="2024-02-29 00:00:00">February 29, 2024</time></li>
-<li class="md-meta__item">
-            in
-            
-              <a class="md-meta__link" href="../../category/tools/">Tools</a></li>
-<li class="md-meta__item">
-            
-              2 min read
-            
-          </li>
-</ul>
-</div>
-</header>
-<div class="md-post__content md-typeset">
-<h2 id="enterprise-azure-policy-as-code-epac"><a class="toclink" href="../../2024/02/29/enterprise-azure-policy-as-code-epac/">Enterprise Azure Policy as Code (EPAC)</a></h2>
-<p>Enterprise Azure Policy as Code (EPAC) is a powerful tool that allows organizations to manage Azure Policies as code in a git repository. It's designed for medium and large organizations with a larger number of Policies, Policy Sets, and Assignments, and/or complex deployment scenarios.</p>
-<h3 id="key-features-of-epac"><a class="toclink" href="../../2024/02/29/enterprise-azure-policy-as-code-epac/#key-features-of-epac">Key Features of EPAC</a></h3>
-<ul>
-<li><strong>Single and multi-tenant policy deployment</strong>: EPAC supports both single and multi-tenant policy deployments, making it versatile for different organizational structures.</li>
-<li><strong>Easy CI/CD Integration</strong>: EPAC can be easily integrated with any CI/CD tool, which makes it a great fit for DevOps environments.</li>
-<li><strong>Operational scripts</strong>: EPAC includes operational scripts to simplify operational tasks.</li>
-<li><strong>Integration with Azure Landing Zones</strong>: EPAC provides a mature integration with Azure Landing Zones. Utilizing Azure Landing Zones together with EPAC is highly recommended.</li>
-</ul>
-<h3 id="who-should-use-epac"><a class="toclink" href="../../2024/02/29/enterprise-azure-policy-as-code-epac/#who-should-use-epac">Who Should Use EPAC?</a></h3>
-<p>EPAC is designed for medium and large organizations with a larger number of Policies, Policy Sets, and Assignments, and/or complex deployment scenarios. However, smaller organizations implementing fully-automated DevOps deployments of every Azure resource (known as Infrastructure as Code) can also benefit from EPAC.</p>
-<h3 id="how-does-epac-work"><a class="toclink" href="../../2024/02/29/enterprise-azure-policy-as-code-epac/#how-does-epac-work">How Does EPAC Work?</a></h3>
-<p>EPAC works by deploying all policies and policy assignments defined in the EPAC repository to the deploymentRootScope and its children. It takes possession of all Policy Resources at the deploymentRootScope and its children.</p>
-<p><img alt="Alt text" src="../../2024/02/image-2.png"/></p>
-<p>The process depicted in the image involves three key scripts that manage a deployment sequence. Here's a breakdown of the process:</p>
-<ol>
-<li>
-<p><strong>Definition Files</strong>: The process begins with various definition files in JSON, CSV, or XLSX formats. These files contain policy definitions, policy set (initiative) definitions, assignments, exemptions, and global settings.</p>
-</li>
-<li>
-<p><strong>Planning Script</strong>: The <code>Build-DeploymentPlans.ps1</code> script uses these definition files to create a deployment plan. This script requires Resource Policy Reader privileges.</p>
-</li>
-<li>
-<p><strong>Deployment Scripts</strong>: The deployment plan is then used by two deployment scripts:</p>
-</li>
-<li><code>Deploy-PolicyPlan.ps1</code>: This script deploys Policy resources using the <code>policy-plan.json</code> file from the deployment plan. It requires Resource Policy Contributor privileges.</li>
-<li><code>Deploy-RolesPlan.ps1</code>: This script deploys Role Assignments using the <code>roles-plan.json</code> file from the deployment plan. It requires User Access Administrator privileges.</li>
-</ol>
-<p>The process includes optional approval gates after each deployment step. These are typically used in production environments to ensure each deployment step is reviewed and approved before moving to the next.</p>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>EPAC is a true desired state deployment technology. It takes possession of all Policy Resources at the deploymentRootScope and its children. It will delete any Policy resources not defined in the EPAC repo.</p>
-</div>
-<h3 id="conclusion"><a class="toclink" href="../../2024/02/29/enterprise-azure-policy-as-code-epac/#conclusion">Conclusion</a></h3>
-<p>EPAC is a robust solution for managing Azure Policies as code. It offers a high level of assurance in highly controlled and sensitive environments, and a means for the development, deployment, management, and reporting of Azure policy at scale. </p>
-<h3 id="references"><a class="toclink" href="../../2024/02/29/enterprise-azure-policy-as-code-epac/#references">References</a></h3>
-<ul>
-<li><a href="https://github.com/Azure/enterprise-azure-policy-as-code">EPAC Documentation</a></li>
-</ul>
-</div>
-</article>
-<article class="md-post md-post--excerpt">
-<header class="md-post__header">
-<nav class="md-post__authors md-typeset">
-<span class="md-author">
-<img alt="Rafael Fernández" src="https://avatars.githubusercontent.com/u/39990341"/>
-</span>
-</nav>
-<div class="md-post__meta md-meta">
-<ul class="md-meta__list">
-<li class="md-meta__item">
-<time datetime="2024-02-28 00:00:00">February 28, 2024</time></li>
-<li class="md-meta__item">
-            in
-            
-              <a class="md-meta__link" href="../../category/tools/">Tools</a></li>
-<li class="md-meta__item">
-            
-              5 min read
-            
-          </li>
-</ul>
-</div>
-</header>
-<div class="md-post__content md-typeset">
-<h2 id="manage-azure-policy-github-action"><a class="toclink" href="../../2024/02/28/manage-azure-policy-github-action/">Manage Azure Policy GitHub Action</a></h2>
-<p>It's recommended to review:</p>
-<ul>
-<li><a href="../../2024/02/24/azure-policy/">Azure Policy</a></li>
-<li><a href="../../2024/02/26/writing-your-first-policy-in-azure-with-portal/">Writing Your First Policy in Azure with Portal</a></li>
-<li><a href="../../2024/02/25/writing-your-first-initiative-with-portal/">Writing Your First Initiative in Azure with Portal</a></li>
-</ul>
-<h3 id="overview"><a class="toclink" href="../../2024/02/28/manage-azure-policy-github-action/#overview">Overview</a></h3>
-<p>The <strong>Manage Azure Policy</strong> GitHub Action empowers you to enforce organizational standards and assess compliance at scale using Azure policies. With this action, you can seamlessly integrate policy management into your CI/CD pipelines, ensuring that your Azure resources adhere to the desired policies.</p>
-<div class="admonition info">
-<p class="admonition-title">Info</p>
-<p>This project does not have received any updates since some time, but it is still a simple option to develop your Azure Policies.
-As everything cannot be good to say that this deployment method has a major drawback, deletions must be done by hand :S</p>
-</div>
-<h3 id="key-features"><a class="toclink" href="../../2024/02/28/manage-azure-policy-github-action/#key-features">Key Features</a></h3>
-<ol>
-<li>
-<p><strong>Customizable Workflows</strong>: GitHub workflows are highly customizable. You have complete control over the sequence in which Azure policies are rolled out. This flexibility enables you to follow safe deployment practices and catch regressions or bugs well before policies are applied to critical resources.</p>
-</li>
-<li>
-<p><strong>Azure Login Integration</strong>: The action assumes that you've already authenticated using the <strong>Azure Login</strong> action. Make sure you've logged in using an Azure service principal with sufficient permissions to write policies on selected scopes. Refer to the <a href="https://github.com/MicrosoftDocs/azure-docs/blob/main/articles/cost-management-billing/manage/ea-azure-marketplace.md">full documentation of Azure Login Action</a> for details on permissions.</p>
-</li>
-<li>
-<p><strong>Policy File Structure</strong>: Your policy files should be organized in a specific directory structure within your GitHub repository. Here's how it should look:</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-14-1"><a href="#__codelineno-14-1" id="__codelineno-14-1" name="__codelineno-14-1"></a>|- policies/
-</span><span id="__span-14-2"><a href="#__codelineno-14-2" id="__codelineno-14-2" name="__codelineno-14-2"></a>   |- &lt;policy1_name&gt;/
-</span><span id="__span-14-3"><a href="#__codelineno-14-3" id="__codelineno-14-3" name="__codelineno-14-3"></a>      |- policy.json
-</span><span id="__span-14-4"><a href="#__codelineno-14-4" id="__codelineno-14-4" name="__codelineno-14-4"></a>      |- assign.&lt;name1&gt;.json
-</span><span id="__span-14-5"><a href="#__codelineno-14-5" id="__codelineno-14-5" name="__codelineno-14-5"></a>      |- assign.&lt;name2&gt;.json
-</span><span id="__span-14-6"><a href="#__codelineno-14-6" id="__codelineno-14-6" name="__codelineno-14-6"></a>      ...
-</span><span id="__span-14-7"><a href="#__codelineno-14-7" id="__codelineno-14-7" name="__codelineno-14-7"></a>   |- &lt;policy2_name&gt;/
-</span><span id="__span-14-8"><a href="#__codelineno-14-8" id="__codelineno-14-8" name="__codelineno-14-8"></a>      |- policy.json
-</span><span id="__span-14-9"><a href="#__codelineno-14-9" id="__codelineno-14-9" name="__codelineno-14-9"></a>      |- assign.&lt;name1&gt;.json
-</span><span id="__span-14-10"><a href="#__codelineno-14-10" id="__codelineno-14-10" name="__codelineno-14-10"></a>      |- assign.&lt;name2&gt;.json
-</span><span id="__span-14-11"><a href="#__codelineno-14-11" id="__codelineno-14-11" name="__codelineno-14-11"></a>      ...
-</span></code></pre></div>
-<ul>
-<li>Each policy resides in a subfolder under the <code>policies/</code> directory.</li>
-<li>The <code>policy.json</code> file contains the policy definition.</li>
-<li>Assignment files (e.g., <code>assign.&lt;name1&gt;.json</code>) specify how the policy is applied.</li>
-</ul>
-</li>
-<li>
-<p><strong>Inputs for the Action</strong>:</p>
-<ul>
-<li><strong>Paths</strong>: Specify the mandatory path(s) to the directory containing your Azure policy files.</li>
-</ul>
-</li>
-</ol>
-<h3 id="sample-workflow"><a class="toclink" href="../../2024/02/28/manage-azure-policy-github-action/#sample-workflow">Sample Workflow</a></h3>
-<p>Here's an example of how you can apply policies at the Management Group scope using the <strong>Manage Azure Policy</strong> action:</p>
-<div class="language-yaml highlight"><pre><span></span><code><span id="__span-15-1"><a href="#__codelineno-15-1" id="__codelineno-15-1" name="__codelineno-15-1"></a><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">'Test</span><span class="nv"> </span><span class="s">Policy'</span>
-</span><span id="__span-15-2"><a href="#__codelineno-15-2" id="__codelineno-15-2" name="__codelineno-15-2"></a><span class="nt">on</span><span class="p">:</span>
-</span><span id="__span-15-3"><a href="#__codelineno-15-3" id="__codelineno-15-3" name="__codelineno-15-3"></a><span class="w">  </span><span class="nt">push</span><span class="p">:</span>
-</span><span id="__span-15-4"><a href="#__codelineno-15-4" id="__codelineno-15-4" name="__codelineno-15-4"></a><span class="w">    </span><span class="nt">branches</span><span class="p">:</span><span class="w"> </span>
-</span><span id="__span-15-5"><a href="#__codelineno-15-5" id="__codelineno-15-5" name="__codelineno-15-5"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">"*"</span><span class="w"> </span>
-</span><span id="__span-15-6"><a href="#__codelineno-15-6" id="__codelineno-15-6" name="__codelineno-15-6"></a><span class="w">    </span><span class="nt">paths</span><span class="p">:</span><span class="w"> </span>
-</span><span id="__span-15-7"><a href="#__codelineno-15-7" id="__codelineno-15-7" name="__codelineno-15-7"></a><span class="w">     </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">'policies/**'</span>
-</span><span id="__span-15-8"><a href="#__codelineno-15-8" id="__codelineno-15-8" name="__codelineno-15-8"></a><span class="w">     </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">'initiatives/**'</span>
-</span><span id="__span-15-9"><a href="#__codelineno-15-9" id="__codelineno-15-9" name="__codelineno-15-9"></a><span class="w">  </span><span class="nt">workflow_dispatch</span><span class="p">:</span>
-</span><span id="__span-15-10"><a href="#__codelineno-15-10" id="__codelineno-15-10" name="__codelineno-15-10"></a>
-</span><span id="__span-15-11"><a href="#__codelineno-15-11" id="__codelineno-15-11" name="__codelineno-15-11"></a><span class="nt">jobs</span><span class="p">:</span>
-</span><span id="__span-15-12"><a href="#__codelineno-15-12" id="__codelineno-15-12" name="__codelineno-15-12"></a><span class="w">  </span><span class="nt">apply-azure-policy</span><span class="p">:</span><span class="w">    </span>
-</span><span id="__span-15-13"><a href="#__codelineno-15-13" id="__codelineno-15-13" name="__codelineno-15-13"></a><span class="w">    </span><span class="nt">runs-on</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ubuntu-latest</span>
-</span><span id="__span-15-14"><a href="#__codelineno-15-14" id="__codelineno-15-14" name="__codelineno-15-14"></a><span class="w">    </span><span class="nt">steps</span><span class="p">:</span>
-</span><span id="__span-15-15"><a href="#__codelineno-15-15" id="__codelineno-15-15" name="__codelineno-15-15"></a><span class="w">    </span><span class="c1"># Azure Login</span>
-</span><span id="__span-15-16"><a href="#__codelineno-15-16" id="__codelineno-15-16" name="__codelineno-15-16"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Login to Azure</span>
-</span><span id="__span-15-17"><a href="#__codelineno-15-17" id="__codelineno-15-17" name="__codelineno-15-17"></a><span class="w">      </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">azure/login@v1</span>
-</span><span id="__span-15-18"><a href="#__codelineno-15-18" id="__codelineno-15-18" name="__codelineno-15-18"></a><span class="w">      </span><span class="nt">with</span><span class="p">:</span>
-</span><span id="__span-15-19"><a href="#__codelineno-15-19" id="__codelineno-15-19" name="__codelineno-15-19"></a><span class="w">        </span><span class="nt">creds</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${{ secrets.AZURE_CREDENTIALS }}</span>
-</span><span id="__span-15-20"><a href="#__codelineno-15-20" id="__codelineno-15-20" name="__codelineno-15-20"></a><span class="w">        </span><span class="nt">allow-no-subscriptions</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
-</span><span id="__span-15-21"><a href="#__codelineno-15-21" id="__codelineno-15-21" name="__codelineno-15-21"></a>
-</span><span id="__span-15-22"><a href="#__codelineno-15-22" id="__codelineno-15-22" name="__codelineno-15-22"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Checkout</span>
-</span><span id="__span-15-23"><a href="#__codelineno-15-23" id="__codelineno-15-23" name="__codelineno-15-23"></a><span class="w">      </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">actions/checkout@v2</span><span class="w"> </span>
-</span><span id="__span-15-24"><a href="#__codelineno-15-24" id="__codelineno-15-24" name="__codelineno-15-24"></a>
-</span><span id="__span-15-25"><a href="#__codelineno-15-25" id="__codelineno-15-25" name="__codelineno-15-25"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Create or Update Azure Policies</span>
-</span><span id="__span-15-26"><a href="#__codelineno-15-26" id="__codelineno-15-26" name="__codelineno-15-26"></a><span class="w">      </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">azure/manage-azure-policy@v0</span>
-</span><span id="__span-15-27"><a href="#__codelineno-15-27" id="__codelineno-15-27" name="__codelineno-15-27"></a><span class="w">      </span><span class="nt">with</span><span class="p">:</span><span class="w">      </span>
-</span><span id="__span-15-28"><a href="#__codelineno-15-28" id="__codelineno-15-28" name="__codelineno-15-28"></a><span class="w">        </span><span class="nt">paths</span><span class="p">:</span><span class="w">  </span><span class="p p-Indicator">|</span><span class="w">                </span>
-</span><span id="__span-15-29"><a href="#__codelineno-15-29" id="__codelineno-15-29" name="__codelineno-15-29"></a><span class="w">          </span><span class="no">policies/**</span>
-</span><span id="__span-15-30"><a href="#__codelineno-15-30" id="__codelineno-15-30" name="__codelineno-15-30"></a><span class="w">          </span><span class="no">initiatives/**</span>
-</span><span id="__span-15-31"><a href="#__codelineno-15-31" id="__codelineno-15-31" name="__codelineno-15-31"></a><span class="w">        </span><span class="nt">assignments</span><span class="p">:</span><span class="w">  </span><span class="p p-Indicator">|</span>
-</span><span id="__span-15-32"><a href="#__codelineno-15-32" id="__codelineno-15-32" name="__codelineno-15-32"></a><span class="w">          </span><span class="no">assign.*_testRG_*.json</span>
-</span></code></pre></div>
-<p>Remember to replace the placeholder values (such as <code>secrets.AZURE_CREDENTIALS</code>) with your actual configuration, you can follow this instructions to create a service principal and get the credentials: <a href="https://github.com/Azure/manage-azure-policy?tab=readme-ov-file#configure-credentials-for-azure-login-action">Create a service principal and get the credentials</a></p>
-<h3 id="example-of-use-for-policy"><a class="toclink" href="../../2024/02/28/manage-azure-policy-github-action/#example-of-use-for-policy">Example of use for Policy</a></h3>
-<p>In this example we define all our policies and initiatives at management group level and assign to resource group, and we have a policy that requires a specific tag and its value.</p>
-<p>You need to create a folder structure like this:</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-16-1"><a href="#__codelineno-16-1" id="__codelineno-16-1" name="__codelineno-16-1"></a>|- policies/
-</span><span id="__span-16-2"><a href="#__codelineno-16-2" id="__codelineno-16-2" name="__codelineno-16-2"></a>   |- require-tag-and-its-value/
-</span><span id="__span-16-3"><a href="#__codelineno-16-3" id="__codelineno-16-3" name="__codelineno-16-3"></a>      |- policy.json
-</span><span id="__span-16-4"><a href="#__codelineno-16-4" id="__codelineno-16-4" name="__codelineno-16-4"></a>      |- assign.testRG_testazurepolicy.json
-</span><span id="__span-16-5"><a href="#__codelineno-16-5" id="__codelineno-16-5" name="__codelineno-16-5"></a>|- initiatives/
-</span><span id="__span-16-6"><a href="#__codelineno-16-6" id="__codelineno-16-6" name="__codelineno-16-6"></a>   |- initiative1/
-</span><span id="__span-16-7"><a href="#__codelineno-16-7" id="__codelineno-16-7" name="__codelineno-16-7"></a>      |- policyset.json
-</span><span id="__span-16-8"><a href="#__codelineno-16-8" id="__codelineno-16-8" name="__codelineno-16-8"></a>      |- assign.testRG_testazurepolicy.json
-</span></code></pre></div>
-<h4 id="policies"><a class="toclink" href="../../2024/02/28/manage-azure-policy-github-action/#policies">policies</a></h4>
-<div class="admonition info">
-<p class="admonition-title">Info</p>
-<ul>
-<li>The <code>policy.json</code> file contains the policy definition, and the <code>assign.&lt;name&gt;.json</code> file specifies how the policy is applied.  </li>
-</ul>
-</div>
-<h5 id="policyjson"><a class="toclink" href="../../2024/02/28/manage-azure-policy-github-action/#policyjson">policy.json</a></h5>
-<div class="admonition info">
-<p class="admonition-title">Info</p>
-<ul>
-<li>The <code>id</code> value specifies where you are going to define the policy.</li>
-</ul>
-</div>
-<div class="language-json highlight"><span class="filename">policy.json</span><pre><span></span><code><span id="__span-17-1"><a href="#__codelineno-17-1" id="__codelineno-17-1" name="__codelineno-17-1"></a><span class="p">{</span>
-</span><span id="__span-17-2"><a href="#__codelineno-17-2" id="__codelineno-17-2" name="__codelineno-17-2"></a><span class="w">    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/providers/Microsoft.Management/managementGroups/00000000-0000-0000-0000-000000000000/providers/Microsoft.Authorization/policyDefinitions/requite-tag-and-its-value"</span><span class="p">,</span>
-</span><span id="__span-17-3"><a href="#__codelineno-17-3" id="__codelineno-17-3" name="__codelineno-17-3"></a><span class="w">    </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Microsoft.Authorization/policyDefinitions"</span><span class="p">,</span>
-</span><span id="__span-17-4"><a href="#__codelineno-17-4" id="__codelineno-17-4" name="__codelineno-17-4"></a><span class="w">    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"requite-tag-and-its-value"</span><span class="p">,</span>
-</span><span id="__span-17-5"><a href="#__codelineno-17-5" id="__codelineno-17-5" name="__codelineno-17-5"></a><span class="w">    </span><span class="nt">"properties"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-17-6"><a href="#__codelineno-17-6" id="__codelineno-17-6" name="__codelineno-17-6"></a><span class="w">        </span><span class="nt">"displayName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Require a tag and its value"</span><span class="p">,</span>
-</span><span id="__span-17-7"><a href="#__codelineno-17-7" id="__codelineno-17-7" name="__codelineno-17-7"></a><span class="w">        </span><span class="nt">"policyType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Custom"</span><span class="p">,</span>
-</span><span id="__span-17-8"><a href="#__codelineno-17-8" id="__codelineno-17-8" name="__codelineno-17-8"></a><span class="w">        </span><span class="nt">"mode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Indexed"</span><span class="p">,</span>
-</span><span id="__span-17-9"><a href="#__codelineno-17-9" id="__codelineno-17-9" name="__codelineno-17-9"></a><span class="w">        </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"This policy requires a specific tag and its value."</span><span class="p">,</span>
-</span><span id="__span-17-10"><a href="#__codelineno-17-10" id="__codelineno-17-10" name="__codelineno-17-10"></a><span class="w">        </span><span class="nt">"metadata"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-17-11"><a href="#__codelineno-17-11" id="__codelineno-17-11" name="__codelineno-17-11"></a><span class="w">            </span><span class="nt">"category"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Tags"</span>
-</span><span id="__span-17-12"><a href="#__codelineno-17-12" id="__codelineno-17-12" name="__codelineno-17-12"></a><span class="w">        </span><span class="p">},</span>
-</span><span id="__span-17-13"><a href="#__codelineno-17-13" id="__codelineno-17-13" name="__codelineno-17-13"></a><span class="w">        </span><span class="nt">"parameters"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-17-14"><a href="#__codelineno-17-14" id="__codelineno-17-14" name="__codelineno-17-14"></a><span class="w">            </span><span class="nt">"tagName"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-17-15"><a href="#__codelineno-17-15" id="__codelineno-17-15" name="__codelineno-17-15"></a><span class="w">                </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"String"</span><span class="p">,</span>
-</span><span id="__span-17-16"><a href="#__codelineno-17-16" id="__codelineno-17-16" name="__codelineno-17-16"></a><span class="w">                </span><span class="nt">"metadata"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-17-17"><a href="#__codelineno-17-17" id="__codelineno-17-17" name="__codelineno-17-17"></a><span class="w">                    </span><span class="nt">"displayName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Tag Name"</span><span class="p">,</span>
-</span><span id="__span-17-18"><a href="#__codelineno-17-18" id="__codelineno-17-18" name="__codelineno-17-18"></a><span class="w">                    </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Name of the tag, such as 'environment'"</span>
-</span><span id="__span-17-19"><a href="#__codelineno-17-19" id="__codelineno-17-19" name="__codelineno-17-19"></a><span class="w">                </span><span class="p">}</span>
-</span><span id="__span-17-20"><a href="#__codelineno-17-20" id="__codelineno-17-20" name="__codelineno-17-20"></a><span class="w">            </span><span class="p">},</span>
-</span><span id="__span-17-21"><a href="#__codelineno-17-21" id="__codelineno-17-21" name="__codelineno-17-21"></a><span class="w">            </span><span class="nt">"tagValue"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-17-22"><a href="#__codelineno-17-22" id="__codelineno-17-22" name="__codelineno-17-22"></a><span class="w">                </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"String"</span><span class="p">,</span>
-</span><span id="__span-17-23"><a href="#__codelineno-17-23" id="__codelineno-17-23" name="__codelineno-17-23"></a><span class="w">                </span><span class="nt">"metadata"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-17-24"><a href="#__codelineno-17-24" id="__codelineno-17-24" name="__codelineno-17-24"></a><span class="w">                    </span><span class="nt">"displayName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Tag Value"</span><span class="p">,</span>
-</span><span id="__span-17-25"><a href="#__codelineno-17-25" id="__codelineno-17-25" name="__codelineno-17-25"></a><span class="w">                    </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Value of the tag, such as 'production'"</span>
-</span><span id="__span-17-26"><a href="#__codelineno-17-26" id="__codelineno-17-26" name="__codelineno-17-26"></a><span class="w">                </span><span class="p">}</span>
-</span><span id="__span-17-27"><a href="#__codelineno-17-27" id="__codelineno-17-27" name="__codelineno-17-27"></a><span class="w">            </span><span class="p">}</span>
-</span><span id="__span-17-28"><a href="#__codelineno-17-28" id="__codelineno-17-28" name="__codelineno-17-28"></a><span class="w">        </span><span class="p">}</span>
-</span><span id="__span-17-29"><a href="#__codelineno-17-29" id="__codelineno-17-29" name="__codelineno-17-29"></a><span class="w">        </span><span class="p">},</span>
-</span><span id="__span-17-30"><a href="#__codelineno-17-30" id="__codelineno-17-30" name="__codelineno-17-30"></a><span class="w">        </span><span class="nt">"policyRule"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-17-31"><a href="#__codelineno-17-31" id="__codelineno-17-31" name="__codelineno-17-31"></a><span class="w">            </span><span class="nt">"if"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-17-32"><a href="#__codelineno-17-32" id="__codelineno-17-32" name="__codelineno-17-32"></a><span class="w">                </span><span class="nt">"not"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-17-33"><a href="#__codelineno-17-33" id="__codelineno-17-33" name="__codelineno-17-33"></a><span class="w">                    </span><span class="nt">"field"</span><span class="p">:</span><span class="w"> </span><span class="s2">"[concat('tags[', parameters('tagName'), ']')]"</span><span class="p">,</span>
-</span><span id="__span-17-34"><a href="#__codelineno-17-34" id="__codelineno-17-34" name="__codelineno-17-34"></a><span class="w">                    </span><span class="nt">"equals"</span><span class="p">:</span><span class="w"> </span><span class="s2">"[parameters('tagValue')]"</span>
-</span><span id="__span-17-35"><a href="#__codelineno-17-35" id="__codelineno-17-35" name="__codelineno-17-35"></a><span class="w">                    </span><span class="p">}</span>
-</span><span id="__span-17-36"><a href="#__codelineno-17-36" id="__codelineno-17-36" name="__codelineno-17-36"></a><span class="w">                </span><span class="p">},</span>
-</span><span id="__span-17-37"><a href="#__codelineno-17-37" id="__codelineno-17-37" name="__codelineno-17-37"></a><span class="w">            </span><span class="nt">"then"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-17-38"><a href="#__codelineno-17-38" id="__codelineno-17-38" name="__codelineno-17-38"></a><span class="w">                </span><span class="nt">"effect"</span><span class="p">:</span><span class="w"> </span><span class="s2">"deny"</span>
-</span><span id="__span-17-39"><a href="#__codelineno-17-39" id="__codelineno-17-39" name="__codelineno-17-39"></a><span class="w">            </span><span class="p">}</span>
-</span><span id="__span-17-40"><a href="#__codelineno-17-40" id="__codelineno-17-40" name="__codelineno-17-40"></a><span class="w">        </span><span class="p">}</span>
-</span><span id="__span-17-41"><a href="#__codelineno-17-41" id="__codelineno-17-41" name="__codelineno-17-41"></a><span class="w">    </span><span class="p">}</span>
-</span></code></pre></div>
-<h5 id="assigntestrg_testazurepolicyjson"><a class="toclink" href="../../2024/02/28/manage-azure-policy-github-action/#assigntestrg_testazurepolicyjson">assign.testRG_testazurepolicy.json</a></h5>
-<div class="admonition info">
-<p class="admonition-title">Info</p>
-<ul>
-<li>Change the <code>id</code> and <code>scope</code> values in the <code>assign.&lt;name&gt;.json</code> file to match your Azure subscription and resource group.</li>
-<li>id specifies where you are going to deploy the assignment.</li>
-<li>id and name are related, name can not be any value, it should be the same as the last part of the id. You can generete a new GUID and use it as name with (1..24 | %{ '{0:x}' -f (Get-Random -Max 16) }) -join ''</li>
-<li>name and id are related.</li>
-<li>The <code>policyDefinitionId</code> value should match the <code>id</code> value in the <code>policy.json</code> file.</li>
-</ul>
-</div>
-<div class="language-json highlight"><span class="filename">assign.testRG_testazurepolicy.json</span><pre><span></span><code><span id="__span-18-1"><a href="#__codelineno-18-1" id="__codelineno-18-1" name="__codelineno-18-1"></a><span class="p">{</span>
-</span><span id="__span-18-2"><a href="#__codelineno-18-2" id="__codelineno-18-2" name="__codelineno-18-2"></a><span class="w">    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-testazurepolicy/providers/Microsoft.Authorization/policyAssignments/599a2c3a1a3b1f8b8e547b3e"</span><span class="p">,</span>
-</span><span id="__span-18-3"><a href="#__codelineno-18-3" id="__codelineno-18-3" name="__codelineno-18-3"></a><span class="w">    </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Microsoft.Authorization/policyAssignments"</span><span class="p">,</span>
-</span><span id="__span-18-4"><a href="#__codelineno-18-4" id="__codelineno-18-4" name="__codelineno-18-4"></a><span class="w">    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"599a2c3a1a3b1f8b8e547b3e"</span><span class="p">,</span><span class="w">     </span>
-</span><span id="__span-18-5"><a href="#__codelineno-18-5" id="__codelineno-18-5" name="__codelineno-18-5"></a><span class="w">    </span><span class="nt">"properties"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-18-6"><a href="#__codelineno-18-6" id="__codelineno-18-6" name="__codelineno-18-6"></a><span class="w">        </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"This policy audits the presence of a specific tag and its value."</span><span class="p">,</span>
-</span><span id="__span-18-7"><a href="#__codelineno-18-7" id="__codelineno-18-7" name="__codelineno-18-7"></a><span class="w">        </span><span class="nt">"displayName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Require a tag and its value"</span><span class="p">,</span>
-</span><span id="__span-18-8"><a href="#__codelineno-18-8" id="__codelineno-18-8" name="__codelineno-18-8"></a><span class="w">        </span><span class="nt">"parameters"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-18-9"><a href="#__codelineno-18-9" id="__codelineno-18-9" name="__codelineno-18-9"></a><span class="w">            </span><span class="nt">"tagName"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-18-10"><a href="#__codelineno-18-10" id="__codelineno-18-10" name="__codelineno-18-10"></a><span class="w">              </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"environment"</span>
-</span><span id="__span-18-11"><a href="#__codelineno-18-11" id="__codelineno-18-11" name="__codelineno-18-11"></a><span class="w">            </span><span class="p">},</span>
-</span><span id="__span-18-12"><a href="#__codelineno-18-12" id="__codelineno-18-12" name="__codelineno-18-12"></a><span class="w">            </span><span class="nt">"tagValue"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-18-13"><a href="#__codelineno-18-13" id="__codelineno-18-13" name="__codelineno-18-13"></a><span class="w">              </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"production"</span>
-</span><span id="__span-18-14"><a href="#__codelineno-18-14" id="__codelineno-18-14" name="__codelineno-18-14"></a><span class="w">            </span><span class="p">}</span>
-</span><span id="__span-18-15"><a href="#__codelineno-18-15" id="__codelineno-18-15" name="__codelineno-18-15"></a><span class="w">          </span><span class="p">},</span>
-</span><span id="__span-18-16"><a href="#__codelineno-18-16" id="__codelineno-18-16" name="__codelineno-18-16"></a><span class="w">          </span><span class="nt">"nonComplianceMessages"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
-</span><span id="__span-18-17"><a href="#__codelineno-18-17" id="__codelineno-18-17" name="__codelineno-18-17"></a><span class="w">            </span><span class="p">{</span>
-</span><span id="__span-18-18"><a href="#__codelineno-18-18" id="__codelineno-18-18" name="__codelineno-18-18"></a><span class="w">              </span><span class="nt">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"This resource is not compliant with the policy. Please apply the required tag and its value."</span>
-</span><span id="__span-18-19"><a href="#__codelineno-18-19" id="__codelineno-18-19" name="__codelineno-18-19"></a><span class="w">            </span><span class="p">}</span>
-</span><span id="__span-18-20"><a href="#__codelineno-18-20" id="__codelineno-18-20" name="__codelineno-18-20"></a><span class="w">          </span><span class="p">],</span>
-</span><span id="__span-18-21"><a href="#__codelineno-18-21" id="__codelineno-18-21" name="__codelineno-18-21"></a><span class="w">          </span><span class="nt">"enforcementMode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Default"</span><span class="p">,</span>
-</span><span id="__span-18-22"><a href="#__codelineno-18-22" id="__codelineno-18-22" name="__codelineno-18-22"></a><span class="w">          </span><span class="nt">"policyDefinitionId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/providers/Microsoft.Management/managementGroups/00000000-0000-0000-0000-000000000000/providers/Microsoft.Authorization/policyDefinitions/requite-tag-and-its-value"</span><span class="p">,</span>
-</span><span id="__span-18-23"><a href="#__codelineno-18-23" id="__codelineno-18-23" name="__codelineno-18-23"></a><span class="w">          </span><span class="nt">"scope"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-testazurepolicy"</span>
-</span><span id="__span-18-24"><a href="#__codelineno-18-24" id="__codelineno-18-24" name="__codelineno-18-24"></a><span class="w">    </span><span class="p">}</span><span class="w">    </span>
-</span><span id="__span-18-25"><a href="#__codelineno-18-25" id="__codelineno-18-25" name="__codelineno-18-25"></a><span class="p">}</span>
-</span></code></pre></div>
-<h4 id="initiatives"><a class="toclink" href="../../2024/02/28/manage-azure-policy-github-action/#initiatives">initiatives</a></h4>
-<div class="admonition info">
-<p class="admonition-title">Info</p>
-<ul>
-<li>The <code>policyset.json</code> file contains the policy definition, and the <code>assign.&lt;name&gt;.json</code> file specifies how the initiative is applied.</li>
-</ul>
-</div>
-<h5 id="policysetjson"><a class="toclink" href="../../2024/02/28/manage-azure-policy-github-action/#policysetjson">policyset.json</a></h5>
-<div class="admonition info">
-<p class="admonition-title">Info</p>
-<ul>
-<li>The <code>id</code> value specifies where you are going to define the initiative.</li>
-<li>The <code>policyDefinitions</code> array contains the policy definitions that are part of the initiative.</li>
-<li>The <code>parameters</code> object defines the parameters that can be passed to the policies within the initiative.</li>
-<li>The <code>policyDefinitionId</code> value should match the <code>id</code> value in the <code>policy.json</code> file of the policy.</li>
-</ul>
-</div>
-<div class="language-json highlight"><span class="filename">policyset.json</span><pre><span></span><code><span id="__span-19-1"><a href="#__codelineno-19-1" id="__codelineno-19-1" name="__codelineno-19-1"></a><span class="p">{</span>
-</span><span id="__span-19-2"><a href="#__codelineno-19-2" id="__codelineno-19-2" name="__codelineno-19-2"></a><span class="w">    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/providers/Microsoft.Management/managementGroups/00000000-0000-0000-0000-000000000000/providers/Microsoft.Authorization/policySetDefinitions/initiative1"</span><span class="p">,</span>
-</span><span id="__span-19-3"><a href="#__codelineno-19-3" id="__codelineno-19-3" name="__codelineno-19-3"></a><span class="w">    </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Microsoft.Authorization/policySetDefinitions"</span><span class="p">,</span>
-</span><span id="__span-19-4"><a href="#__codelineno-19-4" id="__codelineno-19-4" name="__codelineno-19-4"></a><span class="w">    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"initiative1"</span><span class="p">,</span>
-</span><span id="__span-19-5"><a href="#__codelineno-19-5" id="__codelineno-19-5" name="__codelineno-19-5"></a><span class="w">    </span><span class="nt">"properties"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-19-6"><a href="#__codelineno-19-6" id="__codelineno-19-6" name="__codelineno-19-6"></a><span class="w">        </span><span class="nt">"displayName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Initiative 1"</span><span class="p">,</span>
-</span><span id="__span-19-7"><a href="#__codelineno-19-7" id="__codelineno-19-7" name="__codelineno-19-7"></a><span class="w">        </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"This initiative contains a set of policies for testing."</span><span class="p">,</span>
-</span><span id="__span-19-8"><a href="#__codelineno-19-8" id="__codelineno-19-8" name="__codelineno-19-8"></a><span class="w">        </span><span class="nt">"metadata"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-19-9"><a href="#__codelineno-19-9" id="__codelineno-19-9" name="__codelineno-19-9"></a><span class="w">            </span><span class="nt">"category"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Test"</span>
-</span><span id="__span-19-10"><a href="#__codelineno-19-10" id="__codelineno-19-10" name="__codelineno-19-10"></a><span class="w">        </span><span class="p">},</span>
-</span><span id="__span-19-11"><a href="#__codelineno-19-11" id="__codelineno-19-11" name="__codelineno-19-11"></a><span class="w">        </span><span class="nt">"parameters"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-19-12"><a href="#__codelineno-19-12" id="__codelineno-19-12" name="__codelineno-19-12"></a><span class="w">            </span><span class="nt">"tagName"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-19-13"><a href="#__codelineno-19-13" id="__codelineno-19-13" name="__codelineno-19-13"></a><span class="w">                </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"String"</span><span class="p">,</span>
-</span><span id="__span-19-14"><a href="#__codelineno-19-14" id="__codelineno-19-14" name="__codelineno-19-14"></a><span class="w">                </span><span class="nt">"metadata"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-19-15"><a href="#__codelineno-19-15" id="__codelineno-19-15" name="__codelineno-19-15"></a><span class="w">                    </span><span class="nt">"displayName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Tag Name"</span><span class="p">,</span>
-</span><span id="__span-19-16"><a href="#__codelineno-19-16" id="__codelineno-19-16" name="__codelineno-19-16"></a><span class="w">                    </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Name of the tag, such as 'environment'"</span>
-</span><span id="__span-19-17"><a href="#__codelineno-19-17" id="__codelineno-19-17" name="__codelineno-19-17"></a><span class="w">                </span><span class="p">}</span>
-</span><span id="__span-19-18"><a href="#__codelineno-19-18" id="__codelineno-19-18" name="__codelineno-19-18"></a><span class="w">            </span><span class="p">},</span>
-</span><span id="__span-19-19"><a href="#__codelineno-19-19" id="__codelineno-19-19" name="__codelineno-19-19"></a><span class="w">            </span><span class="nt">"tagValue"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-19-20"><a href="#__codelineno-19-20" id="__codelineno-19-20" name="__codelineno-19-20"></a><span class="w">                </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"String"</span><span class="p">,</span>
-</span><span id="__span-19-21"><a href="#__codelineno-19-21" id="__codelineno-19-21" name="__codelineno-19-21"></a><span class="w">                </span><span class="nt">"metadata"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-19-22"><a href="#__codelineno-19-22" id="__codelineno-19-22" name="__codelineno-19-22"></a><span class="w">                    </span><span class="nt">"displayName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Tag Value"</span><span class="p">,</span>
-</span><span id="__span-19-23"><a href="#__codelineno-19-23" id="__codelineno-19-23" name="__codelineno-19-23"></a><span class="w">                    </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Value of the tag, such as 'production'"</span>
-</span><span id="__span-19-24"><a href="#__codelineno-19-24" id="__codelineno-19-24" name="__codelineno-19-24"></a><span class="w">                </span><span class="p">}</span>
-</span><span id="__span-19-25"><a href="#__codelineno-19-25" id="__codelineno-19-25" name="__codelineno-19-25"></a><span class="w">            </span><span class="p">}</span>
-</span><span id="__span-19-26"><a href="#__codelineno-19-26" id="__codelineno-19-26" name="__codelineno-19-26"></a><span class="w">        </span><span class="p">},</span>
-</span><span id="__span-19-27"><a href="#__codelineno-19-27" id="__codelineno-19-27" name="__codelineno-19-27"></a><span class="w">        </span><span class="nt">"policyDefinitions"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
-</span><span id="__span-19-28"><a href="#__codelineno-19-28" id="__codelineno-19-28" name="__codelineno-19-28"></a><span class="w">            </span><span class="p">{</span>
-</span><span id="__span-19-29"><a href="#__codelineno-19-29" id="__codelineno-19-29" name="__codelineno-19-29"></a><span class="w">                </span><span class="nt">"policyDefinitionId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/providers/Microsoft.Management/managementGroups/00000000-0000-0000-0000-000000000000/providers/Microsoft.Authorization/policyDefinitions/requite-tag-and-its-value"</span><span class="p">,</span>
-</span><span id="__span-19-30"><a href="#__codelineno-19-30" id="__codelineno-19-30" name="__codelineno-19-30"></a><span class="w">                </span><span class="nt">"parameters"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-19-31"><a href="#__codelineno-19-31" id="__codelineno-19-31" name="__codelineno-19-31"></a><span class="w">                    </span><span class="nt">"tagName"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-19-32"><a href="#__codelineno-19-32" id="__codelineno-19-32" name="__codelineno-19-32"></a><span class="w">                        </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"[parameters('tagName')]"</span>
-</span><span id="__span-19-33"><a href="#__codelineno-19-33" id="__codelineno-19-33" name="__codelineno-19-33"></a><span class="w">                    </span><span class="p">},</span>
-</span><span id="__span-19-34"><a href="#__codelineno-19-34" id="__codelineno-19-34" name="__codelineno-19-34"></a><span class="w">                    </span><span class="nt">"tagValue"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-19-35"><a href="#__codelineno-19-35" id="__codelineno-19-35" name="__codelineno-19-35"></a><span class="w">                        </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"[parameters('tagValue')]"</span>
-</span><span id="__span-19-36"><a href="#__codelineno-19-36" id="__codelineno-19-36" name="__codelineno-19-36"></a><span class="w">                    </span><span class="p">},</span>
-</span><span id="__span-19-37"><a href="#__codelineno-19-37" id="__codelineno-19-37" name="__codelineno-19-37"></a><span class="w">                    </span><span class="nt">"effect"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-19-38"><a href="#__codelineno-19-38" id="__codelineno-19-38" name="__codelineno-19-38"></a><span class="w">                        </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Deny"</span>
-</span><span id="__span-19-39"><a href="#__codelineno-19-39" id="__codelineno-19-39" name="__codelineno-19-39"></a><span class="w">                    </span><span class="p">}</span>
-</span><span id="__span-19-40"><a href="#__codelineno-19-40" id="__codelineno-19-40" name="__codelineno-19-40"></a><span class="w">                </span><span class="p">}</span>
-</span><span id="__span-19-41"><a href="#__codelineno-19-41" id="__codelineno-19-41" name="__codelineno-19-41"></a><span class="w">            </span><span class="p">}</span>
-</span><span id="__span-19-42"><a href="#__codelineno-19-42" id="__codelineno-19-42" name="__codelineno-19-42"></a><span class="w">        </span><span class="p">]</span>
-</span><span id="__span-19-43"><a href="#__codelineno-19-43" id="__codelineno-19-43" name="__codelineno-19-43"></a><span class="w">    </span><span class="p">}</span>
-</span><span id="__span-19-44"><a href="#__codelineno-19-44" id="__codelineno-19-44" name="__codelineno-19-44"></a><span class="p">}</span>
-</span></code></pre></div>
-<h5 id="assigntestrg_testazurepolicysetjson"><a class="toclink" href="../../2024/02/28/manage-azure-policy-github-action/#assigntestrg_testazurepolicysetjson">assign.testRG_testazurepolicyset.json</a></h5>
-<div class="language-json highlight"><span class="filename">assign.testRG_testazurepolicyset.json</span><pre><span></span><code><span id="__span-20-1"><a href="#__codelineno-20-1" id="__codelineno-20-1" name="__codelineno-20-1"></a><span class="p">{</span>
-</span><span id="__span-20-2"><a href="#__codelineno-20-2" id="__codelineno-20-2" name="__codelineno-20-2"></a><span class="w">    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-testazurepolicy/providers/Microsoft.Authorization/policyAssignments/ada0f4a34b09cf6ad704cc62"</span><span class="p">,</span>
-</span><span id="__span-20-3"><a href="#__codelineno-20-3" id="__codelineno-20-3" name="__codelineno-20-3"></a><span class="w">    </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Microsoft.Authorization/policyAssignments"</span><span class="p">,</span>
-</span><span id="__span-20-4"><a href="#__codelineno-20-4" id="__codelineno-20-4" name="__codelineno-20-4"></a><span class="w">    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ada0f4a34b09cf6ad704cc62"</span><span class="p">,</span><span class="w">     </span>
-</span><span id="__span-20-5"><a href="#__codelineno-20-5" id="__codelineno-20-5" name="__codelineno-20-5"></a><span class="w">    </span><span class="nt">"properties"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-20-6"><a href="#__codelineno-20-6" id="__codelineno-20-6" name="__codelineno-20-6"></a><span class="w">        </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"This initiative audits the presence of a specific tag and its value."</span><span class="p">,</span>
-</span><span id="__span-20-7"><a href="#__codelineno-20-7" id="__codelineno-20-7" name="__codelineno-20-7"></a><span class="w">        </span><span class="nt">"displayName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Require a tag and its value"</span><span class="p">,</span>
-</span><span id="__span-20-8"><a href="#__codelineno-20-8" id="__codelineno-20-8" name="__codelineno-20-8"></a><span class="w">        </span><span class="nt">"parameters"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-20-9"><a href="#__codelineno-20-9" id="__codelineno-20-9" name="__codelineno-20-9"></a><span class="w">            </span><span class="nt">"tagName"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-20-10"><a href="#__codelineno-20-10" id="__codelineno-20-10" name="__codelineno-20-10"></a><span class="w">              </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"environment"</span>
-</span><span id="__span-20-11"><a href="#__codelineno-20-11" id="__codelineno-20-11" name="__codelineno-20-11"></a><span class="w">            </span><span class="p">},</span>
-</span><span id="__span-20-12"><a href="#__codelineno-20-12" id="__codelineno-20-12" name="__codelineno-20-12"></a><span class="w">            </span><span class="nt">"tagValue"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-20-13"><a href="#__codelineno-20-13" id="__codelineno-20-13" name="__codelineno-20-13"></a><span class="w">              </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"production"</span>
-</span><span id="__span-20-14"><a href="#__codelineno-20-14" id="__codelineno-20-14" name="__codelineno-20-14"></a><span class="w">            </span><span class="p">}</span>
-</span><span id="__span-20-15"><a href="#__codelineno-20-15" id="__codelineno-20-15" name="__codelineno-20-15"></a><span class="w">          </span><span class="p">},</span>
-</span><span id="__span-20-16"><a href="#__codelineno-20-16" id="__codelineno-20-16" name="__codelineno-20-16"></a><span class="w">          </span><span class="nt">"nonComplianceMessages"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
-</span><span id="__span-20-17"><a href="#__codelineno-20-17" id="__codelineno-20-17" name="__codelineno-20-17"></a><span class="w">            </span><span class="p">{</span>
-</span><span id="__span-20-18"><a href="#__codelineno-20-18" id="__codelineno-20-18" name="__codelineno-20-18"></a><span class="w">              </span><span class="nt">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"This resource is not compliant with the policy. Please apply the required tag and its value."</span>
-</span><span id="__span-20-19"><a href="#__codelineno-20-19" id="__codelineno-20-19" name="__codelineno-20-19"></a><span class="w">            </span><span class="p">}</span>
-</span><span id="__span-20-20"><a href="#__codelineno-20-20" id="__codelineno-20-20" name="__codelineno-20-20"></a><span class="w">          </span><span class="p">],</span>
-</span><span id="__span-20-21"><a href="#__codelineno-20-21" id="__codelineno-20-21" name="__codelineno-20-21"></a><span class="w">          </span><span class="nt">"enforcementMode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Default"</span><span class="p">,</span>
-</span><span id="__span-20-22"><a href="#__codelineno-20-22" id="__codelineno-20-22" name="__codelineno-20-22"></a><span class="w">          </span><span class="nt">"policyDefinitionId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/providers/Microsoft.Management/managementGroups/00000000-0000-0000-0000-000000000000/providers/Microsoft.Authorization/policySetDefinitions/requite-tag-and-its-value"</span><span class="p">,</span>
-</span><span id="__span-20-23"><a href="#__codelineno-20-23" id="__codelineno-20-23" name="__codelineno-20-23"></a><span class="w">          </span><span class="nt">"scope"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-testazurepolicy"</span>
-</span><span id="__span-20-24"><a href="#__codelineno-20-24" id="__codelineno-20-24" name="__codelineno-20-24"></a><span class="w">    </span><span class="p">}</span><span class="w">    </span>
-</span><span id="__span-20-25"><a href="#__codelineno-20-25" id="__codelineno-20-25" name="__codelineno-20-25"></a><span class="p">}</span>
-</span></code></pre></div>
-<h3 id="conclusion"><a class="toclink" href="../../2024/02/28/manage-azure-policy-github-action/#conclusion">Conclusion</a></h3>
-<p>By incorporating the <strong>Manage Azure Policy</strong> action into your GitHub workflows, you can seamlessly enforce policies, maintain compliance, and ensure the robustness of your Azure resources, although it has its drawbacks, it is one more step compared to a portal. Later we will see the deployment with a more robust tool: EPAC</p>
-<p>Learn more about <a href="https://docs.microsoft.com/en-us/azure/governance/policy/overview">Azure Policies</a> and explore the action on the <a href="https://github.com/marketplace/actions/manage-azure-policy">GitHub Marketplace</a>.</p>
-</div>
-</article>
 <nav class="md-pagination">
-<a class="md-pagination__link" href="../../">1</a> <a class="md-pagination__link" href="../2/">2</a> <a class="md-pagination__link" href="../3/">3</a> <span class="md-pagination__current">4</span> <a class="md-pagination__link" href="../5/">5</a> <a class="md-pagination__link" href="../6/">6</a>
+<a class="md-pagination__link" href="../../">1</a> <a class="md-pagination__link" href="../2/">2</a> <a class="md-pagination__link" href="../3/">3</a> <span class="md-pagination__current">4</span> <a class="md-pagination__link" href="../5/">5</a> <a class="md-pagination__link" href="../6/">6</a> <a class="md-pagination__link" href="../7/">7</a>
 </nav>
 </div>
 </div>
