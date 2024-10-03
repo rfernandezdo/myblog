@@ -672,57 +672,60 @@
 <ol>
 <li>Create a new Terraform configuration file for the resource you want to import. In my case, I created a new file called <code>custom_role.tf</code> with the following content:</li>
 </ol>
-<div class="language-hcl highlight"><pre><span></span><code><span id="__span-10-1"><a href="#__codelineno-10-1" id="__codelineno-10-1" name="__codelineno-10-1"></a><span class="kr">resource</span><span class="w"> </span><span class="nc">"azurerm_role_definition"</span><span class="w"> </span><span class="nv">"custom_role"</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-10-2"><a href="#__codelineno-10-2" id="__codelineno-10-2" name="__codelineno-10-2"></a><span class="w">  </span><span class="na">name</span><span class="w">        </span><span class="o">=</span><span class="w"> </span><span class="s2">"CustomRole"</span>
-</span><span id="__span-10-3"><a href="#__codelineno-10-3" id="__codelineno-10-3" name="__codelineno-10-3"></a><span class="w">  </span><span class="na">scope</span><span class="w">       </span><span class="o">=</span><span class="w"> </span><span class="s2">"/providers/Microsoft.Management/managementGroups/00000000-0000-0000-0000-000000000000"</span>
-</span><span id="__span-10-4"><a href="#__codelineno-10-4" id="__codelineno-10-4" name="__codelineno-10-4"></a><span class="w">  </span><span class="nb">permissions</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-10-5"><a href="#__codelineno-10-5" id="__codelineno-10-5" name="__codelineno-10-5"></a><span class="w">    </span><span class="na">actions</span><span class="w">     </span><span class="o">=</span><span class="w"> </span><span class="p">[</span>
-</span><span id="__span-10-6"><a href="#__codelineno-10-6" id="__codelineno-10-6" name="__codelineno-10-6"></a><span class="w">      </span><span class="s2">"Microsoft.Storage/storageAccounts/listKeys/action"</span><span class="p">,</span>
-</span><span id="__span-10-7"><a href="#__codelineno-10-7" id="__codelineno-10-7" name="__codelineno-10-7"></a><span class="w">      </span><span class="s2">"Microsoft.Storage/storageAccounts/read"</span>
-</span><span id="__span-10-8"><a href="#__codelineno-10-8" id="__codelineno-10-8" name="__codelineno-10-8"></a><span class="w">    </span><span class="p">]</span>
-</span><span id="__span-10-9"><a href="#__codelineno-10-9" id="__codelineno-10-9" name="__codelineno-10-9"></a>
-</span><span id="__span-10-10"><a href="#__codelineno-10-10" id="__codelineno-10-10" name="__codelineno-10-10"></a><span class="w">    </span><span class="na">data_actions</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[]</span>
-</span><span id="__span-10-11"><a href="#__codelineno-10-11" id="__codelineno-10-11" name="__codelineno-10-11"></a>
-</span><span id="__span-10-12"><a href="#__codelineno-10-12" id="__codelineno-10-12" name="__codelineno-10-12"></a><span class="w">    </span><span class="na">not_data_actions</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[]</span>
-</span><span id="__span-10-13"><a href="#__codelineno-10-13" id="__codelineno-10-13" name="__codelineno-10-13"></a><span class="w">  </span><span class="p">}</span>
-</span><span id="__span-10-14"><a href="#__codelineno-10-14" id="__codelineno-10-14" name="__codelineno-10-14"></a><span class="w">  </span><span class="na">assignable_scopes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span>
-</span><span id="__span-10-15"><a href="#__codelineno-10-15" id="__codelineno-10-15" name="__codelineno-10-15"></a><span class="w">    </span><span class="s2">"/providers/Microsoft.Management/managementGroups/00000000-0000-0000-0000-000000000000"</span>
-</span><span id="__span-10-16"><a href="#__codelineno-10-16" id="__codelineno-10-16" name="__codelineno-10-16"></a><span class="w">  </span><span class="p">]</span>
-</span><span id="__span-10-17"><a href="#__codelineno-10-17" id="__codelineno-10-17" name="__codelineno-10-17"></a><span class="p">}</span>
+<div class="language-hcl highlight"><pre><span></span><code><span id="__span-12-1"><a href="#__codelineno-12-1" id="__codelineno-12-1" name="__codelineno-12-1"></a><span class="kr">resource</span><span class="w"> </span><span class="nc">"azurerm_role_definition"</span><span class="w"> </span><span class="nv">"custom_role"</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-12-2"><a href="#__codelineno-12-2" id="__codelineno-12-2" name="__codelineno-12-2"></a><span class="w">  </span><span class="na">name</span><span class="w">        </span><span class="o">=</span><span class="w"> </span><span class="s2">"CustomRole"</span>
+</span><span id="__span-12-3"><a href="#__codelineno-12-3" id="__codelineno-12-3" name="__codelineno-12-3"></a><span class="w">  </span><span class="na">scope</span><span class="w">       </span><span class="o">=</span><span class="w"> </span><span class="s2">"/providers/Microsoft.Management/managementGroups/00000000-0000-0000-0000-000000000000"</span>
+</span><span id="__span-12-4"><a href="#__codelineno-12-4" id="__codelineno-12-4" name="__codelineno-12-4"></a><span class="w">  </span><span class="nb">permissions</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-12-5"><a href="#__codelineno-12-5" id="__codelineno-12-5" name="__codelineno-12-5"></a><span class="w">    </span><span class="na">actions</span><span class="w">     </span><span class="o">=</span><span class="w"> </span><span class="p">[</span>
+</span><span id="__span-12-6"><a href="#__codelineno-12-6" id="__codelineno-12-6" name="__codelineno-12-6"></a><span class="w">      </span><span class="s2">"Microsoft.Storage/storageAccounts/listKeys/action"</span><span class="p">,</span>
+</span><span id="__span-12-7"><a href="#__codelineno-12-7" id="__codelineno-12-7" name="__codelineno-12-7"></a><span class="w">      </span><span class="s2">"Microsoft.Storage/storageAccounts/read"</span>
+</span><span id="__span-12-8"><a href="#__codelineno-12-8" id="__codelineno-12-8" name="__codelineno-12-8"></a><span class="w">    </span><span class="p">]</span>
+</span><span id="__span-12-9"><a href="#__codelineno-12-9" id="__codelineno-12-9" name="__codelineno-12-9"></a>
+</span><span id="__span-12-10"><a href="#__codelineno-12-10" id="__codelineno-12-10" name="__codelineno-12-10"></a><span class="w">    </span><span class="na">data_actions</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[]</span>
+</span><span id="__span-12-11"><a href="#__codelineno-12-11" id="__codelineno-12-11" name="__codelineno-12-11"></a>
+</span><span id="__span-12-12"><a href="#__codelineno-12-12" id="__codelineno-12-12" name="__codelineno-12-12"></a><span class="w">    </span><span class="na">not_data_actions</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[]</span>
+</span><span id="__span-12-13"><a href="#__codelineno-12-13" id="__codelineno-12-13" name="__codelineno-12-13"></a><span class="w">  </span><span class="p">}</span>
+</span><span id="__span-12-14"><a href="#__codelineno-12-14" id="__codelineno-12-14" name="__codelineno-12-14"></a><span class="w">  </span><span class="na">assignable_scopes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span>
+</span><span id="__span-12-15"><a href="#__codelineno-12-15" id="__codelineno-12-15" name="__codelineno-12-15"></a><span class="w">    </span><span class="s2">"/providers/Microsoft.Management/managementGroups/00000000-0000-0000-0000-000000000000"</span>
+</span><span id="__span-12-16"><a href="#__codelineno-12-16" id="__codelineno-12-16" name="__codelineno-12-16"></a><span class="w">  </span><span class="p">]</span>
+</span><span id="__span-12-17"><a href="#__codelineno-12-17" id="__codelineno-12-17" name="__codelineno-12-17"></a><span class="p">}</span>
 </span></code></pre></div>
 <ol>
 <li>Add a import block to the configuration file with the resource type and name you want to import. In my case, I added the following block to the <code>custom_role.tf</code> file:</li>
 </ol>
-<div class="language-hcl highlight"><pre><span></span><code><span id="__span-11-1"><a href="#__codelineno-11-1" id="__codelineno-11-1" name="__codelineno-11-1"></a><span class="nb">import</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-11-2"><a href="#__codelineno-11-2" id="__codelineno-11-2" name="__codelineno-11-2"></a><span class="w">  </span><span class="na">to</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">azurerm_role_definition.custom_role</span>
-</span><span id="__span-11-3"><a href="#__codelineno-11-3" id="__codelineno-11-3" name="__codelineno-11-3"></a><span class="w">  </span><span class="na">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"/providers/Microsoft.Authorization/roleDefinitions/11111111-1111-1111-1111-111111111111"|/providers/Microsoft.Management/managementGroups/00000000-0000-0000-0000-000000000000""</span>
-</span><span id="__span-11-4"><a href="#__codelineno-11-4" id="__codelineno-11-4" name="__codelineno-11-4"></a>
-</span><span id="__span-11-5"><a href="#__codelineno-11-5" id="__codelineno-11-5" name="__codelineno-11-5"></a><span class="p">}</span>
+<div class="language-hcl highlight"><pre><span></span><code><span id="__span-13-1"><a href="#__codelineno-13-1" id="__codelineno-13-1" name="__codelineno-13-1"></a><span class="nb">import</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-13-2"><a href="#__codelineno-13-2" id="__codelineno-13-2" name="__codelineno-13-2"></a><span class="w">  </span><span class="na">to</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">azurerm_role_definition.custom_role</span>
+</span><span id="__span-13-3"><a href="#__codelineno-13-3" id="__codelineno-13-3" name="__codelineno-13-3"></a><span class="w">  </span><span class="na">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"/providers/Microsoft.Authorization/roleDefinitions/11111111-1111-1111-1111-111111111111|/providers/Microsoft.Management/managementGroups/00000000-0000-0000-0000-000000000000"</span>
+</span><span id="__span-13-4"><a href="#__codelineno-13-4" id="__codelineno-13-4" name="__codelineno-13-4"></a>
+</span><span id="__span-13-5"><a href="#__codelineno-13-5" id="__codelineno-13-5" name="__codelineno-13-5"></a><span class="p">}</span>
 </span></code></pre></div>
 <ol>
 <li>Run the <code>terraform</code>plan` command to see the changes that Terraform will make to the resource. In my case, the output looked like this:</li>
 </ol>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-12-1"><a href="#__codelineno-12-1" id="__codelineno-12-1" name="__codelineno-12-1"></a>.
-</span><span id="__span-12-2"><a href="#__codelineno-12-2" id="__codelineno-12-2" name="__codelineno-12-2"></a>.
-</span><span id="__span-12-3"><a href="#__codelineno-12-3" id="__codelineno-12-3" name="__codelineno-12-3"></a>.
-</span><span id="__span-12-4"><a href="#__codelineno-12-4" id="__codelineno-12-4" name="__codelineno-12-4"></a>Terraform<span class="w"> </span>used<span class="w"> </span>the<span class="w"> </span>selected<span class="w"> </span>providers<span class="w"> </span>to<span class="w"> </span>generate<span class="w"> </span>the<span class="w"> </span>following<span class="w"> </span>execution<span class="w"> </span>plan.<span class="w"> </span>Resource<span class="w"> </span>actions<span class="w"> </span>are<span class="w"> </span>indicated<span class="w"> </span>with<span class="w"> </span>the<span class="w"> </span>following<span class="w"> </span>symbols:
-</span><span id="__span-12-5"><a href="#__codelineno-12-5" id="__codelineno-12-5" name="__codelineno-12-5"></a><span class="w">  </span>~<span class="w"> </span>update<span class="w"> </span><span class="k">in</span>-place
-</span><span id="__span-12-6"><a href="#__codelineno-12-6" id="__codelineno-12-6" name="__codelineno-12-6"></a>.
-</span><span id="__span-12-7"><a href="#__codelineno-12-7" id="__codelineno-12-7" name="__codelineno-12-7"></a>.
-</span><span id="__span-12-8"><a href="#__codelineno-12-8" id="__codelineno-12-8" name="__codelineno-12-8"></a>.
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-14-1"><a href="#__codelineno-14-1" id="__codelineno-14-1" name="__codelineno-14-1"></a>.
+</span><span id="__span-14-2"><a href="#__codelineno-14-2" id="__codelineno-14-2" name="__codelineno-14-2"></a>.
+</span><span id="__span-14-3"><a href="#__codelineno-14-3" id="__codelineno-14-3" name="__codelineno-14-3"></a>.
+</span><span id="__span-14-4"><a href="#__codelineno-14-4" id="__codelineno-14-4" name="__codelineno-14-4"></a>Terraform<span class="w"> </span>used<span class="w"> </span>the<span class="w"> </span>selected<span class="w"> </span>providers<span class="w"> </span>to<span class="w"> </span>generate<span class="w"> </span>the<span class="w"> </span>following<span class="w"> </span>execution<span class="w"> </span>plan.<span class="w"> </span>Resource<span class="w"> </span>actions<span class="w"> </span>are<span class="w"> </span>indicated<span class="w"> </span>with<span class="w"> </span>the<span class="w"> </span>following<span class="w"> </span>symbols:
+</span><span id="__span-14-5"><a href="#__codelineno-14-5" id="__codelineno-14-5" name="__codelineno-14-5"></a><span class="w">  </span>~<span class="w"> </span>update<span class="w"> </span><span class="k">in</span>-place
+</span><span id="__span-14-6"><a href="#__codelineno-14-6" id="__codelineno-14-6" name="__codelineno-14-6"></a>.
+</span><span id="__span-14-7"><a href="#__codelineno-14-7" id="__codelineno-14-7" name="__codelineno-14-7"></a>.
+</span><span id="__span-14-8"><a href="#__codelineno-14-8" id="__codelineno-14-8" name="__codelineno-14-8"></a>.
 </span></code></pre></div>
 <ol>
 <li>Run the <code>terraform apply</code> command to import the resource into Terraform. In my case, the output looked like this after a long 9 minutes:</li>
 </ol>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-13-1"><a href="#__codelineno-13-1" id="__codelineno-13-1" name="__codelineno-13-1"></a>...
-</span><span id="__span-13-2"><a href="#__codelineno-13-2" id="__codelineno-13-2" name="__codelineno-13-2"></a>Apply<span class="w"> </span>complete!<span class="w"> </span>Resources:<span class="w"> </span><span class="m">1</span><span class="w"> </span>imported,<span class="w"> </span><span class="m">0</span><span class="w"> </span>added,<span class="w"> </span><span class="m">1</span><span class="w"> </span>changed,<span class="w"> </span><span class="m">0</span><span class="w"> </span>destroyed.
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-15-1"><a href="#__codelineno-15-1" id="__codelineno-15-1" name="__codelineno-15-1"></a>...
+</span><span id="__span-15-2"><a href="#__codelineno-15-2" id="__codelineno-15-2" name="__codelineno-15-2"></a>Apply<span class="w"> </span>complete!<span class="w"> </span>Resources:<span class="w"> </span><span class="m">1</span><span class="w"> </span>imported,<span class="w"> </span><span class="m">0</span><span class="w"> </span>added,<span class="w"> </span><span class="m">1</span><span class="w"> </span>changed,<span class="w"> </span><span class="m">0</span><span class="w"> </span>destroyed.
 </span></code></pre></div>
 <ol>
 <li>Verify that the resource was imported successfully by running the <code>terraform show</code> command. In my case, the output looked like this:</li>
 </ol>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-14-1"><a href="#__codelineno-14-1" id="__codelineno-14-1" name="__codelineno-14-1"></a>terraform<span class="w"> </span>show
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-16-1"><a href="#__codelineno-16-1" id="__codelineno-16-1" name="__codelineno-16-1"></a>terraform<span class="w"> </span>show
 </span></code></pre></div>
 <p>You can use the <code>terraform import</code> command to import existing infrastructure into Terraform too but I prefer to use the <code>import</code> block because it's more readable and easier to manage.</p>
+<p>With terraform import the command would look like this:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-17-1"><a href="#__codelineno-17-1" id="__codelineno-17-1" name="__codelineno-17-1"></a>terraform<span class="w"> </span>import<span class="w"> </span>azurerm_role_definition.custom_role<span class="w"> </span><span class="s2">"/providers/Microsoft.Authorization/roleDefinitions/11111111-1111-1111-1111-111111111111|/providers/Microsoft.Management/managementGroups/00000000-0000-0000-0000-000000000000"</span>
+</span></code></pre></div>
 <h3 id="conclusion"><a class="toclink" href="../../2024/10/03/terraform-import-block/#conclusion">Conclusion</a></h3>
 <p>That's it! You've successfully imported an existing resource into Terraform. Now you can manage it with Terraform just like any other resource.</p>
 <p>Happy coding! 🚀</p>
