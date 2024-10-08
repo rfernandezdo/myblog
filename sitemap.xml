@@ -297,6 +297,10 @@
          <lastmod>2024-10-08</lastmod>
     </url>
     <url>
+         <loc>https://rfernandezdo.github.io/blog/2024/09/20/microsoft-defender-for-storage/</loc>
+         <lastmod>2024-10-08</lastmod>
+    </url>
+    <url>
          <loc>https://rfernandezdo.github.io/blog/2024/09/21/differences-between-b2b-direct-connect-and-b2b-collaboration-in-english/</loc>
          <lastmod>2024-10-08</lastmod>
     </url>
@@ -310,6 +314,10 @@
     </url>
     <url>
          <loc>https://rfernandezdo.github.io/blog/2024/10/03/terraform-import-block/</loc>
+         <lastmod>2024-10-08</lastmod>
+    </url>
+    <url>
+         <loc>https://rfernandezdo.github.io/blog/2024/10/04/how-to-check-if-a-role-permission-is-good-or-bad-in-azure-rbac/</loc>
          <lastmod>2024-10-08</lastmod>
     </url>
     <url>
@@ -353,6 +361,10 @@
          <lastmod>2024-10-08</lastmod>
     </url>
     <url>
+         <loc>https://rfernandezdo.github.io/blog/category/azure-services/</loc>
+         <lastmod>2024-10-08</lastmod>
+    </url>
+    <url>
          <loc>https://rfernandezdo.github.io/blog/category/devops/</loc>
          <lastmod>2024-10-08</lastmod>
     </url>
@@ -373,7 +385,7 @@
          <lastmod>2024-10-08</lastmod>
     </url>
     <url>
-         <loc>https://rfernandezdo.github.io/blog/category/azure-services/</loc>
+         <loc>https://rfernandezdo.github.io/blog/category/azure/</loc>
          <lastmod>2024-10-08</lastmod>
     </url>
     <url>
@@ -390,10 +402,6 @@
     </url>
     <url>
          <loc>https://rfernandezdo.github.io/blog/category/snowflake/</loc>
-         <lastmod>2024-10-08</lastmod>
-    </url>
-    <url>
-         <loc>https://rfernandezdo.github.io/blog/category/azure/</loc>
          <lastmod>2024-10-08</lastmod>
     </url>
     <url>

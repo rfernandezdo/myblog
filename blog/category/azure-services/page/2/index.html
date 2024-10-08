@@ -650,6 +650,190 @@
 <div class="md-post__meta md-meta">
 <ul class="md-meta__list">
 <li class="md-meta__item">
+<time datetime="2024-04-22 00:00:00">April 22, 2024</time></li>
+<li class="md-meta__item">
+            in
+            
+              <a class="md-meta__link" href="../../">Azure Services</a></li>
+<li class="md-meta__item">
+            
+              6 min read
+            
+          </li>
+</ul>
+</div>
+</header>
+<div class="md-post__content md-typeset">
+<h2 id="management-groups"><a class="toclink" href="../../../../2024/04/22/management-groups/">Management Groups</a></h2>
+<h3 id="what-are-management-groups"><a class="toclink" href="../../../../2024/04/22/management-groups/#what-are-management-groups">What are Management Groups?</a></h3>
+<p>Management Groups are a way to manage access, policies, and compliance for multiple subscriptions. They provide a way to manage access, policies, and compliance for multiple subscriptions. Management groups are containers that help you manage access, policy, and compliance for multiple subscriptions. You organize subscriptions into containers called "management groups" and apply your governance conditions to the management groups. All subscriptions within a management group automatically inherit the conditions applied to the management group.</p>
+<h3 id="management-groups-hierarchy"><a class="toclink" href="../../../../2024/04/22/management-groups/#management-groups-hierarchy">Management Groups Hierarchy</a></h3>
+<p>The management group hierarchy is a level of management groups that represent the different levels of your organization. The hierarchy starts with a single root management group, which represents the Microsoft Entra ID tenant. The root management group is the highest level in the hierarchy. All other management groups are subgroups of the root management group.</p>
+<h3 id="management-group-design-considerations"><a class="toclink" href="../../../../2024/04/22/management-groups/#management-group-design-considerations">Management group design considerations</a></h3>
+<p>When designing your management group hierarchy, consider the following:</p>
+<ul>
+<li>
+<p>How does your organization differentiate services that are managed or run by particular teams?</p>
+</li>
+<li>
+<p>Are there any specific operations that need to be isolated due to business or regulatory compliance requirements?</p>
+</li>
+<li>
+<p>Management groups can be utilized to consolidate policy and initiative assignments through Azure Policy.</p>
+</li>
+<li>
+<p>A management group hierarchy can accommodate up to six nested levels. The tenant root level and the subscription level are not included in this count.</p>
+</li>
+<li>
+<p>Any principal, be it a user or service principal, within a Microsoft Entra tenant has the authority to establish new management groups. This is due to the fact that Azure role-based access control (RBAC) authorization for managing group activities is not activated by default. For additional details, refer to the guide on safeguarding your resource hierarchy.</p>
+</li>
+<li>
+<p>By default, all newly created subscriptions will be assigned to the tenant root management group.</p>
+</li>
+</ul>
+<h3 id="management-group-recommendations"><a class="toclink" href="../../../../2024/04/22/management-groups/#management-group-recommendations">Management group recommendations</a></h3>
+<ul>
+<li>
+<p>Maintain a relatively flat management group hierarchy, ideally with three to four levels maximum. This practice minimizes managerial complexity and overhead.</p>
+</li>
+<li>
+<p>Refrain from mirroring your organizational structure into a deeply nested management group hierarchy. Utilize management groups primarily for policy assignment rather than billing. This strategy aligns with the Azure landing zone conceptual architecture, which applies Azure policies to workloads that need similar security and compliance at the same management group level.</p>
+</li>
+<li>
+<p>Establish management groups under your root-level group representing different types of workloads you will host. These groups should reflect the security, compliance, connectivity, and feature requirements of the workloads. By doing this, you can apply a set of Azure policies at the management group level for all workloads with similar needs.</p>
+</li>
+<li>
+<p>Leverage resource tags for querying and horizontally traversing across the management group hierarchy. Resource tags, enforced or appended via Azure Policy, allow you to group resources for search purposes without relying on a complex management group hierarchy.</p>
+</li>
+<li>
+<p>Set up a top-level sandbox management group. This allows users to immediately experiment with Azure and try out resources not yet permitted in production environments. The sandbox provides isolation from your development, testing, and production settings.</p>
+</li>
+<li>
+<p>Create a platform management group beneath the root management group to support common platform policy and Azure role assignments. This ensures distinct policies can be applied to subscriptions used for your Azure foundation and centralizes billing for common resources in one foundational subscription set.</p>
+</li>
+<li>
+<p>Minimize the number of Azure Policy assignments made at the root management group scope. This reduces the debugging of inherited policies in lower-level management groups.</p>
+</li>
+<li>
+<p>Implement policies to enforce compliance requirements either at the management group or subscription scope to achieve policy-driven governance.</p>
+</li>
+<li>
+<p>Ensure only privileged users have operational access to management groups in the tenant. Enable Azure RBAC authorization in the management group <a href="https://learn.microsoft.com/en-us/azure/governance/management-groups/how-to/protect-resource-hierarchy#setting-require-authorization">hierarchy settings</a> to fine-tune user privileges. By default, all users are authorized to create their own management groups under the root management group.</p>
+</li>
+<li>
+<p>Set up a default, dedicated management group for new subscriptions. This prevents any subscriptions from being placed under the root management group. This is particularly important if there are users eligible for Microsoft Developer Network (MSDN) or Visual Studio benefits and subscriptions. A sandbox management group could be a suitable candidate for this type of management group. For more information, see <a href="https://learn.microsoft.com/en-us/azure/governance/management-groups/how-to/protect-resource-hierarchy#setting---default-management-group">Setting - default management group</a>.</p>
+</li>
+<li>
+<p>Avoid creating management groups for production, testing, and development environments. If needed, separate these groups into different subscriptions within the same management group.</p>
+</li>
+</ul>
+<h3 id="management-group-structure-in-the-enterprise-scale-landing-zone"><a class="toclink" href="../../../../2024/04/22/management-groups/#management-group-structure-in-the-enterprise-scale-landing-zone">Management Group Structure in the Enterprise Scale Landing Zone</a></h3>
+<p>This is the common structure for the Management Groups in the Enterprise Scale Landing Zone: </p>
+<pre class="mermaid"><code>    graph TD
+        A[Root Management Group] --&gt; B[Intermediary-Management-Group]
+        B --&gt; C[Decommissioned]
+        B --&gt; D[Landing Zones]
+        B --&gt; E[Platform]
+        B --&gt; F[Sandboxes]
+        D --&gt; G[Corp]
+        D --&gt; H[Online]
+        E --&gt; I[Connectivity]
+        E --&gt; J[Identity]
+        E --&gt; K[Management]
+</code></pre>
+<ol>
+<li><strong>Root Management Group</strong><ul>
+<li>Intermediary-Management-Group<ul>
+<li>Decommissioned: This could be where resources that are being phased out or decommissioned are managed.</li>
+<li>Sandboxes: This could be an area where developers can test and experiment without affecting production systems.</li>
+<li>Landing Zones<ul>
+<li>Corp: This could represent corporate resources or applications.</li>
+<li>Online: This could represent online or customer-facing applications.</li>
+</ul>
+</li>
+<li>Platform<ul>
+<li>Connectivity: This could manage resources related to network connectivity.</li>
+<li>Identity: This could manage resources related to identity and access management.</li>
+<li>Management: This could manage resources related to overall platform management.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<p>This structure allows for clear segmentation of resources based on their purpose and lifecycle. For example, decommissioned resources are separated from active ones, like Sandbox, and resources within the 'Platform' are further categorized based on their function (Connectivity, Identity, Management). The 'Landing Zones' group appears to separate resources based on their use case or environment (Corp, Online).</p>
+<p>The exact interpretation would depend on the specific context and conventions of your organization.</p>
+<h3 id="bad-examples"><a class="toclink" href="../../../../2024/04/22/management-groups/#bad-examples">Bad Examples</a></h3>
+<h4 id="example-1-deeply-nested-hierarchy"><a class="toclink" href="../../../../2024/04/22/management-groups/#example-1-deeply-nested-hierarchy">Example 1: Deeply Nested Hierarchy</a></h4>
+<pre class="mermaid"><code>graph TD
+    A[Root Management Group] --&gt; B[Group 1]
+    B --&gt; C[Group 2]
+    C --&gt; D[Group 3]
+    D --&gt; E[Group 4]
+    E --&gt; F[Group 5]
+    F --&gt; G[Group 6]
+</code></pre>
+<p><strong>Why it's bad:</strong> This hierarchy is too deep. It becomes difficult to manage and increases complexity. Azure supports up to six levels of nested management groups but it's recommended to keep the hierarchy as flat as possible for simplicity.</p>
+<h4 id="example-2-unorganized-structure"><a class="toclink" href="../../../../2024/04/22/management-groups/#example-2-unorganized-structure">Example 2: Unorganized Structure</a></h4>
+<pre class="mermaid"><code>graph TD
+    A[Root Management Group] --&gt; B[Group 1]
+    A --&gt; C[Group 2]
+    B --&gt; D[Group 3]
+    C --&gt; E[Group 4]
+    D --&gt; F[Group 5]
+    E --&gt; G[Group 6]
+</code></pre>
+<p><strong>Why it's bad:</strong> The structure is not well-organized and doesn't follow a logical grouping or hierarchy. This can lead to confusion and difficulty in managing resources and policies.</p>
+<h4 id="example-3-single-level-hierarchy"><a class="toclink" href="../../../../2024/04/22/management-groups/#example-3-single-level-hierarchy">Example 3: Single Level Hierarchy</a></h4>
+<pre class="mermaid"><code>graph TD
+    A[Root Management Group] --&gt; B[Group 1]
+    A --&gt; C[Group 2]
+    A --&gt; D[Group 3]
+    A --&gt; E[Group 4]
+    A --&gt; F[Group 5]
+    A --&gt; G[Group 6]
+</code></pre>
+<p><strong>Why it's bad:</strong> Although this structure is simple, it lacks the ability to group related subscriptions together under a common management group. This makes it harder to apply consistent policies across related subscriptions.</p>
+<h4 id="example-4-environment-based-hierarchy"><a class="toclink" href="../../../../2024/04/22/management-groups/#example-4-environment-based-hierarchy">Example 4: Environment-Based Hierarchy</a></h4>
+<pre class="mermaid"><code>
+graph TD
+    A[Root Management Group] --&gt; B[Production Management Group]
+    A[Root Management Group] --&gt; C[Development Management Group]
+    A[Root Management Group] --&gt; D[Testing Management Group]
+</code></pre>
+<p><strong>Why it's bad:</strong> This structure separates environments into different management groups, which can lead to duplication of policies and increased complexity. It's better to use subscriptions within the same management group to separate environments and apply policies accordingly.</p>
+<h3 id="good-examples"><a class="toclink" href="../../../../2024/04/22/management-groups/#good-examples">Good examples</a></h3>
+<pre class="mermaid"><code>    graph TD
+        A[Root Management Group] --&gt; B[Intermediary-Management-Group]
+        B --&gt; C[Decommissioned]
+        B --&gt; D[Landing Zones]
+        B --&gt; E[Platform]
+        B --&gt; F[Sandboxes]
+        D --&gt; G[Corp]
+        D --&gt; H[Online]
+        E --&gt; I[Connectivity]
+        E --&gt; J[Identity]
+        E --&gt; K[Management]
+</code></pre>
+<p><img alt="😄" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.0.3/assets/svg/1f604.svg" title=":smile:"/></p>
+<h3 id="references"><a class="toclink" href="../../../../2024/04/22/management-groups/#references">References</a></h3>
+<ul>
+<li>https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/ready/landing-zone/design-area/resource-org-management-groups</li>
+<li>https://learn.microsoft.com/en-us/azure/governance/management-groups/overview</li>
+</ul>
+</div>
+</article>
+<article class="md-post md-post--excerpt">
+<header class="md-post__header">
+<nav class="md-post__authors md-typeset">
+<span class="md-author">
+<img alt="Rafael Fernández" src="https://avatars.githubusercontent.com/u/39990341"/>
+</span>
+</nav>
+<div class="md-post__meta md-meta">
+<ul class="md-meta__list">
+<li class="md-meta__item">
 <time datetime="2024-04-19 00:00:00">April 19, 2024</time></li>
 <li class="md-meta__item">
             in
@@ -1644,104 +1828,6 @@ Microsoft.Compute (for Azure Update Manager and automatic extension upgrades)</p
 <li><a href="https://schema.management.azure.com/schemas/2020-10-01/policyDefinition.json">Azure Policy definition schema</a></li>
 <li><a href="https://learn.microsoft.com/en-us/azure/governance/policy/overview">Azure Policy</a></li>
 </ul>
-</div>
-</article>
-<article class="md-post md-post--excerpt">
-<header class="md-post__header">
-<nav class="md-post__authors md-typeset">
-<span class="md-author">
-<img alt="Rafael Fernández" src="https://avatars.githubusercontent.com/u/39990341"/>
-</span>
-</nav>
-<div class="md-post__meta md-meta">
-<ul class="md-meta__list">
-<li class="md-meta__item">
-<time datetime="2024-02-25 00:00:00">February 25, 2024</time></li>
-<li class="md-meta__item">
-            in
-            
-              <a class="md-meta__link" href="../../">Azure Services</a></li>
-<li class="md-meta__item">
-            
-              3 min read
-            
-          </li>
-</ul>
-</div>
-</header>
-<div class="md-post__content md-typeset">
-<h2 id="writing-your-first-initiative-with-portal"><a class="toclink" href="../../../../2024/02/25/writing-your-first-initiative-with-portal/">Writing Your First Initiative with Portal</a></h2>
-<p>Azure Policy is a service in Azure that you use to create, assign and manage policies. These policies enforce different rules and effects over your resources, so those resources stay compliant with your corporate standards and service level agreements.</p>
-<p>In this post, we'll walk through the steps of creating your first initiative in Azure.</p>
-<div class="admonition info">
-<p class="admonition-title">Info</p>
-<p>You need to have a good understanding of Azure Policy before creating an initiative. If you're new to Azure Policy, check out our post on <a href="../../../../2024/02/24/azure-policy/">Azure Policy</a> and <a href="../../../../2024/02/26/writing-your-first-policy-in-azure-with-portal/">Writing Your First Policy in Azure with Portal</a>.</p>
-</div>
-<h3 id="prerequisites"><a class="toclink" href="../../../../2024/02/25/writing-your-first-initiative-with-portal/#prerequisites">Prerequisites</a></h3>
-<ol>
-<li>An active Azure subscription.</li>
-<li>Access to Azure portal.</li>
-<li>Azure Policy defined in your subscription, if you don't have one, you can follow the steps in <a href="../../../../2024/02/26/writing-your-first-policy-in-azure-with-portal/">Writing Your First Policy in Azure with Portal</a>.</li>
-</ol>
-<h3 id="step-1-open-azure-policy"><a class="toclink" href="../../../../2024/02/25/writing-your-first-initiative-with-portal/#step-1-open-azure-policy">Step 1: Open Azure Policy</a></h3>
-<ul>
-<li>Login to the <a href="https://portal.azure.com/">Azure Portal</a>.</li>
-<li>In the left-hand menu, click on <code>All services</code>.</li>
-<li>In the <code>All services</code> blade, search for <code>Policy</code>.</li>
-</ul>
-<h3 id="step-2-create-a-new-initiative-definition"><a class="toclink" href="../../../../2024/02/25/writing-your-first-initiative-with-portal/#step-2-create-a-new-initiative-definition">Step 2: Create a New Initiative Definition</a></h3>
-<ul>
-<li>Click on <code>Defitinions</code> under the <code>Authoring</code> section.</li>
-<li>Click on <code>+ Initiative definition</code>.</li>
-</ul>
-<h3 id="step-3-fill-out-the-initiative-definition"><a class="toclink" href="../../../../2024/02/25/writing-your-first-initiative-with-portal/#step-3-fill-out-the-initiative-definition">Step 3: Fill Out the Initiative Definition</a></h3>
-<p>You will need to fill out several fields:</p>
-<ul>
-<li><strong>Basics</strong>:</li>
-<li><strong>Initiative location</strong>: The location where the initiative is stored.</li>
-<li><strong>Name</strong>: This is a unique name for your initiative.</li>
-<li><strong>Description</strong>: A detailed description of what the initiative does.</li>
-<li><strong>Category</strong>: You can categorize your initiative for easier searching and filtering.</li>
-<li><strong>Policies</strong>:</li>
-<li><strong>Add policy definition(s)</strong>: Here you can add the policies that will be part of the initiative.</li>
-<li><strong>Initiative parameters</strong>:</li>
-<li><strong>Add parameter</strong>: Here you can add parameters that will be used in the initiative.
-  <img alt="Initiative parameters" src="../../../../2024/02/image.png"/></li>
-<li><strong>Policy parameters</strong>:</li>
-<li>
-<p><strong>Add policy parameter</strong>: Here you can add parameters that will be used in the policies that are part of the initiative. You can use the parameters defined in the initiative as value for different policies.
-  <img alt="Policy parameters" src="../../../../2024/02/image-1.png"/></p>
-</li>
-<li>
-<p>Click on <code>Review + create</code>: Review the assignment and click on <code>Create</code>.</p>
-</li>
-</ul>
-<h3 id="step-4-assign-the-initiative"><a class="toclink" href="../../../../2024/02/25/writing-your-first-initiative-with-portal/#step-4-assign-the-initiative">Step 4: Assign the Initiative</a></h3>
-<ul>
-<li>Go to <code>Policy</code> again.</li>
-<li>Go to <code>Assignments</code> under the <code>Authoring</code> section.</li>
-<li>Click on <code>+ Assign initiative</code>.</li>
-</ul>
-<p>You will need to fill out several fields:
-- <strong>Basics</strong>:
-  - <strong>Scope</strong>: Select the scope where you want to assign the initiative.
-  - <strong>Basics</strong>: 
-    - <strong>Initiative definition</strong>: Select the initiative you just created.
-    - <strong>Assignment name</strong>: A unique name for the assignment.
-    - <strong>Description</strong>: A detailed description of what the assignment does.
-    - <strong>Policy enforcement</strong>: Choose the enforcement mode for the assignment.
-- <strong>Parameters</strong>:
-  - <strong>Add parameter</strong>: Initialize parameters that will be used in the 
-initiative.
-- <strong>Remediation</strong>: 
-  - <strong>Auto-remediation</strong>: Enable or disable auto-remediation. That means that if a resource is not compliant, it will be remediated automatically. In other post it will be explained how to create a remediation task.
-- <strong>Non-compliance messages</strong>:
-  - <strong>Non-compliance message</strong>: Define a message that will be shown when a resource is not compliant.</p>
-<ul>
-<li>Click on <code>Review + create</code>: Review the assignment and click on <code>Create</code>.</li>
-</ul>
-<h3 id="conclusion"><a class="toclink" href="../../../../2024/02/25/writing-your-first-initiative-with-portal/#conclusion">Conclusion</a></h3>
-<p>Creating an initiative in Azure Policy is a powerful way to group policies together and enforce them across your Azure environment. By defining initiatives, you can streamline governance, simplify compliance management, and ensure consistent application of policies to your resources. Start creating initiatives today to enhance the security, compliance, and operational efficiency of your Azure environment.</p>
 </div>
 </article>
 <nav class="md-pagination">

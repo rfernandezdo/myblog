@@ -649,6 +649,363 @@
 <div class="md-post__meta md-meta">
 <ul class="md-meta__list">
 <li class="md-meta__item">
+<time datetime="2024-05-02 00:00:00">May 2, 2024</time></li>
+<li class="md-meta__item">
+            in
+            
+              <a class="md-meta__link" href="../../category/azure-services/">Azure Services</a></li>
+<li class="md-meta__item">
+            
+              2 min read
+            
+          </li>
+</ul>
+</div>
+</header>
+<div class="md-post__content md-typeset">
+<h2 id="azure-container-registry-artifact-cache"><a class="toclink" href="../../2024/05/02/azure-container-registry-artifact-cache/">Azure Container Registry: Artifact Cache</a></h2>
+<p>Azure Container Registry is a managed, private Docker registry service provided by Microsoft. It allows you to build, store, and manage container images and artifacts in a secure environment. </p>
+<h3 id="what-is-artifact-caching"><a class="toclink" href="../../2024/05/02/azure-container-registry-artifact-cache/#what-is-artifact-caching">What is Artifact Caching?</a></h3>
+<p>Artifact Cache is a feature in Azure Container Registry that allows users to cache container images in a private container registry. It is available in Basic, Standard, and Premium service tiers.</p>
+<h4 id="benefits-of-artifact-cache"><a class="toclink" href="../../2024/05/02/azure-container-registry-artifact-cache/#benefits-of-artifact-cache">Benefits of Artifact Cache</a></h4>
+<ul>
+<li><strong>Reliable pull operations</strong>: Faster pulls of container images are achievable by caching the container images in ACR.</li>
+<li><strong>Private networks</strong>: Cached registries are available on private networks.</li>
+<li><strong>Ensuring upstream content is delivered</strong>: Artifact Cache allows users to pull images from the local ACR instead of the upstream registry.</li>
+</ul>
+<h3 id="limitations"><a class="toclink" href="../../2024/05/02/azure-container-registry-artifact-cache/#limitations">Limitations</a></h3>
+<p>Cache will only occur after at least one image pull is complete on the available container image</p>
+<h3 id="how-to-use-artifact-cache-in-azure-container-registry-without-credential"><a class="toclink" href="../../2024/05/02/azure-container-registry-artifact-cache/#how-to-use-artifact-cache-in-azure-container-registry-without-credential">How to Use Artifact Cache in Azure Container Registry without credential?</a></h3>
+<p>Let's take a look at how you can implement artifact caching in Azure Container Registry.</p>
+<h4 id="step-1-create-a-cache-rule"><a class="toclink" href="../../2024/05/02/azure-container-registry-artifact-cache/#step-1-create-a-cache-rule">Step 1: Create a Cache Rule</a></h4>
+<p>The first step is to create a cache rule in your Azure Container Registry. This rule specifies the source image that should be cached and the target image that will be stored in the cache.</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-10-1"><a href="#__codelineno-10-1" id="__codelineno-10-1" name="__codelineno-10-1"></a>az<span class="w"> </span>acr<span class="w"> </span>cache<span class="w"> </span>create<span class="w"> </span>-r<span class="w"> </span>MyRegistry<span class="w"> </span>-n<span class="w"> </span>MyRule<span class="w"> </span>-s<span class="w"> </span>docker.io/library/ubuntu<span class="w"> </span>-t<span class="w"> </span>ubuntu
+</span></code></pre></div>
+<p>Check the cache rule:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-11-1"><a href="#__codelineno-11-1" id="__codelineno-11-1" name="__codelineno-11-1"></a>az<span class="w"> </span>acr<span class="w"> </span>cache<span class="w"> </span>show<span class="w"> </span>-r<span class="w"> </span>MyRegistry<span class="w"> </span>-n<span class="w"> </span>MyRule
+</span></code></pre></div>
+<h4 id="step-2-pull-the-image"><a class="toclink" href="../../2024/05/02/azure-container-registry-artifact-cache/#step-2-pull-the-image">Step 2: Pull the Image</a></h4>
+<p>Next, you need to pull the image from the source registry to the cache. This will download the image and store it in the cache for future use.</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-12-1"><a href="#__codelineno-12-1" id="__codelineno-12-1" name="__codelineno-12-1"></a>docker<span class="w"> </span>pull<span class="w"> </span>myregistry.azurecr.io/hello-world:latest
+</span></code></pre></div>
+<h4 id="step-3-clean-up-the-resources"><a class="toclink" href="../../2024/05/02/azure-container-registry-artifact-cache/#step-3-clean-up-the-resources">Step 3: Clean up the resources</a></h4>
+<p>Finally, you can clean up the resources by deleting the cache rule.</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-13-1"><a href="#__codelineno-13-1" id="__codelineno-13-1" name="__codelineno-13-1"></a>az<span class="w"> </span>acr<span class="w"> </span>cache<span class="w"> </span>delete<span class="w"> </span>-r<span class="w"> </span>MyRegistry<span class="w"> </span>-n<span class="w"> </span>MyRule
+</span></code></pre></div>
+<p>If you need to check other rules, you can use the following command:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-14-1"><a href="#__codelineno-14-1" id="__codelineno-14-1" name="__codelineno-14-1"></a>az<span class="w"> </span>acr<span class="w"> </span>cache<span class="w"> </span>list<span class="w"> </span>-r<span class="w"> </span>MyRegistry
+</span></code></pre></div>
+<h3 id="conclusion"><a class="toclink" href="../../2024/05/02/azure-container-registry-artifact-cache/#conclusion">Conclusion</a></h3>
+<p>Azure Container Registry's Artifact Cache feature provides a convenient way to cache container images in a private registry, improving pull performance and reducing network traffic. By following the steps outlined in this article, you can easily set up and use artifact caching in your Azure Container Registry.</p>
+<p>If you need to use the cache with authentication, you can use the following article: <a href="https://learn.microsoft.com/en-us/azure/container-registry/tutorial-enable-artifact-cache-auth-cli">Enable Artifact Cache with authentication</a>.</p>
+<p>For more detailed information, please visit the <a href="https://learn.microsoft.com/en-us/azure/container-registry/tutorial-artifact-cache">official tutorial</a> on the Microsoft Azure website.</p>
+<h3 id="references"><a class="toclink" href="../../2024/05/02/azure-container-registry-artifact-cache/#references">References</a></h3>
+<ul>
+<li><a href="https://docs.microsoft.com/en-us/azure/container-registry/">Azure Container Registry Documentation</a></li>
+<li><a href="https://learn.microsoft.com/en-us/azure/container-registry/tutorial-artifact-cache">Azure Container Artifact Cache Overview</a></li>
+</ul>
+</div>
+</article>
+<article class="md-post md-post--excerpt">
+<header class="md-post__header">
+<nav class="md-post__authors md-typeset">
+<span class="md-author">
+<img alt="Rafael Fernández" src="https://avatars.githubusercontent.com/u/39990341"/>
+</span>
+</nav>
+<div class="md-post__meta md-meta">
+<ul class="md-meta__list">
+<li class="md-meta__item">
+<time datetime="2024-05-01 00:00:00">May 1, 2024</time></li>
+<li class="md-meta__item">
+            in
+            
+              <a class="md-meta__link" href="../../category/devops/">DevOps</a></li>
+<li class="md-meta__item">
+            
+              6 min read
+            
+          </li>
+</ul>
+</div>
+</header>
+<div class="md-post__content md-typeset">
+<h2 id="repository-strategy-branching-strategy"><a class="toclink" href="../../2024/05/01/repository-strategy-branching-strategy/">Repository Strategy: Branching Strategy</a></h2>
+<p>Once we have decided that we will use branches, it is time to define a strategy, so that all developers can work in a coordinated way.</p>
+<p>Some of the best known strategies are:</p>
+<ul>
+<li><strong>Gitflow</strong>: It is a branching model designed around the project release. It is a strict branching model that assigns very specific roles to different branches.</li>
+<li><strong>Feature Branch</strong>: It is a strategy where each feature is developed in a separate branch. This strategy is simple and easy to understand.</li>
+<li><strong>Trunk-Based Development</strong>: It is a strategy where all developers work on a single branch. This strategy is simple and easy to understand.</li>
+<li><strong>GitHub Flow</strong>: It is a strategy where all developers work on a single branch. This strategy is simple and easy to understand.</li>
+<li><strong>GitLab Flow</strong>: It is a strategy where all developers work on a single branch. This strategy is simple and easy to understand.</li>
+<li><strong>Microsoft Flow</strong>: It is a strategy where all developers work on a single branch. This strategy is simple and easy to understand.</li>
+</ul>
+<h3 id="gitflow"><a class="toclink" href="../../2024/05/01/repository-strategy-branching-strategy/#gitflow">Gitflow</a></h3>
+<p>Gitflow is a branching model designed around the project release. It is a strict branching model that assigns very specific roles to different branches.</p>
+<p>The Gitflow strategy is based on the following branches:</p>
+<ul>
+<li><strong>main</strong>: It is the main branch of the project. It contains the code that is in production.</li>
+<li><strong>develop</strong>: It is the branch where the code is integrated before being released to production.</li>
+</ul>
+<p>The Gitflow strategy is based on the following types of branches:</p>
+<ul>
+<li><strong>feature</strong>: It is the branch where the code for a new feature is developed.</li>
+<li><strong>release</strong>: It is the branch where the code is prepared for release.</li>
+<li><strong>hotfix</strong>: It is the branch where the code is developed to fix a bug in production.</li>
+</ul>
+<p>The Gitflow strategy is based on the following rules:</p>
+<ul>
+<li><strong>Feature branches are created from the develop branch</strong>.</li>
+<li><strong>Feature branches are merged into the develop branch</strong>.</li>
+<li><strong>Release branches are created from the develop branch</strong>.</li>
+<li><strong>Release branches are merged into the main and develop branches</strong>.</li>
+<li><strong>Hotfix branches are created from the main branch</strong>.</li>
+<li><strong>Hotfix branches are merged into the main and develop branches</strong>.</li>
+</ul>
+<p>The Gitflow strategy is based on the following workflow:</p>
+<ol>
+<li><strong>Developers create a feature branch from the develop branch</strong>.</li>
+<li><strong>Developers develop the code for the new feature in the feature branch</strong>.</li>
+<li><strong>Developers merge the feature branch into the develop branch</strong>.</li>
+<li><strong>Developers create a release branch from the develop branch</strong>.</li>
+<li><strong>Developers prepare the code for release in the release branch</strong>.</li>
+<li><strong>Developers merge the release branch into the main and develop branches</strong>.</li>
+<li><strong>Developers create a hotfix branch from the main branch</strong>.</li>
+<li><strong>Developers fix the bug in the hotfix branch</strong>.</li>
+<li><strong>Developers merge the hotfix branch into the main and develop branches</strong>.</li>
+</ol>
+<pre class="mermaid"><code>gitGraph:
+options
+{
+    "nodeSpacing": 150,
+    "nodeRadius": 10
+}
+end
+commit
+branch develop
+checkout develop
+commit
+commit
+branch feature_branch
+checkout feature_branch
+commit
+commit
+checkout develop
+merge feature_branch
+commit
+branch release_branch
+checkout release_branch
+commit
+commit
+checkout develop
+merge release_branch
+checkout main
+merge release_branch
+commit
+branch hotfix_branch
+checkout hotfix_branch
+commit
+commit
+checkout develop
+merge hotfix_branch
+checkout main
+merge hotfix_branch
+</code></pre>
+<p>The Gitflow strategy have the following advantages:</p>
+<ul>
+<li><strong>Isolation</strong>: Each feature is developed in a separate branch, isolating it from other features.</li>
+<li><strong>Collaboration</strong>: Developers can work on different features at the same time without affecting each other.</li>
+<li><strong>Stability</strong>: The main branch contains the code that is in production, ensuring that it is stable and reliable.</li>
+</ul>
+<p>The Gitflow strategy is based on the following disadvantages:</p>
+<ul>
+<li><strong>Complexity</strong>: The Gitflow strategy is complex and can be difficult to understand for new developers.</li>
+<li><strong>Overhead</strong>: The Gitflow strategy requires developers to create and manage multiple branches, which can be time-consuming.</li>
+</ul>
+<h3 id="feature-branch-workflow"><a class="toclink" href="../../2024/05/01/repository-strategy-branching-strategy/#feature-branch-workflow">Feature Branch Workflow</a></h3>
+<p>Feature Branch is a strategy where each feature is developed in a separate branch. This strategy is simple and easy to understand.</p>
+<p>The Feature Branch strategy is based on the following rules:</p>
+<ul>
+<li><strong>Developers create a feature branch from the main branch</strong>.</li>
+<li><strong>Developers develop the code for the new feature in the feature branch</strong>.</li>
+<li><strong>Developers merge the feature branch into the main branch</strong>.</li>
+</ul>
+<p>The Feature Branch strategy is based on the following workflow:</p>
+<ol>
+<li><strong>Developers create a feature branch from the main branch</strong>.</li>
+<li><strong>Developers develop the code for the new feature in the feature branch</strong>.</li>
+<li><strong>Developers merge the feature branch into the main branch</strong>.</li>
+</ol>
+<pre class="mermaid"><code>gitGraph:
+options
+{
+    "nodeSpacing": 150,
+    "nodeRadius": 10
+}
+end
+commit
+checkout main
+commit
+commit
+branch feature_branch
+checkout feature_branch
+commit
+commit
+checkout main
+merge feature_branch
+</code></pre>
+<p>The Feature Branch strategy is based on the following advantages:</p>
+<ul>
+<li><strong>Simplicity</strong>: The Feature Branch strategy is simple and easy to understand.</li>
+<li><strong>Flexibility</strong>: Developers can work on different features at the same time without affecting each other.</li>
+<li><strong>Visibility</strong>: Changes made in feature branches are visible to other developers, making it easier to review and merge changes.</li>
+</ul>
+<p>The Feature Branch strategy is based on the following disadvantages:</p>
+<ul>
+<li><strong>Conflicts</strong>: Multiple developers working on the same feature can lead to conflicts and merge issues.</li>
+<li><strong>Complexity</strong>: Managing multiple feature branches can be challenging, especially in large projects.</li>
+</ul>
+<h3 id="trunk-based-development"><a class="toclink" href="../../2024/05/01/repository-strategy-branching-strategy/#trunk-based-development">Trunk-Based Development</a></h3>
+<p>The Trunk-Based Development strategy is based on the following rules:</p>
+<ul>
+<li><strong>Developers work on a single branch</strong>.</li>
+<li><strong>Developers create feature flags to hide unfinished features</strong>.</li>
+<li><strong>Developers merge the code into the main branch when it is ready</strong>.</li>
+</ul>
+<p>The Trunk-Based Development strategy is based on the following workflow:</p>
+<ol>
+<li><strong>Developers work on a single branch</strong>.</li>
+<li><strong>Developers create feature flags to hide unfinished features</strong>.</li>
+<li><strong>Developers merge the code into the main branch when it is ready</strong>.</li>
+</ol>
+<pre class="mermaid"><code>gitGraph:
+options
+{
+    "nodeSpacing": 150,
+    "nodeRadius": 10
+}
+end
+commit
+checkout main
+commit
+commit tag:"v1.0.0"
+commit
+commit
+commit tag:"v2.0.0"
+</code></pre>
+<p>The Trunk-Based Development strategy is based on the following advantages:</p>
+<ul>
+<li><strong>Simplicity</strong>: The Trunk-Based Development strategy is simple and easy to understand.</li>
+<li><strong>Flexibility</strong>: Developers can work on different features at the same time without affecting each other.</li>
+<li><strong>Visibility</strong>: Changes made in the main branch are visible to other developers, making it easier to review and merge changes.</li>
+</ul>
+<p>The Trunk-Based Development strategy is based on the following disadvantages:</p>
+<ul>
+<li><strong>Conflicts</strong>: Multiple developers working on the same codebase can lead to conflicts and merge issues.</li>
+<li><strong>Complexity</strong>: Managing feature flags can be challenging, especially in large projects.</li>
+</ul>
+<h3 id="github-flow"><a class="toclink" href="../../2024/05/01/repository-strategy-branching-strategy/#github-flow">GitHub Flow</a></h3>
+<p>GitHub Flow is a strategy where all developers work on a single branch. This strategy is simple and easy to understand.</p>
+<p>The GitHub Flow strategy is based on the following rules:</p>
+<ul>
+<li><strong>Developers work on a single branch</strong>.</li>
+<li><strong>Developers create feature branches to work on new features</strong>.</li>
+<li><strong>Developers merge the feature branches into the main branch when they are ready</strong>.</li>
+</ul>
+<p>The GitHub Flow strategy is based on the following workflow:</p>
+<ol>
+<li><strong>Developers work on a single branch</strong>.</li>
+<li><strong>Developers create a feature branch from the main branch</strong>.</li>
+<li><strong>Developers develop the code for the new feature in the feature branch</strong>.</li>
+<li><strong>Developers merge the feature branch into the main branch</strong>.</li>
+</ol>
+<pre class="mermaid"><code>gitGraph:
+options
+{
+    "nodeSpacing": 150,
+    "nodeRadius": 10
+}
+end
+commit
+checkout main
+commit
+commit
+branch feature_branch
+checkout feature_branch
+commit
+commit
+checkout main
+merge feature_branch
+</code></pre>
+<h3 id="gitlab-flow"><a class="toclink" href="../../2024/05/01/repository-strategy-branching-strategy/#gitlab-flow">GitLab Flow</a></h3>
+<p>GitLab Flow is a strategy where all developers work on a single branch. This strategy is simple and easy to understand. GitLab Flow is often used with release branches.</p>
+<p>The GitLab Flow strategy is based on the following rules:</p>
+<ul>
+<li><strong>Developers work on a single branch</strong>.</li>
+<li><strong>Developers create feature branches to work on new features</strong>.</li>
+<li><strong>Developers merge the feature branches into the main branch when they are ready</strong>.</li>
+<li><strong>Developers create a pre-production branch to make bug fixes before merging changes back to the main branch</strong>.</li>
+<li><strong>Developers merge the pre-production branch into the main branch before going to production</strong>.</li>
+<li><strong>Developers can add as many pre-production branches as needed</strong>.</li>
+<li><strong>Developers can maintain different versions of the production branch</strong>.</li>
+</ul>
+<p>The GitLab Flow strategy is based on the following workflow:</p>
+<ol>
+<li><strong>Developers work on a single branch</strong>.</li>
+<li><strong>Developers create a feature branch from the main branch</strong>.</li>
+<li><strong>Developers develop the code for the new feature in the feature branch</strong>.</li>
+<li><strong>Developers merge the feature branch into the main branch</strong>.</li>
+<li><strong>Developers create a pre-production branch from the main branch</strong>.</li>
+<li><strong>Developers make bug fixes in the pre-production branch</strong>.</li>
+<li><strong>Developers merge the pre-production branch into the main branch</strong>.</li>
+<li><strong>Developers create a production branch from the main branch</strong>.</li>
+<li><strong>Developers merge the production branch into the main branch</strong>.</li>
+</ol>
+<pre class="mermaid"><code>gitGraph:
+options
+{
+    "nodeSpacing": 150,
+    "nodeRadius": 10
+}
+end
+commit
+checkout main
+commit
+commit
+branch feature_branch
+checkout feature_branch
+commit
+commit
+checkout main
+merge feature_branch
+commit
+branch pre-production
+checkout pre-production
+commit
+commit
+checkout main
+merge pre-production
+commit
+branch production
+checkout production
+commit
+commit
+checkout main
+merge production
+</code></pre>
+</div>
+</article>
+<article class="md-post md-post--excerpt">
+<header class="md-post__header">
+<nav class="md-post__authors md-typeset">
+<span class="md-author">
+<img alt="Rafael Fernández" src="https://avatars.githubusercontent.com/u/39990341"/>
+</span>
+</nav>
+<div class="md-post__meta md-meta">
+<ul class="md-meta__list">
+<li class="md-meta__item">
 <time datetime="2024-04-30 00:00:00">April 30, 2024</time></li>
 <li class="md-meta__item">
             in
@@ -1327,470 +1684,6 @@
 <p>Moving subscriptions could affect the resources if there are policies or permissions applied at the management group level. It's important to understand the implications before making the move. Also, keep in mind that you cannot move the Root management group or rename it.</p>
 </div>
 <p>In conclusion, moving management groups and subscriptions allows for better organization and management of your Azure resources. However, it should be done carefully considering the impact on resources and compliance with assigned policies.</p>
-</div>
-</article>
-<article class="md-post md-post--excerpt">
-<header class="md-post__header">
-<nav class="md-post__authors md-typeset">
-<span class="md-author">
-<img alt="Rafael Fernández" src="https://avatars.githubusercontent.com/u/39990341"/>
-</span>
-</nav>
-<div class="md-post__meta md-meta">
-<ul class="md-meta__list">
-<li class="md-meta__item">
-<time datetime="2024-04-22 00:00:00">April 22, 2024</time></li>
-<li class="md-meta__item">
-            in
-            
-              <a class="md-meta__link" href="../../category/azure-services/">Azure Services</a></li>
-<li class="md-meta__item">
-            
-              6 min read
-            
-          </li>
-</ul>
-</div>
-</header>
-<div class="md-post__content md-typeset">
-<h2 id="management-groups"><a class="toclink" href="../../2024/04/22/management-groups/">Management Groups</a></h2>
-<h3 id="what-are-management-groups"><a class="toclink" href="../../2024/04/22/management-groups/#what-are-management-groups">What are Management Groups?</a></h3>
-<p>Management Groups are a way to manage access, policies, and compliance for multiple subscriptions. They provide a way to manage access, policies, and compliance for multiple subscriptions. Management groups are containers that help you manage access, policy, and compliance for multiple subscriptions. You organize subscriptions into containers called "management groups" and apply your governance conditions to the management groups. All subscriptions within a management group automatically inherit the conditions applied to the management group.</p>
-<h3 id="management-groups-hierarchy"><a class="toclink" href="../../2024/04/22/management-groups/#management-groups-hierarchy">Management Groups Hierarchy</a></h3>
-<p>The management group hierarchy is a level of management groups that represent the different levels of your organization. The hierarchy starts with a single root management group, which represents the Microsoft Entra ID tenant. The root management group is the highest level in the hierarchy. All other management groups are subgroups of the root management group.</p>
-<h3 id="management-group-design-considerations"><a class="toclink" href="../../2024/04/22/management-groups/#management-group-design-considerations">Management group design considerations</a></h3>
-<p>When designing your management group hierarchy, consider the following:</p>
-<ul>
-<li>
-<p>How does your organization differentiate services that are managed or run by particular teams?</p>
-</li>
-<li>
-<p>Are there any specific operations that need to be isolated due to business or regulatory compliance requirements?</p>
-</li>
-<li>
-<p>Management groups can be utilized to consolidate policy and initiative assignments through Azure Policy.</p>
-</li>
-<li>
-<p>A management group hierarchy can accommodate up to six nested levels. The tenant root level and the subscription level are not included in this count.</p>
-</li>
-<li>
-<p>Any principal, be it a user or service principal, within a Microsoft Entra tenant has the authority to establish new management groups. This is due to the fact that Azure role-based access control (RBAC) authorization for managing group activities is not activated by default. For additional details, refer to the guide on safeguarding your resource hierarchy.</p>
-</li>
-<li>
-<p>By default, all newly created subscriptions will be assigned to the tenant root management group.</p>
-</li>
-</ul>
-<h3 id="management-group-recommendations"><a class="toclink" href="../../2024/04/22/management-groups/#management-group-recommendations">Management group recommendations</a></h3>
-<ul>
-<li>
-<p>Maintain a relatively flat management group hierarchy, ideally with three to four levels maximum. This practice minimizes managerial complexity and overhead.</p>
-</li>
-<li>
-<p>Refrain from mirroring your organizational structure into a deeply nested management group hierarchy. Utilize management groups primarily for policy assignment rather than billing. This strategy aligns with the Azure landing zone conceptual architecture, which applies Azure policies to workloads that need similar security and compliance at the same management group level.</p>
-</li>
-<li>
-<p>Establish management groups under your root-level group representing different types of workloads you will host. These groups should reflect the security, compliance, connectivity, and feature requirements of the workloads. By doing this, you can apply a set of Azure policies at the management group level for all workloads with similar needs.</p>
-</li>
-<li>
-<p>Leverage resource tags for querying and horizontally traversing across the management group hierarchy. Resource tags, enforced or appended via Azure Policy, allow you to group resources for search purposes without relying on a complex management group hierarchy.</p>
-</li>
-<li>
-<p>Set up a top-level sandbox management group. This allows users to immediately experiment with Azure and try out resources not yet permitted in production environments. The sandbox provides isolation from your development, testing, and production settings.</p>
-</li>
-<li>
-<p>Create a platform management group beneath the root management group to support common platform policy and Azure role assignments. This ensures distinct policies can be applied to subscriptions used for your Azure foundation and centralizes billing for common resources in one foundational subscription set.</p>
-</li>
-<li>
-<p>Minimize the number of Azure Policy assignments made at the root management group scope. This reduces the debugging of inherited policies in lower-level management groups.</p>
-</li>
-<li>
-<p>Implement policies to enforce compliance requirements either at the management group or subscription scope to achieve policy-driven governance.</p>
-</li>
-<li>
-<p>Ensure only privileged users have operational access to management groups in the tenant. Enable Azure RBAC authorization in the management group <a href="https://learn.microsoft.com/en-us/azure/governance/management-groups/how-to/protect-resource-hierarchy#setting-require-authorization">hierarchy settings</a> to fine-tune user privileges. By default, all users are authorized to create their own management groups under the root management group.</p>
-</li>
-<li>
-<p>Set up a default, dedicated management group for new subscriptions. This prevents any subscriptions from being placed under the root management group. This is particularly important if there are users eligible for Microsoft Developer Network (MSDN) or Visual Studio benefits and subscriptions. A sandbox management group could be a suitable candidate for this type of management group. For more information, see <a href="https://learn.microsoft.com/en-us/azure/governance/management-groups/how-to/protect-resource-hierarchy#setting---default-management-group">Setting - default management group</a>.</p>
-</li>
-<li>
-<p>Avoid creating management groups for production, testing, and development environments. If needed, separate these groups into different subscriptions within the same management group.</p>
-</li>
-</ul>
-<h3 id="management-group-structure-in-the-enterprise-scale-landing-zone"><a class="toclink" href="../../2024/04/22/management-groups/#management-group-structure-in-the-enterprise-scale-landing-zone">Management Group Structure in the Enterprise Scale Landing Zone</a></h3>
-<p>This is the common structure for the Management Groups in the Enterprise Scale Landing Zone: </p>
-<pre class="mermaid"><code>    graph TD
-        A[Root Management Group] --&gt; B[Intermediary-Management-Group]
-        B --&gt; C[Decommissioned]
-        B --&gt; D[Landing Zones]
-        B --&gt; E[Platform]
-        B --&gt; F[Sandboxes]
-        D --&gt; G[Corp]
-        D --&gt; H[Online]
-        E --&gt; I[Connectivity]
-        E --&gt; J[Identity]
-        E --&gt; K[Management]
-</code></pre>
-<ol>
-<li><strong>Root Management Group</strong><ul>
-<li>Intermediary-Management-Group<ul>
-<li>Decommissioned: This could be where resources that are being phased out or decommissioned are managed.</li>
-<li>Sandboxes: This could be an area where developers can test and experiment without affecting production systems.</li>
-<li>Landing Zones<ul>
-<li>Corp: This could represent corporate resources or applications.</li>
-<li>Online: This could represent online or customer-facing applications.</li>
-</ul>
-</li>
-<li>Platform<ul>
-<li>Connectivity: This could manage resources related to network connectivity.</li>
-<li>Identity: This could manage resources related to identity and access management.</li>
-<li>Management: This could manage resources related to overall platform management.</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ol>
-<p>This structure allows for clear segmentation of resources based on their purpose and lifecycle. For example, decommissioned resources are separated from active ones, like Sandbox, and resources within the 'Platform' are further categorized based on their function (Connectivity, Identity, Management). The 'Landing Zones' group appears to separate resources based on their use case or environment (Corp, Online).</p>
-<p>The exact interpretation would depend on the specific context and conventions of your organization.</p>
-<h3 id="bad-examples"><a class="toclink" href="../../2024/04/22/management-groups/#bad-examples">Bad Examples</a></h3>
-<h4 id="example-1-deeply-nested-hierarchy"><a class="toclink" href="../../2024/04/22/management-groups/#example-1-deeply-nested-hierarchy">Example 1: Deeply Nested Hierarchy</a></h4>
-<pre class="mermaid"><code>graph TD
-    A[Root Management Group] --&gt; B[Group 1]
-    B --&gt; C[Group 2]
-    C --&gt; D[Group 3]
-    D --&gt; E[Group 4]
-    E --&gt; F[Group 5]
-    F --&gt; G[Group 6]
-</code></pre>
-<p><strong>Why it's bad:</strong> This hierarchy is too deep. It becomes difficult to manage and increases complexity. Azure supports up to six levels of nested management groups but it's recommended to keep the hierarchy as flat as possible for simplicity.</p>
-<h4 id="example-2-unorganized-structure"><a class="toclink" href="../../2024/04/22/management-groups/#example-2-unorganized-structure">Example 2: Unorganized Structure</a></h4>
-<pre class="mermaid"><code>graph TD
-    A[Root Management Group] --&gt; B[Group 1]
-    A --&gt; C[Group 2]
-    B --&gt; D[Group 3]
-    C --&gt; E[Group 4]
-    D --&gt; F[Group 5]
-    E --&gt; G[Group 6]
-</code></pre>
-<p><strong>Why it's bad:</strong> The structure is not well-organized and doesn't follow a logical grouping or hierarchy. This can lead to confusion and difficulty in managing resources and policies.</p>
-<h4 id="example-3-single-level-hierarchy"><a class="toclink" href="../../2024/04/22/management-groups/#example-3-single-level-hierarchy">Example 3: Single Level Hierarchy</a></h4>
-<pre class="mermaid"><code>graph TD
-    A[Root Management Group] --&gt; B[Group 1]
-    A --&gt; C[Group 2]
-    A --&gt; D[Group 3]
-    A --&gt; E[Group 4]
-    A --&gt; F[Group 5]
-    A --&gt; G[Group 6]
-</code></pre>
-<p><strong>Why it's bad:</strong> Although this structure is simple, it lacks the ability to group related subscriptions together under a common management group. This makes it harder to apply consistent policies across related subscriptions.</p>
-<h4 id="example-4-environment-based-hierarchy"><a class="toclink" href="../../2024/04/22/management-groups/#example-4-environment-based-hierarchy">Example 4: Environment-Based Hierarchy</a></h4>
-<pre class="mermaid"><code>
-graph TD
-    A[Root Management Group] --&gt; B[Production Management Group]
-    A[Root Management Group] --&gt; C[Development Management Group]
-    A[Root Management Group] --&gt; D[Testing Management Group]
-</code></pre>
-<p><strong>Why it's bad:</strong> This structure separates environments into different management groups, which can lead to duplication of policies and increased complexity. It's better to use subscriptions within the same management group to separate environments and apply policies accordingly.</p>
-<h3 id="good-examples"><a class="toclink" href="../../2024/04/22/management-groups/#good-examples">Good examples</a></h3>
-<pre class="mermaid"><code>    graph TD
-        A[Root Management Group] --&gt; B[Intermediary-Management-Group]
-        B --&gt; C[Decommissioned]
-        B --&gt; D[Landing Zones]
-        B --&gt; E[Platform]
-        B --&gt; F[Sandboxes]
-        D --&gt; G[Corp]
-        D --&gt; H[Online]
-        E --&gt; I[Connectivity]
-        E --&gt; J[Identity]
-        E --&gt; K[Management]
-</code></pre>
-<p><img alt="😄" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.0.3/assets/svg/1f604.svg" title=":smile:"/></p>
-<h3 id="references"><a class="toclink" href="../../2024/04/22/management-groups/#references">References</a></h3>
-<ul>
-<li>https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/ready/landing-zone/design-area/resource-org-management-groups</li>
-<li>https://learn.microsoft.com/en-us/azure/governance/management-groups/overview</li>
-</ul>
-</div>
-</article>
-<article class="md-post md-post--excerpt">
-<header class="md-post__header">
-<nav class="md-post__authors md-typeset">
-<span class="md-author">
-<img alt="Rafael Fernández" src="https://avatars.githubusercontent.com/u/39990341"/>
-</span>
-</nav>
-<div class="md-post__meta md-meta">
-<ul class="md-meta__list">
-<li class="md-meta__item">
-<time datetime="2024-04-20 00:00:00">April 20, 2024</time></li>
-<li class="md-meta__item">
-            in
-            
-              <a class="md-meta__link" href="../../category/azure/">Azure</a></li>
-<li class="md-meta__item">
-            
-              6 min read
-            
-          </li>
-</ul>
-</div>
-</header>
-<div class="md-post__content md-typeset">
-<h2 id="how-to-create-assigment-reports-for-azure-rbac"><a class="toclink" href="../../2024/04/20/how-to-create-assigment-reports-for-azure-rbac/">How to create assigment Reports for Azure RBAC</a></h2>
-<p>Role-Based Access Control (RBAC) is a key feature of Azure that allows you to manage access to Azure resources. With RBAC, you can grant permissions to users, groups, and applications at a certain scope, such as a subscription, resource group, or resource. RBAC uses role assignments to determine what actions a user, group, or application can perform on a resource.</p>
-<p>In this article, we will show you how to create reports for role assignments in Azure using PowerShell and the ImportExcel module. We will generate separate Excel files for role assignments at the subscription and management group levels, including information such as the role, principal, scope, and whether the assignment is inherited.</p>
-<h3 id="role-assignment-report-in-excel"><a class="toclink" href="../../2024/04/20/how-to-create-assigment-reports-for-azure-rbac/#role-assignment-report-in-excel">Role assignment report in Excel</a></h3>
-<p>This is the PowerShell script that generates the role assignment reports:</p>
-<div class="language-powershell highlight"><pre><span></span><code><span id="__span-4-1"><a href="#__codelineno-4-1" id="__codelineno-4-1" name="__codelineno-4-1"></a><span class="cm">&lt;#</span>
-</span><span id="__span-4-2"><a href="#__codelineno-4-2" id="__codelineno-4-2" name="__codelineno-4-2"></a><span class="sd">.SYNOPSIS</span>
-</span><span id="__span-4-3"><a href="#__codelineno-4-3" id="__codelineno-4-3" name="__codelineno-4-3"></a><span class="cm">A script to get role assignments for Azure subscriptions and management groups.</span>
-</span><span id="__span-4-4"><a href="#__codelineno-4-4" id="__codelineno-4-4" name="__codelineno-4-4"></a>
-</span><span id="__span-4-5"><a href="#__codelineno-4-5" id="__codelineno-4-5" name="__codelineno-4-5"></a><span class="sd">.DESCRIPTION</span>
-</span><span id="__span-4-6"><a href="#__codelineno-4-6" id="__codelineno-4-6" name="__codelineno-4-6"></a><span class="cm">This script gets role assignments for specified or all Azure subscriptions and management groups,</span>
-</span><span id="__span-4-7"><a href="#__codelineno-4-7" id="__codelineno-4-7" name="__codelineno-4-7"></a><span class="cm">and exports them to Excel files. It uses the ImportExcel module to create the Excel files.</span>
-</span><span id="__span-4-8"><a href="#__codelineno-4-8" id="__codelineno-4-8" name="__codelineno-4-8"></a>
-</span><span id="__span-4-9"><a href="#__codelineno-4-9" id="__codelineno-4-9" name="__codelineno-4-9"></a><span class="sd">.PARAMETER</span><span class="cm"> SubscriptionId</span>
-</span><span id="__span-4-10"><a href="#__codelineno-4-10" id="__codelineno-4-10" name="__codelineno-4-10"></a><span class="cm">The ID of the Azure subscription. If not provided, the script gets role assignments for all subscriptions.</span>
-</span><span id="__span-4-11"><a href="#__codelineno-4-11" id="__codelineno-4-11" name="__codelineno-4-11"></a>
-</span><span id="__span-4-12"><a href="#__codelineno-4-12" id="__codelineno-4-12" name="__codelineno-4-12"></a><span class="sd">.PARAMETER</span><span class="cm"> ManagementGroupName</span>
-</span><span id="__span-4-13"><a href="#__codelineno-4-13" id="__codelineno-4-13" name="__codelineno-4-13"></a><span class="cm">The name of the Azure management group. If not provided, the script gets role assignments for all management groups.</span>
-</span><span id="__span-4-14"><a href="#__codelineno-4-14" id="__codelineno-4-14" name="__codelineno-4-14"></a>
-</span><span id="__span-4-15"><a href="#__codelineno-4-15" id="__codelineno-4-15" name="__codelineno-4-15"></a><span class="sd">.PARAMETER</span><span class="cm"> GetSubscriptions</span>
-</span><span id="__span-4-16"><a href="#__codelineno-4-16" id="__codelineno-4-16" name="__codelineno-4-16"></a><span class="cm">Specifies whether to get role assignments for subscriptions. Default is false.</span>
-</span><span id="__span-4-17"><a href="#__codelineno-4-17" id="__codelineno-4-17" name="__codelineno-4-17"></a>
-</span><span id="__span-4-18"><a href="#__codelineno-4-18" id="__codelineno-4-18" name="__codelineno-4-18"></a><span class="sd">.PARAMETER</span><span class="cm"> GetManagementGroups</span>
-</span><span id="__span-4-19"><a href="#__codelineno-4-19" id="__codelineno-4-19" name="__codelineno-4-19"></a><span class="cm">Specifies whether to get role assignments for management groups. Default is true.</span>
-</span><span id="__span-4-20"><a href="#__codelineno-4-20" id="__codelineno-4-20" name="__codelineno-4-20"></a>
-</span><span id="__span-4-21"><a href="#__codelineno-4-21" id="__codelineno-4-21" name="__codelineno-4-21"></a><span class="sd">.EXAMPLE</span>
-</span><span id="__span-4-22"><a href="#__codelineno-4-22" id="__codelineno-4-22" name="__codelineno-4-22"></a><span class="cm">.\get-azroleassigments.ps1 -SubscriptionId "sub-id"</span>
-</span><span id="__span-4-23"><a href="#__codelineno-4-23" id="__codelineno-4-23" name="__codelineno-4-23"></a>
-</span><span id="__span-4-24"><a href="#__codelineno-4-24" id="__codelineno-4-24" name="__codelineno-4-24"></a><span class="cm">This example gets role assignments for the specified subscription and management group.</span>
-</span><span id="__span-4-25"><a href="#__codelineno-4-25" id="__codelineno-4-25" name="__codelineno-4-25"></a>
-</span><span id="__span-4-26"><a href="#__codelineno-4-26" id="__codelineno-4-26" name="__codelineno-4-26"></a><span class="cm">.\get-azroleassigments.ps1 -ManagementGroupName "mg-name" -GetSubscriptions $true -GetManagementGroups $false</span>
-</span><span id="__span-4-27"><a href="#__codelineno-4-27" id="__codelineno-4-27" name="__codelineno-4-27"></a>
-</span><span id="__span-4-28"><a href="#__codelineno-4-28" id="__codelineno-4-28" name="__codelineno-4-28"></a><span class="cm">This example gets role assignments for the specified management group.</span>
-</span><span id="__span-4-29"><a href="#__codelineno-4-29" id="__codelineno-4-29" name="__codelineno-4-29"></a>
-</span><span id="__span-4-30"><a href="#__codelineno-4-30" id="__codelineno-4-30" name="__codelineno-4-30"></a><span class="cm">.\get-azroleassigments.ps1  -GetSubscriptions $true -GetManagementGroups $true</span>
-</span><span id="__span-4-31"><a href="#__codelineno-4-31" id="__codelineno-4-31" name="__codelineno-4-31"></a>
-</span><span id="__span-4-32"><a href="#__codelineno-4-32" id="__codelineno-4-32" name="__codelineno-4-32"></a><span class="cm">This example gets role assignments for all subscriptions and management groups.</span>
-</span><span id="__span-4-33"><a href="#__codelineno-4-33" id="__codelineno-4-33" name="__codelineno-4-33"></a>
-</span><span id="__span-4-34"><a href="#__codelineno-4-34" id="__codelineno-4-34" name="__codelineno-4-34"></a><span class="sd">.NOTES</span>
-</span><span id="__span-4-35"><a href="#__codelineno-4-35" id="__codelineno-4-35" name="__codelineno-4-35"></a><span class="cm">You can not provide both SubscriptionId and GetSubscriptions parameters at the same time.</span>
-</span><span id="__span-4-36"><a href="#__codelineno-4-36" id="__codelineno-4-36" name="__codelineno-4-36"></a><span class="cm">You can not provide both ManagementGroupName and GetManagementGroups parameters at the same time.</span>
-</span><span id="__span-4-37"><a href="#__codelineno-4-37" id="__codelineno-4-37" name="__codelineno-4-37"></a>
-</span><span id="__span-4-38"><a href="#__codelineno-4-38" id="__codelineno-4-38" name="__codelineno-4-38"></a><span class="cm">#&gt;</span>
-</span><span id="__span-4-39"><a href="#__codelineno-4-39" id="__codelineno-4-39" name="__codelineno-4-39"></a>
-</span><span id="__span-4-40"><a href="#__codelineno-4-40" id="__codelineno-4-40" name="__codelineno-4-40"></a><span class="c"># Parameters setup</span>
-</span><span id="__span-4-41"><a href="#__codelineno-4-41" id="__codelineno-4-41" name="__codelineno-4-41"></a><span class="k">param</span> <span class="p">(</span>
-</span><span id="__span-4-42"><a href="#__codelineno-4-42" id="__codelineno-4-42" name="__codelineno-4-42"></a>    <span class="p">[</span><span class="k">Parameter</span><span class="p">(</span><span class="k">Mandatory</span><span class="p">=</span><span class="nv">$false</span><span class="p">)]</span>
-</span><span id="__span-4-43"><a href="#__codelineno-4-43" id="__codelineno-4-43" name="__codelineno-4-43"></a>    <span class="no">[string]</span><span class="nv">$SubscriptionId</span><span class="p">,</span>
-</span><span id="__span-4-44"><a href="#__codelineno-4-44" id="__codelineno-4-44" name="__codelineno-4-44"></a>
-</span><span id="__span-4-45"><a href="#__codelineno-4-45" id="__codelineno-4-45" name="__codelineno-4-45"></a>    <span class="p">[</span><span class="k">Parameter</span><span class="p">(</span><span class="k">Mandatory</span><span class="p">=</span><span class="nv">$false</span><span class="p">)]</span>
-</span><span id="__span-4-46"><a href="#__codelineno-4-46" id="__codelineno-4-46" name="__codelineno-4-46"></a>    <span class="no">[string]</span><span class="nv">$ManagementGroupName</span><span class="p">,</span>
-</span><span id="__span-4-47"><a href="#__codelineno-4-47" id="__codelineno-4-47" name="__codelineno-4-47"></a>
-</span><span id="__span-4-48"><a href="#__codelineno-4-48" id="__codelineno-4-48" name="__codelineno-4-48"></a>    <span class="p">[</span><span class="k">Parameter</span><span class="p">(</span><span class="k">Mandatory</span><span class="p">=</span><span class="nv">$false</span><span class="p">)]</span>
-</span><span id="__span-4-49"><a href="#__codelineno-4-49" id="__codelineno-4-49" name="__codelineno-4-49"></a>    <span class="no">[bool]</span><span class="nv">$GetSubscriptions</span> <span class="p">=</span> <span class="nv">$false</span><span class="p">,</span>
-</span><span id="__span-4-50"><a href="#__codelineno-4-50" id="__codelineno-4-50" name="__codelineno-4-50"></a>
-</span><span id="__span-4-51"><a href="#__codelineno-4-51" id="__codelineno-4-51" name="__codelineno-4-51"></a>    <span class="p">[</span><span class="k">Parameter</span><span class="p">(</span><span class="k">Mandatory</span><span class="p">=</span><span class="nv">$false</span><span class="p">)]</span>
-</span><span id="__span-4-52"><a href="#__codelineno-4-52" id="__codelineno-4-52" name="__codelineno-4-52"></a>    <span class="no">[bool]</span><span class="nv">$GetManagementGroups</span> <span class="p">=</span> <span class="nv">$true</span>
-</span><span id="__span-4-53"><a href="#__codelineno-4-53" id="__codelineno-4-53" name="__codelineno-4-53"></a><span class="p">)</span>
-</span><span id="__span-4-54"><a href="#__codelineno-4-54" id="__codelineno-4-54" name="__codelineno-4-54"></a>
-</span><span id="__span-4-55"><a href="#__codelineno-4-55" id="__codelineno-4-55" name="__codelineno-4-55"></a><span class="c"># The rest of your script...</span>
-</span><span id="__span-4-56"><a href="#__codelineno-4-56" id="__codelineno-4-56" name="__codelineno-4-56"></a>
-</span><span id="__span-4-57"><a href="#__codelineno-4-57" id="__codelineno-4-57" name="__codelineno-4-57"></a><span class="c"># Parameters setup</span>
-</span><span id="__span-4-58"><a href="#__codelineno-4-58" id="__codelineno-4-58" name="__codelineno-4-58"></a><span class="k">param</span> <span class="p">(</span>
-</span><span id="__span-4-59"><a href="#__codelineno-4-59" id="__codelineno-4-59" name="__codelineno-4-59"></a>    <span class="p">[</span><span class="k">Parameter</span><span class="p">(</span><span class="k">Mandatory</span><span class="p">=</span><span class="nv">$false</span><span class="p">)]</span>
-</span><span id="__span-4-60"><a href="#__codelineno-4-60" id="__codelineno-4-60" name="__codelineno-4-60"></a>    <span class="no">[string]</span><span class="nv">$SubscriptionId</span><span class="p">,</span>
-</span><span id="__span-4-61"><a href="#__codelineno-4-61" id="__codelineno-4-61" name="__codelineno-4-61"></a>
-</span><span id="__span-4-62"><a href="#__codelineno-4-62" id="__codelineno-4-62" name="__codelineno-4-62"></a>    <span class="p">[</span><span class="k">Parameter</span><span class="p">(</span><span class="k">Mandatory</span><span class="p">=</span><span class="nv">$false</span><span class="p">)]</span>
-</span><span id="__span-4-63"><a href="#__codelineno-4-63" id="__codelineno-4-63" name="__codelineno-4-63"></a>    <span class="no">[string]</span><span class="nv">$ManagementGroupName</span><span class="p">,</span>
-</span><span id="__span-4-64"><a href="#__codelineno-4-64" id="__codelineno-4-64" name="__codelineno-4-64"></a>
-</span><span id="__span-4-65"><a href="#__codelineno-4-65" id="__codelineno-4-65" name="__codelineno-4-65"></a>    <span class="p">[</span><span class="k">Parameter</span><span class="p">(</span><span class="k">Mandatory</span><span class="p">=</span><span class="nv">$false</span><span class="p">)]</span>
-</span><span id="__span-4-66"><a href="#__codelineno-4-66" id="__codelineno-4-66" name="__codelineno-4-66"></a>    <span class="no">[bool]</span><span class="nv">$GetSubscriptions</span> <span class="p">=</span> <span class="nv">$false</span><span class="p">,</span>
-</span><span id="__span-4-67"><a href="#__codelineno-4-67" id="__codelineno-4-67" name="__codelineno-4-67"></a>
-</span><span id="__span-4-68"><a href="#__codelineno-4-68" id="__codelineno-4-68" name="__codelineno-4-68"></a>    <span class="p">[</span><span class="k">Parameter</span><span class="p">(</span><span class="k">Mandatory</span><span class="p">=</span><span class="nv">$false</span><span class="p">)]</span>
-</span><span id="__span-4-69"><a href="#__codelineno-4-69" id="__codelineno-4-69" name="__codelineno-4-69"></a>    <span class="no">[bool]</span><span class="nv">$GetManagementGroups</span> <span class="p">=</span> <span class="nv">$true</span>
-</span><span id="__span-4-70"><a href="#__codelineno-4-70" id="__codelineno-4-70" name="__codelineno-4-70"></a><span class="p">)</span>
-</span><span id="__span-4-71"><a href="#__codelineno-4-71" id="__codelineno-4-71" name="__codelineno-4-71"></a>
-</span><span id="__span-4-72"><a href="#__codelineno-4-72" id="__codelineno-4-72" name="__codelineno-4-72"></a><span class="c"># Install the ImportExcel module if not already installed</span>
-</span><span id="__span-4-73"><a href="#__codelineno-4-73" id="__codelineno-4-73" name="__codelineno-4-73"></a><span class="k">if</span> <span class="p">(!(</span><span class="nb">Get-Module</span> <span class="n">-ListAvailable</span> <span class="n">-Name</span> <span class="n">ImportExcel</span><span class="p">))</span> <span class="p">{</span>
-</span><span id="__span-4-74"><a href="#__codelineno-4-74" id="__codelineno-4-74" name="__codelineno-4-74"></a>    <span class="nb">Install-Module</span> <span class="n">-Name</span> <span class="n">ImportExcel</span> <span class="n">-Scope</span> <span class="n">CurrentUser</span>
-</span><span id="__span-4-75"><a href="#__codelineno-4-75" id="__codelineno-4-75" name="__codelineno-4-75"></a><span class="p">}</span>
-</span><span id="__span-4-76"><a href="#__codelineno-4-76" id="__codelineno-4-76" name="__codelineno-4-76"></a>
-</span><span id="__span-4-77"><a href="#__codelineno-4-77" id="__codelineno-4-77" name="__codelineno-4-77"></a><span class="c"># Define the path to your Excel file for Managing Group role assignments</span>
-</span><span id="__span-4-78"><a href="#__codelineno-4-78" id="__codelineno-4-78" name="__codelineno-4-78"></a><span class="nv">$managementGroupPath</span> <span class="p">=</span> <span class="s2">".\AzRoleAssignmentMg.xlsx"</span>
-</span><span id="__span-4-79"><a href="#__codelineno-4-79" id="__codelineno-4-79" name="__codelineno-4-79"></a><span class="c"># Define the path to your Excel file for Subscription role assignments</span>
-</span><span id="__span-4-80"><a href="#__codelineno-4-80" id="__codelineno-4-80" name="__codelineno-4-80"></a><span class="nv">$subscriptionPath</span> <span class="p">=</span> <span class="s2">".\AzRoleAssignmentSub.xlsx"</span>
-</span><span id="__span-4-81"><a href="#__codelineno-4-81" id="__codelineno-4-81" name="__codelineno-4-81"></a>
-</span><span id="__span-4-82"><a href="#__codelineno-4-82" id="__codelineno-4-82" name="__codelineno-4-82"></a><span class="c"># Initialize an empty array to hold all role assignments</span>
-</span><span id="__span-4-83"><a href="#__codelineno-4-83" id="__codelineno-4-83" name="__codelineno-4-83"></a><span class="nv">$subscriptionRoleAssignments</span> <span class="p">=</span> <span class="p">@()</span>
-</span><span id="__span-4-84"><a href="#__codelineno-4-84" id="__codelineno-4-84" name="__codelineno-4-84"></a><span class="nv">$managementGroupRoleAssignments</span> <span class="p">=</span> <span class="p">@()</span>
-</span><span id="__span-4-85"><a href="#__codelineno-4-85" id="__codelineno-4-85" name="__codelineno-4-85"></a>
-</span><span id="__span-4-86"><a href="#__codelineno-4-86" id="__codelineno-4-86" name="__codelineno-4-86"></a><span class="k">if</span> <span class="p">(</span><span class="nv">$GetManagementGroups</span><span class="p">)</span> <span class="p">{</span>
-</span><span id="__span-4-87"><a href="#__codelineno-4-87" id="__codelineno-4-87" name="__codelineno-4-87"></a>    <span class="c"># Check if ManagementGroupName is provided</span>
-</span><span id="__span-4-88"><a href="#__codelineno-4-88" id="__codelineno-4-88" name="__codelineno-4-88"></a>    <span class="k">if</span> <span class="p">(</span><span class="nv">$ManagementGroupName</span><span class="p">)</span> <span class="p">{</span>
-</span><span id="__span-4-89"><a href="#__codelineno-4-89" id="__codelineno-4-89" name="__codelineno-4-89"></a>        <span class="c"># Get role assignments for the specified management group</span>
-</span><span id="__span-4-90"><a href="#__codelineno-4-90" id="__codelineno-4-90" name="__codelineno-4-90"></a>        <span class="nv">$roleAssignments</span> <span class="p">=</span> <span class="nb">Get-AzRoleAssignment</span> <span class="n">-Scope</span> <span class="s2">"/providers/Microsoft.Management/managementGroups/$ManagementGroupName"</span>
-</span><span id="__span-4-91"><a href="#__codelineno-4-91" id="__codelineno-4-91" name="__codelineno-4-91"></a>
-</span><span id="__span-4-92"><a href="#__codelineno-4-92" id="__codelineno-4-92" name="__codelineno-4-92"></a>        <span class="c"># Add these role assignments to the management group role assignments array</span>
-</span><span id="__span-4-93"><a href="#__codelineno-4-93" id="__codelineno-4-93" name="__codelineno-4-93"></a>        <span class="nv">$managementGroupRoleAssignments</span> <span class="p">+=</span> <span class="nv">$roleAssignments</span>
-</span><span id="__span-4-94"><a href="#__codelineno-4-94" id="__codelineno-4-94" name="__codelineno-4-94"></a>
-</span><span id="__span-4-95"><a href="#__codelineno-4-95" id="__codelineno-4-95" name="__codelineno-4-95"></a>        <span class="c"># Add 'GroupName' and 'IsInherited' properties to each role assignment object</span>
-</span><span id="__span-4-96"><a href="#__codelineno-4-96" id="__codelineno-4-96" name="__codelineno-4-96"></a>        <span class="nv">$roleAssignments</span> <span class="p">|</span> <span class="k">ForEach</span><span class="n">-Object</span> <span class="p">{</span>
-</span><span id="__span-4-97"><a href="#__codelineno-4-97" id="__codelineno-4-97" name="__codelineno-4-97"></a>            <span class="nv">$_</span> <span class="p">|</span> <span class="nb">Add-Member</span> <span class="n">-NotePropertyName</span> <span class="s1">'GroupDisplayName'</span> <span class="n">-NotePropertyValue</span> <span class="p">(</span><span class="nb">Get-AzManagementGroup</span> <span class="n">-GroupName</span> <span class="nv">$ManagementGroupName</span><span class="p">).</span><span class="n">DisplayName</span>
-</span><span id="__span-4-98"><a href="#__codelineno-4-98" id="__codelineno-4-98" name="__codelineno-4-98"></a>            <span class="nv">$_</span> <span class="p">|</span> <span class="nb">Add-Member</span> <span class="n">-NotePropertyName</span> <span class="s1">'GroupName'</span> <span class="n">-NotePropertyValue</span> <span class="nv">$ManagementGroupName</span>
-</span><span id="__span-4-99"><a href="#__codelineno-4-99" id="__codelineno-4-99" name="__codelineno-4-99"></a>            <span class="c"># If the Scope of the role assignment is equal to the Id of the management group,</span>
-</span><span id="__span-4-100"><a href="#__codelineno-4-100" id="__codelineno-4-100" name="__codelineno-4-100"></a>            <span class="c"># then the role assignment is not inherited; otherwise, it is inherited.</span>
-</span><span id="__span-4-101"><a href="#__codelineno-4-101" id="__codelineno-4-101" name="__codelineno-4-101"></a>            <span class="k">if</span> <span class="p">(</span><span class="nv">$_</span><span class="p">.</span><span class="n">Scope</span> <span class="o">-eq</span> <span class="s2">"/providers/Microsoft.Management/managementGroups/$ManagementGroupName"</span><span class="p">)</span> <span class="p">{</span>
-</span><span id="__span-4-102"><a href="#__codelineno-4-102" id="__codelineno-4-102" name="__codelineno-4-102"></a>                <span class="nv">$_</span> <span class="p">|</span> <span class="nb">Add-Member</span> <span class="n">-NotePropertyName</span> <span class="s1">'IsInherited'</span> <span class="n">-NotePropertyValue</span> <span class="nv">$false</span>
-</span><span id="__span-4-103"><a href="#__codelineno-4-103" id="__codelineno-4-103" name="__codelineno-4-103"></a>            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-</span><span id="__span-4-104"><a href="#__codelineno-4-104" id="__codelineno-4-104" name="__codelineno-4-104"></a>                <span class="nv">$_</span> <span class="p">|</span> <span class="nb">Add-Member</span> <span class="n">-NotePropertyName</span> <span class="s1">'IsInherited'</span> <span class="n">-NotePropertyValue</span> <span class="nv">$true</span>
-</span><span id="__span-4-105"><a href="#__codelineno-4-105" id="__codelineno-4-105" name="__codelineno-4-105"></a>            <span class="p">}</span>
-</span><span id="__span-4-106"><a href="#__codelineno-4-106" id="__codelineno-4-106" name="__codelineno-4-106"></a>        <span class="p">}</span>
-</span><span id="__span-4-107"><a href="#__codelineno-4-107" id="__codelineno-4-107" name="__codelineno-4-107"></a>
-</span><span id="__span-4-108"><a href="#__codelineno-4-108" id="__codelineno-4-108" name="__codelineno-4-108"></a>        <span class="c"># Export the role assignments to a new sheet in the Excel file</span>
-</span><span id="__span-4-109"><a href="#__codelineno-4-109" id="__codelineno-4-109" name="__codelineno-4-109"></a>        <span class="nv">$roleAssignments</span> <span class="p">|</span> <span class="nb">Export-Excel</span> <span class="n">-Path</span> <span class="nv">$managementGroupPath</span> <span class="n">-WorksheetName</span> <span class="p">(</span><span class="nb">Get-AzManagementGroup</span> <span class="n">-GroupName</span> <span class="nv">$ManagementGroupName</span><span class="p">).</span><span class="n">DisplayName</span> <span class="n">-AutoSize</span> <span class="n">-AutoFilter</span>
-</span><span id="__span-4-110"><a href="#__codelineno-4-110" id="__codelineno-4-110" name="__codelineno-4-110"></a>    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-</span><span id="__span-4-111"><a href="#__codelineno-4-111" id="__codelineno-4-111" name="__codelineno-4-111"></a>        <span class="c"># Get all management groups</span>
-</span><span id="__span-4-112"><a href="#__codelineno-4-112" id="__codelineno-4-112" name="__codelineno-4-112"></a>        <span class="nv">$managementGroups</span> <span class="p">=</span> <span class="nb">Get-AzManagementGroup</span>
-</span><span id="__span-4-113"><a href="#__codelineno-4-113" id="__codelineno-4-113" name="__codelineno-4-113"></a>        <span class="c"># Loop through each management group</span>
-</span><span id="__span-4-114"><a href="#__codelineno-4-114" id="__codelineno-4-114" name="__codelineno-4-114"></a>        <span class="k">foreach</span> <span class="p">(</span><span class="nv">$mg</span> <span class="k">in</span> <span class="nv">$managementGroups</span><span class="p">)</span> <span class="p">{</span>
-</span><span id="__span-4-115"><a href="#__codelineno-4-115" id="__codelineno-4-115" name="__codelineno-4-115"></a>            <span class="c"># Get role assignments for the current management group</span>
-</span><span id="__span-4-116"><a href="#__codelineno-4-116" id="__codelineno-4-116" name="__codelineno-4-116"></a>            <span class="nv">$roleAssignments</span> <span class="p">=</span> <span class="nb">Get-AzRoleAssignment</span> <span class="n">-Scope</span> <span class="s2">"/providers/Microsoft.Management/managementGroups/</span><span class="p">$(</span><span class="nv">$mg</span><span class="p">.</span><span class="n">Name</span><span class="p">)</span><span class="s2">"</span>
-</span><span id="__span-4-117"><a href="#__codelineno-4-117" id="__codelineno-4-117" name="__codelineno-4-117"></a>
-</span><span id="__span-4-118"><a href="#__codelineno-4-118" id="__codelineno-4-118" name="__codelineno-4-118"></a>            <span class="c"># Add these role assignments to the management group role assignments array</span>
-</span><span id="__span-4-119"><a href="#__codelineno-4-119" id="__codelineno-4-119" name="__codelineno-4-119"></a>            <span class="nv">$managementGroupRoleAssignments</span> <span class="p">+=</span> <span class="nv">$roleAssignments</span>
-</span><span id="__span-4-120"><a href="#__codelineno-4-120" id="__codelineno-4-120" name="__codelineno-4-120"></a>
-</span><span id="__span-4-121"><a href="#__codelineno-4-121" id="__codelineno-4-121" name="__codelineno-4-121"></a>            <span class="c"># Add 'GroupName' and 'IsInherited' properties to each role assignment object</span>
-</span><span id="__span-4-122"><a href="#__codelineno-4-122" id="__codelineno-4-122" name="__codelineno-4-122"></a>            <span class="nv">$roleAssignments</span> <span class="p">|</span> <span class="k">ForEach</span><span class="n">-Object</span> <span class="p">{</span>
-</span><span id="__span-4-123"><a href="#__codelineno-4-123" id="__codelineno-4-123" name="__codelineno-4-123"></a>                <span class="nv">$_</span> <span class="p">|</span> <span class="nb">Add-Member</span> <span class="n">-NotePropertyName</span> <span class="s1">'GroupDisplayName'</span> <span class="n">-NotePropertyValue</span> <span class="nv">$mg</span><span class="p">.</span><span class="n">DisplayName</span>
-</span><span id="__span-4-124"><a href="#__codelineno-4-124" id="__codelineno-4-124" name="__codelineno-4-124"></a>                <span class="nv">$_</span> <span class="p">|</span> <span class="nb">Add-Member</span> <span class="n">-NotePropertyName</span> <span class="s1">'GroupName'</span> <span class="n">-NotePropertyValue</span> <span class="nv">$mg</span><span class="p">.</span><span class="n">Name</span>
-</span><span id="__span-4-125"><a href="#__codelineno-4-125" id="__codelineno-4-125" name="__codelineno-4-125"></a>                <span class="c"># If the Scope of the role assignment is equal to the Id of the management group,</span>
-</span><span id="__span-4-126"><a href="#__codelineno-4-126" id="__codelineno-4-126" name="__codelineno-4-126"></a>                <span class="c"># then the role assignment is not inherited; otherwise, it is inherited.</span>
-</span><span id="__span-4-127"><a href="#__codelineno-4-127" id="__codelineno-4-127" name="__codelineno-4-127"></a>                <span class="k">if</span> <span class="p">(</span><span class="nv">$_</span><span class="p">.</span><span class="n">Scope</span> <span class="o">-eq</span> <span class="nv">$mg</span><span class="p">.</span><span class="n">Id</span><span class="p">)</span> <span class="p">{</span>
-</span><span id="__span-4-128"><a href="#__codelineno-4-128" id="__codelineno-4-128" name="__codelineno-4-128"></a>                    <span class="nv">$_</span> <span class="p">|</span> <span class="nb">Add-Member</span> <span class="n">-NotePropertyName</span> <span class="s1">'IsInherited'</span> <span class="n">-NotePropertyValue</span> <span class="nv">$false</span>
-</span><span id="__span-4-129"><a href="#__codelineno-4-129" id="__codelineno-4-129" name="__codelineno-4-129"></a>                <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-</span><span id="__span-4-130"><a href="#__codelineno-4-130" id="__codelineno-4-130" name="__codelineno-4-130"></a>                    <span class="nv">$_</span> <span class="p">|</span> <span class="nb">Add-Member</span> <span class="n">-NotePropertyName</span> <span class="s1">'IsInherited'</span> <span class="n">-NotePropertyValue</span> <span class="nv">$true</span>
-</span><span id="__span-4-131"><a href="#__codelineno-4-131" id="__codelineno-4-131" name="__codelineno-4-131"></a>                <span class="p">}</span>
-</span><span id="__span-4-132"><a href="#__codelineno-4-132" id="__codelineno-4-132" name="__codelineno-4-132"></a>            <span class="p">}</span>
-</span><span id="__span-4-133"><a href="#__codelineno-4-133" id="__codelineno-4-133" name="__codelineno-4-133"></a>
-</span><span id="__span-4-134"><a href="#__codelineno-4-134" id="__codelineno-4-134" name="__codelineno-4-134"></a>            <span class="c"># Export the role assignments to a new sheet in the Excel file</span>
-</span><span id="__span-4-135"><a href="#__codelineno-4-135" id="__codelineno-4-135" name="__codelineno-4-135"></a>            <span class="nv">$roleAssignments</span> <span class="p">|</span> <span class="nb">Export-Excel</span> <span class="n">-Path</span> <span class="nv">$managementGroupPath</span> <span class="n">-WorksheetName</span> <span class="nv">$mg</span><span class="p">.</span><span class="n">DisplayName</span> <span class="n">-AutoSize</span> <span class="n">-AutoFilter</span>
-</span><span id="__span-4-136"><a href="#__codelineno-4-136" id="__codelineno-4-136" name="__codelineno-4-136"></a>        <span class="p">}</span>
-</span><span id="__span-4-137"><a href="#__codelineno-4-137" id="__codelineno-4-137" name="__codelineno-4-137"></a>    <span class="p">}</span>
-</span><span id="__span-4-138"><a href="#__codelineno-4-138" id="__codelineno-4-138" name="__codelineno-4-138"></a><span class="p">}</span>
-</span><span id="__span-4-139"><a href="#__codelineno-4-139" id="__codelineno-4-139" name="__codelineno-4-139"></a>
-</span><span id="__span-4-140"><a href="#__codelineno-4-140" id="__codelineno-4-140" name="__codelineno-4-140"></a><span class="k">if</span> <span class="p">(</span><span class="nv">$GetSubscriptions</span><span class="p">)</span> <span class="p">{</span>   
-</span><span id="__span-4-141"><a href="#__codelineno-4-141" id="__codelineno-4-141" name="__codelineno-4-141"></a>    <span class="c"># Check if SubscriptionId is provided</span>
-</span><span id="__span-4-142"><a href="#__codelineno-4-142" id="__codelineno-4-142" name="__codelineno-4-142"></a>    <span class="k">if</span> <span class="p">(</span><span class="nv">$SubscriptionId</span><span class="p">)</span> <span class="p">{</span>
-</span><span id="__span-4-143"><a href="#__codelineno-4-143" id="__codelineno-4-143" name="__codelineno-4-143"></a>        <span class="c"># Get role assignments for the specified subscription</span>
-</span><span id="__span-4-144"><a href="#__codelineno-4-144" id="__codelineno-4-144" name="__codelineno-4-144"></a>        <span class="nv">$roleAssignments</span> <span class="p">=</span> <span class="nb">Get-AzRoleAssignment</span> <span class="n">-Scope</span> <span class="s2">"/subscriptions/$SubscriptionId"</span>
-</span><span id="__span-4-145"><a href="#__codelineno-4-145" id="__codelineno-4-145" name="__codelineno-4-145"></a>
-</span><span id="__span-4-146"><a href="#__codelineno-4-146" id="__codelineno-4-146" name="__codelineno-4-146"></a>        <span class="c"># Add these role assignments to the subscription role assignments array</span>
-</span><span id="__span-4-147"><a href="#__codelineno-4-147" id="__codelineno-4-147" name="__codelineno-4-147"></a>        <span class="nv">$subscriptionRoleAssignments</span> <span class="p">+=</span> <span class="nv">$roleAssignments</span>
-</span><span id="__span-4-148"><a href="#__codelineno-4-148" id="__codelineno-4-148" name="__codelineno-4-148"></a>
-</span><span id="__span-4-149"><a href="#__codelineno-4-149" id="__codelineno-4-149" name="__codelineno-4-149"></a>        <span class="c"># Add 'SubscriptionName' and 'IsInherited' properties to each role assignment object</span>
-</span><span id="__span-4-150"><a href="#__codelineno-4-150" id="__codelineno-4-150" name="__codelineno-4-150"></a>        <span class="nv">$roleAssignments</span> <span class="p">|</span> <span class="k">ForEach</span><span class="n">-Object</span> <span class="p">{</span> 
-</span><span id="__span-4-151"><a href="#__codelineno-4-151" id="__codelineno-4-151" name="__codelineno-4-151"></a>            <span class="nv">$_</span> <span class="p">|</span> <span class="nb">Add-Member</span> <span class="n">-NotePropertyName</span> <span class="s1">'SubscriptionName'</span> <span class="n">-NotePropertyValue</span> <span class="p">(</span><span class="nb">Get-AzSubscription</span> <span class="n">-SubscriptionId</span> <span class="nv">$SubscriptionId</span><span class="p">).</span><span class="n">Name</span> 
-</span><span id="__span-4-152"><a href="#__codelineno-4-152" id="__codelineno-4-152" name="__codelineno-4-152"></a>            <span class="nv">$_</span> <span class="p">|</span> <span class="nb">Add-Member</span> <span class="n">-NotePropertyName</span> <span class="s1">'IsInherited'</span> <span class="n">-NotePropertyValue</span> <span class="nv">$false</span>
-</span><span id="__span-4-153"><a href="#__codelineno-4-153" id="__codelineno-4-153" name="__codelineno-4-153"></a>        <span class="p">}</span>
-</span><span id="__span-4-154"><a href="#__codelineno-4-154" id="__codelineno-4-154" name="__codelineno-4-154"></a>
-</span><span id="__span-4-155"><a href="#__codelineno-4-155" id="__codelineno-4-155" name="__codelineno-4-155"></a>        <span class="c"># Export the role assignments to a new sheet in the Excel file</span>
-</span><span id="__span-4-156"><a href="#__codelineno-4-156" id="__codelineno-4-156" name="__codelineno-4-156"></a>        <span class="nv">$roleAssignments</span> <span class="p">|</span> <span class="nb">Export-Excel</span> <span class="n">-Path</span> <span class="nv">$subscriptionPath</span> <span class="n">-WorksheetName</span> <span class="p">(</span><span class="nb">Get-AzSubscription</span> <span class="n">-SubscriptionId</span> <span class="nv">$SubscriptionId</span><span class="p">).</span><span class="n">Name</span> <span class="n">-AutoSize</span> <span class="n">-AutoFilter</span>
-</span><span id="__span-4-157"><a href="#__codelineno-4-157" id="__codelineno-4-157" name="__codelineno-4-157"></a>    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-</span><span id="__span-4-158"><a href="#__codelineno-4-158" id="__codelineno-4-158" name="__codelineno-4-158"></a>        <span class="c"># Get all subscriptions</span>
-</span><span id="__span-4-159"><a href="#__codelineno-4-159" id="__codelineno-4-159" name="__codelineno-4-159"></a>        <span class="nv">$subscriptions</span> <span class="p">=</span> <span class="nb">Get-AzSubscription</span>
-</span><span id="__span-4-160"><a href="#__codelineno-4-160" id="__codelineno-4-160" name="__codelineno-4-160"></a>
-</span><span id="__span-4-161"><a href="#__codelineno-4-161" id="__codelineno-4-161" name="__codelineno-4-161"></a>        <span class="c"># Loop through each subscription</span>
-</span><span id="__span-4-162"><a href="#__codelineno-4-162" id="__codelineno-4-162" name="__codelineno-4-162"></a>        <span class="k">foreach</span> <span class="p">(</span><span class="nv">$sub</span> <span class="k">in</span> <span class="nv">$subscriptions</span><span class="p">)</span> <span class="p">{</span>
-</span><span id="__span-4-163"><a href="#__codelineno-4-163" id="__codelineno-4-163" name="__codelineno-4-163"></a>            <span class="c"># Get role assignments for the current subscription</span>
-</span><span id="__span-4-164"><a href="#__codelineno-4-164" id="__codelineno-4-164" name="__codelineno-4-164"></a>            <span class="nv">$roleAssignments</span> <span class="p">=</span> <span class="nb">Get-AzRoleAssignment</span> <span class="n">-Scope</span> <span class="s2">"/subscriptions/</span><span class="p">$(</span><span class="nv">$sub</span><span class="p">.</span><span class="n">SubscriptionId</span><span class="p">)</span><span class="s2">"</span>
-</span><span id="__span-4-165"><a href="#__codelineno-4-165" id="__codelineno-4-165" name="__codelineno-4-165"></a>
-</span><span id="__span-4-166"><a href="#__codelineno-4-166" id="__codelineno-4-166" name="__codelineno-4-166"></a>            <span class="c"># Add these role assignments to the subscription role assignments array</span>
-</span><span id="__span-4-167"><a href="#__codelineno-4-167" id="__codelineno-4-167" name="__codelineno-4-167"></a>            <span class="nv">$subscriptionRoleAssignments</span> <span class="p">+=</span> <span class="nv">$roleAssignments</span>
-</span><span id="__span-4-168"><a href="#__codelineno-4-168" id="__codelineno-4-168" name="__codelineno-4-168"></a>
-</span><span id="__span-4-169"><a href="#__codelineno-4-169" id="__codelineno-4-169" name="__codelineno-4-169"></a>            <span class="c"># Add 'SubscriptionName' and 'IsInherited' properties to each role assignment object</span>
-</span><span id="__span-4-170"><a href="#__codelineno-4-170" id="__codelineno-4-170" name="__codelineno-4-170"></a>            <span class="nv">$roleAssignments</span> <span class="p">|</span> <span class="k">ForEach</span><span class="n">-Object</span> <span class="p">{</span> 
-</span><span id="__span-4-171"><a href="#__codelineno-4-171" id="__codelineno-4-171" name="__codelineno-4-171"></a>                <span class="nv">$_</span> <span class="p">|</span> <span class="nb">Add-Member</span> <span class="n">-NotePropertyName</span> <span class="s1">'SubscriptionName'</span> <span class="n">-NotePropertyValue</span> <span class="nv">$sub</span><span class="p">.</span><span class="n">Name</span>
-</span><span id="__span-4-172"><a href="#__codelineno-4-172" id="__codelineno-4-172" name="__codelineno-4-172"></a>                 <span class="c"># If the Scope of the role assignment is equal to the subscription Id,</span>
-</span><span id="__span-4-173"><a href="#__codelineno-4-173" id="__codelineno-4-173" name="__codelineno-4-173"></a>                 <span class="c"># then the role assignment is not inherited; otherwise, it is inherited.</span>
-</span><span id="__span-4-174"><a href="#__codelineno-4-174" id="__codelineno-4-174" name="__codelineno-4-174"></a>                <span class="k">if</span> <span class="p">(</span><span class="nv">$_</span><span class="p">.</span><span class="n">Scope</span> <span class="o">-eq</span> <span class="s2">"/subscriptions/</span><span class="p">$(</span><span class="nv">$sub</span><span class="p">.</span><span class="n">SubscriptionId</span><span class="p">)</span><span class="s2">"</span><span class="p">)</span> <span class="p">{</span>
-</span><span id="__span-4-175"><a href="#__codelineno-4-175" id="__codelineno-4-175" name="__codelineno-4-175"></a>                    <span class="nv">$_</span> <span class="p">|</span> <span class="nb">Add-Member</span> <span class="n">-NotePropertyName</span> <span class="s1">'IsInherited'</span> <span class="n">-NotePropertyValue</span> <span class="nv">$false</span>
-</span><span id="__span-4-176"><a href="#__codelineno-4-176" id="__codelineno-4-176" name="__codelineno-4-176"></a>                <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-</span><span id="__span-4-177"><a href="#__codelineno-4-177" id="__codelineno-4-177" name="__codelineno-4-177"></a>                    <span class="nv">$_</span> <span class="p">|</span> <span class="nb">Add-Member</span> <span class="n">-NotePropertyName</span> <span class="s1">'IsInherited'</span> <span class="n">-NotePropertyValue</span> <span class="nv">$true</span>
-</span><span id="__span-4-178"><a href="#__codelineno-4-178" id="__codelineno-4-178" name="__codelineno-4-178"></a>                <span class="p">}</span>
-</span><span id="__span-4-179"><a href="#__codelineno-4-179" id="__codelineno-4-179" name="__codelineno-4-179"></a>            <span class="p">}</span>
-</span><span id="__span-4-180"><a href="#__codelineno-4-180" id="__codelineno-4-180" name="__codelineno-4-180"></a>
-</span><span id="__span-4-181"><a href="#__codelineno-4-181" id="__codelineno-4-181" name="__codelineno-4-181"></a>            <span class="c"># Export the role assignments to a new sheet in the Excel file</span>
-</span><span id="__span-4-182"><a href="#__codelineno-4-182" id="__codelineno-4-182" name="__codelineno-4-182"></a>            <span class="nv">$roleAssignments</span> <span class="p">|</span> <span class="nb">Export-Excel</span> <span class="n">-Path</span> <span class="nv">$subscriptionPath</span> <span class="n">-WorksheetName</span> <span class="nv">$sub</span><span class="p">.</span><span class="n">Name</span> <span class="n">-AutoSize</span> <span class="n">-AutoFilter</span>
-</span><span id="__span-4-183"><a href="#__codelineno-4-183" id="__codelineno-4-183" name="__codelineno-4-183"></a>        <span class="p">}</span>
-</span><span id="__span-4-184"><a href="#__codelineno-4-184" id="__codelineno-4-184" name="__codelineno-4-184"></a>    <span class="p">}</span>
-</span><span id="__span-4-185"><a href="#__codelineno-4-185" id="__codelineno-4-185" name="__codelineno-4-185"></a><span class="p">}</span>
-</span></code></pre></div>
-<p>This script takes the following parameters:</p>
-<ul>
-<li><code>GetSubscriptions</code>: A switch parameter that specifies whether to generate reports for subscriptions. The default value is <code>$false</code>.</li>
-<li><code>GetManagementGroups</code>: A switch parameter that specifies whether to generate reports for management groups. The default value is <code>$true</code>.</li>
-<li><code>SubscriptionId</code>: The ID of the subscription for which you want to generate the report. If this parameter is not provided, the script will generate reports for all subscriptions.</li>
-<li><code>ManagementGroupName</code>: The name of the management group for which you want to generate the report. If this parameter is not provided, the script will generate reports for all management groups.</li>
-</ul>
-<h3 id="role-definition-report-in-excel-1"><a class="toclink" href="../../2024/04/20/how-to-create-assigment-reports-for-azure-rbac/#role-definition-report-in-excel-1">Role definition report in Excel 1</a></h3>
-<p>You can also generate a report for role definitions in Azure using the following PowerShell script:</p>
-<div class="language-powershell highlight"><pre><span></span><code><span id="__span-5-1"><a href="#__codelineno-5-1" id="__codelineno-5-1" name="__codelineno-5-1"></a><span class="k">param</span><span class="p">(</span>
-</span><span id="__span-5-2"><a href="#__codelineno-5-2" id="__codelineno-5-2" name="__codelineno-5-2"></a>    <span class="p">[</span><span class="k">Parameter</span><span class="p">(</span><span class="k">Mandatory</span><span class="p">=</span><span class="nv">$false</span><span class="p">)]</span>
-</span><span id="__span-5-3"><a href="#__codelineno-5-3" id="__codelineno-5-3" name="__codelineno-5-3"></a>    <span class="p">[</span><span class="k">ValidateSet</span><span class="p">(</span><span class="s1">'Console'</span><span class="p">,</span> <span class="s1">'Excel'</span><span class="p">)]</span>
-</span><span id="__span-5-4"><a href="#__codelineno-5-4" id="__codelineno-5-4" name="__codelineno-5-4"></a>    <span class="no">[string]</span><span class="nv">$OutputType</span> <span class="p">=</span> <span class="s1">'Console'</span><span class="p">,</span>
-</span><span id="__span-5-5"><a href="#__codelineno-5-5" id="__codelineno-5-5" name="__codelineno-5-5"></a>
-</span><span id="__span-5-6"><a href="#__codelineno-5-6" id="__codelineno-5-6" name="__codelineno-5-6"></a>    <span class="p">[</span><span class="k">Parameter</span><span class="p">(</span><span class="k">Mandatory</span><span class="p">=</span><span class="nv">$false</span><span class="p">)]</span>
-</span><span id="__span-5-7"><a href="#__codelineno-5-7" id="__codelineno-5-7" name="__codelineno-5-7"></a>    <span class="no">[string]</span><span class="nv">$ExcelFilePath</span> <span class="p">=</span> <span class="s2">".\AzRoleDefinition.xlsx"</span>
-</span><span id="__span-5-8"><a href="#__codelineno-5-8" id="__codelineno-5-8" name="__codelineno-5-8"></a><span class="p">)</span>
-</span><span id="__span-5-9"><a href="#__codelineno-5-9" id="__codelineno-5-9" name="__codelineno-5-9"></a>
-</span><span id="__span-5-10"><a href="#__codelineno-5-10" id="__codelineno-5-10" name="__codelineno-5-10"></a><span class="c"># Install the ImportExcel module if not already installed</span>
-</span><span id="__span-5-11"><a href="#__codelineno-5-11" id="__codelineno-5-11" name="__codelineno-5-11"></a><span class="k">if</span> <span class="p">(!(</span><span class="nb">Get-Module</span> <span class="n">-ListAvailable</span> <span class="n">-Name</span> <span class="n">ImportExcel</span><span class="p">))</span> <span class="p">{</span>
-</span><span id="__span-5-12"><a href="#__codelineno-5-12" id="__codelineno-5-12" name="__codelineno-5-12"></a>    <span class="nb">Install-Module</span> <span class="n">-Name</span> <span class="n">ImportExcel</span> <span class="n">-Scope</span> <span class="n">CurrentUser</span>
-</span><span id="__span-5-13"><a href="#__codelineno-5-13" id="__codelineno-5-13" name="__codelineno-5-13"></a><span class="p">}</span>
-</span><span id="__span-5-14"><a href="#__codelineno-5-14" id="__codelineno-5-14" name="__codelineno-5-14"></a>
-</span><span id="__span-5-15"><a href="#__codelineno-5-15" id="__codelineno-5-15" name="__codelineno-5-15"></a><span class="c"># Install the  AzureRM module if not already installed</span>
-</span><span id="__span-5-16"><a href="#__codelineno-5-16" id="__codelineno-5-16" name="__codelineno-5-16"></a><span class="k">if</span> <span class="p">(!(</span><span class="nb">Get-Module</span> <span class="n">-ListAvailable</span> <span class="n">-Name</span>  <span class="n">Az</span><span class="p">))</span> <span class="p">{</span>
-</span><span id="__span-5-17"><a href="#__codelineno-5-17" id="__codelineno-5-17" name="__codelineno-5-17"></a>    <span class="nb">Set-ExecutionPolicy</span> <span class="n">-ExecutionPolicy</span> <span class="n">RemoteSigned</span> <span class="n">-Scope</span> <span class="n">CurrentUser</span>
-</span><span id="__span-5-18"><a href="#__codelineno-5-18" id="__codelineno-5-18" name="__codelineno-5-18"></a>    <span class="nb">Install-Module</span> <span class="n">-Name</span>  <span class="n">Az</span> <span class="n">-Scope</span> <span class="n">CurrentUser</span>
-</span><span id="__span-5-19"><a href="#__codelineno-5-19" id="__codelineno-5-19" name="__codelineno-5-19"></a><span class="p">}</span>
-</span><span id="__span-5-20"><a href="#__codelineno-5-20" id="__codelineno-5-20" name="__codelineno-5-20"></a>
-</span><span id="__span-5-21"><a href="#__codelineno-5-21" id="__codelineno-5-21" name="__codelineno-5-21"></a><span class="c"># Get all role definitions</span>
-</span><span id="__span-5-22"><a href="#__codelineno-5-22" id="__codelineno-5-22" name="__codelineno-5-22"></a><span class="nv">$roleDefinitions</span> <span class="p">=</span> <span class="nb">Get-AzRoleDefinition</span> <span class="p">|</span> <span class="k">ForEach</span><span class="n">-Object</span> <span class="p">{</span>
-</span><span id="__span-5-23"><a href="#__codelineno-5-23" id="__codelineno-5-23" name="__codelineno-5-23"></a>    <span class="c"># Create a custom object with ordered properties</span>
-</span><span id="__span-5-24"><a href="#__codelineno-5-24" id="__codelineno-5-24" name="__codelineno-5-24"></a>    <span class="nv">$customObject</span> <span class="p">=</span> <span class="nb">New-Object</span> <span class="n">PSObject</span> <span class="n">-Property</span> <span class="p">@{</span>
-</span><span id="__span-5-25"><a href="#__codelineno-5-25" id="__codelineno-5-25" name="__codelineno-5-25"></a>        <span class="n">Name</span> <span class="p">=</span> <span class="nv">$_</span><span class="p">.</span><span class="n">Name</span>
-</span><span id="__span-5-26"><a href="#__codelineno-5-26" id="__codelineno-5-26" name="__codelineno-5-26"></a>        <span class="n">Id</span> <span class="p">=</span> <span class="nv">$_</span><span class="p">.</span><span class="n">Id</span>
-</span><span id="__span-5-27"><a href="#__codelineno-5-27" id="__codelineno-5-27" name="__codelineno-5-27"></a>        <span class="n">IsCustom</span> <span class="p">=</span> <span class="nv">$_</span><span class="p">.</span><span class="n">IsCustom</span>
-</span><span id="__span-5-28"><a href="#__codelineno-5-28" id="__codelineno-5-28" name="__codelineno-5-28"></a>        <span class="n">Description</span> <span class="p">=</span> <span class="nv">$_</span><span class="p">.</span><span class="n">Description</span>
-</span><span id="__span-5-29"><a href="#__codelineno-5-29" id="__codelineno-5-29" name="__codelineno-5-29"></a>        <span class="n">Actions</span> <span class="p">=</span> <span class="p">(</span><span class="nv">$_</span><span class="p">.</span><span class="n">Actions</span> <span class="n">-join</span> <span class="s1">', '</span><span class="p">).</span><span class="n">Replace</span><span class="p">(</span><span class="s1">','</span><span class="p">,</span> <span class="s2">",</span><span class="se">`n</span><span class="s2">"</span><span class="p">)</span>
-</span><span id="__span-5-30"><a href="#__codelineno-5-30" id="__codelineno-5-30" name="__codelineno-5-30"></a>        <span class="n">NotActions</span> <span class="p">=</span> <span class="p">(</span><span class="nv">$_</span><span class="p">.</span><span class="n">NotActions</span> <span class="n">-join</span> <span class="s1">', '</span><span class="p">).</span><span class="n">Replace</span><span class="p">(</span><span class="s1">','</span><span class="p">,</span> <span class="s2">",</span><span class="se">`n</span><span class="s2">"</span><span class="p">)</span>
-</span><span id="__span-5-31"><a href="#__codelineno-5-31" id="__codelineno-5-31" name="__codelineno-5-31"></a>        <span class="n">DataActions</span> <span class="p">=</span> <span class="p">(</span><span class="nv">$_</span><span class="p">.</span><span class="n">DataActions</span> <span class="n">-join</span> <span class="s1">', '</span><span class="p">).</span><span class="n">Replace</span><span class="p">(</span><span class="s1">','</span><span class="p">,</span> <span class="s2">",</span><span class="se">`n</span><span class="s2">"</span><span class="p">)</span>
-</span><span id="__span-5-32"><a href="#__codelineno-5-32" id="__codelineno-5-32" name="__codelineno-5-32"></a>        <span class="n">NotDataActions</span> <span class="p">=</span> <span class="p">(</span><span class="nv">$_</span><span class="p">.</span><span class="n">NotDataActions</span> <span class="n">-join</span> <span class="s1">', '</span><span class="p">).</span><span class="n">Replace</span><span class="p">(</span><span class="s1">','</span><span class="p">,</span> <span class="s2">",</span><span class="se">`n</span><span class="s2">"</span><span class="p">)</span>
-</span><span id="__span-5-33"><a href="#__codelineno-5-33" id="__codelineno-5-33" name="__codelineno-5-33"></a>        <span class="n">AssignableScopes</span> <span class="p">=</span> <span class="p">(</span><span class="nv">$_</span><span class="p">.</span><span class="n">AssignableScopes</span> <span class="n">-join</span> <span class="s1">', '</span><span class="p">).</span><span class="n">Replace</span><span class="p">(</span><span class="s1">','</span><span class="p">,</span> <span class="s2">",</span><span class="se">`n</span><span class="s2">"</span><span class="p">)</span>
-</span><span id="__span-5-34"><a href="#__codelineno-5-34" id="__codelineno-5-34" name="__codelineno-5-34"></a>    <span class="p">}</span> <span class="p">|</span> <span class="nb">Select-Object</span> <span class="n">Name</span><span class="p">,</span> <span class="n">Id</span><span class="p">,</span> <span class="n">IsCustom</span><span class="p">,</span> <span class="n">Description</span><span class="p">,</span> <span class="n">Actions</span><span class="p">,</span> <span class="n">NotActions</span><span class="p">,</span> <span class="n">DataActions</span><span class="p">,</span> <span class="n">NotDataActions</span><span class="p">,</span> <span class="n">AssignableScopes</span>
-</span><span id="__span-5-35"><a href="#__codelineno-5-35" id="__codelineno-5-35" name="__codelineno-5-35"></a>
-</span><span id="__span-5-36"><a href="#__codelineno-5-36" id="__codelineno-5-36" name="__codelineno-5-36"></a>    <span class="k">return</span> <span class="nv">$customObject</span>
-</span><span id="__span-5-37"><a href="#__codelineno-5-37" id="__codelineno-5-37" name="__codelineno-5-37"></a><span class="p">}</span>
-</span><span id="__span-5-38"><a href="#__codelineno-5-38" id="__codelineno-5-38" name="__codelineno-5-38"></a>
-</span><span id="__span-5-39"><a href="#__codelineno-5-39" id="__codelineno-5-39" name="__codelineno-5-39"></a><span class="k">if</span> <span class="p">(</span><span class="nv">$OutputType</span> <span class="o">-eq</span> <span class="s1">'Console'</span><span class="p">)</span> <span class="p">{</span>
-</span><span id="__span-5-40"><a href="#__codelineno-5-40" id="__codelineno-5-40" name="__codelineno-5-40"></a>    <span class="c"># Output to console</span>
-</span><span id="__span-5-41"><a href="#__codelineno-5-41" id="__codelineno-5-41" name="__codelineno-5-41"></a>    <span class="nv">$roleDefinitions</span> <span class="p">|</span> <span class="nb">Format-Table</span> <span class="n">-AutoSize</span>
-</span><span id="__span-5-42"><a href="#__codelineno-5-42" id="__codelineno-5-42" name="__codelineno-5-42"></a><span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-</span><span id="__span-5-43"><a href="#__codelineno-5-43" id="__codelineno-5-43" name="__codelineno-5-43"></a>    <span class="c"># Export to Excel</span>
-</span><span id="__span-5-44"><a href="#__codelineno-5-44" id="__codelineno-5-44" name="__codelineno-5-44"></a>    <span class="nv">$roleDefinitions</span> <span class="p">|</span> <span class="nb">Export-Excel</span> <span class="n">-Path</span> <span class="nv">$ExcelFilePath</span> <span class="n">-WorksheetName</span> <span class="s1">'Role Definitions'</span> <span class="n">-AutoSize</span> <span class="n">-AutoFilter</span>    
-</span><span id="__span-5-45"><a href="#__codelineno-5-45" id="__codelineno-5-45" name="__codelineno-5-45"></a><span class="p">}</span>
-</span></code></pre></div>
-<p>This script takes the following parameters:</p>
-<ul>
-<li><code>OutputType</code>: A string parameter that specifies the output type. The default value is <code>'Console'</code>. You can also specify <code>'Excel'</code> to export the report to an Excel file.</li>
-<li><code>ExcelFilePath</code>: The path to the Excel file where you want to export the report. The default value is <code>".\AzRoleDefinition.xlsx"</code>.</li>
-</ul>
-<p>In the Excel report, you will see the following columns for each role definition: <code>Name</code>, <code>Id</code>, <code>IsCustom</code>, <code>Description</code>, <code>Actions</code>, <code>NotActions</code>, <code>DataActions</code>, <code>NotDataActions</code>, and <code>AssignableScopes</code>.</p>
-<h3 id="conclusion"><a class="toclink" href="../../2024/04/20/how-to-create-assigment-reports-for-azure-rbac/#conclusion">Conclusion</a></h3>
-<p>In this article, we have shown you how to create reports for role assignments and role definitions in Azure using PowerShell and the ImportExcel module. These reports can help you better understand the permissions assigned to users, groups, and applications in your Azure environment and ensure that they are configured correctly. You can customize the scripts to include additional information or export the reports in different formats to suit your needs.</p>
 </div>
 </article>
 <nav class="md-pagination">
