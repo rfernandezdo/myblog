@@ -241,6 +241,13 @@
           </label>
 <ul class="md-nav__list" data-md-scrollfix="">
 <li class="md-nav__item">
+<a class="md-nav__link" href="../../../../2024/11/">
+<span class="md-ellipsis">
+    2024/11
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
 <a class="md-nav__link" href="../../../../2024/10/">
 <span class="md-ellipsis">
     2024/10
@@ -640,6 +647,555 @@
 <header class="md-typeset">
 <h1 id="azure-services">Azure Services</h1>
 </header>
+<article class="md-post md-post--excerpt">
+<header class="md-post__header">
+<nav class="md-post__authors md-typeset">
+<span class="md-author">
+<img alt="Rafael Fernández" src="https://avatars.githubusercontent.com/u/39990341"/>
+</span>
+</nav>
+<div class="md-post__meta md-meta">
+<ul class="md-meta__list">
+<li class="md-meta__item">
+<time datetime="2024-04-07 00:00:00">April 7, 2024</time></li>
+<li class="md-meta__item">
+            in
+            
+              <a class="md-meta__link" href="../../">Azure Services</a></li>
+<li class="md-meta__item">
+            
+              4 min read
+            
+          </li>
+</ul>
+</div>
+</header>
+<div class="md-post__content md-typeset">
+<h2 id="how-to-use-azue-arc-enabled-servers-with-managed-identity-to-access-to-azure-storage-account"><a class="toclink" href="../../../../2024/04/07/how-to-use-azue-arc-enabled-servers-with-managed-identity-to-access-to-azure-storage-account/">How to use Azue ARC-enabled servers with managed identity to access to Azure Storage Account</a></h2>
+<p>In this demo we will show how to use Azure ARC-enabled servers with managed identity to access to Azure Storage Account.</p>
+<h3 id="prerequisites"><a class="toclink" href="../../../../2024/04/07/how-to-use-azue-arc-enabled-servers-with-managed-identity-to-access-to-azure-storage-account/#prerequisites">Prerequisites</a></h3>
+<ul>
+<li>An Azure subscription. If you don't have an Azure subscription, create a <a href="https://azure.microsoft.com/en-us/free/">free account</a> before you begin.</li>
+</ul>
+<h3 id="required-permissions"><a class="toclink" href="../../../../2024/04/07/how-to-use-azue-arc-enabled-servers-with-managed-identity-to-access-to-azure-storage-account/#required-permissions">Required permissions</a></h3>
+<p>You'll need the following Azure built-in roles for different aspects of managing connected machines:</p>
+<ul>
+<li>To onboard machines, you must have the <a href="https://learn.microsoft.com/en-us/azure/role-based-access-control/built-in-roles#azure-connected-machine-onboarding">Azure Connected Machine Onboarding</a> or <a href="https://learn.microsoft.com/en-us/azure/role-based-access-control/built-in-roles#contributor">Contributor</a> role for the resource group where you're managing the servers.</li>
+<li>To read, modify, and delete a machine, you must have the <a href="https://learn.microsoft.com/en-us/azure/role-based-access-control/built-in-roles#azure-connected-machine-resource-administrator">Azure Connected Machine Resource Administrator</a> role for the resource group.</li>
+<li>To select a resource group from the drop-down list when using the <strong>Generate script</strong> method, you'll also need the <a href="https://learn.microsoft.com/en-us/azure/role-based-access-control/built-in-roles#reader">Reader</a> role for that resource group (or another role that includes <strong>Reader</strong> access).</li>
+</ul>
+<h3 id="register-azure-resource-providers"><a class="toclink" href="../../../../2024/04/07/how-to-use-azue-arc-enabled-servers-with-managed-identity-to-access-to-azure-storage-account/#register-azure-resource-providers">Register Azure resource providers</a></h3>
+<p>To use Azure Arc-enabled servers with managed identity, you need to register the following resource providers:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-18-1"><a href="#__codelineno-18-1" id="__codelineno-18-1" name="__codelineno-18-1"></a>az<span class="w"> </span>account<span class="w"> </span><span class="nb">set</span><span class="w"> </span>--subscription<span class="w"> </span><span class="s2">"{Your Subscription Name}"</span>
+</span><span id="__span-18-2"><a href="#__codelineno-18-2" id="__codelineno-18-2" name="__codelineno-18-2"></a>az<span class="w"> </span>provider<span class="w"> </span>register<span class="w"> </span>--namespace<span class="w"> </span><span class="s1">'Microsoft.HybridCompute'</span>
+</span><span id="__span-18-3"><a href="#__codelineno-18-3" id="__codelineno-18-3" name="__codelineno-18-3"></a>az<span class="w"> </span>provider<span class="w"> </span>register<span class="w"> </span>--namespace<span class="w"> </span><span class="s1">'Microsoft.GuestConfiguration'</span>
+</span><span id="__span-18-4"><a href="#__codelineno-18-4" id="__codelineno-18-4" name="__codelineno-18-4"></a>az<span class="w"> </span>provider<span class="w"> </span>register<span class="w"> </span>--namespace<span class="w"> </span><span class="s1">'Microsoft.HybridConnectivity'</span>
+</span><span id="__span-18-5"><a href="#__codelineno-18-5" id="__codelineno-18-5" name="__codelineno-18-5"></a>az<span class="w"> </span>provider<span class="w"> </span>register<span class="w"> </span>--namespace<span class="w"> </span><span class="s1">'Microsoft.AzureArcData'</span>
+</span></code></pre></div>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>Microsoft.AzureArcData (if you plan to Arc-enable SQL Servers)
+Microsoft.Compute (for Azure Update Manager and automatic extension upgrades)</p>
+</div>
+<h3 id="networking-requirements"><a class="toclink" href="../../../../2024/04/07/how-to-use-azue-arc-enabled-servers-with-managed-identity-to-access-to-azure-storage-account/#networking-requirements">Networking requirements</a></h3>
+<p>The Azure Connected Machine agent for Linux and Windows communicates outbound securely to Azure Arc over TCP port 443. In this demo, we have use <a href="https://learn.microsoft.com/en-us/azure/azure-arc/servers/private-link-security#network-configuration">Azure Private Link</a>. </p>
+<h3 id="azure-arc-enabled-enabled-server"><a class="toclink" href="../../../../2024/04/07/how-to-use-azue-arc-enabled-servers-with-managed-identity-to-access-to-azure-storage-account/#azure-arc-enabled-enabled-server">Azure ARC-enabled enabled server</a></h3>
+<p>We use  <a href="https://azurearcjumpstart.io/azure_arc_jumpstart/azure_arc_servers/day2/arc_privatelink">Use Azure Private Link to securely connect networks to Azure Arc-enabled servers</a> to achieve this.</p>
+<p>Some tips:</p>
+<ul>
+<li>
+<p>If you have any issue registerin de VM: generate a script to register a machine with Azure Arc following that instructions <a href="https://learn.microsoft.com/en-us/azure/azure-arc/servers/learn/quick-enable-hybrid-vm#generate-installation-script">here</a></p>
+</li>
+<li>
+<p>If you have an error that says "Path C:\ProgramData\AzureConnectedMachineAgent\Log\himds.log is busy. Retrying..." you can use the following command to resolve it if you know that you are doing:</p>
+</li>
+</ul>
+<p><div class="language-powershell highlight"><pre><span></span><code><span id="__span-19-1"><a href="#__codelineno-19-1" id="__codelineno-19-1" name="__codelineno-19-1"></a> <span class="p">(</span><span class="nb">get-wmiobject</span> <span class="n">-class</span> <span class="n">win32_product</span> <span class="p">|</span> <span class="nb">where </span><span class="p">{</span><span class="nv">$_</span><span class="p">.</span><span class="n">name</span> <span class="o">-like</span> <span class="s2">"Azure *"</span><span class="p">}).</span><span class="n">uninstall</span><span class="p">()</span> 
+</span></code></pre></div>
+- Review /etc/hosts file and add the following entries:</p>
+<div class="language-powershell highlight"><pre><span></span><code><span id="__span-20-1"><a href="#__codelineno-20-1" id="__codelineno-20-1" name="__codelineno-20-1"></a><span class="nv">$Env:PEname</span> <span class="p">=</span> <span class="s2">"myprivatelink"</span>
+</span><span id="__span-20-2"><a href="#__codelineno-20-2" id="__codelineno-20-2" name="__codelineno-20-2"></a><span class="nv">$Env:resourceGroup</span> <span class="p">=</span> <span class="s2">"myResourceGroup"</span>
+</span><span id="__span-20-3"><a href="#__codelineno-20-3" id="__codelineno-20-3" name="__codelineno-20-3"></a><span class="nv">$file</span> <span class="p">=</span> <span class="s2">"C:\Windows\System32\drivers\etc\hosts"</span>
+</span><span id="__span-20-4"><a href="#__codelineno-20-4" id="__codelineno-20-4" name="__codelineno-20-4"></a>
+</span><span id="__span-20-5"><a href="#__codelineno-20-5" id="__codelineno-20-5" name="__codelineno-20-5"></a><span class="nv">$gisfqdn</span> <span class="p">=</span> <span class="p">(</span><span class="n">az</span> <span class="n">network</span> <span class="n">private-endpoint</span> <span class="n">dns-zone-group</span> <span class="n">list</span> <span class="p">-</span><span class="n">-endpoint-name</span> <span class="nv">$Env:PEname</span> <span class="p">-</span><span class="n">-resource-group</span> <span class="nv">$Env:resourceGroup</span> <span class="n">-o</span> <span class="n">json</span> <span class="p">-</span><span class="n">-query</span> <span class="s1">'[0].privateDnsZoneConfigs[0].recordSets[0].fqdn'</span> <span class="n">-o</span> <span class="n">json</span><span class="p">).</span><span class="n">replace</span><span class="p">(</span><span class="s1">'.privatelink'</span><span class="p">,</span><span class="s1">''</span><span class="p">).</span><span class="n">replace</span><span class="p">(</span><span class="s2">"</span><span class="se">`"</span><span class="s2">"</span><span class="p">,</span><span class="s2">""</span><span class="p">)</span>
+</span><span id="__span-20-6"><a href="#__codelineno-20-6" id="__codelineno-20-6" name="__codelineno-20-6"></a><span class="nv">$gisIP</span> <span class="p">=</span> <span class="p">(</span><span class="n">az</span> <span class="n">network</span> <span class="n">private-endpoint</span> <span class="n">dns-zone-group</span> <span class="n">list</span> <span class="p">-</span><span class="n">-endpoint-name</span> <span class="nv">$Env:PEname</span> <span class="p">-</span><span class="n">-resource-group</span> <span class="nv">$Env:resourceGroup</span> <span class="n">-o</span> <span class="n">json</span> <span class="p">-</span><span class="n">-query</span> <span class="p">[</span><span class="n">0</span><span class="p">].</span><span class="n">privateDnsZoneConfigs</span><span class="p">[</span><span class="n">0</span><span class="p">].</span><span class="n">recordSets</span><span class="p">[</span><span class="n">0</span><span class="p">].</span><span class="n">ipAddresses</span><span class="p">[</span><span class="n">0</span><span class="p">]</span> <span class="n">-o</span> <span class="n">json</span><span class="p">).</span><span class="n">replace</span><span class="p">(</span><span class="s2">"</span><span class="se">`"</span><span class="s2">"</span><span class="p">,</span><span class="s2">""</span><span class="p">)</span>
+</span><span id="__span-20-7"><a href="#__codelineno-20-7" id="__codelineno-20-7" name="__codelineno-20-7"></a><span class="nv">$hisfqdn</span> <span class="p">=</span> <span class="p">(</span><span class="n">az</span> <span class="n">network</span> <span class="n">private-endpoint</span> <span class="n">dns-zone-group</span> <span class="n">list</span> <span class="p">-</span><span class="n">-endpoint-name</span> <span class="nv">$Env:PEname</span> <span class="p">-</span><span class="n">-resource-group</span> <span class="nv">$Env:resourceGroup</span> <span class="n">-o</span> <span class="n">json</span> <span class="p">-</span><span class="n">-query</span> <span class="p">[</span><span class="n">0</span><span class="p">].</span><span class="n">privateDnsZoneConfigs</span><span class="p">[</span><span class="n">0</span><span class="p">].</span><span class="n">recordSets</span><span class="p">[</span><span class="n">1</span><span class="p">].</span><span class="n">fqdn</span> <span class="n">-o</span> <span class="n">json</span><span class="p">).</span><span class="n">replace</span><span class="p">(</span><span class="s1">'.privatelink'</span><span class="p">,</span><span class="s1">''</span><span class="p">).</span><span class="n">replace</span><span class="p">(</span><span class="s2">"</span><span class="se">`"</span><span class="s2">"</span><span class="p">,</span><span class="s2">""</span><span class="p">)</span>
+</span><span id="__span-20-8"><a href="#__codelineno-20-8" id="__codelineno-20-8" name="__codelineno-20-8"></a><span class="nv">$hisIP</span> <span class="p">=</span> <span class="p">(</span><span class="n">az</span> <span class="n">network</span> <span class="n">private-endpoint</span> <span class="n">dns-zone-group</span> <span class="n">list</span> <span class="p">-</span><span class="n">-endpoint-name</span> <span class="nv">$Env:PEname</span> <span class="p">-</span><span class="n">-resource-group</span> <span class="nv">$Env:resourceGroup</span> <span class="n">-o</span> <span class="n">json</span> <span class="p">-</span><span class="n">-query</span> <span class="p">[</span><span class="n">0</span><span class="p">].</span><span class="n">privateDnsZoneConfigs</span><span class="p">[</span><span class="n">0</span><span class="p">].</span><span class="n">recordSets</span><span class="p">[</span><span class="n">1</span><span class="p">].</span><span class="n">ipAddresses</span><span class="p">[</span><span class="n">0</span><span class="p">]</span> <span class="n">-o</span> <span class="n">json</span><span class="p">).</span><span class="n">replace</span><span class="p">(</span><span class="s1">'.privatelink'</span><span class="p">,</span><span class="s1">''</span><span class="p">).</span><span class="n">replace</span><span class="p">(</span><span class="s2">"</span><span class="se">`"</span><span class="s2">"</span><span class="p">,</span><span class="s2">""</span><span class="p">)</span>
+</span><span id="__span-20-9"><a href="#__codelineno-20-9" id="__codelineno-20-9" name="__codelineno-20-9"></a><span class="nv">$agentfqdn</span> <span class="p">=</span> <span class="p">(</span><span class="n">az</span> <span class="n">network</span> <span class="n">private-endpoint</span> <span class="n">dns-zone-group</span> <span class="n">list</span> <span class="p">-</span><span class="n">-endpoint-name</span> <span class="nv">$Env:PEname</span> <span class="p">-</span><span class="n">-resource-group</span> <span class="nv">$Env:resourceGroup</span> <span class="n">-o</span> <span class="n">json</span> <span class="p">-</span><span class="n">-query</span> <span class="p">[</span><span class="n">0</span><span class="p">].</span><span class="n">privateDnsZoneConfigs</span><span class="p">[</span><span class="n">1</span><span class="p">].</span><span class="n">recordSets</span><span class="p">[</span><span class="n">0</span><span class="p">].</span><span class="n">fqdn</span> <span class="n">-o</span> <span class="n">json</span><span class="p">).</span><span class="n">replace</span><span class="p">(</span><span class="s1">'.privatelink'</span><span class="p">,</span><span class="s1">''</span><span class="p">).</span><span class="n">replace</span><span class="p">(</span><span class="s2">"</span><span class="se">`"</span><span class="s2">"</span><span class="p">,</span><span class="s2">""</span><span class="p">)</span>
+</span><span id="__span-20-10"><a href="#__codelineno-20-10" id="__codelineno-20-10" name="__codelineno-20-10"></a><span class="nv">$agentIp</span> <span class="p">=</span> <span class="p">(</span><span class="n">az</span> <span class="n">network</span> <span class="n">private-endpoint</span> <span class="n">dns-zone-group</span> <span class="n">list</span> <span class="p">-</span><span class="n">-endpoint-name</span> <span class="nv">$Env:PEname</span> <span class="p">-</span><span class="n">-resource-group</span> <span class="nv">$Env:resourceGroup</span> <span class="n">-o</span> <span class="n">json</span> <span class="p">-</span><span class="n">-query</span> <span class="p">[</span><span class="n">0</span><span class="p">].</span><span class="n">privateDnsZoneConfigs</span><span class="p">[</span><span class="n">1</span><span class="p">].</span><span class="n">recordSets</span><span class="p">[</span><span class="n">0</span><span class="p">].</span><span class="n">ipAddresses</span><span class="p">[</span><span class="n">0</span><span class="p">]</span> <span class="n">-o</span> <span class="n">json</span><span class="p">).</span><span class="n">replace</span><span class="p">(</span><span class="s1">'.privatelink'</span><span class="p">,</span><span class="s1">''</span><span class="p">).</span><span class="n">replace</span><span class="p">(</span><span class="s2">"</span><span class="se">`"</span><span class="s2">"</span><span class="p">,</span><span class="s2">""</span><span class="p">)</span>
+</span><span id="__span-20-11"><a href="#__codelineno-20-11" id="__codelineno-20-11" name="__codelineno-20-11"></a><span class="nv">$gasfqdn</span> <span class="p">=</span> <span class="p">(</span><span class="n">az</span> <span class="n">network</span> <span class="n">private-endpoint</span> <span class="n">dns-zone-group</span> <span class="n">list</span> <span class="p">-</span><span class="n">-endpoint-name</span> <span class="nv">$Env:PEname</span> <span class="p">-</span><span class="n">-resource-group</span> <span class="nv">$Env:resourceGroup</span> <span class="n">-o</span> <span class="n">json</span> <span class="p">-</span><span class="n">-query</span> <span class="p">[</span><span class="n">0</span><span class="p">].</span><span class="n">privateDnsZoneConfigs</span><span class="p">[</span><span class="n">1</span><span class="p">].</span><span class="n">recordSets</span><span class="p">[</span><span class="n">1</span><span class="p">].</span><span class="n">fqdn</span> <span class="n">-o</span> <span class="n">json</span><span class="p">).</span><span class="n">replace</span><span class="p">(</span><span class="s1">'.privatelink'</span><span class="p">,</span><span class="s1">''</span><span class="p">).</span><span class="n">replace</span><span class="p">(</span><span class="s2">"</span><span class="se">`"</span><span class="s2">"</span><span class="p">,</span><span class="s2">""</span><span class="p">)</span>
+</span><span id="__span-20-12"><a href="#__codelineno-20-12" id="__codelineno-20-12" name="__codelineno-20-12"></a><span class="nv">$gasIp</span> <span class="p">=</span> <span class="p">(</span><span class="n">az</span> <span class="n">network</span> <span class="n">private-endpoint</span> <span class="n">dns-zone-group</span> <span class="n">list</span> <span class="p">-</span><span class="n">-endpoint-name</span> <span class="nv">$Env:PEname</span> <span class="p">-</span><span class="n">-resource-group</span> <span class="nv">$Env:resourceGroup</span> <span class="n">-o</span> <span class="n">json</span> <span class="p">-</span><span class="n">-query</span> <span class="p">[</span><span class="n">0</span><span class="p">].</span><span class="n">privateDnsZoneConfigs</span><span class="p">[</span><span class="n">1</span><span class="p">].</span><span class="n">recordSets</span><span class="p">[</span><span class="n">1</span><span class="p">].</span><span class="n">ipAddresses</span><span class="p">[</span><span class="n">0</span><span class="p">]</span> <span class="n">-o</span> <span class="n">json</span><span class="p">).</span><span class="n">replace</span><span class="p">(</span><span class="s1">'.privatelink'</span><span class="p">,</span><span class="s1">''</span><span class="p">).</span><span class="n">replace</span><span class="p">(</span><span class="s2">"</span><span class="se">`"</span><span class="s2">"</span><span class="p">,</span><span class="s2">""</span><span class="p">)</span>
+</span><span id="__span-20-13"><a href="#__codelineno-20-13" id="__codelineno-20-13" name="__codelineno-20-13"></a><span class="nv">$dpfqdn</span> <span class="p">=</span> <span class="p">(</span><span class="n">az</span> <span class="n">network</span> <span class="n">private-endpoint</span> <span class="n">dns-zone-group</span> <span class="n">list</span> <span class="p">-</span><span class="n">-endpoint-name</span> <span class="nv">$Env:PEname</span> <span class="p">-</span><span class="n">-resource-group</span> <span class="nv">$Env:resourceGroup</span> <span class="n">-o</span> <span class="n">json</span> <span class="p">-</span><span class="n">-query</span> <span class="p">[</span><span class="n">0</span><span class="p">].</span><span class="n">privateDnsZoneConfigs</span><span class="p">[</span><span class="n">2</span><span class="p">].</span><span class="n">recordSets</span><span class="p">[</span><span class="n">0</span><span class="p">].</span><span class="n">fqdn</span> <span class="n">-o</span> <span class="n">json</span><span class="p">).</span><span class="n">replace</span><span class="p">(</span><span class="s1">'.privatelink'</span><span class="p">,</span><span class="s1">''</span><span class="p">).</span><span class="n">replace</span><span class="p">(</span><span class="s2">"</span><span class="se">`"</span><span class="s2">"</span><span class="p">,</span><span class="s2">""</span><span class="p">)</span>
+</span><span id="__span-20-14"><a href="#__codelineno-20-14" id="__codelineno-20-14" name="__codelineno-20-14"></a><span class="nv">$dpIp</span> <span class="p">=</span> <span class="p">(</span><span class="n">az</span> <span class="n">network</span> <span class="n">private-endpoint</span> <span class="n">dns-zone-group</span> <span class="n">list</span> <span class="p">-</span><span class="n">-endpoint-name</span> <span class="nv">$Env:PEname</span> <span class="p">-</span><span class="n">-resource-group</span> <span class="nv">$Env:resourceGroup</span> <span class="n">-o</span> <span class="n">json</span> <span class="p">-</span><span class="n">-query</span> <span class="p">[</span><span class="n">0</span><span class="p">].</span><span class="n">privateDnsZoneConfigs</span><span class="p">[</span><span class="n">2</span><span class="p">].</span><span class="n">recordSets</span><span class="p">[</span><span class="n">0</span><span class="p">].</span><span class="n">ipAddresses</span><span class="p">[</span><span class="n">0</span><span class="p">]</span> <span class="n">-o</span> <span class="n">json</span><span class="p">).</span><span class="n">replace</span><span class="p">(</span><span class="s1">'.privatelink'</span><span class="p">,</span><span class="s1">''</span><span class="p">).</span><span class="n">replace</span><span class="p">(</span><span class="s2">"</span><span class="se">`"</span><span class="s2">"</span><span class="p">,</span><span class="s2">""</span><span class="p">)</span>
+</span><span id="__span-20-15"><a href="#__codelineno-20-15" id="__codelineno-20-15" name="__codelineno-20-15"></a>
+</span><span id="__span-20-16"><a href="#__codelineno-20-16" id="__codelineno-20-16" name="__codelineno-20-16"></a><span class="nv">$hostfile</span> <span class="p">+=</span> <span class="s2">"$gisIP $gisfqdn"</span>
+</span><span id="__span-20-17"><a href="#__codelineno-20-17" id="__codelineno-20-17" name="__codelineno-20-17"></a><span class="nv">$hostfile</span> <span class="p">+=</span> <span class="s2">"$hisIP $hisfqdn"</span>
+</span><span id="__span-20-18"><a href="#__codelineno-20-18" id="__codelineno-20-18" name="__codelineno-20-18"></a><span class="nv">$hostfile</span> <span class="p">+=</span> <span class="s2">"$agentIP $agentfqdn"</span>
+</span><span id="__span-20-19"><a href="#__codelineno-20-19" id="__codelineno-20-19" name="__codelineno-20-19"></a><span class="nv">$hostfile</span> <span class="p">+=</span> <span class="s2">"$gasIP $gasfqdn"</span>
+</span><span id="__span-20-20"><a href="#__codelineno-20-20" id="__codelineno-20-20" name="__codelineno-20-20"></a><span class="nv">$hostfile</span> <span class="p">+=</span> <span class="s2">"$dpIP $dpfqdn"</span>
+</span></code></pre></div>
+<h3 id="storage-account-configuration"><a class="toclink" href="../../../../2024/04/07/how-to-use-azue-arc-enabled-servers-with-managed-identity-to-access-to-azure-storage-account/#storage-account-configuration">Storage Account configuration</a></h3>
+<h4 id="create-a-storage-account-with-static-website-enabled"><a class="toclink" href="../../../../2024/04/07/how-to-use-azue-arc-enabled-servers-with-managed-identity-to-access-to-azure-storage-account/#create-a-storage-account-with-static-website-enabled">Create a Storage Account with static website enabled</a></h4>
+<div class="language-powershell highlight"><pre><span></span><code><span id="__span-21-1"><a href="#__codelineno-21-1" id="__codelineno-21-1" name="__codelineno-21-1"></a><span class="nv">$resourceGroup</span> <span class="p">=</span> <span class="s2">"myResourceGroup"</span>
+</span><span id="__span-21-2"><a href="#__codelineno-21-2" id="__codelineno-21-2" name="__codelineno-21-2"></a><span class="nv">$location</span> <span class="p">=</span> <span class="s2">"eastus"</span>
+</span><span id="__span-21-3"><a href="#__codelineno-21-3" id="__codelineno-21-3" name="__codelineno-21-3"></a><span class="nv">$storageAccount</span> <span class="p">=</span> <span class="s2">"mystorageaccount"</span>
+</span><span id="__span-21-4"><a href="#__codelineno-21-4" id="__codelineno-21-4" name="__codelineno-21-4"></a><span class="nv">$indexDocument</span> <span class="p">=</span> <span class="s2">"index.html"</span>
+</span><span id="__span-21-5"><a href="#__codelineno-21-5" id="__codelineno-21-5" name="__codelineno-21-5"></a><span class="n">az</span> <span class="nb">group </span><span class="n">create</span> <span class="p">-</span><span class="n">-name</span> <span class="nv">$resourceGroup</span> <span class="p">-</span><span class="n">-location</span> <span class="nv">$location</span>
+</span><span id="__span-21-6"><a href="#__codelineno-21-6" id="__codelineno-21-6" name="__codelineno-21-6"></a><span class="n">az</span> <span class="n">storage</span> <span class="n">account</span> <span class="n">create</span> <span class="p">-</span><span class="n">-name</span> <span class="nv">$storageAccount</span> <span class="p">-</span><span class="n">-resource-group</span> <span class="nv">$resourceGroup</span> <span class="p">-</span><span class="n">-location</span> <span class="nv">$location</span> <span class="p">-</span><span class="n">-sku</span> <span class="n">Standard_LRS</span>
+</span><span id="__span-21-7"><a href="#__codelineno-21-7" id="__codelineno-21-7" name="__codelineno-21-7"></a><span class="n">az</span> <span class="n">storage</span> <span class="n">blob</span> <span class="n">service-properties</span> <span class="n">update</span> <span class="p">-</span><span class="n">-account-name</span> <span class="nv">$storageAccount</span> <span class="p">-</span><span class="n">-static-website</span> <span class="p">-</span><span class="n">-index-document</span> <span class="nv">$indexDocument</span>
+</span></code></pre></div>
+<h4 id="add-private-endpoints-to-the-storage-accoun-for-blob-and-static-website"><a class="toclink" href="../../../../2024/04/07/how-to-use-azue-arc-enabled-servers-with-managed-identity-to-access-to-azure-storage-account/#add-private-endpoints-to-the-storage-accoun-for-blob-and-static-website">Add private endpoints to the storage accoun for blob and static website</a></h4>
+<div class="language-powershell highlight"><pre><span></span><code><span id="__span-22-1"><a href="#__codelineno-22-1" id="__codelineno-22-1" name="__codelineno-22-1"></a><span class="nv">$resourceGroup</span> <span class="p">=</span> <span class="s2">"myResourceGroup"</span>
+</span><span id="__span-22-2"><a href="#__codelineno-22-2" id="__codelineno-22-2" name="__codelineno-22-2"></a><span class="nv">$storageAccount</span> <span class="p">=</span> <span class="s2">"mystorageaccount"</span>
+</span><span id="__span-22-3"><a href="#__codelineno-22-3" id="__codelineno-22-3" name="__codelineno-22-3"></a><span class="nv">$privateEndpointName</span> <span class="p">=</span> <span class="s2">"myprivatelink"</span>
+</span><span id="__span-22-4"><a href="#__codelineno-22-4" id="__codelineno-22-4" name="__codelineno-22-4"></a><span class="nv">$location</span> <span class="p">=</span> <span class="s2">"eastus"</span>
+</span><span id="__span-22-5"><a href="#__codelineno-22-5" id="__codelineno-22-5" name="__codelineno-22-5"></a><span class="nv">$vnetName</span> <span class="p">=</span> <span class="s2">"myVnet"</span>
+</span><span id="__span-22-6"><a href="#__codelineno-22-6" id="__codelineno-22-6" name="__codelineno-22-6"></a><span class="nv">$subnetName</span> <span class="p">=</span> <span class="s2">"mySubnet"</span>
+</span><span id="__span-22-7"><a href="#__codelineno-22-7" id="__codelineno-22-7" name="__codelineno-22-7"></a><span class="nv">$subscriptionId</span> <span class="p">=</span> <span class="s2">"{subscription-id}"</span>
+</span><span id="__span-22-8"><a href="#__codelineno-22-8" id="__codelineno-22-8" name="__codelineno-22-8"></a><span class="n">az</span> <span class="n">network</span> <span class="n">private-endpoint</span> <span class="n">create</span> <span class="p">-</span><span class="n">-name</span> <span class="nv">$privateEndpointName</span> <span class="p">-</span><span class="n">-resource-group</span> <span class="nv">$resourceGroup</span> <span class="p">-</span><span class="n">-vnet-name</span> <span class="nv">$vnetName</span> <span class="p">-</span><span class="n">-subnet</span> <span class="nv">$subnetName</span> <span class="p">-</span><span class="n">-private-connection-resource-id</span> <span class="s2">"/subscriptions/$subscriptionId/resourceGroups/$resourceGroup/providers/Microsoft.Storage/storageAccounts/$storageAccount"</span> <span class="p">-</span><span class="n">-group-id</span> <span class="n">blob</span> <span class="p">-</span><span class="n">-connection-name</span> <span class="nv">$privateEndpointName</span> <span class="p">-</span><span class="n">-location</span> <span class="nv">$location</span>
+</span><span id="__span-22-9"><a href="#__codelineno-22-9" id="__codelineno-22-9" name="__codelineno-22-9"></a><span class="n">az</span> <span class="n">network</span> <span class="n">private-endpoint</span> <span class="n">create</span> <span class="p">-</span><span class="n">-name</span> <span class="nv">$privateEndpointName</span> <span class="p">-</span><span class="n">-resource-group</span> <span class="nv">$resourceGroup</span> <span class="p">-</span><span class="n">-vnet-name</span> <span class="nv">$vnetName</span> <span class="p">-</span><span class="n">-subnet</span> <span class="nv">$subnetName</span> <span class="p">-</span><span class="n">-private-connection-resource-id</span> <span class="s2">"/subscriptions/$subscriptionId/resourceGroups/$resourceGroup/providers/Microsoft.Storage/storageAccounts/$storageAccount"</span> <span class="p">-</span><span class="n">-group-id</span> <span class="n">web</span> <span class="p">-</span><span class="n">-connection-name</span> <span class="nv">$privateEndpointName</span> <span class="p">-</span><span class="n">-location</span> <span class="nv">$location</span>
+</span></code></pre></div>
+<h4 id="disable-public-access-to-the-storage-account-except-for-your-ip"><a class="toclink" href="../../../../2024/04/07/how-to-use-azue-arc-enabled-servers-with-managed-identity-to-access-to-azure-storage-account/#disable-public-access-to-the-storage-account-except-for-your-ip">Disable public access to the storage account except for your ip</a></h4>
+<div class="language-powershell highlight"><pre><span></span><code><span id="__span-23-1"><a href="#__codelineno-23-1" id="__codelineno-23-1" name="__codelineno-23-1"></a><span class="nv">$resourceGroup</span> <span class="p">=</span> <span class="s2">"myResourceGroup"</span>
+</span><span id="__span-23-2"><a href="#__codelineno-23-2" id="__codelineno-23-2" name="__codelineno-23-2"></a><span class="nv">$storageAccount</span> <span class="p">=</span> <span class="s2">"mystorageaccount"</span>
+</span><span id="__span-23-3"><a href="#__codelineno-23-3" id="__codelineno-23-3" name="__codelineno-23-3"></a><span class="nv">$ipAddress</span> <span class="p">=</span> <span class="s2">"myIpAddress"</span>
+</span><span id="__span-23-4"><a href="#__codelineno-23-4" id="__codelineno-23-4" name="__codelineno-23-4"></a><span class="n">az</span> <span class="n">storage</span> <span class="n">account</span> <span class="n">update</span> <span class="p">-</span><span class="n">-name</span> <span class="nv">$storageAccount</span> <span class="p">-</span><span class="n">-resource-group</span> <span class="nv">$resourceGroup</span> <span class="p">-</span><span class="n">-bypass</span> <span class="s2">"AzureServices,Logging,Metrics"</span> <span class="p">-</span><span class="n">-default-action</span> <span class="n">Deny</span>
+</span><span id="__span-23-5"><a href="#__codelineno-23-5" id="__codelineno-23-5" name="__codelineno-23-5"></a><span class="n">az</span> <span class="n">storage</span> <span class="n">account</span> <span class="n">network-rule</span> <span class="n">add</span> <span class="p">-</span><span class="n">-account-name</span> <span class="nv">$storageAccount</span> <span class="p">-</span><span class="n">-resource-group</span> <span class="nv">$resourceGroup</span> <span class="p">-</span><span class="n">-ip-address</span> <span class="nv">$ipAddress</span>
+</span></code></pre></div>
+<h4 id="assign-the-storage-blob-data-contributor-role-to-the-managed-identity-of-the-azure-arc-enabled-server"><a class="toclink" href="../../../../2024/04/07/how-to-use-azue-arc-enabled-servers-with-managed-identity-to-access-to-azure-storage-account/#assign-the-storage-blob-data-contributor-role-to-the-managed-identity-of-the-azure-arc-enabled-server">Assign the Storage Blob Data Contributor role to the managed identity of the Azure ARC-enabled server</a></h4>
+<div class="language-powershell highlight"><pre><span></span><code><span id="__span-24-1"><a href="#__codelineno-24-1" id="__codelineno-24-1" name="__codelineno-24-1"></a><span class="nv">$resourceGroup</span> <span class="p">=</span> <span class="s2">"myResourceGroup"</span>
+</span><span id="__span-24-2"><a href="#__codelineno-24-2" id="__codelineno-24-2" name="__codelineno-24-2"></a><span class="nv">$storageAccount</span> <span class="p">=</span> <span class="s2">"mystorageaccount"</span>
+</span><span id="__span-24-3"><a href="#__codelineno-24-3" id="__codelineno-24-3" name="__codelineno-24-3"></a><span class="nv">$serverName</span> <span class="p">=</span> <span class="s2">"myserver"</span>
+</span><span id="__span-24-4"><a href="#__codelineno-24-4" id="__codelineno-24-4" name="__codelineno-24-4"></a><span class="nv">$managedIdentity</span> <span class="p">=</span> <span class="n">az</span> <span class="n">resource</span> <span class="n">show</span> <span class="p">-</span><span class="n">-resource-group</span> <span class="nv">$resourceGroup</span> <span class="p">-</span><span class="n">-name</span> <span class="nv">$serverName</span> <span class="p">-</span><span class="n">-resource-type</span> <span class="s2">"Microsoft.HybridCompute/machines"</span> <span class="p">-</span><span class="n">-query</span> <span class="s2">"identity.principalId"</span> <span class="p">-</span><span class="n">-output</span> <span class="n">tsv</span>
+</span><span id="__span-24-5"><a href="#__codelineno-24-5" id="__codelineno-24-5" name="__codelineno-24-5"></a><span class="n">az</span> <span class="n">role</span> <span class="n">assignment</span> <span class="n">create</span> <span class="p">-</span><span class="n">-role</span> <span class="s2">"Storage Blob Data Contributor"</span> <span class="p">-</span><span class="n">-assignee-object-id</span> <span class="nv">$managedIdentity</span> <span class="p">-</span><span class="n">-scope</span> <span class="s2">"/subscriptions/{subscription-id}/resourceGroups/$resourceGroup/providers/Microsoft.Storage/storageAccounts/$storageAccount"</span>
+</span></code></pre></div>
+<h3 id="download-azcopy-install-it-and-copy-something-to-web-in-the-storage-account"><a class="toclink" href="../../../../2024/04/07/how-to-use-azue-arc-enabled-servers-with-managed-identity-to-access-to-azure-storage-account/#download-azcopy-install-it-and-copy-something-to-web-in-the-storage-account">Download azcopy,  install it and copy something to $web in the storage account</a></h3>
+<h4 id="download-azcopy-in-the-vm"><a class="toclink" href="../../../../2024/04/07/how-to-use-azue-arc-enabled-servers-with-managed-identity-to-access-to-azure-storage-account/#download-azcopy-in-the-vm">Download azcopy in the vm</a></h4>
+<div class="language-powershell highlight"><pre><span></span><code><span id="__span-25-1"><a href="#__codelineno-25-1" id="__codelineno-25-1" name="__codelineno-25-1"></a><span class="nb">Invoke-WebRequest</span> <span class="n">-Uri</span> <span class="s2">"https://aka.ms/downloadazcopy-v10-windows"</span> <span class="n">-OutFile</span> <span class="n">AzCopy</span><span class="p">.</span><span class="n">zip</span>
+</span><span id="__span-25-2"><a href="#__codelineno-25-2" id="__codelineno-25-2" name="__codelineno-25-2"></a>
+</span><span id="__span-25-3"><a href="#__codelineno-25-3" id="__codelineno-25-3" name="__codelineno-25-3"></a><span class="nb">Expand-Archive</span> <span class="n">AzCopy</span><span class="p">.</span><span class="n">zip</span> <span class="n">-DestinationPath</span> <span class="nv">$env:ProgramFiles</span>
+</span><span id="__span-25-4"><a href="#__codelineno-25-4" id="__codelineno-25-4" name="__codelineno-25-4"></a>
+</span><span id="__span-25-5"><a href="#__codelineno-25-5" id="__codelineno-25-5" name="__codelineno-25-5"></a><span class="nv">$env:Path</span> <span class="p">+=</span> <span class="s2">";$env:ProgramFiles\azcopy"</span>
+</span></code></pre></div>
+<h4 id="copy-something-to-web-in-the-storage-account"><a class="toclink" href="../../../../2024/04/07/how-to-use-azue-arc-enabled-servers-with-managed-identity-to-access-to-azure-storage-account/#copy-something-to-web-in-the-storage-account">Copy something to $web in the storage account</a></h4>
+<div class="language-powershell highlight"><pre><span></span><code><span id="__span-26-1"><a href="#__codelineno-26-1" id="__codelineno-26-1" name="__codelineno-26-1"></a><span class="nv">$storageAccount</span> <span class="p">=</span> <span class="s2">"mystorageaccount"</span>
+</span><span id="__span-26-2"><a href="#__codelineno-26-2" id="__codelineno-26-2" name="__codelineno-26-2"></a><span class="nv">$source</span> <span class="p">=</span> <span class="s2">"C:\Users\Public\Documents\myFile.txt"</span>
+</span><span id="__span-26-3"><a href="#__codelineno-26-3" id="__codelineno-26-3" name="__codelineno-26-3"></a><span class="nv">$destination</span> <span class="p">=</span> <span class="s2">"https://$storageAccount.blob.core.windows.net/\$web/myFile.txt"</span>
+</span><span id="__span-26-4"><a href="#__codelineno-26-4" id="__codelineno-26-4" name="__codelineno-26-4"></a><span class="n">azcopy</span> <span class="n">login</span> <span class="p">-</span><span class="n">-identity</span>
+</span><span id="__span-26-5"><a href="#__codelineno-26-5" id="__codelineno-26-5" name="__codelineno-26-5"></a><span class="n">azcopy</span> <span class="nb">copy </span><span class="nv">$source</span> <span class="nv">$destination</span>
+</span></code></pre></div>
+<p>Now you can check the file in the static website of the storage account.</p>
+</div>
+</article>
+<article class="md-post md-post--excerpt">
+<header class="md-post__header">
+<nav class="md-post__authors md-typeset">
+<span class="md-author">
+<img alt="Rafael Fernández" src="https://avatars.githubusercontent.com/u/39990341"/>
+</span>
+</nav>
+<div class="md-post__meta md-meta">
+<ul class="md-meta__list">
+<li class="md-meta__item">
+<time datetime="2024-04-06 00:00:00">April 6, 2024</time></li>
+<li class="md-meta__item">
+            in
+            
+              <a class="md-meta__link" href="../../">Azure Services</a></li>
+<li class="md-meta__item">
+            
+              4 min read
+            
+          </li>
+</ul>
+</div>
+</header>
+<div class="md-post__content md-typeset">
+<h2 id="azure-arc"><a class="toclink" href="../../../../2024/04/06/azure-arc/">Azure ARC</a></h2>
+<p>Azure ARC is a service that extends Azure management capabilities to any infrastructure. It allows you to manage resources running on-premises, at the edge, or in multi-cloud environments using the same Azure management tools, security, and compliance policies that you use in Azure. Azure ARC enables you to manage and govern your resources consistently across all environments, providing a unified control plane for your hybrid cloud infrastructure. Let's explore how Azure ARC works and how you can leverage it to manage your resources effectively.</p>
+<h3 id="azure-arc-overview"><a class="toclink" href="../../../../2024/04/06/azure-arc/#azure-arc-overview">Azure ARC Overview</a></h3>
+<p><strong>Azure ARC</strong> is a service that extends Azure management capabilities to any infrastructure. It allows you to manage resources running outside of Azure using the same Azure management tools, security, and compliance policies that you use in Azure. Azure ARC provides a unified control plane for managing resources across on-premises, multi-cloud, and edge environments, enabling you to govern your resources consistently.</p>
+<p>Azure ARC enables you to:</p>
+<ul>
+<li><strong>Manage resources</strong>: Azure ARC allows you to manage resources running on-premises, at the edge, or in multi-cloud environments using Azure management tools like Azure Policy, Azure Monitor, and Microsoft Defender for Cloud.</li>
+<li><strong>Governance</strong>: Azure ARC provides a unified control plane for managing and governing resources across all environments, enabling you to enforce security and compliance policies consistently.</li>
+<li><strong>Security</strong>: Azure ARC extends Azure security capabilities to resources running outside of Azure, enabling you to protect your resources with Azure security features like Azure Security Center and Azure Defender.</li>
+<li><strong>Compliance</strong>: Azure ARC enables you to enforce compliance policies across all environments, ensuring that your resources meet regulatory requirements and organizational standards.</li>
+</ul>
+<h3 id="azure-arc-components"><a class="toclink" href="../../../../2024/04/06/azure-arc/#azure-arc-components">Azure ARC Components</a></h3>
+<p>Azure ARC consists of the following components:</p>
+<ul>
+<li><strong>Azure ARC-enabled servers</strong>: Azure ARC-enabled servers allow you to manage and govern servers running on-premises or at the edge using Azure management tools. You can connect your servers to Azure ARC to manage them using Azure Policy, Azure Monitor, and Microsoft Defender for Cloud.</li>
+<li><strong>Azure ARC-enabled Kubernetes clusters</strong>: Azure ARC-enabled Kubernetes clusters allow you to manage and govern Kubernetes clusters running on-premises or in other clouds using Azure management tools. You can connect your Kubernetes clusters to Azure ARC to manage them using Azure Policy, Azure Monitor, and Microsoft Defender for Cloud.</li>
+<li><strong>Azure ARC-enabled data services</strong>: Azure ARC-enabled data services allow you to manage and govern data services running on-premises or in other clouds using Azure management tools. You can connect your data services to Azure ARC to manage them using Azure Policy, Azure Monitor, and Microsoft Defender for Cloud.</li>
+<li><strong>SQL Server enabled by Azure Arc</strong>: SQL Server enabled by Azure Arc allows you to run SQL Server on any infrastructure using Azure management tools. You can connect your SQL Server instances to Azure ARC to manage them using Azure Policy, Azure Monitor, and Microsoft Defender for Cloud.</li>
+<li><strong>Azure Arc-enabled private clouds</strong>: Azure Arc resource bridge hosts other components such as custom locations, cluster extensions, and other Azure Arc agents in order to deliver the level of functionality with the private cloud infrastructures it supports.</li>
+</ul>
+<h3 id="azure-arc-use-cases"><a class="toclink" href="../../../../2024/04/06/azure-arc/#azure-arc-use-cases">Azure ARC Use Cases</a></h3>
+<p>Azure ARC can be used in a variety of scenarios to manage and govern resources across on-premises, multi-cloud, and edge environments. Some common use cases for Azure ARC include:</p>
+<ul>
+<li><strong>Hybrid cloud management</strong>: Azure ARC enables you to manage resources consistently across on-premises, multi-cloud, and edge environments using the same Azure management tools and policies.</li>
+<li><strong>Security and compliance</strong>: Azure ARC allows you to enforce security and compliance policies consistently across all environments, ensuring that your resources meet regulatory requirements and organizational standards.</li>
+<li><strong>Resource governance</strong>: Azure ARC provides a unified control plane for managing and governing resources across all environments, enabling you to enforce policies and monitor resource health and performance.</li>
+<li><strong>Application modernization</strong>: Azure ARC enables you to manage and govern Kubernetes clusters and data services running on-premises or in other clouds, allowing you to modernize your applications and infrastructure.</li>
+</ul>
+<h3 id="getting-started-with-azure-arc"><a class="toclink" href="../../../../2024/04/06/azure-arc/#getting-started-with-azure-arc">Getting Started with Azure ARC</a></h3>
+<p>To get started with Azure ARC, you need to:</p>
+<ol>
+<li><strong>Connect your resources</strong>: Connect your servers, Kubernetes clusters, or data services to Azure ARC using the Azure ARC agent.</li>
+<li><strong>Manage your resources</strong>: Use Azure management tools like Azure Policy, Azure Monitor, and Microsoft Defender for Cloud to manage and govern your resources consistently across all environments.</li>
+<li><strong>Enforce security and compliance</strong>: Use Azure security features like Microsoft Defender for Cloud to protect your resources and enforce security and compliance policies.</li>
+</ol>
+<p>By leveraging Azure ARC, you can manage and govern your resources consistently across on-premises, multi-cloud, and edge environments, providing a unified control plane for your hybrid cloud infrastructure. Azure ARC enables you to enforce security and compliance policies consistently, ensuring that your resources meet regulatory requirements and organizational standards. </p>
+<h3 id="conclusion"><a class="toclink" href="../../../../2024/04/06/azure-arc/#conclusion">Conclusion</a></h3>
+<p>Azure ARC is a powerful service that extends Azure management capabilities to any infrastructure, enabling you to manage and govern resources consistently across on-premises, multi-cloud, and edge environments. By leveraging Azure ARC, you can enforce security and compliance policies consistently, ensuring that your resources meet regulatory requirements and organizational standards. Azure ARC provides a unified control plane for managing and governing resources, enabling you to manage your hybrid cloud infrastructure effectively.</p>
+<p>For more information on Azure ARC, visit the <a href="https://docs.microsoft.com/en-us/azure/azure-arc/">Azure ARC documentation</a>.</p>
+</div>
+</article>
+<article class="md-post md-post--excerpt">
+<header class="md-post__header">
+<nav class="md-post__authors md-typeset">
+<span class="md-author">
+<img alt="Rafael Fernández" src="https://avatars.githubusercontent.com/u/39990341"/>
+</span>
+</nav>
+<div class="md-post__meta md-meta">
+<ul class="md-meta__list">
+<li class="md-meta__item">
+<time datetime="2024-03-02 00:00:00">March 2, 2024</time></li>
+<li class="md-meta__item">
+            in
+            
+              <a class="md-meta__link" href="../../">Azure Services</a></li>
+<li class="md-meta__item">
+            
+              2 min read
+            
+          </li>
+</ul>
+</div>
+</header>
+<div class="md-post__content md-typeset">
+<h2 id="azure-policy-management-best-practices"><a class="toclink" href="../../../../2024/03/02/azure-policy-management-best-practices/">Azure Policy Management Best Practices</a></h2>
+<ol>
+<li>
+<p><strong>Version Control</strong>: Store your policy definitions in a version-controlled repository. This practice ensures that you can track changes, collaborate effectively, and roll back to previous versions if needed.</p>
+</li>
+<li>
+<p><strong>Automated Testing</strong>: Incorporate policy testing into your CI/CD pipelines. Automated tests can help you catch policy violations early in the development process, reducing the risk of non-compliance.</p>
+</li>
+<li>
+<p><strong>Policy Documentation</strong>: Document your policies clearly, including their purpose, scope, and expected behavior. This documentation helps stakeholders understand the policies and their impact on Azure resources.</p>
+</li>
+<li>
+<p><strong>Policy Assignment</strong>: Assign policies at the appropriate scope (e.g., Management Group, Subscription, Resource Group) based on your organizational requirements. Avoid assigning policies at a broader scope than necessary to prevent unintended consequences.</p>
+</li>
+<li>
+<p><strong>Policy Exemptions</strong>: Use policy exemptions judiciously. Document the reasons for exemptions and periodically review them to ensure they are still valid.</p>
+</li>
+<li>
+<p><strong>Policy Enforcement</strong>: Monitor policy compliance regularly and take corrective action for non-compliant resources. Use Azure Policy's built-in compliance reports and alerts to track policy violations.</p>
+</li>
+<li>
+<p><strong>Policy Remediation</strong>: Implement automated remediation tasks for policy violations where possible. Azure Policy's remediation tasks can help bring non-compliant resources back into compliance automatically.</p>
+</li>
+<li>
+<p><strong>Policy Monitoring</strong>: Continuously monitor policy effectiveness and adjust policies as needed. Regularly review policy violations, exemptions, and compliance trends to refine your policy implementation.</p>
+</li>
+<li>
+<p><strong>Policy Governance</strong>: Establish a governance framework for Azure Policy that includes policy creation, assignment, monitoring, and enforcement processes. Define roles and responsibilities for policy management to ensure accountability.</p>
+</li>
+<li>
+<p><strong>Policy Lifecycle Management</strong>: Define a policy lifecycle management process that covers policy creation, testing, deployment, monitoring, and retirement. Regularly review and update policies to align with changing organizational requirements.</p>
+</li>
+<li>
+<p><strong>Unique source of truth</strong>: Use EPAC, terraform, ARM,.... but use an unique source of truth for your policies.</p>
+</li>
+</ol>
+<p>By following these best practices, you can effectively manage Azure policies and ensure compliance with organizational standards across your Azure environment. Azure Policy plays a crucial role in maintaining governance, security, and compliance, and adopting these practices can help you maximize its benefits.</p>
+</div>
+</article>
+<article class="md-post md-post--excerpt">
+<header class="md-post__header">
+<nav class="md-post__authors md-typeset">
+<span class="md-author">
+<img alt="Rafael Fernández" src="https://avatars.githubusercontent.com/u/39990341"/>
+</span>
+</nav>
+<div class="md-post__meta md-meta">
+<ul class="md-meta__list">
+<li class="md-meta__item">
+<time datetime="2024-02-26 00:00:00">February 26, 2024</time></li>
+<li class="md-meta__item">
+            in
+            
+              <a class="md-meta__link" href="../../">Azure Services</a></li>
+<li class="md-meta__item">
+            
+              3 min read
+            
+          </li>
+</ul>
+</div>
+</header>
+<div class="md-post__content md-typeset">
+<h2 id="writing-your-first-policy-in-azure-with-portal"><a class="toclink" href="../../../../2024/02/26/writing-your-first-policy-in-azure-with-portal/">Writing Your First Policy in Azure with Portal</a></h2>
+<p>Azure Policy is a service in Azure that you use to create, assign and manage policies. These policies enforce different rules and effects over your resources, so those resources stay compliant with your corporate standards and service level agreements.</p>
+<p>In this post, we'll walk through the steps of creating your first policy in Azure.</p>
+<h3 id="prerequisites"><a class="toclink" href="../../../../2024/02/26/writing-your-first-policy-in-azure-with-portal/#prerequisites">Prerequisites</a></h3>
+<ol>
+<li>An active Azure subscription.</li>
+<li>Access to Azure portal.</li>
+</ol>
+<h3 id="step-1-open-azure-policy"><a class="toclink" href="../../../../2024/02/26/writing-your-first-policy-in-azure-with-portal/#step-1-open-azure-policy">Step 1: Open Azure Policy</a></h3>
+<ul>
+<li>Login to the <a href="https://portal.azure.com/">Azure Portal</a>.</li>
+<li>In the left-hand menu, click on <code>All services</code>.</li>
+<li>In the <code>All services</code> blade, search for <code>Policy</code>.</li>
+</ul>
+<h3 id="step-2-create-a-new-policy-definition"><a class="toclink" href="../../../../2024/02/26/writing-your-first-policy-in-azure-with-portal/#step-2-create-a-new-policy-definition">Step 2: Create a New Policy Definition</a></h3>
+<ul>
+<li>Click on <code>Definitions</code> under the <code>Authoring</code> section.</li>
+<li>Click on <code>+ Policy definition</code>.</li>
+</ul>
+<h3 id="step-3-fill-out-the-policy-definition"><a class="toclink" href="../../../../2024/02/26/writing-your-first-policy-in-azure-with-portal/#step-3-fill-out-the-policy-definition">Step 3: Fill Out the Policy Definition</a></h3>
+<p>You will need to fill out several fields:</p>
+<ul>
+<li><strong>Definition location</strong>: The location where the policy is stored.</li>
+<li><strong>Name</strong>: This is a unique name for your policy.</li>
+<li><strong>Description</strong>: A detailed description of what the policy does.</li>
+<li><strong>Category</strong>: You can categorize your policy for easier searching and filtering.</li>
+</ul>
+<p>The most important part of the policy definition is the policy rule itself. The policy rule is where you describe the logic that enforces the policy. </p>
+<p>Here's an example of a simple policy rule that ensures all indexed resources have tags and deny creation or update if they do not.</p>
+<div class="language-json highlight"><pre><span></span><code><span id="__span-4-1"><a href="#__codelineno-4-1" id="__codelineno-4-1" name="__codelineno-4-1"></a><span class="p">{</span>
+</span><span id="__span-4-2"><a href="#__codelineno-4-2" id="__codelineno-4-2" name="__codelineno-4-2"></a><span class="w">    </span><span class="nt">"properties"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-4-3"><a href="#__codelineno-4-3" id="__codelineno-4-3" name="__codelineno-4-3"></a><span class="w">        </span><span class="nt">"displayName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Require a tag and its value"</span><span class="p">,</span>
+</span><span id="__span-4-4"><a href="#__codelineno-4-4" id="__codelineno-4-4" name="__codelineno-4-4"></a><span class="w">        </span><span class="nt">"policyType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Custom"</span><span class="p">,</span>
+</span><span id="__span-4-5"><a href="#__codelineno-4-5" id="__codelineno-4-5" name="__codelineno-4-5"></a><span class="w">        </span><span class="nt">"mode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Indexed"</span><span class="p">,</span>
+</span><span id="__span-4-6"><a href="#__codelineno-4-6" id="__codelineno-4-6" name="__codelineno-4-6"></a><span class="w">        </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"This policy requires a specific tag and its value."</span><span class="p">,</span>
+</span><span id="__span-4-7"><a href="#__codelineno-4-7" id="__codelineno-4-7" name="__codelineno-4-7"></a><span class="w">        </span><span class="nt">"metadata"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-4-8"><a href="#__codelineno-4-8" id="__codelineno-4-8" name="__codelineno-4-8"></a><span class="w">            </span><span class="nt">"category"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Tags"</span>
+</span><span id="__span-4-9"><a href="#__codelineno-4-9" id="__codelineno-4-9" name="__codelineno-4-9"></a><span class="w">        </span><span class="p">},</span>
+</span><span id="__span-4-10"><a href="#__codelineno-4-10" id="__codelineno-4-10" name="__codelineno-4-10"></a><span class="w">        </span><span class="nt">"parameters"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-4-11"><a href="#__codelineno-4-11" id="__codelineno-4-11" name="__codelineno-4-11"></a><span class="w">            </span><span class="nt">"tagName"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-4-12"><a href="#__codelineno-4-12" id="__codelineno-4-12" name="__codelineno-4-12"></a><span class="w">                </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"String"</span><span class="p">,</span>
+</span><span id="__span-4-13"><a href="#__codelineno-4-13" id="__codelineno-4-13" name="__codelineno-4-13"></a><span class="w">                </span><span class="nt">"metadata"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-4-14"><a href="#__codelineno-4-14" id="__codelineno-4-14" name="__codelineno-4-14"></a><span class="w">                    </span><span class="nt">"displayName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Tag Name"</span><span class="p">,</span>
+</span><span id="__span-4-15"><a href="#__codelineno-4-15" id="__codelineno-4-15" name="__codelineno-4-15"></a><span class="w">                    </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Name of the tag, such as 'environment'"</span>
+</span><span id="__span-4-16"><a href="#__codelineno-4-16" id="__codelineno-4-16" name="__codelineno-4-16"></a><span class="w">                </span><span class="p">}</span>
+</span><span id="__span-4-17"><a href="#__codelineno-4-17" id="__codelineno-4-17" name="__codelineno-4-17"></a><span class="w">            </span><span class="p">},</span>
+</span><span id="__span-4-18"><a href="#__codelineno-4-18" id="__codelineno-4-18" name="__codelineno-4-18"></a><span class="w">            </span><span class="nt">"tagValue"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-4-19"><a href="#__codelineno-4-19" id="__codelineno-4-19" name="__codelineno-4-19"></a><span class="w">                </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"String"</span><span class="p">,</span>
+</span><span id="__span-4-20"><a href="#__codelineno-4-20" id="__codelineno-4-20" name="__codelineno-4-20"></a><span class="w">                </span><span class="nt">"metadata"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-4-21"><a href="#__codelineno-4-21" id="__codelineno-4-21" name="__codelineno-4-21"></a><span class="w">                    </span><span class="nt">"displayName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Tag Value"</span><span class="p">,</span>
+</span><span id="__span-4-22"><a href="#__codelineno-4-22" id="__codelineno-4-22" name="__codelineno-4-22"></a><span class="w">                    </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Value of the tag, such as 'production'"</span>
+</span><span id="__span-4-23"><a href="#__codelineno-4-23" id="__codelineno-4-23" name="__codelineno-4-23"></a><span class="w">                </span><span class="p">}</span>
+</span><span id="__span-4-24"><a href="#__codelineno-4-24" id="__codelineno-4-24" name="__codelineno-4-24"></a><span class="w">            </span><span class="p">}</span>
+</span><span id="__span-4-25"><a href="#__codelineno-4-25" id="__codelineno-4-25" name="__codelineno-4-25"></a><span class="w">        </span><span class="p">},</span>
+</span><span id="__span-4-26"><a href="#__codelineno-4-26" id="__codelineno-4-26" name="__codelineno-4-26"></a><span class="w">        </span><span class="p">},</span>
+</span><span id="__span-4-27"><a href="#__codelineno-4-27" id="__codelineno-4-27" name="__codelineno-4-27"></a><span class="w">        </span><span class="nt">"policyRule"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-4-28"><a href="#__codelineno-4-28" id="__codelineno-4-28" name="__codelineno-4-28"></a><span class="w">            </span><span class="nt">"if"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-4-29"><a href="#__codelineno-4-29" id="__codelineno-4-29" name="__codelineno-4-29"></a><span class="w">                </span><span class="nt">"not"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-4-30"><a href="#__codelineno-4-30" id="__codelineno-4-30" name="__codelineno-4-30"></a><span class="w">                    </span><span class="nt">"field"</span><span class="p">:</span><span class="w"> </span><span class="s2">"[concat('tags[', parameters('tagName'), ']')]"</span><span class="p">,</span>
+</span><span id="__span-4-31"><a href="#__codelineno-4-31" id="__codelineno-4-31" name="__codelineno-4-31"></a><span class="w">                    </span><span class="nt">"equals"</span><span class="p">:</span><span class="w"> </span><span class="s2">"[parameters('tagValue')]"</span>
+</span><span id="__span-4-32"><a href="#__codelineno-4-32" id="__codelineno-4-32" name="__codelineno-4-32"></a><span class="w">                    </span><span class="p">}</span>
+</span><span id="__span-4-33"><a href="#__codelineno-4-33" id="__codelineno-4-33" name="__codelineno-4-33"></a><span class="w">                </span><span class="p">},</span>
+</span><span id="__span-4-34"><a href="#__codelineno-4-34" id="__codelineno-4-34" name="__codelineno-4-34"></a><span class="w">            </span><span class="nt">"then"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-4-35"><a href="#__codelineno-4-35" id="__codelineno-4-35" name="__codelineno-4-35"></a><span class="w">                </span><span class="nt">"effect"</span><span class="p">:</span><span class="w"> </span><span class="s2">"deny"</span>
+</span><span id="__span-4-36"><a href="#__codelineno-4-36" id="__codelineno-4-36" name="__codelineno-4-36"></a><span class="w">            </span><span class="p">}</span>
+</span><span id="__span-4-37"><a href="#__codelineno-4-37" id="__codelineno-4-37" name="__codelineno-4-37"></a><span class="w">        </span><span class="p">}</span>
+</span><span id="__span-4-38"><a href="#__codelineno-4-38" id="__codelineno-4-38" name="__codelineno-4-38"></a><span class="w">    </span><span class="p">}</span>
+</span></code></pre></div>
+<p>But, in portal, you can add properties directly in the form but you can't add displayName, policyType and metadata because they are added by portal itself, so you can add only mode,parameters and policyRule, Policy definition could be like this:</p>
+<ul>
+<li>Definition location: <code>Tenant Root Group</code></li>
+<li>Name: <code>Require a tag and its value</code></li>
+<li>Description: <code>This policy requires a specific tag and its value.</code></li>
+<li>Category: <code>Tags</code></li>
+<li>POLICY RULE:</li>
+</ul>
+<div class="language-json highlight"><pre><span></span><code><span id="__span-5-1"><a href="#__codelineno-5-1" id="__codelineno-5-1" name="__codelineno-5-1"></a><span class="p">{</span>
+</span><span id="__span-5-2"><a href="#__codelineno-5-2" id="__codelineno-5-2" name="__codelineno-5-2"></a>
+</span><span id="__span-5-3"><a href="#__codelineno-5-3" id="__codelineno-5-3" name="__codelineno-5-3"></a><span class="w">        </span><span class="nt">"mode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Indexed"</span><span class="p">,</span><span class="w"> </span>
+</span><span id="__span-5-4"><a href="#__codelineno-5-4" id="__codelineno-5-4" name="__codelineno-5-4"></a><span class="w">        </span><span class="nt">"parameters"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-5-5"><a href="#__codelineno-5-5" id="__codelineno-5-5" name="__codelineno-5-5"></a><span class="w">            </span><span class="nt">"tagName"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-5-6"><a href="#__codelineno-5-6" id="__codelineno-5-6" name="__codelineno-5-6"></a><span class="w">                </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"String"</span><span class="p">,</span>
+</span><span id="__span-5-7"><a href="#__codelineno-5-7" id="__codelineno-5-7" name="__codelineno-5-7"></a><span class="w">                </span><span class="nt">"metadata"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-5-8"><a href="#__codelineno-5-8" id="__codelineno-5-8" name="__codelineno-5-8"></a><span class="w">                    </span><span class="nt">"displayName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Tag Name"</span><span class="p">,</span>
+</span><span id="__span-5-9"><a href="#__codelineno-5-9" id="__codelineno-5-9" name="__codelineno-5-9"></a><span class="w">                    </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Name of the tag, such as 'environment'"</span>
+</span><span id="__span-5-10"><a href="#__codelineno-5-10" id="__codelineno-5-10" name="__codelineno-5-10"></a><span class="w">                </span><span class="p">}</span>
+</span><span id="__span-5-11"><a href="#__codelineno-5-11" id="__codelineno-5-11" name="__codelineno-5-11"></a><span class="w">            </span><span class="p">},</span>
+</span><span id="__span-5-12"><a href="#__codelineno-5-12" id="__codelineno-5-12" name="__codelineno-5-12"></a><span class="w">            </span><span class="nt">"tagValue"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-5-13"><a href="#__codelineno-5-13" id="__codelineno-5-13" name="__codelineno-5-13"></a><span class="w">                </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"String"</span><span class="p">,</span>
+</span><span id="__span-5-14"><a href="#__codelineno-5-14" id="__codelineno-5-14" name="__codelineno-5-14"></a><span class="w">                </span><span class="nt">"metadata"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-5-15"><a href="#__codelineno-5-15" id="__codelineno-5-15" name="__codelineno-5-15"></a><span class="w">                    </span><span class="nt">"displayName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Tag Value"</span><span class="p">,</span>
+</span><span id="__span-5-16"><a href="#__codelineno-5-16" id="__codelineno-5-16" name="__codelineno-5-16"></a><span class="w">                    </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Value of the tag, such as 'production'"</span>
+</span><span id="__span-5-17"><a href="#__codelineno-5-17" id="__codelineno-5-17" name="__codelineno-5-17"></a><span class="w">                </span><span class="p">}</span>
+</span><span id="__span-5-18"><a href="#__codelineno-5-18" id="__codelineno-5-18" name="__codelineno-5-18"></a><span class="w">            </span><span class="p">}</span>
+</span><span id="__span-5-19"><a href="#__codelineno-5-19" id="__codelineno-5-19" name="__codelineno-5-19"></a><span class="w">        </span><span class="p">},</span>
+</span><span id="__span-5-20"><a href="#__codelineno-5-20" id="__codelineno-5-20" name="__codelineno-5-20"></a><span class="w">        </span><span class="nt">"policyRule"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-5-21"><a href="#__codelineno-5-21" id="__codelineno-5-21" name="__codelineno-5-21"></a><span class="w">            </span><span class="nt">"if"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-5-22"><a href="#__codelineno-5-22" id="__codelineno-5-22" name="__codelineno-5-22"></a><span class="w">                </span><span class="nt">"not"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-5-23"><a href="#__codelineno-5-23" id="__codelineno-5-23" name="__codelineno-5-23"></a><span class="w">                    </span><span class="nt">"field"</span><span class="p">:</span><span class="w"> </span><span class="s2">"[concat('tags[', parameters('tagName'), ']')]"</span><span class="p">,</span>
+</span><span id="__span-5-24"><a href="#__codelineno-5-24" id="__codelineno-5-24" name="__codelineno-5-24"></a><span class="w">                    </span><span class="nt">"equals"</span><span class="p">:</span><span class="w"> </span><span class="s2">"[parameters('tagValue')]"</span>
+</span><span id="__span-5-25"><a href="#__codelineno-5-25" id="__codelineno-5-25" name="__codelineno-5-25"></a><span class="w">                    </span><span class="p">}</span>
+</span><span id="__span-5-26"><a href="#__codelineno-5-26" id="__codelineno-5-26" name="__codelineno-5-26"></a><span class="w">                </span><span class="p">},</span>
+</span><span id="__span-5-27"><a href="#__codelineno-5-27" id="__codelineno-5-27" name="__codelineno-5-27"></a><span class="w">            </span><span class="nt">"then"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-5-28"><a href="#__codelineno-5-28" id="__codelineno-5-28" name="__codelineno-5-28"></a><span class="w">                </span><span class="nt">"effect"</span><span class="p">:</span><span class="w"> </span><span class="s2">"deny"</span>
+</span><span id="__span-5-29"><a href="#__codelineno-5-29" id="__codelineno-5-29" name="__codelineno-5-29"></a><span class="w">            </span><span class="p">}</span>
+</span><span id="__span-5-30"><a href="#__codelineno-5-30" id="__codelineno-5-30" name="__codelineno-5-30"></a><span class="w">        </span><span class="p">}</span>
+</span><span id="__span-5-31"><a href="#__codelineno-5-31" id="__codelineno-5-31" name="__codelineno-5-31"></a><span class="p">}</span>
+</span></code></pre></div>
+<p>Once you've filled out all the fields and written your policy rule, click on <code>Save</code>.</p>
+<h3 id="step-4-assign-the-policy"><a class="toclink" href="../../../../2024/02/26/writing-your-first-policy-in-azure-with-portal/#step-4-assign-the-policy">Step 4: Assign the Policy</a></h3>
+<ul>
+<li>Go back to the <code>Policy</code> service in the Azure portal.</li>
+<li>Click on <code>Assignments</code> under the <code>Authoring</code> section.</li>
+<li>Click on <code>+ Assign Policy</code>.</li>
+<li>In <strong>Basics</strong>, fill out the following fields:<ul>
+<li><strong>Scope</strong><ul>
+<li><strong>Scope</strong>: Select the scope where you want to assign the policy.</li>
+<li><strong>Exclusions</strong>: Add any exclusions if needed.</li>
+</ul>
+</li>
+<li><strong>Basics</strong><ul>
+<li><strong>Policy definition</strong>: Select the policy you created.</li>
+<li><strong>Assignment name</strong>: A unique name for the assignment.</li>
+<li><strong>Description</strong>: A detailed description of the assignment.</li>
+<li><strong>Policy enforcement</strong>: <code>Enabled</code>.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>In <strong>Parameters</strong>: Fill out any parameters needed for the policy.</li>
+<li>In <strong>Non-compliance message</strong>: A message to display when a resource is non-compliant.</li>
+<li>Click on <code>Review + create</code>: Review the assignment and click on <code>Create</code>.</li>
+</ul>
+<p>Congratulations! You've just created and assigned your first policy in Azure. It will now evaluate any new or existing resources within its scope.</p>
+<p>Remember, Azure Policy is a powerful tool for maintaining compliance and managing your resources at scale. Happy coding!</p>
+</div>
+</article>
+<article class="md-post md-post--excerpt">
+<header class="md-post__header">
+<nav class="md-post__authors md-typeset">
+<span class="md-author">
+<img alt="Rafael Fernández" src="https://avatars.githubusercontent.com/u/39990341"/>
+</span>
+</nav>
+<div class="md-post__meta md-meta">
+<ul class="md-meta__list">
+<li class="md-meta__item">
+<time datetime="2024-02-25 00:00:00">February 25, 2024</time></li>
+<li class="md-meta__item">
+            in
+            
+              <a class="md-meta__link" href="../../">Azure Services</a></li>
+<li class="md-meta__item">
+            
+              2 min read
+            
+          </li>
+</ul>
+</div>
+</header>
+<div class="md-post__content md-typeset">
+<h2 id="azure-policy-defintion-schema"><a class="toclink" href="../../../../2024/02/25/azure-policy-defintion-schema/">Azure Policy, defintion schema</a></h2>
+<p>This is the schema for the Azure Policy definition:</p>
+<div class="language-json highlight"><pre><span></span><code><span id="__span-4-1"><a href="#__codelineno-4-1" id="__codelineno-4-1" name="__codelineno-4-1"></a><span class="p">{</span>
+</span><span id="__span-4-2"><a href="#__codelineno-4-2" id="__codelineno-4-2" name="__codelineno-4-2"></a><span class="w">    </span><span class="nt">"properties"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-4-3"><a href="#__codelineno-4-3" id="__codelineno-4-3" name="__codelineno-4-3"></a><span class="w">        </span><span class="nt">"displayName"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-4-4"><a href="#__codelineno-4-4" id="__codelineno-4-4" name="__codelineno-4-4"></a><span class="w">            </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span>
+</span><span id="__span-4-5"><a href="#__codelineno-4-5" id="__codelineno-4-5" name="__codelineno-4-5"></a><span class="w">            </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"The display name of the policy definition."</span>
+</span><span id="__span-4-6"><a href="#__codelineno-4-6" id="__codelineno-4-6" name="__codelineno-4-6"></a><span class="w">        </span><span class="p">},</span>
+</span><span id="__span-4-7"><a href="#__codelineno-4-7" id="__codelineno-4-7" name="__codelineno-4-7"></a><span class="w">        </span><span class="nt">"policyType"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-4-8"><a href="#__codelineno-4-8" id="__codelineno-4-8" name="__codelineno-4-8"></a><span class="w">            </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span>
+</span><span id="__span-4-9"><a href="#__codelineno-4-9" id="__codelineno-4-9" name="__codelineno-4-9"></a><span class="w">            </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"The policy type of the policy definition."</span>
+</span><span id="__span-4-10"><a href="#__codelineno-4-10" id="__codelineno-4-10" name="__codelineno-4-10"></a><span class="w">        </span><span class="p">},</span>
+</span><span id="__span-4-11"><a href="#__codelineno-4-11" id="__codelineno-4-11" name="__codelineno-4-11"></a><span class="w">        </span><span class="nt">"mode"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-4-12"><a href="#__codelineno-4-12" id="__codelineno-4-12" name="__codelineno-4-12"></a><span class="w">            </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span>
+</span><span id="__span-4-13"><a href="#__codelineno-4-13" id="__codelineno-4-13" name="__codelineno-4-13"></a><span class="w">            </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"The mode of the policy definition."</span>
+</span><span id="__span-4-14"><a href="#__codelineno-4-14" id="__codelineno-4-14" name="__codelineno-4-14"></a><span class="w">        </span><span class="p">},</span>
+</span><span id="__span-4-15"><a href="#__codelineno-4-15" id="__codelineno-4-15" name="__codelineno-4-15"></a><span class="w">        </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-4-16"><a href="#__codelineno-4-16" id="__codelineno-4-16" name="__codelineno-4-16"></a><span class="w">            </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span>
+</span><span id="__span-4-17"><a href="#__codelineno-4-17" id="__codelineno-4-17" name="__codelineno-4-17"></a><span class="w">            </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"The description of the policy definition."</span>
+</span><span id="__span-4-18"><a href="#__codelineno-4-18" id="__codelineno-4-18" name="__codelineno-4-18"></a><span class="w">        </span><span class="p">},</span>
+</span><span id="__span-4-19"><a href="#__codelineno-4-19" id="__codelineno-4-19" name="__codelineno-4-19"></a><span class="w">        </span><span class="nt">"mode"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-4-20"><a href="#__codelineno-4-20" id="__codelineno-4-20" name="__codelineno-4-20"></a><span class="w">            </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span>
+</span><span id="__span-4-21"><a href="#__codelineno-4-21" id="__codelineno-4-21" name="__codelineno-4-21"></a><span class="w">            </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"The mode of the policy definition."</span>
+</span><span id="__span-4-22"><a href="#__codelineno-4-22" id="__codelineno-4-22" name="__codelineno-4-22"></a><span class="w">        </span><span class="p">},</span>
+</span><span id="__span-4-23"><a href="#__codelineno-4-23" id="__codelineno-4-23" name="__codelineno-4-23"></a><span class="w">        </span><span class="nt">"metadata"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-4-24"><a href="#__codelineno-4-24" id="__codelineno-4-24" name="__codelineno-4-24"></a><span class="w">            </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"object"</span><span class="p">,</span>
+</span><span id="__span-4-25"><a href="#__codelineno-4-25" id="__codelineno-4-25" name="__codelineno-4-25"></a><span class="w">            </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"The metadata of the policy definition."</span>
+</span><span id="__span-4-26"><a href="#__codelineno-4-26" id="__codelineno-4-26" name="__codelineno-4-26"></a><span class="w">        </span><span class="p">},</span>
+</span><span id="__span-4-27"><a href="#__codelineno-4-27" id="__codelineno-4-27" name="__codelineno-4-27"></a><span class="w">        </span><span class="nt">"parameters"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-4-28"><a href="#__codelineno-4-28" id="__codelineno-4-28" name="__codelineno-4-28"></a><span class="w">            </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"object"</span><span class="p">,</span>
+</span><span id="__span-4-29"><a href="#__codelineno-4-29" id="__codelineno-4-29" name="__codelineno-4-29"></a><span class="w">            </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"The parameters of the policy definition."</span>
+</span><span id="__span-4-30"><a href="#__codelineno-4-30" id="__codelineno-4-30" name="__codelineno-4-30"></a><span class="w">        </span><span class="p">},</span>
+</span><span id="__span-4-31"><a href="#__codelineno-4-31" id="__codelineno-4-31" name="__codelineno-4-31"></a><span class="w">        </span><span class="nt">"policyRule"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-4-32"><a href="#__codelineno-4-32" id="__codelineno-4-32" name="__codelineno-4-32"></a><span class="w">            </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"object"</span><span class="p">,</span>
+</span><span id="__span-4-33"><a href="#__codelineno-4-33" id="__codelineno-4-33" name="__codelineno-4-33"></a><span class="w">            </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"The policy rule of the policy definition. If/then rule."</span>
+</span><span id="__span-4-34"><a href="#__codelineno-4-34" id="__codelineno-4-34" name="__codelineno-4-34"></a><span class="w">        </span><span class="p">}</span><span class="w">       </span>
+</span><span id="__span-4-35"><a href="#__codelineno-4-35" id="__codelineno-4-35" name="__codelineno-4-35"></a>
+</span><span id="__span-4-36"><a href="#__codelineno-4-36" id="__codelineno-4-36" name="__codelineno-4-36"></a><span class="w">    </span><span class="p">}</span>
+</span><span id="__span-4-37"><a href="#__codelineno-4-37" id="__codelineno-4-37" name="__codelineno-4-37"></a><span class="p">}</span>
+</span></code></pre></div>
+<p>You can see other elements in the schema like id, type, and name, It's depens of how you want to deploy the policy definition.</p>
+<p>Full schema is in <a href="https://schema.management.azure.com/schemas/2020-10-01/policyDefinition.json">Azure Policy definition schema</a>.</p>
+<h3 id="example"><a class="toclink" href="../../../../2024/02/25/azure-policy-defintion-schema/#example">Example</a></h3>
+<p>Here is an example of a policy definition:</p>
+<div class="language-json highlight"><pre><span></span><code><span id="__span-5-1"><a href="#__codelineno-5-1" id="__codelineno-5-1" name="__codelineno-5-1"></a><span class="p">{</span>
+</span><span id="__span-5-2"><a href="#__codelineno-5-2" id="__codelineno-5-2" name="__codelineno-5-2"></a><span class="w">    </span><span class="nt">"properties"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-5-3"><a href="#__codelineno-5-3" id="__codelineno-5-3" name="__codelineno-5-3"></a><span class="w">        </span><span class="nt">"displayName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Require a tag and its value"</span><span class="p">,</span>
+</span><span id="__span-5-4"><a href="#__codelineno-5-4" id="__codelineno-5-4" name="__codelineno-5-4"></a><span class="w">        </span><span class="nt">"policyType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Custom"</span><span class="p">,</span>
+</span><span id="__span-5-5"><a href="#__codelineno-5-5" id="__codelineno-5-5" name="__codelineno-5-5"></a><span class="w">        </span><span class="nt">"mode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Indexed"</span><span class="p">,</span>
+</span><span id="__span-5-6"><a href="#__codelineno-5-6" id="__codelineno-5-6" name="__codelineno-5-6"></a><span class="w">        </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"This policy requires a specific tag and its value."</span><span class="p">,</span>
+</span><span id="__span-5-7"><a href="#__codelineno-5-7" id="__codelineno-5-7" name="__codelineno-5-7"></a><span class="w">        </span><span class="nt">"metadata"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-5-8"><a href="#__codelineno-5-8" id="__codelineno-5-8" name="__codelineno-5-8"></a><span class="w">            </span><span class="nt">"category"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Tags"</span>
+</span><span id="__span-5-9"><a href="#__codelineno-5-9" id="__codelineno-5-9" name="__codelineno-5-9"></a><span class="w">        </span><span class="p">},</span>
+</span><span id="__span-5-10"><a href="#__codelineno-5-10" id="__codelineno-5-10" name="__codelineno-5-10"></a><span class="w">        </span><span class="nt">"parameters"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-5-11"><a href="#__codelineno-5-11" id="__codelineno-5-11" name="__codelineno-5-11"></a><span class="w">            </span><span class="nt">"tagName"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-5-12"><a href="#__codelineno-5-12" id="__codelineno-5-12" name="__codelineno-5-12"></a><span class="w">                </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"String"</span><span class="p">,</span>
+</span><span id="__span-5-13"><a href="#__codelineno-5-13" id="__codelineno-5-13" name="__codelineno-5-13"></a><span class="w">                </span><span class="nt">"metadata"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-5-14"><a href="#__codelineno-5-14" id="__codelineno-5-14" name="__codelineno-5-14"></a><span class="w">                    </span><span class="nt">"displayName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Tag Name"</span><span class="p">,</span>
+</span><span id="__span-5-15"><a href="#__codelineno-5-15" id="__codelineno-5-15" name="__codelineno-5-15"></a><span class="w">                    </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Name of the tag, such as 'environment'"</span>
+</span><span id="__span-5-16"><a href="#__codelineno-5-16" id="__codelineno-5-16" name="__codelineno-5-16"></a><span class="w">                </span><span class="p">}</span>
+</span><span id="__span-5-17"><a href="#__codelineno-5-17" id="__codelineno-5-17" name="__codelineno-5-17"></a><span class="w">            </span><span class="p">},</span>
+</span><span id="__span-5-18"><a href="#__codelineno-5-18" id="__codelineno-5-18" name="__codelineno-5-18"></a><span class="w">            </span><span class="nt">"tagValue"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-5-19"><a href="#__codelineno-5-19" id="__codelineno-5-19" name="__codelineno-5-19"></a><span class="w">                </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"String"</span><span class="p">,</span>
+</span><span id="__span-5-20"><a href="#__codelineno-5-20" id="__codelineno-5-20" name="__codelineno-5-20"></a><span class="w">                </span><span class="nt">"metadata"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-5-21"><a href="#__codelineno-5-21" id="__codelineno-5-21" name="__codelineno-5-21"></a><span class="w">                    </span><span class="nt">"displayName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Tag Value"</span><span class="p">,</span>
+</span><span id="__span-5-22"><a href="#__codelineno-5-22" id="__codelineno-5-22" name="__codelineno-5-22"></a><span class="w">                    </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Value of the tag, such as 'production'"</span>
+</span><span id="__span-5-23"><a href="#__codelineno-5-23" id="__codelineno-5-23" name="__codelineno-5-23"></a><span class="w">                </span><span class="p">}</span>
+</span><span id="__span-5-24"><a href="#__codelineno-5-24" id="__codelineno-5-24" name="__codelineno-5-24"></a><span class="w">            </span><span class="p">}</span>
+</span><span id="__span-5-25"><a href="#__codelineno-5-25" id="__codelineno-5-25" name="__codelineno-5-25"></a><span class="w">        </span><span class="p">},</span>
+</span><span id="__span-5-26"><a href="#__codelineno-5-26" id="__codelineno-5-26" name="__codelineno-5-26"></a><span class="w">        </span><span class="nt">"policyRule"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-5-27"><a href="#__codelineno-5-27" id="__codelineno-5-27" name="__codelineno-5-27"></a><span class="w">            </span><span class="nt">"if"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-5-28"><a href="#__codelineno-5-28" id="__codelineno-5-28" name="__codelineno-5-28"></a><span class="w">                </span><span class="nt">"field"</span><span class="p">:</span><span class="w"> </span><span class="s2">"[concat('tags[', parameters('tagName'), ']')]"</span><span class="p">,</span>
+</span><span id="__span-5-29"><a href="#__codelineno-5-29" id="__codelineno-5-29" name="__codelineno-5-29"></a><span class="w">                </span><span class="nt">"exists"</span><span class="p">:</span><span class="w"> </span><span class="s2">"false"</span>
+</span><span id="__span-5-30"><a href="#__codelineno-5-30" id="__codelineno-5-30" name="__codelineno-5-30"></a><span class="w">            </span><span class="p">},</span>
+</span><span id="__span-5-31"><a href="#__codelineno-5-31" id="__codelineno-5-31" name="__codelineno-5-31"></a><span class="w">            </span><span class="nt">"then"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-5-32"><a href="#__codelineno-5-32" id="__codelineno-5-32" name="__codelineno-5-32"></a><span class="w">                </span><span class="nt">"effect"</span><span class="p">:</span><span class="w"> </span><span class="s2">"deny"</span>
+</span><span id="__span-5-33"><a href="#__codelineno-5-33" id="__codelineno-5-33" name="__codelineno-5-33"></a><span class="w">            </span><span class="p">}</span>
+</span><span id="__span-5-34"><a href="#__codelineno-5-34" id="__codelineno-5-34" name="__codelineno-5-34"></a><span class="w">        </span><span class="p">}</span>
+</span><span id="__span-5-35"><a href="#__codelineno-5-35" id="__codelineno-5-35" name="__codelineno-5-35"></a><span class="w">    </span><span class="p">}</span>
+</span><span id="__span-5-36"><a href="#__codelineno-5-36" id="__codelineno-5-36" name="__codelineno-5-36"></a><span class="p">}</span>
+</span></code></pre></div>
+<p>This policy definition requires a specific tag and its value. If the tag does not exist, the policy denies the action.</p>
+<p>How you can see, the most important part of the policy definition is the policy rule. </p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The policy rule is where you describe the logic that enforces the policy.</p>
+</div>
+<h3 id="conclusion"><a class="toclink" href="../../../../2024/02/25/azure-policy-defintion-schema/#conclusion">Conclusion</a></h3>
+<p>Understanding the schema for Azure Policy definitions is essential for creating and managing policies effectively. By defining the necessary attributes and rules, you can enforce compliance, security, and operational standards across your Azure environment. Leveraging the Azure Policy definition schema allows you to tailor policies to your organization's specific requirements and ensure consistent governance practices.</p>
+<h3 id="references"><a class="toclink" href="../../../../2024/02/25/azure-policy-defintion-schema/#references">References</a></h3>
+<ul>
+<li><a href="https://schema.management.azure.com/schemas/2020-10-01/policyDefinition.json">Azure Policy definition schema</a></li>
+<li><a href="https://learn.microsoft.com/en-us/azure/governance/policy/overview">Azure Policy</a></li>
+</ul>
+</div>
+</article>
 <article class="md-post md-post--excerpt">
 <header class="md-post__header">
 <nav class="md-post__authors md-typeset">
@@ -1060,42 +1616,8 @@ https://learn.microsoft.com/en-us/azure/container-apps/compare-options</li>
 <p>That's it folks!, thanks for reading <img alt="😄" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.0.3/assets/svg/1f604.svg" title=":smile:">!.</img></p>
 </div>
 </article>
-<article class="md-post md-post--excerpt">
-<header class="md-post__header">
-<nav class="md-post__authors md-typeset">
-<span class="md-author">
-<img alt="Rafael Fernández" src="https://avatars.githubusercontent.com/u/39990341"/>
-</span>
-</nav>
-<div class="md-post__meta md-meta">
-<ul class="md-meta__list">
-<li class="md-meta__item">
-<time datetime="2023-11-15 00:00:00">November 15, 2023</time></li>
-<li class="md-meta__item">
-            in
-            
-              <a class="md-meta__link" href="../../">Azure Services</a></li>
-<li class="md-meta__item">
-            
-              1 min read
-            
-          </li>
-</ul>
-</div>
-</header>
-<div class="md-post__content md-typeset">
-<h2 id="azure-services"><a class="toclink" href="../../../../2023/11/15/azure--services/">Azure  Services</a></h2>
-<p>I have decided to create a new category on my blog to talk about Azure services.</p>
-<p>The main goal of this category is to provide a quick overview of some Azure services and some design considerations.</p>
-<p>What is this category due to?</p>
-<p>In some cases, it is because I am working with this Service and I think it is a good idea to share my experience with you and write it down for me, in others, it is because I am studying/reviewing an Azure Service and I think it is a good idea. Share my notes with you.</p>
-<p>I hope you like it.</p>
-<p>I am going to start with <a href="../../../../2023/11/18/azure-communication-services/">Azure Communication Services</a></p>
-<p>That's all folks!, thanks for reading <img alt="❤" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.0.3/assets/svg/2764.svg" title=":heart:">!</img></p>
-</div>
-</article>
 <nav class="md-pagination">
-<a class="md-pagination__link" href="../../">1</a> <a class="md-pagination__link" href="../2/">2</a> <span class="md-pagination__current">3</span>
+<a class="md-pagination__link" href="../../">1</a> <a class="md-pagination__link" href="../2/">2</a> <span class="md-pagination__current">3</span> <a class="md-pagination__link" href="../4/">4</a>
 </nav>
 </div>
 </div>

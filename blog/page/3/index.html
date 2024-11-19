@@ -241,6 +241,13 @@
           </label>
 <ul class="md-nav__list" data-md-scrollfix="">
 <li class="md-nav__item">
+<a class="md-nav__link" href="../../2024/11/">
+<span class="md-ellipsis">
+    2024/11
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
 <a class="md-nav__link" href="../../2024/10/">
 <span class="md-ellipsis">
     2024/10
@@ -649,6 +656,590 @@
 <div class="md-post__meta md-meta">
 <ul class="md-meta__list">
 <li class="md-meta__item">
+<time datetime="2024-06-10 00:00:00">June 10, 2024</time></li>
+<li class="md-meta__item">
+            in
+            
+              <a class="md-meta__link" href="../../category/devops/">DevOps</a></li>
+<li class="md-meta__item">
+            
+              2 min read
+            
+          </li>
+</ul>
+</div>
+</header>
+<div class="md-post__content md-typeset">
+<h2 id="implementing-policy-as-code-with-open-policy-agent"><a class="toclink" href="../../2024/06/10/implementing-policy-as-code-with-open-policy-agent/">Implementing policy as code with Open Policy Agent</a></h2>
+<p>In this post, I will show you how to implement policy as code with Open Policy Agent (OPA) and Azure.</p>
+<h3 id="what-is-open-policy-agent"><a class="toclink" href="../../2024/06/10/implementing-policy-as-code-with-open-policy-agent/#what-is-open-policy-agent">What is Open Policy Agent?</a></h3>
+<p>Open Policy Agent (OPA) is an open-source, general-purpose policy engine that enables you to define and enforce policies across your cloud-native stack. OPA provides a high-level declarative language called Rego that you can use to write policies that are easy to understand and maintain.</p>
+<h3 id="why-use-open-policy-agent"><a class="toclink" href="../../2024/06/10/implementing-policy-as-code-with-open-policy-agent/#why-use-open-policy-agent">Why use Open Policy Agent?</a></h3>
+<p>There are several reasons to use OPA:</p>
+<ul>
+<li><strong>Consistency</strong>: OPA allows you to define policies in a single place and enforce them consistently across your cloud-native stack.</li>
+<li><strong>Flexibility</strong>: OPA provides a flexible policy language that allows you to define policies that are tailored to your specific requirements.</li>
+<li><strong>Auditability</strong>: OPA provides a transparent and auditable way to enforce policies, making it easy to understand why a policy decision was made.</li>
+<li><strong>Integration</strong>: OPA integrates with a wide range of cloud-native tools and platforms, making it easy to enforce policies across your entire stack.</li>
+</ul>
+<h3 id="getting-started-with-open-policy-agent"><a class="toclink" href="../../2024/06/10/implementing-policy-as-code-with-open-policy-agent/#getting-started-with-open-policy-agent">Getting started with Open Policy Agent</a></h3>
+<p>To get started with OPA, you need to install the OPA CLI and write some policies in Rego.</p>
+<p>You can install the OPA CLI by downloading the binary from the <a href="https://github.com/open-policy-agent/opa/releases">OPA GitHub releases page</a>, you can check the <a href="https://www.openpolicyagent.org/docs/latest/#running-opa">installation guide</a> for more details.</p>
+<p>Once you have installed the OPA CLI, you can write policies in Rego. Rego is a high-level declarative language that allows you to define policies in a clear and concise way.</p>
+<p>Here's a simple example of a policy that enforces a naming convention for Azure resources:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a href="#__codelineno-2-1" id="__codelineno-2-1" name="__codelineno-2-1"></a>package azure.resources
+</span><span id="__span-2-2"><a href="#__codelineno-2-2" id="__codelineno-2-2" name="__codelineno-2-2"></a>
+</span><span id="__span-2-3"><a href="#__codelineno-2-3" id="__codelineno-2-3" name="__codelineno-2-3"></a>default allow = false
+</span><span id="__span-2-4"><a href="#__codelineno-2-4" id="__codelineno-2-4" name="__codelineno-2-4"></a>
+</span><span id="__span-2-5"><a href="#__codelineno-2-5" id="__codelineno-2-5" name="__codelineno-2-5"></a>allow {
+</span><span id="__span-2-6"><a href="#__codelineno-2-6" id="__codelineno-2-6" name="__codelineno-2-6"></a>    input.resource.type == "Microsoft.Compute/virtualMachines"
+</span><span id="__span-2-7"><a href="#__codelineno-2-7" id="__codelineno-2-7" name="__codelineno-2-7"></a>    input.resource.name == "my-vm"
+</span><span id="__span-2-8"><a href="#__codelineno-2-8" id="__codelineno-2-8" name="__codelineno-2-8"></a>}
+</span></code></pre></div>
+<p>This policy allows resources of type <code>Microsoft.Compute/virtualMachines</code> with the name <code>my-vm</code>. You can write more complex policies that enforce a wide range of requirements, such as resource tagging, network security, and access control.</p>
+<h3 id="integrating-open-policy-agent-with-azure"><a class="toclink" href="../../2024/06/10/implementing-policy-as-code-with-open-policy-agent/#integrating-open-policy-agent-with-azure">Integrating Open Policy Agent with Azure</a></h3>
+<p>To integrate OPA with Azure, you can use the Azure Policy service, which allows you to define and enforce policies across your Azure resources. You can use OPA to define custom policies that are not supported by Azure Policy out of the box, or to enforce policies across multiple cloud providers.</p>
+<h3 id="conclusion"><a class="toclink" href="../../2024/06/10/implementing-policy-as-code-with-open-policy-agent/#conclusion">Conclusion</a></h3>
+<p>Open Policy Agent is a powerful tool that allows you to define and enforce policies across your cloud-native stack. By using OPA, you can ensure that your infrastructure is secure, compliant, and consistent, and that your policies are easy to understand and maintain. I hope this post has given you a good introduction to OPA and how you can use it to implement policy as code in your cloud-native environment.</p>
+<h3 id="additional-resources"><a class="toclink" href="../../2024/06/10/implementing-policy-as-code-with-open-policy-agent/#additional-resources">Additional resources</a></h3>
+<p>I have created a <a href="https://github.com/rfernandezdo/rego-examples">GitHub repository</a> with some examples of policies written in Rego that you can use as a starting point for your own policies.</p>
+<h3 id="references"><a class="toclink" href="../../2024/06/10/implementing-policy-as-code-with-open-policy-agent/#references">References</a></h3>
+<ul>
+<li><a href="https://www.openpolicyagent.org/">Open Policy Agent</a></li>
+<li><a href="https://docs.microsoft.com/en-us/azure/governance/policy/overview">Azure Policy</a></li>
+<li><a href="https://www.openpolicyagent.org/docs/latest/policy-language/">Rego language</a></li>
+</ul>
+</div>
+</article>
+<article class="md-post md-post--excerpt">
+<header class="md-post__header">
+<nav class="md-post__authors md-typeset">
+<span class="md-author">
+<img alt="Rafael Fernández" src="https://avatars.githubusercontent.com/u/39990341"/>
+</span>
+</nav>
+<div class="md-post__meta md-meta">
+<ul class="md-meta__list">
+<li class="md-meta__item">
+<time datetime="2024-06-09 00:00:00">June 9, 2024</time></li>
+<li class="md-meta__item">
+            in
+            
+              <a class="md-meta__link" href="../../category/azure-services/">Azure Services</a>, 
+              <a class="md-meta__link" href="../../category/finops/">FinOps</a></li>
+<li class="md-meta__item">
+            
+              4 min read
+            
+          </li>
+</ul>
+</div>
+</header>
+<div class="md-post__content md-typeset">
+<h2 id="finops-for-azure-optimizing-your-cloud-spend"><a class="toclink" href="../../2024/06/09/finops-for-azure-optimizing-your-cloud-spend/">FinOps for Azure: Optimizing Your Cloud Spend</a></h2>
+<p>In the cloud era, optimizing cloud spend has become a critical aspect of financial management. FinOps, a set of financial operations practices, empowers organizations to get the most out of their Azure investment. This blog post dives into the core principles of FinOps, explores the benefits it offers, and outlines practical strategies for implementing FinOps in your Azure environment.</p>
+<h3 id="understanding-the-cloud-cost-challenge"><a class="toclink" href="../../2024/06/09/finops-for-azure-optimizing-your-cloud-spend/#understanding-the-cloud-cost-challenge">Understanding the Cloud Cost Challenge</a></h3>
+<p>Traditional IT expenditure followed a capital expenditure (capex) model, where businesses purchased hardware and software upfront. Cloud computing introduces a paradigm shift with the operational expenditure (opex) model. Here, businesses pay for resources as they consume them, leading to variable and unpredictable costs.</p>
+<p>FinOps tackles this challenge by providing a framework for managing cloud finances. It encompasses three key pillars:</p>
+<ul>
+<li><strong>People:</strong> Establish a FinOps team or designate individuals responsible for overseeing cloud costs. This team should possess a blend of cloud technical expertise, financial acumen, and business process knowledge.</li>
+<li><strong>Process:</strong>  Define processes for budgeting, forecasting, and monitoring cloud expenses. This involves setting spending limits, creating chargeback models for different departments, and regularly reviewing cost reports.</li>
+<li><strong>Tools:</strong> Leverage Azure Cost Management, a suite of tools that provides granular insights into your Azure spending. It enables cost allocation by resource, service, department, or any other relevant dimension.</li>
+</ul>
+<p>It's essential to adopt a FinOps mindset that encourages collaboration between finance, IT, and business teams to drive cost efficiency and value realization in the cloud.</p>
+<p>It's important to note that FinOps is not just about cost-cutting; it's about optimizing cloud spending to align with business objectives and maximize ROI.</p>
+<h3 id="azure-cost-management-optimizing-your-azure-spending"><a class="toclink" href="../../2024/06/09/finops-for-azure-optimizing-your-cloud-spend/#azure-cost-management-optimizing-your-azure-spending">Azure Cost Management: Optimizing Your Azure Spending</a></h3>
+<p>Azure Cost Management empowers you to analyze your Azure spending patterns and identify cost-saving opportunities. Here's a glimpse into its key functionalities:</p>
+<ul>
+<li><strong>Cost Views:</strong> Generate comprehensive reports that categorize your Azure spending by various attributes like resource group, service, or department.</li>
+<li><strong>Cost Alerts:</strong> Set up proactive alerts to notify you when your spending exceeds predefined thresholds.</li>
+<li><strong>Reservations:</strong> Purchase reserved instances of frequently used Azure resources for significant upfront discounts.</li>
+<li><strong>Recommendations:</strong> Azure Cost Management analyzes your usage patterns and recommends potential cost-saving measures, such as rightsizing resources or leveraging spot instances.</li>
+</ul>
+<h3 id="the-power-of-tags-and-azure-policy"><a class="toclink" href="../../2024/06/09/finops-for-azure-optimizing-your-cloud-spend/#the-power-of-tags-and-azure-policy">The Power of Tags and Azure Policy</a></h3>
+<p>Tags are metadata labels that you can attach to your Azure resources to categorize and track them effectively. They play a pivotal role in FinOps by enabling you to:</p>
+<ul>
+<li>Associate costs with specific departments, projects, or applications.</li>
+<li>Identify unused or underutilized resources for potential cost savings.</li>
+<li>Simplify cost allocation and chargeback processes.</li>
+</ul>
+<p>Azure Policy helps enforce tagging standards and governance rules across your Azure environment. You can define policies that mandate specific tags for all resources, ensuring consistent cost allocation and data accuracy.</p>
+<h3 id="benefits-of-implementing-finops"><a class="toclink" href="../../2024/06/09/finops-for-azure-optimizing-your-cloud-spend/#benefits-of-implementing-finops">Benefits of Implementing FinOps</a></h3>
+<p>A well-defined FinOps strategy empowers you to:</p>
+<ul>
+<li><strong>Gain Visibility into Cloud Spending:</strong>  Obtain a clear picture of your Azure expenditures, enabling informed budgeting and cost control decisions.</li>
+<li><strong>Optimize Cloud Costs:</strong> Identify and eliminate wasteful spending through cost-saving recommendations and proactive measures.</li>
+<li><strong>Improve Cloud Governance:</strong>  Enforce tagging policies and spending limits to ensure responsible cloud resource utilization.</li>
+<li><strong>Align Cloud Spending with Business Value:</strong>  Make data-driven decisions about cloud investments that support your business objectives.</li>
+</ul>
+<h3 id="getting-started-with-finops-in-azure"><a class="toclink" href="../../2024/06/09/finops-for-azure-optimizing-your-cloud-spend/#getting-started-with-finops-in-azure">Getting Started with FinOps in Azure</a></h3>
+<p>Implementing FinOps doesn't necessitate a complex overhaul. Here's a recommended approach:</p>
+<ol>
+<li><strong>Establish a FinOps Team:</strong>  Assemble a cross-functional team comprising representatives from finance, IT, and business departments.</li>
+<li><strong>Set Clear Goals and Objectives:</strong>  Define your FinOps goals, whether it's reducing costs by a specific percentage or improving budget forecasting accuracy.</li>
+<li><strong>Leverage Azure Cost Management:</strong>  Start by exploring Azure Cost Management to understand your current spending patterns.</li>
+<li><strong>Implement Basic Tagging Standards:</strong>  Enforce basic tagging policies to categorize your Azure resources for cost allocation purposes.</li>
+<li><strong>Continuously Monitor and Refine:</strong>  Regularly review your cloud cost reports and identify areas for further optimization.</li>
+</ol>
+<p>By following these steps and embracing a FinOps culture, you can effectively manage your Azure expenses and derive maximum value from your cloud investment.</p>
+<h3 id="toolchain-for-finops-in-azure"><a class="toclink" href="../../2024/06/09/finops-for-azure-optimizing-your-cloud-spend/#toolchain-for-finops-in-azure">Toolchain for FinOps in Azure</a></h3>
+<p>To streamline your FinOps practices in Azure, consider leveraging the following tools:</p>
+<pre class="mermaid"><code>graph LR
+A[Financial Operations Practices] --&gt; B{Cloud Spend Optimization}
+B --&gt; C{Cost Visibility}
+B --&gt; D{Cost Optimization}
+B --&gt; E{Governance}
+C --&gt; F{Azure Cost Management}
+D --&gt; G{Azure Advisor}
+E --&gt; H{Azure Policy}
+F --&gt; I{Cost Views}
+F --&gt; J{Cost Alerts}
+G --&gt; K{Cost Recommendations}
+H --&gt; L{Tag Enforcement}
+</code></pre>
+<p>This toolchain combines Azure Cost Management, Azure Advisor, and Azure Policy to provide a comprehensive suite of capabilities for managing your Azure spending effectively.</p>
+<p><strong>Highly recommended</strong>, you can check <a href="https://microsoft.github.io/finops-toolkit/">FinOps toolkit</a>, it's a set of tools and best practices to help you implement FinOps in your organization, it includes tools for cost allocation, budgeting, and forecasting, as well as best practices for FinOps implementation.</p>
+<h3 id="conclusion"><a class="toclink" href="../../2024/06/09/finops-for-azure-optimizing-your-cloud-spend/#conclusion">Conclusion</a></h3>
+<p>FinOps is an essential practice for organizations leveraging Azure. It empowers you to make informed decisions about your cloud finances, optimize spending, and achieve your business goals. As an Azure Solutions Architect, I recommend that you establish a FinOps practice within your organization to unlock the full potential of Azure and achieve financial efficiency in the cloud.</p>
+<p>This blog post provides a foundational understanding of FinOps in Azure. </p>
+<p>By embracing FinOps, you can transform your cloud cost management practices and drive business success in the cloud era.</p>
+<h3 id="references"><a class="toclink" href="../../2024/06/09/finops-for-azure-optimizing-your-cloud-spend/#references">References</a></h3>
+<ul>
+<li><a href="https://www.youtube.com/watch?v=YHUptdFtozQ">Thanks John Savill</a></li>
+<li><a href="https://microsoft.github.io/finops-toolkit/">FinOps toolkit</a></li>
+</ul>
+</div>
+</article>
+<article class="md-post md-post--excerpt">
+<header class="md-post__header">
+<nav class="md-post__authors md-typeset">
+<span class="md-author">
+<img alt="Rafael Fernández" src="https://avatars.githubusercontent.com/u/39990341"/>
+</span>
+</nav>
+<div class="md-post__meta md-meta">
+<ul class="md-meta__list">
+<li class="md-meta__item">
+<time datetime="2024-05-07 00:00:00">May 7, 2024</time></li>
+<li class="md-meta__item">
+            in
+            
+              <a class="md-meta__link" href="../../category/devops/">DevOps</a></li>
+<li class="md-meta__item">
+            
+              2 min read
+            
+          </li>
+</ul>
+</div>
+</header>
+<div class="md-post__content md-typeset">
+<h2 id="repository-strategy-how-to-test-branching-strategy-in-local-repository"><a class="toclink" href="../../2024/05/07/repository-strategy-how-to-test-branching-strategy-in-local-repository/">Repository Strategy: How to test Branching Strategy in local repository</a></h2>
+<p>If you don't want to test in github, gitlab, or azure devops, you can test in your local desktop.</p>
+<h3 id="step-1-create-a-new-local-bare-repository"><a class="toclink" href="../../2024/05/07/repository-strategy-how-to-test-branching-strategy-in-local-repository/#step-1-create-a-new-local-bare-repository"><strong>Step 1: Create a new local bare repository</strong></a></h3>
+<p>To create a new local bare repository, open a terminal window and run the following command:</p>
+<div class="language-pwsh highlight"><pre><span></span><code><span id="__span-16-1"><a href="#__codelineno-16-1" id="__codelineno-16-1" name="__codelineno-16-1"></a><span class="n">mkdir</span> <span class="n">localrepo</span>
+</span><span id="__span-16-2"><a href="#__codelineno-16-2" id="__codelineno-16-2" name="__codelineno-16-2"></a><span class="nb">cd </span><span class="n">localrepo</span>
+</span><span id="__span-16-3"><a href="#__codelineno-16-3" id="__codelineno-16-3" name="__codelineno-16-3"></a><span class="n">git</span> <span class="n">init</span> <span class="p">-</span><span class="n">-bare</span> <span class="n">my-repo</span><span class="p">.</span><span class="n">git</span>
+</span></code></pre></div>
+<p>This command creates a new directory called <code>localrepo</code> and initializes a new bare repository called <code>my-repo.git</code> inside it.</p>
+<h3 id="step-2-create-a-local-repository"><a class="toclink" href="../../2024/05/07/repository-strategy-how-to-test-branching-strategy-in-local-repository/#step-2-create-a-local-repository"><strong>Step 2: Create a local repository</strong></a></h3>
+<p>To create a new local repository, open a terminal window and run the following command:</p>
+<div class="language-pwsh highlight"><pre><span></span><code><span id="__span-17-1"><a href="#__codelineno-17-1" id="__codelineno-17-1" name="__codelineno-17-1"></a><span class="n">mkdir</span> <span class="n">my-repo</span>
+</span><span id="__span-17-2"><a href="#__codelineno-17-2" id="__codelineno-17-2" name="__codelineno-17-2"></a><span class="nb">cd </span><span class="n">my-repo</span>
+</span><span id="__span-17-3"><a href="#__codelineno-17-3" id="__codelineno-17-3" name="__codelineno-17-3"></a><span class="n">git</span> <span class="n">init</span>
+</span></code></pre></div>
+<p>This command creates a new directory called <code>my-repo</code> and initializes a new repository inside it.</p>
+<h3 id="step-3-add-the-remote-repository"><a class="toclink" href="../../2024/05/07/repository-strategy-how-to-test-branching-strategy-in-local-repository/#step-3-add-the-remote-repository"><strong>Step 3: Add the remote repository</strong></a></h3>
+<p>To add the remote repository to your local repository, run the following command:</p>
+<div class="language-pwsh highlight"><pre><span></span><code><span id="__span-18-1"><a href="#__codelineno-18-1" id="__codelineno-18-1" name="__codelineno-18-1"></a><span class="n">git</span> <span class="n">remote</span> <span class="n">add</span> <span class="n">origin</span> <span class="p">../</span><span class="n">my-repo</span><span class="p">.</span><span class="n">git</span>
+</span></code></pre></div>
+<p>In mi case, I have used absolute path, c:\users\myuser\localrepo\my-repo.git:</p>
+<div class="language-pwsh highlight"><pre><span></span><code><span id="__span-19-1"><a href="#__codelineno-19-1" id="__codelineno-19-1" name="__codelineno-19-1"></a><span class="n">git</span> <span class="n">remote</span> <span class="n">add</span> <span class="n">origin</span> <span class="n">c</span><span class="p">:\</span><span class="n">users</span><span class="p">\</span><span class="n">myuser</span><span class="p">\</span><span class="n">localrepo</span><span class="p">\</span><span class="n">my-repo</span><span class="p">.</span><span class="n">git</span>
+</span></code></pre></div>
+<p>This command adds the remote repository as the <code>origin</code> remote.</p>
+<h3 id="step-4-create-a-new-file-make-first-commit-and-push"><a class="toclink" href="../../2024/05/07/repository-strategy-how-to-test-branching-strategy-in-local-repository/#step-4-create-a-new-file-make-first-commit-and-push">*<em>Step 4: Create a new file, make first commit and push</em></a></h3>
+<p>To create a new file in your local repository, run the following command:</p>
+<div class="language-pwsh highlight"><pre><span></span><code><span id="__span-20-1"><a href="#__codelineno-20-1" id="__codelineno-20-1" name="__codelineno-20-1"></a><span class="nb">echo </span><span class="s2">"Hello, World!"</span> <span class="p">&gt;</span> <span class="n">hello</span><span class="p">.</span><span class="n">txt</span>
+</span></code></pre></div>
+<p>This command creates a new file called <code>hello.txt</code> with the content <code>Hello, World!</code>.</p>
+<p>To make the first commit to your local repository, run the following command:</p>
+<div class="language-pwsh highlight"><pre><span></span><code><span id="__span-21-1"><a href="#__codelineno-21-1" id="__codelineno-21-1" name="__codelineno-21-1"></a><span class="n">git</span> <span class="n">add</span> <span class="n">hello</span><span class="p">.</span><span class="n">txt</span>
+</span><span id="__span-21-2"><a href="#__codelineno-21-2" id="__codelineno-21-2" name="__codelineno-21-2"></a><span class="n">git</span> <span class="n">commit</span> <span class="n">-m</span> <span class="s2">"Initial commit"</span>
+</span></code></pre></div>
+<p>This command stages the <code>hello.txt</code> file and commits it to the repository with the message <code>Initial commit</code>.</p>
+<p>To push the changes to the remote repository, run the following command:</p>
+<div class="language-pwsh highlight"><pre><span></span><code><span id="__span-22-1"><a href="#__codelineno-22-1" id="__codelineno-22-1" name="__codelineno-22-1"></a><span class="n">git</span> <span class="n">push</span> <span class="n">-u</span> <span class="n">origin</span> <span class="n">master</span>
+</span></code></pre></div>
+<p>This command pushes the changes to the <code>master</code> branch of the remote repository.</p>
+<h3 id="step-5-create-a-new-branch-and-push-it-to-the-remote-repository"><a class="toclink" href="../../2024/05/07/repository-strategy-how-to-test-branching-strategy-in-local-repository/#step-5-create-a-new-branch-and-push-it-to-the-remote-repository"><strong>Step 5: Create a new branch and push it to the remote repository</strong></a></h3>
+<p>To create a new branch in your local repository, run the following command:</p>
+<div class="language-pwsh highlight"><pre><span></span><code><span id="__span-23-1"><a href="#__codelineno-23-1" id="__codelineno-23-1" name="__codelineno-23-1"></a><span class="n">git</span> <span class="n">checkout</span> <span class="n">-b</span> <span class="n">feature-branch</span>
+</span></code></pre></div>
+<p>This command creates a new branch called <code>feature-branch</code> and switches to it.</p>
+<h3 id="conclusion"><a class="toclink" href="../../2024/05/07/repository-strategy-how-to-test-branching-strategy-in-local-repository/#conclusion">Conclusion</a></h3>
+<p>By following these steps, you can test your branching strategy in a local repository before pushing changes to a remote repository. This allows you to experiment with different branching strategies and workflows without affecting your production codebase.</p>
+</div>
+</article>
+<article class="md-post md-post--excerpt">
+<header class="md-post__header">
+<nav class="md-post__authors md-typeset">
+<span class="md-author">
+<img alt="Rafael Fernández" src="https://avatars.githubusercontent.com/u/39990341"/>
+</span>
+</nav>
+<div class="md-post__meta md-meta">
+<ul class="md-meta__list">
+<li class="md-meta__item">
+<time datetime="2024-05-06 00:00:00">May 6, 2024</time></li>
+<li class="md-meta__item">
+            in
+            
+              <a class="md-meta__link" href="../../category/m365/">M365</a></li>
+<li class="md-meta__item">
+            
+              2 min read
+            
+          </li>
+</ul>
+</div>
+</header>
+<div class="md-post__content md-typeset">
+<h2 id="configure-your-teams-meetings-options-to-improve-your-collaboration-experience"><a class="toclink" href="../../2024/05/06/configure-your-teams-meetings-options-to-improve-your-collaboration-experience/">Configure your Teams meetings options to improve your collaboration experience</a></h2>
+<p>Microsoft Teams is a powerful collaboration tool that allows you to communicate and work with your team members from anywhere in the world. One of the key features of Teams is the ability to schedule and host meetings with your colleagues, clients, or partners.</p>
+<p>In this blog post, we will show you how to configure your Teams meetings options to improve your collaboration experience and make your meetings more productive.</p>
+<h3 id="what-are-teams-meetings-options"><a class="toclink" href="../../2024/05/06/configure-your-teams-meetings-options-to-improve-your-collaboration-experience/#what-are-teams-meetings-options">What are Teams meetings options?</a></h3>
+<p>Teams meetings options are settings that allow you to control various aspects of your meetings, such as who can bypass the lobby, who can present, and who can record the meeting. By configuring these options, you can ensure that your meetings run smoothly and securely.</p>
+<h3 id="how-to-configure-your-teams-meetings-options"><a class="toclink" href="../../2024/05/06/configure-your-teams-meetings-options-to-improve-your-collaboration-experience/#how-to-configure-your-teams-meetings-options">How to configure your Teams meetings options</a></h3>
+<p>To configure your Teams meetings options, follow these steps:</p>
+<ol>
+<li>Open the Teams app on your computer or mobile device.</li>
+<li>Click on the calendar icon in the left-hand menu to view your calendar.</li>
+<li>Click on the "Meetings" tab at the top of the screen to view your upcoming meetings.</li>
+<li>Click on the meeting you want to configure to open the meeting details.</li>
+<li>Click on the "Meeting options" link at the bottom of the meeting details window.</li>
+<li>Configure the meeting options according to your preferences. You can control who can bypass the lobby, who can present, who can record the meeting, and other settings.</li>
+</ol>
+<h3 id="key-settings-to-configure"><a class="toclink" href="../../2024/05/06/configure-your-teams-meetings-options-to-improve-your-collaboration-experience/#key-settings-to-configure">Key settings to configure</a></h3>
+<p>Here are some key settings that you may want to configure in your Teams meetings options:</p>
+<ul>
+<li>
+<p><strong>Who can bypass the lobby:</strong> By default, all participants are sent to the lobby when they join a meeting. You can configure this setting to allow participants to bypass the lobby and join the meeting directly.</p>
+</li>
+<li>
+<p><strong>Who can present:</strong> By default, only the meeting organizer can present in a meeting. You can configure this setting to allow other participants to present as well.</p>
+</li>
+<li>
+<p><strong>Who can record the meeting:</strong> By default, only the meeting organizer can record a meeting. You can configure this setting to allow other participants to record the meeting as well.</p>
+</li>
+<li>
+<p><strong>Automatically admit people:</strong> By default, participants need to be admitted to the meeting by the organizer or a presenter. You can configure this setting to automatically admit people to the meeting.</p>
+</li>
+<li>
+<p><strong>Allow attendees to unmute:</strong> By default, attendees are muted when they join a meeting. You can configure this setting to allow attendees to unmute themselves.</p>
+</li>
+</ul>
+<h3 id="conclusion"><a class="toclink" href="../../2024/05/06/configure-your-teams-meetings-options-to-improve-your-collaboration-experience/#conclusion">Conclusion</a></h3>
+<p>Configuring your Teams meetings options is a great way to improve your collaboration experience and make your meetings more productive. By configuring these settings, you can ensure that your meetings run smoothly and securely, allowing you to focus on the task at hand.</p>
+</div>
+</article>
+<article class="md-post md-post--excerpt">
+<header class="md-post__header">
+<nav class="md-post__authors md-typeset">
+<span class="md-author">
+<img alt="Rafael Fernández" src="https://avatars.githubusercontent.com/u/39990341"/>
+</span>
+</nav>
+<div class="md-post__meta md-meta">
+<ul class="md-meta__list">
+<li class="md-meta__item">
+<time datetime="2024-05-04 00:00:00">May 4, 2024</time></li>
+<li class="md-meta__item">
+            in
+            
+              <a class="md-meta__link" href="../../category/azure-services/">Azure Services</a>, 
+              <a class="md-meta__link" href="../../category/snowflake/">Snowflake</a></li>
+<li class="md-meta__item">
+            
+              5 min read
+            
+          </li>
+</ul>
+</div>
+</header>
+<div class="md-post__content md-typeset">
+<h2 id="reduce-your-attack-surface-in-snowflake-when-using-from-azure"><a class="toclink" href="../../2024/05/04/reduce-your-attack-surface-in-snowflake-when-using-from-azure/">Reduce your attack surface in Snowflake when using from Azure</a></h2>
+<p>When it comes to data security, reducing your attack surface is a crucial step. This post will guide you on how to minimize your attack surface when using Snowflake with Azure or Power BI.</p>
+<h3 id="what-is-snowflake"><a class="toclink" href="../../2024/05/04/reduce-your-attack-surface-in-snowflake-when-using-from-azure/#what-is-snowflake">What is Snowflake?</a></h3>
+<p>Snowflake is a cloud-based data warehousing platform that allows you to store and analyze large amounts of data. It is known for its scalability, performance, and ease of use. Snowflake is popular among organizations that need to process large volumes of data quickly and efficiently.</p>
+<h3 id="what-is-an-attack-surface"><a class="toclink" href="../../2024/05/04/reduce-your-attack-surface-in-snowflake-when-using-from-azure/#what-is-an-attack-surface">What is an Attack Surface?</a></h3>
+<p>An attack surface refers to the number of possible ways an attacker can get into a system and potentially extract data. The larger the attack surface, the more opportunities there are for attackers. Therefore, reducing the attack surface is a key aspect of securing your systems.</p>
+<p>How to Reduce Your Attack Surface in Snowflake:</p>
+<ol>
+<li>
+<p>Use Azure Private Link
+Azure Private Link provides private connectivity from a virtual network to Snowflake, isolating your traffic from the public internet. It significantly reduces the attack surface by ensuring that traffic between Azure and Snowflake doesn't traverse over the public internet.</p>
+</li>
+<li>
+<p>Implement Network Policies
+Snowflake allows you to define network policies that restrict access based on IP addresses. By limiting access to trusted IP ranges, you can reduce the potential points of entry for an attacker.</p>
+</li>
+<li>
+<p>Enable Multi-Factor Authentication (MFA)
+MFA adds an extra layer of security by requiring users to provide at least two forms of identification before accessing the Snowflake account. This makes it harder for attackers to gain unauthorized access, even if they have your password.</p>
+</li>
+</ol>
+<p>In this blog post, we will show you how to reduce your attack surface when using Snowflake from Azure or Power BI by using Azure Private Link</p>
+<h3 id="default-snowflake-architecture"><a class="toclink" href="../../2024/05/04/reduce-your-attack-surface-in-snowflake-when-using-from-azure/#default-snowflake-architecture">Default Snowflake architecture</a></h3>
+<p>By default, Snowflake is accessible from the public internet. This means that anyone with the right credentials can access your Snowflake account from anywhere in the world, you can limit access to specific IP addresses, but this still exposes your Snowflake account to potential attackers. </p>
+<p>This is a security risk because it exposes your Snowflake account to potential attackers.</p>
+<h3 id="using-azure-private-link-with-snowflake"><a class="toclink" href="../../2024/05/04/reduce-your-attack-surface-in-snowflake-when-using-from-azure/#using-azure-private-link-with-snowflake">Using Azure Private Link with Snowflake</a></h3>
+<h4 id="simple-architecture-diagram-of-azure-private-link-with-snowflake"><a class="toclink" href="../../2024/05/04/reduce-your-attack-surface-in-snowflake-when-using-from-azure/#simple-architecture-diagram-of-azure-private-link-with-snowflake">Simple Architecture Diagram of Azure Private Link with Snowflake</a></h4>
+<p>The architecture of using Azure Private Link with Snowflake is as follows:</p>
+<pre class="mermaid"><code>    graph TD
+    A[Virtual Network] --&gt;|Private Endpoint| B[Snowflake]
+    B --&gt;|Private Link Service| C[Private Link Resource]
+    C --&gt;|Private Connection| D[Virtual Network]
+    D --&gt;|Subnet| E[Private Endpoint]    
+</code></pre>
+<h4 id="architecture-components"><a class="toclink" href="../../2024/05/04/reduce-your-attack-surface-in-snowflake-when-using-from-azure/#architecture-components">Architecture Components</a></h4>
+<h4 id="requirements"><a class="toclink" href="../../2024/05/04/reduce-your-attack-surface-in-snowflake-when-using-from-azure/#requirements">Requirements</a></h4>
+<p>Before you can use Azure Private Link with Snowflake, you need to have the following requirements in place:</p>
+<ul>
+<li>A Snowflake account with ACCOUNTADMIN privileges</li>
+<li>Business Critical or higher Snowflake edition</li>
+<li>An Azure subscription with a Resource Group  and privileges to create:<ul>
+<li>Virtual Network</li>
+<li>Subnet</li>
+<li>Private Endpoint</li>
+</ul>
+</li>
+</ul>
+<h4 id="step-by-step-guide"><a class="toclink" href="../../2024/05/04/reduce-your-attack-surface-in-snowflake-when-using-from-azure/#step-by-step-guide">Step-by-Step Guide</a></h4>
+<div class="admonition info">
+<p class="admonition-title">Note</p>
+<p>Replace the placeholders with your actual values, that is a orientation guide.</p>
+</div>
+<h5 id="step-1-retrieve-dedailts-of-your-snowflake-account"><a class="toclink" href="../../2024/05/04/reduce-your-attack-surface-in-snowflake-when-using-from-azure/#step-1-retrieve-dedailts-of-your-snowflake-account">Step 1: Retrieve Dedailts of your Snowflake Account</a></h5>
+<div class="language-sql highlight"><pre><span></span><code><span id="__span-18-1"><a href="#__codelineno-18-1" id="__codelineno-18-1" name="__codelineno-18-1"></a><span class="n">USE</span><span class="w"> </span><span class="k">ROLE</span><span class="w"> </span><span class="n">ACCOUNTADMIN</span><span class="p">;</span>
+</span><span id="__span-18-2"><a href="#__codelineno-18-2" id="__codelineno-18-2" name="__codelineno-18-2"></a><span class="k">select</span><span class="w"> </span><span class="k">select</span><span class="w"> </span><span class="k">SYSTEM</span><span class="err">$</span><span class="n">GET_PRIVATELINK_CONFIG</span><span class="p">();</span>
+</span></code></pre></div>
+<h5 id="step-2-create-a-virtual-network"><a class="toclink" href="../../2024/05/04/reduce-your-attack-surface-in-snowflake-when-using-from-azure/#step-2-create-a-virtual-network">Step 2: Create a Virtual Network</a></h5>
+<p>A virtual network is a private network that allows you to securely connect your resources in Azure. To create a virtual network with azcli, follow these steps:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-19-1"><a href="#__codelineno-19-1" id="__codelineno-19-1" name="__codelineno-19-1"></a>az<span class="w"> </span>network<span class="w"> </span>vnet<span class="w"> </span>create<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-19-2"><a href="#__codelineno-19-2" id="__codelineno-19-2" name="__codelineno-19-2"></a><span class="w">  </span>--name<span class="w"> </span>myVnet<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-19-3"><a href="#__codelineno-19-3" id="__codelineno-19-3" name="__codelineno-19-3"></a><span class="w">  </span>--resource-group<span class="w"> </span>myResourceGroup<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-19-4"><a href="#__codelineno-19-4" id="__codelineno-19-4" name="__codelineno-19-4"></a><span class="w">  </span>--address-prefix
+</span><span id="__span-19-5"><a href="#__codelineno-19-5" id="__codelineno-19-5" name="__codelineno-19-5"></a><span class="w">  </span>--subnet-name<span class="w"> </span>mySubnet<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-19-6"><a href="#__codelineno-19-6" id="__codelineno-19-6" name="__codelineno-19-6"></a><span class="w">  </span>--subnet-prefix
+</span><span id="__span-19-7"><a href="#__codelineno-19-7" id="__codelineno-19-7" name="__codelineno-19-7"></a><span class="w">  </span>--enable-private-endpoint-network-policies<span class="w"> </span><span class="nb">true</span>
+</span></code></pre></div>
+<h5 id="step-3-create-a-private-endpoint"><a class="toclink" href="../../2024/05/04/reduce-your-attack-surface-in-snowflake-when-using-from-azure/#step-3-create-a-private-endpoint">Step 3: Create a Private Endpoint</a></h5>
+<p>The first step is to create a private endpoint in Azure. A private endpoint is a network interface that connects your virtual network to the Snowflake service. This allows you to access Snowflake using a private IP address, rather than a public one.</p>
+<p>To create a private endpoint with azcli, follow these steps:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-20-1"><a href="#__codelineno-20-1" id="__codelineno-20-1" name="__codelineno-20-1"></a>az<span class="w"> </span>network<span class="w"> </span>private-endpoint<span class="w"> </span>create<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-20-2"><a href="#__codelineno-20-2" id="__codelineno-20-2" name="__codelineno-20-2"></a><span class="w">  </span>--name<span class="w"> </span>mySnowflakeEndpoint<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-20-3"><a href="#__codelineno-20-3" id="__codelineno-20-3" name="__codelineno-20-3"></a><span class="w">  </span>--resource-group<span class="w"> </span>myResourceGroup<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-20-4"><a href="#__codelineno-20-4" id="__codelineno-20-4" name="__codelineno-20-4"></a><span class="w">  </span>--vnet-name<span class="w"> </span>myVnet<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-20-5"><a href="#__codelineno-20-5" id="__codelineno-20-5" name="__codelineno-20-5"></a><span class="w">  </span>--subnet<span class="w"> </span>mySubnet<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-20-6"><a href="#__codelineno-20-6" id="__codelineno-20-6" name="__codelineno-20-6"></a><span class="w">  </span>--private-connection-resource-id<span class="w"> </span>/subscriptions/&lt;subscription-id&gt;/resourceGroups/&lt;resource-group&gt;/providers/Microsoft.Network/privateLinkServices/&lt;Snowflake-service-name&gt;<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-20-7"><a href="#__codelineno-20-7" id="__codelineno-20-7" name="__codelineno-20-7"></a><span class="w">  </span>--connection-name<span class="w"> </span>mySnowflakeConnection
+</span></code></pre></div>
+<p>Check the status of the private endpoint:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-21-1"><a href="#__codelineno-21-1" id="__codelineno-21-1" name="__codelineno-21-1"></a>az<span class="w"> </span>network<span class="w"> </span>private-endpoint<span class="w"> </span>show<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-21-2"><a href="#__codelineno-21-2" id="__codelineno-21-2" name="__codelineno-21-2"></a><span class="w">  </span>--name<span class="w"> </span>mySnowflakeEndpoint<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-21-3"><a href="#__codelineno-21-3" id="__codelineno-21-3" name="__codelineno-21-3"></a><span class="w">  </span>--resource-group<span class="w"> </span>myResourceGroup
+</span></code></pre></div>
+<h5 id="step-4-authorize-the-private-endpoint"><a class="toclink" href="../../2024/05/04/reduce-your-attack-surface-in-snowflake-when-using-from-azure/#step-4-authorize-the-private-endpoint">Step 4: Authorize the Private Endpoint</a></h5>
+<p>The next step is to authorize the private endpoint to access the Snowflake service. </p>
+<p>Retrieve the Resource ID of the private endpoint:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-22-1"><a href="#__codelineno-22-1" id="__codelineno-22-1" name="__codelineno-22-1"></a>az<span class="w"> </span>network<span class="w"> </span>private-endpoint<span class="w"> </span>show<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-22-2"><a href="#__codelineno-22-2" id="__codelineno-22-2" name="__codelineno-22-2"></a><span class="w">  </span>--name<span class="w"> </span>mySnowflakeEndpoint<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-22-3"><a href="#__codelineno-22-3" id="__codelineno-22-3" name="__codelineno-22-3"></a><span class="w">  </span>--resource-group<span class="w"> </span>myResourceGroup
+</span></code></pre></div>
+<p>Create a temporary access token that Snowflake can use to authorize the private endpoint:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-23-1"><a href="#__codelineno-23-1" id="__codelineno-23-1" name="__codelineno-23-1"></a>az<span class="w"> </span>account<span class="w"> </span>get-access-token<span class="w"> </span>--subscription<span class="w"> </span>&lt;subscription-id&gt;
+</span></code></pre></div>
+<p>Authorize the private endpoint in Snowflake:</p>
+<div class="language-sql highlight"><pre><span></span><code><span id="__span-24-1"><a href="#__codelineno-24-1" id="__codelineno-24-1" name="__codelineno-24-1"></a><span class="n">USE</span><span class="w"> </span><span class="k">ROLE</span><span class="w"> </span><span class="n">ACCOUNTADMIN</span><span class="p">;</span>
+</span><span id="__span-24-2"><a href="#__codelineno-24-2" id="__codelineno-24-2" name="__codelineno-24-2"></a><span class="k">select</span><span class="w"> </span><span class="k">SYSTEM</span><span class="err">$</span><span class="n">AUTHORIZE_PRIVATELINK</span><span class="p">(</span><span class="s1">'&lt;resource-id&gt;'</span><span class="p">,</span><span class="w"> </span><span class="s1">'&lt;access-token&gt;'</span><span class="p">);</span>
+</span></code></pre></div>
+<h4 id="step-5-block-public-access"><a class="toclink" href="../../2024/05/04/reduce-your-attack-surface-in-snowflake-when-using-from-azure/#step-5-block-public-access">Step 5: Block Public Access</a></h4>
+<p>To further reduce your attack surface, you can block public access to your Snowflake account. This ensures that all traffic to and from Snowflake goes through the private endpoint, reducing the risk of unauthorized access.</p>
+<p>To block public access to your Snowflake account, you need to use Network Policy, follow these steps:</p>
+<div class="language-sql highlight"><pre><span></span><code><span id="__span-25-1"><a href="#__codelineno-25-1" id="__codelineno-25-1" name="__codelineno-25-1"></a><span class="n">USE</span><span class="w"> </span><span class="k">ROLE</span><span class="w"> </span><span class="n">ACCOUNTADMIN</span><span class="p">;</span>
+</span><span id="__span-25-2"><a href="#__codelineno-25-2" id="__codelineno-25-2" name="__codelineno-25-2"></a><span class="k">CREATE</span><span class="w"> </span><span class="n">NETWORK</span><span class="w"> </span><span class="k">RULE</span><span class="w"> </span><span class="n">allow_access_rule</span>
+</span><span id="__span-25-3"><a href="#__codelineno-25-3" id="__codelineno-25-3" name="__codelineno-25-3"></a><span class="w">  </span><span class="k">MODE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">INGRESS</span>
+</span><span id="__span-25-4"><a href="#__codelineno-25-4" id="__codelineno-25-4" name="__codelineno-25-4"></a><span class="w">  </span><span class="k">TYPE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">IPV4</span>
+</span><span id="__span-25-5"><a href="#__codelineno-25-5" id="__codelineno-25-5" name="__codelineno-25-5"></a><span class="w">  </span><span class="n">VALUE_LIST</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="s1">'192.168.1.99/24'</span><span class="p">);</span>
+</span><span id="__span-25-6"><a href="#__codelineno-25-6" id="__codelineno-25-6" name="__codelineno-25-6"></a>
+</span><span id="__span-25-7"><a href="#__codelineno-25-7" id="__codelineno-25-7" name="__codelineno-25-7"></a><span class="k">CREATE</span><span class="w"> </span><span class="n">NETWORK</span><span class="w"> </span><span class="k">RULE</span><span class="w"> </span><span class="n">block_access_rule</span>
+</span><span id="__span-25-8"><a href="#__codelineno-25-8" id="__codelineno-25-8" name="__codelineno-25-8"></a><span class="w">  </span><span class="k">MODE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">INGRESS</span>
+</span><span id="__span-25-9"><a href="#__codelineno-25-9" id="__codelineno-25-9" name="__codelineno-25-9"></a><span class="w">  </span><span class="k">TYPE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">IPV4</span>
+</span><span id="__span-25-10"><a href="#__codelineno-25-10" id="__codelineno-25-10" name="__codelineno-25-10"></a><span class="w">  </span><span class="n">VALUE_LIST</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="s1">'0.0.0.0/0'</span><span class="p">);</span>
+</span><span id="__span-25-11"><a href="#__codelineno-25-11" id="__codelineno-25-11" name="__codelineno-25-11"></a>
+</span><span id="__span-25-12"><a href="#__codelineno-25-12" id="__codelineno-25-12" name="__codelineno-25-12"></a><span class="k">CREATE</span><span class="w"> </span><span class="n">NETWORK</span><span class="w"> </span><span class="n">POLICY</span><span class="w"> </span><span class="n">public_network_policy</span>
+</span><span id="__span-25-13"><a href="#__codelineno-25-13" id="__codelineno-25-13" name="__codelineno-25-13"></a><span class="w">  </span><span class="n">ALLOWED_NETWORK_RULE_LIST</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="s1">'allow_access_rule'</span><span class="p">)</span>
+</span><span id="__span-25-14"><a href="#__codelineno-25-14" id="__codelineno-25-14" name="__codelineno-25-14"></a><span class="w">  </span><span class="n">BLOCKED_NETWORK_RULE_LIST</span><span class="o">=</span><span class="p">(</span><span class="s1">'block_access_rule'</span><span class="p">);</span>
+</span></code></pre></div>
+<p>It's highly recommended to follow the best practices for network policies in Snowflake. You can find more information here:  https://docs.snowflake.com/en/user-guide/network-policies#best-practices</p>
+<h4 id="step-6-test-the-connection"><a class="toclink" href="../../2024/05/04/reduce-your-attack-surface-in-snowflake-when-using-from-azure/#step-6-test-the-connection">Step 6: Test the Connection</a></h4>
+<p>To test the connection between your virtual network and Snowflake, you can use the SnowSQL client. </p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-26-1"><a href="#__codelineno-26-1" id="__codelineno-26-1" name="__codelineno-26-1"></a>snowsql<span class="w"> </span>-a<span class="w"> </span>&lt;account_name&gt;<span class="w"> </span>-u<span class="w"> </span>&lt;username&gt;<span class="w"> </span>-r<span class="w"> </span>&lt;role&gt;<span class="w"> </span>-w<span class="w"> </span>&lt;warehouse&gt;<span class="w"> </span>-d<span class="w"> </span>&lt;database&gt;<span class="w"> </span>-s<span class="w"> </span>&lt;schema&gt;
+</span></code></pre></div>
+<h3 id="internal-stages-with-azure-blob-private-endpoints"><a class="toclink" href="../../2024/05/04/reduce-your-attack-surface-in-snowflake-when-using-from-azure/#internal-stages-with-azure-blob-private-endpoints">Internal Stages with Azure Blob Private Endpoints</a></h3>
+<p>If you are using Azure Blob Storage as an internal stage in Snowflake, you can also use Azure Private Link to secure the connection between Snowflake and Azure Blob Storage.</p>
+<p>It's recommended to use Azure Blob Storage with Private Endpoints to ensure that your data is secure and that you are reducing your attack surface, you can check the following documentation for more information: <a href="https://docs.snowflake.com/en/user-guide/private-internal-stages-azure">Azure Private Endpoints for Internal Stages</a> to learn how to configure Azure Blob Storage with Private Endpoints in Snowflake.</p>
+<h3 id="conclusion"><a class="toclink" href="../../2024/05/04/reduce-your-attack-surface-in-snowflake-when-using-from-azure/#conclusion">Conclusion</a></h3>
+<p>Reducing your attack surface is a critical aspect of securing your systems. By using Azure Private Link with Snowflake, you can significantly reduce the risk of unauthorized access and data breaches. Follow the steps outlined in this blog post to set up Azure Private Link with Snowflake and start securing your data today.</p>
+<h3 id="references"><a class="toclink" href="../../2024/05/04/reduce-your-attack-surface-in-snowflake-when-using-from-azure/#references">References</a></h3>
+<ul>
+<li><a href="https://docs.microsoft.com/en-us/azure/private-link/">Azure Private Link documentation</a></li>
+<li><a href="https://docs.snowflake.com/en/user-guide/intro-editions">Snowflake Editions</a></li>
+<li><a href="https://docs.snowflake.com/en/sql-reference/functions/system_get_privatelink">$GET_PRIVATELINK_CONFIG();</a></li>
+<li><a href="https://docs.snowflake.com/en/user-guide/network-policies">Snowflake Network Policies</a></li>
+<li><a href="https://docs.snowflake.com/en/user-guide/private-internal-stages-azure">Azure Private Endpoints for Internal Stages</a></li>
+</ul>
+</div>
+</article>
+<article class="md-post md-post--excerpt">
+<header class="md-post__header">
+<nav class="md-post__authors md-typeset">
+<span class="md-author">
+<img alt="Rafael Fernández" src="https://avatars.githubusercontent.com/u/39990341"/>
+</span>
+</nav>
+<div class="md-post__meta md-meta">
+<ul class="md-meta__list">
+<li class="md-meta__item">
+<time datetime="2024-05-03 00:00:00">May 3, 2024</time></li>
+<li class="md-meta__item">
+            in
+            
+              <a class="md-meta__link" href="../../category/devops/">DevOps</a></li>
+<li class="md-meta__item">
+            
+              3 min read
+            
+          </li>
+</ul>
+</div>
+</header>
+<div class="md-post__content md-typeset">
+<h2 id="nested-structures-with-optional-attributes-and-dynamic-blocks"><a class="toclink" href="../../2024/05/03/nested-structures-with-optional-attributes-and-dynamic-blocks/">Nested Structures with Optional Attributes and Dynamic Blocks</a></h2>
+<p>In this post, I will explain how to define nested structures with optional attributes and it's use dynamic blocks in Terraform.</p>
+<h3 id="nested-structures"><a class="toclink" href="../../2024/05/03/nested-structures-with-optional-attributes-and-dynamic-blocks/#nested-structures">Nested Structures</a></h3>
+<p>Terraform allows you to define nested structures to represent complex data types in your configuration. Nested structures are useful when you need to group related attributes together or define a data structure that contains multiple fields.</p>
+<p>For example, you might define a nested structure to represent a virtual machine with multiple attributes, such as size, image, and network configuration:</p>
+<div class="language-hcl highlight"><pre><span></span><code><span id="__span-8-1"><a href="#__codelineno-8-1" id="__codelineno-8-1" name="__codelineno-8-1"></a><span class="kr">variable</span><span class="w"> </span><span class="nv">"vm"</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-8-2"><a href="#__codelineno-8-2" id="__codelineno-8-2" name="__codelineno-8-2"></a><span class="w">  </span><span class="na">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">object</span><span class="p">({</span>
+</span><span id="__span-8-3"><a href="#__codelineno-8-3" id="__codelineno-8-3" name="__codelineno-8-3"></a><span class="w">    </span><span class="na">size</span><span class="w">     </span><span class="o">=</span><span class="w"> </span><span class="kt">string</span>
+</span><span id="__span-8-4"><a href="#__codelineno-8-4" id="__codelineno-8-4" name="__codelineno-8-4"></a><span class="w">    </span><span class="na">image</span><span class="w">    </span><span class="o">=</span><span class="w"> </span><span class="kt">string</span>
+</span><span id="__span-8-5"><a href="#__codelineno-8-5" id="__codelineno-8-5" name="__codelineno-8-5"></a><span class="w">    </span><span class="na">network</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="kt">object</span><span class="p">({</span>
+</span><span id="__span-8-6"><a href="#__codelineno-8-6" id="__codelineno-8-6" name="__codelineno-8-6"></a><span class="w">      </span><span class="na">subnet</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">string</span>
+</span><span id="__span-8-7"><a href="#__codelineno-8-7" id="__codelineno-8-7" name="__codelineno-8-7"></a><span class="w">      </span><span class="na">security_group</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">string</span>
+</span><span id="__span-8-8"><a href="#__codelineno-8-8" id="__codelineno-8-8" name="__codelineno-8-8"></a><span class="w">    </span><span class="p">})</span>
+</span><span id="__span-8-9"><a href="#__codelineno-8-9" id="__codelineno-8-9" name="__codelineno-8-9"></a><span class="w">  </span><span class="p">})</span>
+</span><span id="__span-8-10"><a href="#__codelineno-8-10" id="__codelineno-8-10" name="__codelineno-8-10"></a><span class="p">}</span>
+</span><span id="__span-8-11"><a href="#__codelineno-8-11" id="__codelineno-8-11" name="__codelineno-8-11"></a>
+</span><span id="__span-8-12"><a href="#__codelineno-8-12" id="__codelineno-8-12" name="__codelineno-8-12"></a><span class="kr">resource</span><span class="w"> </span><span class="nc">"azurerm_virtual_machine"</span><span class="w"> </span><span class="nv">"example"</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-8-13"><a href="#__codelineno-8-13" id="__codelineno-8-13" name="__codelineno-8-13"></a><span class="w">  </span><span class="na">name</span><span class="w">     </span><span class="o">=</span><span class="w"> </span><span class="s2">"example-vm"</span>
+</span><span id="__span-8-14"><a href="#__codelineno-8-14" id="__codelineno-8-14" name="__codelineno-8-14"></a><span class="w">  </span><span class="na">size</span><span class="w">     </span><span class="o">=</span><span class="w"> </span><span class="nv">var.vm.size</span>
+</span><span id="__span-8-15"><a href="#__codelineno-8-15" id="__codelineno-8-15" name="__codelineno-8-15"></a><span class="w">  </span><span class="na">image</span><span class="w">    </span><span class="o">=</span><span class="w"> </span><span class="nv">var.vm.image</span>
+</span><span id="__span-8-16"><a href="#__codelineno-8-16" id="__codelineno-8-16" name="__codelineno-8-16"></a><span class="w">  </span><span class="na">subnet</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="nv">var.vm.network.subnet</span>
+</span><span id="__span-8-17"><a href="#__codelineno-8-17" id="__codelineno-8-17" name="__codelineno-8-17"></a><span class="w">  </span><span class="na">security_group</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">var.vm.network.security_group</span>
+</span><span id="__span-8-18"><a href="#__codelineno-8-18" id="__codelineno-8-18" name="__codelineno-8-18"></a><span class="p">}</span>
+</span></code></pre></div>
+<p>In this example, the <code>vm</code> variable defines a nested structure with three attributes: <code>size</code>, <code>image</code>, and <code>network</code>. The <code>network</code> attribute is itself a nested structure with two attributes: <code>subnet</code> and <code>security_group</code>.</p>
+<h3 id="optional-attributes"><a class="toclink" href="../../2024/05/03/nested-structures-with-optional-attributes-and-dynamic-blocks/#optional-attributes">Optional Attributes</a></h3>
+<p>If you have an attribute that is optional, you can define it as an optional attribute in your configuration. Optional attributes are useful when you want to provide a default value for an attribute but allow users to override it if needed.</p>
+<p>If optional doesn't works,  Terraform allows you to define your variables as <code>any</code> type, but it's not recommended because it can lead to errors and make your configuration less maintainable. It's better to define your variables with the correct type and use optional attributes when needed, but some cases it's necessary to use <code>any</code> and <code>null</code> values, you can minimize the risk of errors by providing a good description of the variable and its expected values.</p>
+<p>For example, you might define an optional attribute for the <code>security_group</code> in the <code>network</code> structure:</p>
+<div class="language-hcl highlight"><pre><span></span><code><span id="__span-9-1"><a href="#__codelineno-9-1" id="__codelineno-9-1" name="__codelineno-9-1"></a><span class="kr">variable</span><span class="w"> </span><span class="nv">"vm"</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-9-2"><a href="#__codelineno-9-2" id="__codelineno-9-2" name="__codelineno-9-2"></a><span class="w">  </span><span class="na">description</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="dl">DESCRIPTION</span>
+</span><span id="__span-9-3"><a href="#__codelineno-9-3" id="__codelineno-9-3" name="__codelineno-9-3"></a><span class="sh">  Virtual machine configuration.</span>
+</span><span id="__span-9-4"><a href="#__codelineno-9-4" id="__codelineno-9-4" name="__codelineno-9-4"></a><span class="sh">  The following attributes are required:</span>
+</span><span id="__span-9-5"><a href="#__codelineno-9-5" id="__codelineno-9-5" name="__codelineno-9-5"></a><span class="sh">  - size: The size of the virtual machine.</span>
+</span><span id="__span-9-6"><a href="#__codelineno-9-6" id="__codelineno-9-6" name="__codelineno-9-6"></a><span class="sh">  - image: The image for the virtual machine.</span>
+</span><span id="__span-9-7"><a href="#__codelineno-9-7" id="__codelineno-9-7" name="__codelineno-9-7"></a><span class="sh">  - network: The network configuration for the virtual machine.</span>
+</span><span id="__span-9-8"><a href="#__codelineno-9-8" id="__codelineno-9-8" name="__codelineno-9-8"></a><span class="sh">  The network configuration should have the following attributes:</span>
+</span><span id="__span-9-9"><a href="#__codelineno-9-9" id="__codelineno-9-9" name="__codelineno-9-9"></a><span class="sh">  - subnet: The subnet for the virtual machine.</span>
+</span><span id="__span-9-10"><a href="#__codelineno-9-10" id="__codelineno-9-10" name="__codelineno-9-10"></a><span class="sh">  - security_group: The security group for the virtual machine.</span>
+</span><span id="__span-9-11"><a href="#__codelineno-9-11" id="__codelineno-9-11" name="__codelineno-9-11"></a><span class="dl">  DESCRIPTION</span>
+</span><span id="__span-9-12"><a href="#__codelineno-9-12" id="__codelineno-9-12" name="__codelineno-9-12"></a><span class="w">  </span><span class="na">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="err">any</span>
+</span><span id="__span-9-13"><a href="#__codelineno-9-13" id="__codelineno-9-13" name="__codelineno-9-13"></a><span class="w">  </span><span class="na">default</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">null</span>
+</span><span id="__span-9-14"><a href="#__codelineno-9-14" id="__codelineno-9-14" name="__codelineno-9-14"></a><span class="p">}</span>
+</span><span id="__span-9-15"><a href="#__codelineno-9-15" id="__codelineno-9-15" name="__codelineno-9-15"></a>
+</span><span id="__span-9-16"><a href="#__codelineno-9-16" id="__codelineno-9-16" name="__codelineno-9-16"></a><span class="kr">resource</span><span class="w"> </span><span class="nc">"azurerm_virtual_machine"</span><span class="w"> </span><span class="nv">"example"</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-9-17"><a href="#__codelineno-9-17" id="__codelineno-9-17" name="__codelineno-9-17"></a><span class="w">  </span><span class="na">name</span><span class="w">     </span><span class="o">=</span><span class="w"> </span><span class="s2">"example-vm"</span>
+</span><span id="__span-9-18"><a href="#__codelineno-9-18" id="__codelineno-9-18" name="__codelineno-9-18"></a><span class="w">  </span><span class="na">size</span><span class="w">     </span><span class="o">=</span><span class="w"> </span><span class="nv">var.vm.size</span>
+</span><span id="__span-9-19"><a href="#__codelineno-9-19" id="__codelineno-9-19" name="__codelineno-9-19"></a><span class="w">  </span><span class="na">image</span><span class="w">    </span><span class="o">=</span><span class="w"> </span><span class="nv">var.vm.image</span>
+</span><span id="__span-9-20"><a href="#__codelineno-9-20" id="__codelineno-9-20" name="__codelineno-9-20"></a><span class="w">  </span><span class="na">subnet</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="nv">var.vm.network.subnet</span>
+</span><span id="__span-9-21"><a href="#__codelineno-9-21" id="__codelineno-9-21" name="__codelineno-9-21"></a><span class="w">  </span><span class="na">security_group</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">var.vm.network.security_group</span>
+</span><span id="__span-9-22"><a href="#__codelineno-9-22" id="__codelineno-9-22" name="__codelineno-9-22"></a><span class="p">}</span>
+</span></code></pre></div>
+<div class="language-hcl highlight"><pre><span></span><code><span id="__span-10-1"><a href="#__codelineno-10-1" id="__codelineno-10-1" name="__codelineno-10-1"></a><span class="kr">variable</span><span class="w"> </span><span class="nv">"vm"</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-10-2"><a href="#__codelineno-10-2" id="__codelineno-10-2" name="__codelineno-10-2"></a><span class="w">  </span><span class="na">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">object</span><span class="p">({</span>
+</span><span id="__span-10-3"><a href="#__codelineno-10-3" id="__codelineno-10-3" name="__codelineno-10-3"></a><span class="w">    </span><span class="na">size</span><span class="w">     </span><span class="o">=</span><span class="w"> </span><span class="kt">string</span>
+</span><span id="__span-10-4"><a href="#__codelineno-10-4" id="__codelineno-10-4" name="__codelineno-10-4"></a><span class="w">    </span><span class="na">image</span><span class="w">    </span><span class="o">=</span><span class="w"> </span><span class="kt">string</span>
+</span><span id="__span-10-5"><a href="#__codelineno-10-5" id="__codelineno-10-5" name="__codelineno-10-5"></a><span class="w">    </span><span class="na">network</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="kt">object</span><span class="p">({</span>
+</span><span id="__span-10-6"><a href="#__codelineno-10-6" id="__codelineno-10-6" name="__codelineno-10-6"></a><span class="w">      </span><span class="na">subnet</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">string</span>
+</span><span id="__span-10-7"><a href="#__codelineno-10-7" id="__codelineno-10-7" name="__codelineno-10-7"></a><span class="w">      </span><span class="na">security_group</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="err">optional</span><span class="p">(</span><span class="kt">string</span><span class="p">)</span>
+</span><span id="__span-10-8"><a href="#__codelineno-10-8" id="__codelineno-10-8" name="__codelineno-10-8"></a><span class="w">    </span><span class="p">})</span>
+</span><span id="__span-10-9"><a href="#__codelineno-10-9" id="__codelineno-10-9" name="__codelineno-10-9"></a><span class="w">  </span><span class="p">})</span>
+</span><span id="__span-10-10"><a href="#__codelineno-10-10" id="__codelineno-10-10" name="__codelineno-10-10"></a><span class="p">}</span>
+</span><span id="__span-10-11"><a href="#__codelineno-10-11" id="__codelineno-10-11" name="__codelineno-10-11"></a>
+</span><span id="__span-10-12"><a href="#__codelineno-10-12" id="__codelineno-10-12" name="__codelineno-10-12"></a>
+</span><span id="__span-10-13"><a href="#__codelineno-10-13" id="__codelineno-10-13" name="__codelineno-10-13"></a><span class="kr">resource</span><span class="w"> </span><span class="nc">"azurerm_virtual_machine"</span><span class="w"> </span><span class="nv">"example"</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-10-14"><a href="#__codelineno-10-14" id="__codelineno-10-14" name="__codelineno-10-14"></a><span class="w">  </span><span class="na">name</span><span class="w">     </span><span class="o">=</span><span class="w"> </span><span class="s2">"example-vm"</span>
+</span><span id="__span-10-15"><a href="#__codelineno-10-15" id="__codelineno-10-15" name="__codelineno-10-15"></a><span class="w">  </span><span class="na">size</span><span class="w">     </span><span class="o">=</span><span class="w"> </span><span class="nv">var.vm.size</span>
+</span><span id="__span-10-16"><a href="#__codelineno-10-16" id="__codelineno-10-16" name="__codelineno-10-16"></a><span class="w">  </span><span class="na">image</span><span class="w">    </span><span class="o">=</span><span class="w"> </span><span class="nv">var.vm.image</span>
+</span><span id="__span-10-17"><a href="#__codelineno-10-17" id="__codelineno-10-17" name="__codelineno-10-17"></a><span class="w">  </span><span class="na">subnet</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="nv">var.vm.network.subnet</span>
+</span><span id="__span-10-18"><a href="#__codelineno-10-18" id="__codelineno-10-18" name="__codelineno-10-18"></a><span class="w">  </span><span class="na">security_group</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">var.vm.network.security_group</span>
+</span><span id="__span-10-19"><a href="#__codelineno-10-19" id="__codelineno-10-19" name="__codelineno-10-19"></a><span class="p">}</span>
+</span></code></pre></div>
+<p>In this example, the <code>security_group</code> attribute in the <code>network</code> structure is defined as an optional attribute with a default value of <code>null</code>. This allows users to provide a custom security group if needed, or use the default value if no value is provided.</p>
+<h3 id="dynamic-blocks"><a class="toclink" href="../../2024/05/03/nested-structures-with-optional-attributes-and-dynamic-blocks/#dynamic-blocks">Dynamic Blocks</a></h3>
+<p>Terraform allows you to use dynamic blocks to define multiple instances of a block within a resource or module. Dynamic blocks are useful when you need to create multiple instances of a block based on a list or map of values.</p>
+<p>For example, you might use a dynamic block to define multiple network interfaces for a virtual machine:</p>
+<div class="language-hcl highlight"><pre><span></span><code><span id="__span-11-1"><a href="#__codelineno-11-1" id="__codelineno-11-1" name="__codelineno-11-1"></a><span class="kr">variable</span><span class="w"> </span><span class="nv">"network_interfaces"</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-11-2"><a href="#__codelineno-11-2" id="__codelineno-11-2" name="__codelineno-11-2"></a><span class="w">  </span><span class="na">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">list</span><span class="p">(</span><span class="kt">object</span><span class="p">({</span>
+</span><span id="__span-11-3"><a href="#__codelineno-11-3" id="__codelineno-11-3" name="__codelineno-11-3"></a><span class="w">    </span><span class="na">name</span><span class="w">    </span><span class="o">=</span><span class="w"> </span><span class="kt">string</span>
+</span><span id="__span-11-4"><a href="#__codelineno-11-4" id="__codelineno-11-4" name="__codelineno-11-4"></a><span class="w">    </span><span class="na">subnet</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="kt">string</span>
+</span><span id="__span-11-5"><a href="#__codelineno-11-5" id="__codelineno-11-5" name="__codelineno-11-5"></a><span class="w">    </span><span class="na">security_group</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">string</span>
+</span><span id="__span-11-6"><a href="#__codelineno-11-6" id="__codelineno-11-6" name="__codelineno-11-6"></a><span class="w">  </span><span class="p">}))</span>
+</span><span id="__span-11-7"><a href="#__codelineno-11-7" id="__codelineno-11-7" name="__codelineno-11-7"></a><span class="p">}</span>
+</span><span id="__span-11-8"><a href="#__codelineno-11-8" id="__codelineno-11-8" name="__codelineno-11-8"></a>
+</span><span id="__span-11-9"><a href="#__codelineno-11-9" id="__codelineno-11-9" name="__codelineno-11-9"></a><span class="kr">resource</span><span class="w"> </span><span class="nc">"azurerm_virtual_machine"</span><span class="w"> </span><span class="nv">"example"</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-11-10"><a href="#__codelineno-11-10" id="__codelineno-11-10" name="__codelineno-11-10"></a><span class="w">  </span><span class="na">name</span><span class="w">     </span><span class="o">=</span><span class="w"> </span><span class="s2">"example-vm"</span>
+</span><span id="__span-11-11"><a href="#__codelineno-11-11" id="__codelineno-11-11" name="__codelineno-11-11"></a><span class="w">  </span><span class="na">size</span><span class="w">     </span><span class="o">=</span><span class="w"> </span><span class="s2">"Standard_DS1_v2"</span>
+</span><span id="__span-11-12"><a href="#__codelineno-11-12" id="__codelineno-11-12" name="__codelineno-11-12"></a><span class="w">  </span><span class="na">image</span><span class="w">    </span><span class="o">=</span><span class="w"> </span><span class="s2">"UbuntuServer"</span>
+</span><span id="__span-11-13"><a href="#__codelineno-11-13" id="__codelineno-11-13" name="__codelineno-11-13"></a>
+</span><span id="__span-11-14"><a href="#__codelineno-11-14" id="__codelineno-11-14" name="__codelineno-11-14"></a><span class="w">  </span><span class="err">dynamic</span><span class="w"> </span><span class="s2">"network_interface"</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-11-15"><a href="#__codelineno-11-15" id="__codelineno-11-15" name="__codelineno-11-15"></a><span class="w">    </span><span class="na">for_each</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">var.network_interfaces</span>
+</span><span id="__span-11-16"><a href="#__codelineno-11-16" id="__codelineno-11-16" name="__codelineno-11-16"></a><span class="w">    </span><span class="nb">content</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-11-17"><a href="#__codelineno-11-17" id="__codelineno-11-17" name="__codelineno-11-17"></a><span class="w">      </span><span class="na">name</span><span class="w">            </span><span class="o">=</span><span class="w"> </span><span class="nv">network_interface.value.name</span>
+</span><span id="__span-11-18"><a href="#__codelineno-11-18" id="__codelineno-11-18" name="__codelineno-11-18"></a><span class="w">      </span><span class="na">subnet</span><span class="w">          </span><span class="o">=</span><span class="w"> </span><span class="nv">network_interface.value.subnet</span>
+</span><span id="__span-11-19"><a href="#__codelineno-11-19" id="__codelineno-11-19" name="__codelineno-11-19"></a><span class="w">      </span><span class="na">security_group</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="nv">network_interface.value.security_group</span>
+</span><span id="__span-11-20"><a href="#__codelineno-11-20" id="__codelineno-11-20" name="__codelineno-11-20"></a><span class="w">    </span><span class="p">}</span>
+</span><span id="__span-11-21"><a href="#__codelineno-11-21" id="__codelineno-11-21" name="__codelineno-11-21"></a><span class="w">  </span><span class="p">}</span>
+</span><span id="__span-11-22"><a href="#__codelineno-11-22" id="__codelineno-11-22" name="__codelineno-11-22"></a><span class="p">}</span>
+</span></code></pre></div>
+<p>In this example, the <code>network_interfaces</code> variable defines a list of objects representing network interfaces with three attributes: <code>name</code>, <code>subnet</code>, and <code>security_group</code>. The dynamic block iterates over the list of network interfaces and creates a network interface block for each object in the list.</p>
+<h3 id="conclusion"><a class="toclink" href="../../2024/05/03/nested-structures-with-optional-attributes-and-dynamic-blocks/#conclusion">Conclusion</a></h3>
+<p>In this post, I explained how to define nested structures with optional attributes and use dynamic blocks in Terraform. Nested structures are useful for representing complex data types, while optional attributes allow you to provide default values for attributes that can be overridden by users. Dynamic blocks are useful for creating multiple instances of a block based on a list or map of values. By combining these features, you can create flexible and reusable configurations in Terraform.</p>
+</div>
+</article>
+<article class="md-post md-post--excerpt">
+<header class="md-post__header">
+<nav class="md-post__authors md-typeset">
+<span class="md-author">
+<img alt="Rafael Fernández" src="https://avatars.githubusercontent.com/u/39990341"/>
+</span>
+</nav>
+<div class="md-post__meta md-meta">
+<ul class="md-meta__list">
+<li class="md-meta__item">
 <time datetime="2024-05-02 00:00:00">May 2, 2024</time></li>
 <li class="md-meta__item">
             in
@@ -679,21 +1270,21 @@
 <p>Let's take a look at how you can implement artifact caching in Azure Container Registry.</p>
 <h4 id="step-1-create-a-cache-rule"><a class="toclink" href="../../2024/05/02/azure-container-registry-artifact-cache/#step-1-create-a-cache-rule">Step 1: Create a Cache Rule</a></h4>
 <p>The first step is to create a cache rule in your Azure Container Registry. This rule specifies the source image that should be cached and the target image that will be stored in the cache.</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-10-1"><a href="#__codelineno-10-1" id="__codelineno-10-1" name="__codelineno-10-1"></a>az<span class="w"> </span>acr<span class="w"> </span>cache<span class="w"> </span>create<span class="w"> </span>-r<span class="w"> </span>MyRegistry<span class="w"> </span>-n<span class="w"> </span>MyRule<span class="w"> </span>-s<span class="w"> </span>docker.io/library/ubuntu<span class="w"> </span>-t<span class="w"> </span>ubuntu
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-5-1"><a href="#__codelineno-5-1" id="__codelineno-5-1" name="__codelineno-5-1"></a>az<span class="w"> </span>acr<span class="w"> </span>cache<span class="w"> </span>create<span class="w"> </span>-r<span class="w"> </span>MyRegistry<span class="w"> </span>-n<span class="w"> </span>MyRule<span class="w"> </span>-s<span class="w"> </span>docker.io/library/ubuntu<span class="w"> </span>-t<span class="w"> </span>ubuntu
 </span></code></pre></div>
 <p>Check the cache rule:</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-11-1"><a href="#__codelineno-11-1" id="__codelineno-11-1" name="__codelineno-11-1"></a>az<span class="w"> </span>acr<span class="w"> </span>cache<span class="w"> </span>show<span class="w"> </span>-r<span class="w"> </span>MyRegistry<span class="w"> </span>-n<span class="w"> </span>MyRule
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-6-1"><a href="#__codelineno-6-1" id="__codelineno-6-1" name="__codelineno-6-1"></a>az<span class="w"> </span>acr<span class="w"> </span>cache<span class="w"> </span>show<span class="w"> </span>-r<span class="w"> </span>MyRegistry<span class="w"> </span>-n<span class="w"> </span>MyRule
 </span></code></pre></div>
 <h4 id="step-2-pull-the-image"><a class="toclink" href="../../2024/05/02/azure-container-registry-artifact-cache/#step-2-pull-the-image">Step 2: Pull the Image</a></h4>
 <p>Next, you need to pull the image from the source registry to the cache. This will download the image and store it in the cache for future use.</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-12-1"><a href="#__codelineno-12-1" id="__codelineno-12-1" name="__codelineno-12-1"></a>docker<span class="w"> </span>pull<span class="w"> </span>myregistry.azurecr.io/hello-world:latest
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-7-1"><a href="#__codelineno-7-1" id="__codelineno-7-1" name="__codelineno-7-1"></a>docker<span class="w"> </span>pull<span class="w"> </span>myregistry.azurecr.io/hello-world:latest
 </span></code></pre></div>
 <h4 id="step-3-clean-up-the-resources"><a class="toclink" href="../../2024/05/02/azure-container-registry-artifact-cache/#step-3-clean-up-the-resources">Step 3: Clean up the resources</a></h4>
 <p>Finally, you can clean up the resources by deleting the cache rule.</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-13-1"><a href="#__codelineno-13-1" id="__codelineno-13-1" name="__codelineno-13-1"></a>az<span class="w"> </span>acr<span class="w"> </span>cache<span class="w"> </span>delete<span class="w"> </span>-r<span class="w"> </span>MyRegistry<span class="w"> </span>-n<span class="w"> </span>MyRule
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-8-1"><a href="#__codelineno-8-1" id="__codelineno-8-1" name="__codelineno-8-1"></a>az<span class="w"> </span>acr<span class="w"> </span>cache<span class="w"> </span>delete<span class="w"> </span>-r<span class="w"> </span>MyRegistry<span class="w"> </span>-n<span class="w"> </span>MyRule
 </span></code></pre></div>
 <p>If you need to check other rules, you can use the following command:</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-14-1"><a href="#__codelineno-14-1" id="__codelineno-14-1" name="__codelineno-14-1"></a>az<span class="w"> </span>acr<span class="w"> </span>cache<span class="w"> </span>list<span class="w"> </span>-r<span class="w"> </span>MyRegistry
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-9-1"><a href="#__codelineno-9-1" id="__codelineno-9-1" name="__codelineno-9-1"></a>az<span class="w"> </span>acr<span class="w"> </span>cache<span class="w"> </span>list<span class="w"> </span>-r<span class="w"> </span>MyRegistry
 </span></code></pre></div>
 <h3 id="conclusion"><a class="toclink" href="../../2024/05/02/azure-container-registry-artifact-cache/#conclusion">Conclusion</a></h3>
 <p>Azure Container Registry's Artifact Cache feature provides a convenient way to cache container images in a private registry, improving pull performance and reducing network traffic. By following the steps outlined in this article, you can easily set up and use artifact caching in your Azure Container Registry.</p>
@@ -1120,570 +1711,6 @@ merge production
 </ul>
 <h3 id="conclusion"><a class="toclink" href="../../2024/04/29/repository-strategy-monorepo-vs-multi-repo/#conclusion">Conclusion</a></h3>
 <p>For my IaC project with Terraform, I will use a monorepo approach to manage all the Terraform modules and configurations for my project.</p>
-</div>
-</article>
-<article class="md-post md-post--excerpt">
-<header class="md-post__header">
-<nav class="md-post__authors md-typeset">
-<span class="md-author">
-<img alt="Rafael Fernández" src="https://avatars.githubusercontent.com/u/39990341"/>
-</span>
-</nav>
-<div class="md-post__meta md-meta">
-<ul class="md-meta__list">
-<li class="md-meta__item">
-<time datetime="2024-04-28 00:00:00">April 28, 2024</time></li>
-<li class="md-meta__item">
-            in
-            
-              <a class="md-meta__link" href="../../category/devops/">DevOps</a></li>
-<li class="md-meta__item">
-            
-              3 min read
-            
-          </li>
-</ul>
-</div>
-</header>
-<div class="md-post__content md-typeset">
-<h2 id="terraform-configuration-language"><a class="toclink" href="../../2024/04/28/terraform-configuration-language/">Terraform: Configuration Language</a></h2>
-<p>After deciding to use Terraform for my Infrastructure as Code (IaC) project,  Terraform configuration language must be understanded to define the desired state of my infrastructure.</p>
-<div class="admonition info">
-<p class="admonition-title">Info</p>
-<p>I will update this post with more information about Terraform configuration language in the future.</p>
-</div>
-<p>Terraform uses a declarative configuration language to define the desired state of your infrastructure. This configuration language is designed to be human-readable and easy to understand, making it accessible to both developers and operations teams.</p>
-<h3 id="declarative-vs-imperative"><a class="toclink" href="../../2024/04/28/terraform-configuration-language/#declarative-vs-imperative">Declarative vs. Imperative</a></h3>
-<p>Terraform's configuration language is declarative, meaning that you define the desired state of your infrastructure without specifying the exact steps needed to achieve that state. This is in contrast to imperative languages, where you specify the exact sequence of steps needed to achieve a desired outcome.</p>
-<p>For example, in an imperative language, you might write a script that creates a virtual machine by executing a series of commands to provision the necessary resources. In a declarative language like Terraform, you would simply define the desired state of the virtual machine (e.g., its size, image, and network configuration) and let Terraform figure out the steps needed to achieve that state.</p>
-<h3 id="configuration-blocks"><a class="toclink" href="../../2024/04/28/terraform-configuration-language/#configuration-blocks">Configuration Blocks</a></h3>
-<p>Terraform uses configuration blocks to define different aspects of your infrastructure. Each block has a specific purpose and contains configuration settings that define how that aspect of your infrastructure should be provisioned.</p>
-<p>For example, you might use a <code>provider</code> block to define the cloud provider you want to use, a <code>resource</code> block to define a specific resource (e.g., a virtual machine or storage account), or a <code>variable</code> block to define input variables that can be passed to your configuration.</p>
-<div class="language-hcl highlight"><pre><span></span><code><span id="__span-20-1"><a href="#__codelineno-20-1" id="__codelineno-20-1" name="__codelineno-20-1"></a><span class="kr">provider</span><span class="w"> </span><span class="nv">"azurerm"</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-20-2"><a href="#__codelineno-20-2" id="__codelineno-20-2" name="__codelineno-20-2"></a><span class="w">  </span><span class="nb">features</span><span class="w"> </span><span class="p">{}</span>
-</span><span id="__span-20-3"><a href="#__codelineno-20-3" id="__codelineno-20-3" name="__codelineno-20-3"></a><span class="p">}</span>
-</span><span id="__span-20-4"><a href="#__codelineno-20-4" id="__codelineno-20-4" name="__codelineno-20-4"></a>
-</span><span id="__span-20-5"><a href="#__codelineno-20-5" id="__codelineno-20-5" name="__codelineno-20-5"></a><span class="kr">resource</span><span class="w"> </span><span class="nc">"azurerm_resource_group"</span><span class="w"> </span><span class="nv">"example"</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-20-6"><a href="#__codelineno-20-6" id="__codelineno-20-6" name="__codelineno-20-6"></a><span class="w">  </span><span class="na">name</span><span class="w">     </span><span class="o">=</span><span class="w"> </span><span class="s2">"example-resources"</span>
-</span><span id="__span-20-7"><a href="#__codelineno-20-7" id="__codelineno-20-7" name="__codelineno-20-7"></a><span class="w">  </span><span class="na">location</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"East US"</span>
-</span><span id="__span-20-8"><a href="#__codelineno-20-8" id="__codelineno-20-8" name="__codelineno-20-8"></a><span class="p">}</span>
-</span><span id="__span-20-9"><a href="#__codelineno-20-9" id="__codelineno-20-9" name="__codelineno-20-9"></a>
-</span><span id="__span-20-10"><a href="#__codelineno-20-10" id="__codelineno-20-10" name="__codelineno-20-10"></a><span class="kr">variable</span><span class="w"> </span><span class="nv">"location"</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-20-11"><a href="#__codelineno-20-11" id="__codelineno-20-11" name="__codelineno-20-11"></a><span class="w">  </span><span class="na">type</span><span class="w">    </span><span class="o">=</span><span class="w"> </span><span class="kt">string</span>
-</span><span id="__span-20-12"><a href="#__codelineno-20-12" id="__codelineno-20-12" name="__codelineno-20-12"></a><span class="w">  </span><span class="na">default</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"East US"</span>
-</span><span id="__span-20-13"><a href="#__codelineno-20-13" id="__codelineno-20-13" name="__codelineno-20-13"></a><span class="p">}</span>
-</span></code></pre></div>
-<h3 id="variables"><a class="toclink" href="../../2024/04/28/terraform-configuration-language/#variables">Variables</a></h3>
-<p>Terraform allows you to define variables that can be used to parameterize your configuration. Variables can be used to pass values into your configuration, making it easier to reuse and customize your infrastructure definitions.</p>
-<div class="language-hcl highlight"><pre><span></span><code><span id="__span-21-1"><a href="#__codelineno-21-1" id="__codelineno-21-1" name="__codelineno-21-1"></a><span class="kr">variable</span><span class="w"> </span><span class="nv">"location"</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-21-2"><a href="#__codelineno-21-2" id="__codelineno-21-2" name="__codelineno-21-2"></a><span class="w">  </span><span class="na">type</span><span class="w">    </span><span class="o">=</span><span class="w"> </span><span class="kt">string</span>
-</span><span id="__span-21-3"><a href="#__codelineno-21-3" id="__codelineno-21-3" name="__codelineno-21-3"></a><span class="w">  </span><span class="na">default</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"East US"</span>
-</span><span id="__span-21-4"><a href="#__codelineno-21-4" id="__codelineno-21-4" name="__codelineno-21-4"></a><span class="p">}</span>
-</span><span id="__span-21-5"><a href="#__codelineno-21-5" id="__codelineno-21-5" name="__codelineno-21-5"></a>
-</span><span id="__span-21-6"><a href="#__codelineno-21-6" id="__codelineno-21-6" name="__codelineno-21-6"></a><span class="kr">resource</span><span class="w"> </span><span class="nc">"azurerm_resource_group"</span><span class="w"> </span><span class="nv">"example"</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-21-7"><a href="#__codelineno-21-7" id="__codelineno-21-7" name="__codelineno-21-7"></a><span class="w">  </span><span class="na">name</span><span class="w">     </span><span class="o">=</span><span class="w"> </span><span class="s2">"example-resources"</span>
-</span><span id="__span-21-8"><a href="#__codelineno-21-8" id="__codelineno-21-8" name="__codelineno-21-8"></a><span class="w">  </span><span class="na">location</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">var.location</span>
-</span><span id="__span-21-9"><a href="#__codelineno-21-9" id="__codelineno-21-9" name="__codelineno-21-9"></a><span class="p">}</span>
-</span></code></pre></div>
-<h3 id="locals"><a class="toclink" href="../../2024/04/28/terraform-configuration-language/#locals">locals</a></h3>
-<p>Terraform allows you to define local values that can be used within your configuration. Locals are similar to variables but are only available within the current module or configuration block.</p>
-<div class="language-hcl highlight"><pre><span></span><code><span id="__span-22-1"><a href="#__codelineno-22-1" id="__codelineno-22-1" name="__codelineno-22-1"></a><span class="kr">variable</span><span class="w"> </span><span class="nv">"location"</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-22-2"><a href="#__codelineno-22-2" id="__codelineno-22-2" name="__codelineno-22-2"></a><span class="w">  </span><span class="na">type</span><span class="w">    </span><span class="o">=</span><span class="w"> </span><span class="kt">string</span>
-</span><span id="__span-22-3"><a href="#__codelineno-22-3" id="__codelineno-22-3" name="__codelineno-22-3"></a><span class="w">  </span><span class="na">default</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"East US"</span>
-</span><span id="__span-22-4"><a href="#__codelineno-22-4" id="__codelineno-22-4" name="__codelineno-22-4"></a><span class="p">}</span>
-</span><span id="__span-22-5"><a href="#__codelineno-22-5" id="__codelineno-22-5" name="__codelineno-22-5"></a>
-</span><span id="__span-22-6"><a href="#__codelineno-22-6" id="__codelineno-22-6" name="__codelineno-22-6"></a><span class="nb">locals</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-22-7"><a href="#__codelineno-22-7" id="__codelineno-22-7" name="__codelineno-22-7"></a><span class="w">  </span><span class="na">resource_group_name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"example-resources"</span>
-</span><span id="__span-22-8"><a href="#__codelineno-22-8" id="__codelineno-22-8" name="__codelineno-22-8"></a><span class="p">}</span>
-</span><span id="__span-22-9"><a href="#__codelineno-22-9" id="__codelineno-22-9" name="__codelineno-22-9"></a>
-</span><span id="__span-22-10"><a href="#__codelineno-22-10" id="__codelineno-22-10" name="__codelineno-22-10"></a><span class="kr">resource</span><span class="w"> </span><span class="nc">"azurerm_resource_group"</span><span class="w"> </span><span class="nv">"example"</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-22-11"><a href="#__codelineno-22-11" id="__codelineno-22-11" name="__codelineno-22-11"></a><span class="w">  </span><span class="na">name</span><span class="w">     </span><span class="o">=</span><span class="w"> </span><span class="nv">local.resource_group_name</span>
-</span><span id="__span-22-12"><a href="#__codelineno-22-12" id="__codelineno-22-12" name="__codelineno-22-12"></a><span class="w">  </span><span class="na">location</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">var.location</span>
-</span><span id="__span-22-13"><a href="#__codelineno-22-13" id="__codelineno-22-13" name="__codelineno-22-13"></a><span class="p">}</span>
-</span></code></pre></div>
-<h3 id="data-sources"><a class="toclink" href="../../2024/04/28/terraform-configuration-language/#data-sources">Data Sources</a></h3>
-<p>Terraform allows you to define data sources that can be used to query external resources and retrieve information that can be used in your configuration. Data sources are read-only and can be used to fetch information about existing resources, such as virtual networks, storage accounts, or database instances.</p>
-<div class="language-hcl highlight"><pre><span></span><code><span id="__span-23-1"><a href="#__codelineno-23-1" id="__codelineno-23-1" name="__codelineno-23-1"></a><span class="kr">data</span><span class="w"> </span><span class="nc">"azurerm_resource_group"</span><span class="w"> </span><span class="nv">"example"</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-23-2"><a href="#__codelineno-23-2" id="__codelineno-23-2" name="__codelineno-23-2"></a><span class="w">  </span><span class="na">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"example-resources"</span>
-</span><span id="__span-23-3"><a href="#__codelineno-23-3" id="__codelineno-23-3" name="__codelineno-23-3"></a><span class="p">}</span>
-</span><span id="__span-23-4"><a href="#__codelineno-23-4" id="__codelineno-23-4" name="__codelineno-23-4"></a>
-</span><span id="__span-23-5"><a href="#__codelineno-23-5" id="__codelineno-23-5" name="__codelineno-23-5"></a><span class="kr">resource</span><span class="w"> </span><span class="nc">"azurerm_virtual_network"</span><span class="w"> </span><span class="nv">"example"</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-23-6"><a href="#__codelineno-23-6" id="__codelineno-23-6" name="__codelineno-23-6"></a><span class="w">  </span><span class="na">name</span><span class="w">                </span><span class="o">=</span><span class="w"> </span><span class="s2">"example-network"</span>
-</span><span id="__span-23-7"><a href="#__codelineno-23-7" id="__codelineno-23-7" name="__codelineno-23-7"></a><span class="w">  </span><span class="na">location</span><span class="w">            </span><span class="o">=</span><span class="w"> </span><span class="nv">data.azurerm_resource_group.example.location</span>
-</span><span id="__span-23-8"><a href="#__codelineno-23-8" id="__codelineno-23-8" name="__codelineno-23-8"></a><span class="w">  </span><span class="na">resource_group_name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">data.azurerm_resource_group.example.name</span>
-</span><span id="__span-23-9"><a href="#__codelineno-23-9" id="__codelineno-23-9" name="__codelineno-23-9"></a><span class="p">}</span>
-</span></code></pre></div>
-<h3 id="functions"><a class="toclink" href="../../2024/04/28/terraform-configuration-language/#functions">Functions</a></h3>
-<h4 id="try"><a class="toclink" href="../../2024/04/28/terraform-configuration-language/#try">try</a></h4>
-<p>The <code>try</code> function allows you to provide a default value in case an expression returns an error. This can be useful when working with optional values that may or may not be present.</p>
-<div class="language-hcl highlight"><pre><span></span><code><span id="__span-24-1"><a href="#__codelineno-24-1" id="__codelineno-24-1" name="__codelineno-24-1"></a><span class="kr">variable</span><span class="w"> </span><span class="nv">"optional_value"</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-24-2"><a href="#__codelineno-24-2" id="__codelineno-24-2" name="__codelineno-24-2"></a><span class="w">  </span><span class="na">type</span><span class="w">    </span><span class="o">=</span><span class="w"> </span><span class="kt">string</span>
-</span><span id="__span-24-3"><a href="#__codelineno-24-3" id="__codelineno-24-3" name="__codelineno-24-3"></a><span class="w">  </span><span class="na">default</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">null</span>
-</span><span id="__span-24-4"><a href="#__codelineno-24-4" id="__codelineno-24-4" name="__codelineno-24-4"></a><span class="p">}</span>
-</span><span id="__span-24-5"><a href="#__codelineno-24-5" id="__codelineno-24-5" name="__codelineno-24-5"></a>
-</span><span id="__span-24-6"><a href="#__codelineno-24-6" id="__codelineno-24-6" name="__codelineno-24-6"></a><span class="nb">locals</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-24-7"><a href="#__codelineno-24-7" id="__codelineno-24-7" name="__codelineno-24-7"></a><span class="w">  </span><span class="na">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">try</span><span class="p">(</span><span class="nv">var.optional_value</span><span class="p">,</span><span class="w"> </span><span class="s2">"default_value"</span><span class="p">)</span>
-</span><span id="__span-24-8"><a href="#__codelineno-24-8" id="__codelineno-24-8" name="__codelineno-24-8"></a><span class="p">}</span>
-</span></code></pre></div>
-<h3 id="debugging-terraform"><a class="toclink" href="../../2024/04/28/terraform-configuration-language/#debugging-terraform">Debugging Terraform</a></h3>
-<p>You can use the <code>TF_LOG</code> environment variable to enable debug logging in Terraform. This can be useful when troubleshooting issues with your infrastructure or understanding how Terraform is executing your configuration.</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-25-1"><a href="#__codelineno-25-1" id="__codelineno-25-1" name="__codelineno-25-1"></a><span class="nb">export</span><span class="w"> </span><span class="nv">TF_LOG</span><span class="o">=</span>DEBUG
-</span><span id="__span-25-2"><a href="#__codelineno-25-2" id="__codelineno-25-2" name="__codelineno-25-2"></a>terraform<span class="w"> </span>plan
-</span></code></pre></div>
-<p>TOu can use the following decreasing verbosity levels log:  TRACE, DEBUG, INFO, WARN or ERROR</p>
-<p>To persist logged output logs in a file:</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-26-1"><a href="#__codelineno-26-1" id="__codelineno-26-1" name="__codelineno-26-1"></a><span class="nb">export</span><span class="w"> </span><span class="nv">TF_LOG_PATH</span><span class="o">=</span><span class="s2">"terraform.log"</span>
-</span></code></pre></div>
-<p>To separare logs for Terraform and provider, you can use the following environment variables <strong>TF_LOG_CORE</strong> and <strong>TF_LOG_PROVIDER</strong> respectively. For example, to enable debug logging for both Terraform and the Azure provider, you can use the following environment variables:</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-27-1"><a href="#__codelineno-27-1" id="__codelineno-27-1" name="__codelineno-27-1"></a><span class="nb">export</span><span class="w"> </span><span class="nv">TF_LOG_CORE</span><span class="o">=</span>DEBUG
-</span><span id="__span-27-2"><a href="#__codelineno-27-2" id="__codelineno-27-2" name="__codelineno-27-2"></a><span class="nb">export</span><span class="w"> </span><span class="nv">TF_LOG_PATH</span><span class="o">=</span><span class="s2">"terraform.log"</span>
-</span></code></pre></div>
-<p>or </p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-28-1"><a href="#__codelineno-28-1" id="__codelineno-28-1" name="__codelineno-28-1"></a><span class="nb">export</span><span class="w"> </span><span class="nv">TF_LOG_PROVIDER</span><span class="o">=</span>DEBUG
-</span><span id="__span-28-2"><a href="#__codelineno-28-2" id="__codelineno-28-2" name="__codelineno-28-2"></a><span class="nb">export</span><span class="w"> </span><span class="nv">TF_LOG_PATH</span><span class="o">=</span><span class="s2">"provider.log"</span>
-</span></code></pre></div>
-<p>To disable debug logging, you can unset the <code>TF_LOG</code> environment variable:</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-29-1"><a href="#__codelineno-29-1" id="__codelineno-29-1" name="__codelineno-29-1"></a><span class="nb">unset</span><span class="w"> </span>TF_LOG
-</span></code></pre></div>
-<h3 id="references"><a class="toclink" href="../../2024/04/28/terraform-configuration-language/#references">References</a></h3>
-<ul>
-<li><a href="https://www.terraform.io/docs/language/index.html">Terraform Configuration Language</a></li>
-<li><a href="https://www.terraform.io/docs/language/functions/index.html">Terraform Functions</a></li>
-<li><a href="https://www.terraform.io/docs/internals/debugging.html">Terraform Debugging</a></li>
-</ul>
-</div>
-</article>
-<article class="md-post md-post--excerpt">
-<header class="md-post__header">
-<nav class="md-post__authors md-typeset">
-<span class="md-author">
-<img alt="Rafael Fernández" src="https://avatars.githubusercontent.com/u/39990341"/>
-</span>
-</nav>
-<div class="md-post__meta md-meta">
-<ul class="md-meta__list">
-<li class="md-meta__item">
-<time datetime="2024-04-28 00:00:00">April 28, 2024</time></li>
-<li class="md-meta__item">
-            in
-            
-              <a class="md-meta__link" href="../../category/devops/">DevOps</a></li>
-<li class="md-meta__item">
-            
-              1 min read
-            
-          </li>
-</ul>
-</div>
-</header>
-<div class="md-post__content md-typeset">
-<h2 id="terraform-set-your-local-environment-developer"><a class="toclink" href="../../2024/04/28/terraform-set-your-local-environment-developer/">Terraform: Set your local environment developer</a></h2>
-<p>I wil use Ubuntu in WSL v2 as my local environment for my IaC project with Terraform. I will install the following tools:</p>
-<ul>
-<li>vscode</li>
-<li>Trunk</li>
-<li>tenv</li>
-<li>az cli</li>
-</ul>
-<h3 id="az-cli"><a class="toclink" href="../../2024/04/28/terraform-set-your-local-environment-developer/#az-cli">az cli</a></h3>
-<p>I will use the Azure CLI to interact with Azure resources from the command line. I will install the Azure CLI using the following commands:</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-6-1"><a href="#__codelineno-6-1" id="__codelineno-6-1" name="__codelineno-6-1"></a>curl<span class="w"> </span>-sL<span class="w"> </span>https://aka.ms/InstallAzureCLIDeb<span class="w"> </span><span class="p">|</span><span class="w"> </span>sudo<span class="w"> </span>bash
-</span></code></pre></div>
-<h3 id="vscode"><a class="toclink" href="../../2024/04/28/terraform-set-your-local-environment-developer/#vscode">vscode</a></h3>
-<p>I will use Visual Studio Code as my code editor for my IaC project with Terraform. I will install the following extensions:</p>
-<ul>
-<li>Terraform</li>
-<li>Azure Terraform</li>
-<li>Azure Account</li>
-<li>Trunk</li>
-</ul>
-<h3 id="tenv"><a class="toclink" href="../../2024/04/28/terraform-set-your-local-environment-developer/#tenv">tenv</a></h3>
-<p><code>tenv</code> is a tool that allows you to manage multiple Terraform environments with ease. It provides a simple way to switch between different environments, such as development, staging, and production, by managing environment variables and state files for each environment.</p>
-<h4 id="installation"><a class="toclink" href="../../2024/04/28/terraform-set-your-local-environment-developer/#installation">Installation</a></h4>
-<p>You can install <code>tenv</code> using <code>go get</code>:</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-7-1"><a href="#__codelineno-7-1" id="__codelineno-7-1" name="__codelineno-7-1"></a><span class="nv">LATEST_VERSION</span><span class="o">=</span><span class="k">$(</span>curl<span class="w"> </span>--silent<span class="w"> </span>https://api.github.com/repos/tofuutils/tenv/releases/latest<span class="w"> </span><span class="p">|</span><span class="w"> </span>jq<span class="w"> </span>-r<span class="w"> </span>.tag_name<span class="k">)</span>
-</span><span id="__span-7-2"><a href="#__codelineno-7-2" id="__codelineno-7-2" name="__codelineno-7-2"></a>curl<span class="w"> </span>-O<span class="w"> </span>-L<span class="w"> </span><span class="s2">"https://github.com/tofuutils/tenv/releases/latest/download/tenv_</span><span class="si">${</span><span class="nv">LATEST_VERSION</span><span class="si">}</span><span class="s2">_amd64.deb"</span>
-</span><span id="__span-7-3"><a href="#__codelineno-7-3" id="__codelineno-7-3" name="__codelineno-7-3"></a>sudo<span class="w"> </span>dpkg<span class="w"> </span>-i<span class="w"> </span><span class="s2">"tenv_</span><span class="si">${</span><span class="nv">LATEST_VERSION</span><span class="si">}</span><span class="s2">_amd64.deb"</span>
-</span></code></pre></div>
-<h4 id="usage"><a class="toclink" href="../../2024/04/28/terraform-set-your-local-environment-developer/#usage">Usage</a></h4>
-<p>To create a new environment, you can use the <code>tenv create</code> command:</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-8-1"><a href="#__codelineno-8-1" id="__codelineno-8-1" name="__codelineno-8-1"></a><span class="c1"># to install the latest version of Terraform</span>
-</span><span id="__span-8-2"><a href="#__codelineno-8-2" id="__codelineno-8-2" name="__codelineno-8-2"></a>tenv<span class="w"> </span>tf<span class="w"> </span>install<span class="w"> </span>
-</span></code></pre></div>
-<h3 id="references"><a class="toclink" href="../../2024/04/28/terraform-set-your-local-environment-developer/#references">References</a></h3>
-<ul>
-<li><a href="https://github.com/tofuutils/tenv">tenv</a></li>
-</ul>
-</div>
-</article>
-<article class="md-post md-post--excerpt">
-<header class="md-post__header">
-<nav class="md-post__authors md-typeset">
-<span class="md-author">
-<img alt="Rafael Fernández" src="https://avatars.githubusercontent.com/u/39990341"/>
-</span>
-</nav>
-<div class="md-post__meta md-meta">
-<ul class="md-meta__list">
-<li class="md-meta__item">
-<time datetime="2024-04-27 00:00:00">April 27, 2024</time></li>
-<li class="md-meta__item">
-            in
-            
-              <a class="md-meta__link" href="../../category/devops/">DevOps</a></li>
-<li class="md-meta__item">
-            
-              2 min read
-            
-          </li>
-</ul>
-</div>
-</header>
-<div class="md-post__content md-typeset">
-<h2 id="starting-my-iac-project-with-terraform"><a class="toclink" href="../../2024/04/27/starting-my-iac-project-with-terraform/">Starting my IaC project with terraform</a></h2>
-<p>This is not my first IaC project but I want to share with you some key considerations that I have in mind to start a personal IaC project with Terraform based on post <a href="../../2024/04/26/what-you-need-to-think-about-when-starting-an-iac-project-/">What you need to think about when starting an IaC project ?</a></p>
-<h3 id="1-define-your-goals"><a class="toclink" href="../../2024/04/27/starting-my-iac-project-with-terraform/#1-define-your-goals">1. <strong>Define Your Goals</strong></a></h3>
-<p>These are my goals:</p>
-<ul>
-<li>Automate the provisioning of infrastructure</li>
-<li>Improve consistency and repeatability</li>
-<li>Reduce manual effort</li>
-<li>Enable faster deployments</li>
-</ul>
-<h3 id="2-select-the-right-tools"><a class="toclink" href="../../2024/04/27/starting-my-iac-project-with-terraform/#2-select-the-right-tools">2. <strong>Select the Right Tools</strong></a></h3>
-<p>For my project I will use Terraform because I am familiar with it and I like its declarative configuration language.</p>
-<h3 id="3-design-your-infrastructure"><a class="toclink" href="../../2024/04/27/starting-my-iac-project-with-terraform/#3-design-your-infrastructure">3. <strong>Design Your Infrastructure</strong></a></h3>
-<p>In my project, I will use a modular design that separates my infrastructure into different modules, such as networking, compute, and storage. This will allow me to reuse code across different projects and make my infrastructure more maintainable.</p>
-<h3 id="4-version-control-your-code"><a class="toclink" href="../../2024/04/27/starting-my-iac-project-with-terraform/#4-version-control-your-code">4. <strong>Version Control Your Code</strong></a></h3>
-<p>I will use Git for version control and follow best practices for version control, such as using descriptive commit messages and branching strategies.</p>
-<h3 id="5-automate-testing"><a class="toclink" href="../../2024/04/27/starting-my-iac-project-with-terraform/#5-automate-testing">5. <strong>Automate Testing</strong></a></h3>
-<p>Like appear in <a href="https://learn.microsoft.com/en-us/azure/developer/terraform/best-practices-compliance-testing">Implement compliance testing with Terraform and Azure</a>, I'd  like to implement: </p>
-<ul>
-<li>Compliance testing</li>
-<li>End-to-end testing</li>
-<li>Integration testing</li>
-</ul>
-<h3 id="6-implement-continuous-integrationcontinuous-deployment-cicd"><a class="toclink" href="../../2024/04/27/starting-my-iac-project-with-terraform/#6-implement-continuous-integrationcontinuous-deployment-cicd">6. <strong>Implement Continuous Integration/Continuous Deployment (CI/CD)</strong></a></h3>
-<p>I set up my  CI/CD pipelines with Github Actions.</p>
-<h3 id="7-monitor-and-maintain-your-infrastructure"><a class="toclink" href="../../2024/04/27/starting-my-iac-project-with-terraform/#7-monitor-and-maintain-your-infrastructure">7. <strong>Monitor and Maintain Your Infrastructure</strong></a></h3>
-<p>I will use Azure Monitor to monitor my infrastructure and set up alerts to notify me of any issues. I will also regularly review and update my infrastructure code to ensure that it remains up to date and secure.</p>
-<p>Of course I don't have all the answers yet, but I will keep you updated on my progress and share my learnings along the way. Stay tuned for more updates on my IaC project with Terraform!</p>
-</div>
-</article>
-<article class="md-post md-post--excerpt">
-<header class="md-post__header">
-<nav class="md-post__authors md-typeset">
-<span class="md-author">
-<img alt="Rafael Fernández" src="https://avatars.githubusercontent.com/u/39990341"/>
-</span>
-</nav>
-<div class="md-post__meta md-meta">
-<ul class="md-meta__list">
-<li class="md-meta__item">
-<time datetime="2024-04-26 00:00:00">April 26, 2024</time></li>
-<li class="md-meta__item">
-            in
-            
-              <a class="md-meta__link" href="../../category/devops/">DevOps</a></li>
-<li class="md-meta__item">
-            
-              4 min read
-            
-          </li>
-</ul>
-</div>
-</header>
-<div class="md-post__content md-typeset">
-<h2 id="what-you-need-to-think-about-when-starting-an-iac-project"><a class="toclink" href="../../2024/04/26/what-you-need-to-think-about-when-starting-an-iac-project-/">What you need to think about when starting an IaC project ?</a></h2>
-<p>Infrastructure as Code (IaC) is a key practice in modern software development that allows you to manage your infrastructure in a declarative manner. With IaC, you can define your infrastructure using code, which can be version-controlled, tested, and deployed automatically. This approach brings several benefits, such as increased consistency, repeatability, and scalability.</p>
-<p>When starting an IaC project, there are several key considerations you need to keep in mind to ensure its success. In this article, we will discuss some of the key things you should think about when embarking on an IaC project.</p>
-<h3 id="1-define-your-goals"><a class="toclink" href="../../2024/04/26/what-you-need-to-think-about-when-starting-an-iac-project-/#1-define-your-goals">1. <strong>Define Your Goals</strong></a></h3>
-<p>Before you start writing any code, it's essential to define your goals for the IaC project. What are you trying to achieve with IaC? Are you looking to automate the provisioning of infrastructure, improve consistency, or increase scalability? By clearly defining your goals, you can ensure that your IaC project is aligned with your organization's objectives.</p>
-<p>Some examples: </p>
-<ul>
-<li>Automate the provisioning of infrastructure</li>
-<li>Improve consistency and repeatability</li>
-<li>Increase scalability and reduce manual effort</li>
-<li>Enhance security and compliance</li>
-<li>Enable faster development and deployment cycles</li>
-</ul>
-<h3 id="2-select-the-right-tools"><a class="toclink" href="../../2024/04/26/what-you-need-to-think-about-when-starting-an-iac-project-/#2-select-the-right-tools">2. <strong>Select the Right Tools</strong></a></h3>
-<p>Choosing the right tools is crucial for the success of your IaC project. There are several IaC tools available, such as Terraform, Ansible, and AWS CloudFormation, each with its strengths and weaknesses. Consider factors such as ease of use, scalability, and integration with your existing tools when selecting an IaC tool.</p>
-<p>Some examples:</p>
-<ul>
-<li>Terraform: A popular IaC tool that allows you to define your infrastructure using a declarative configuration language.</li>
-<li>Ansible: A configuration management tool that can also be used for IaC.</li>
-<li>AWS CloudFormation: A service provided by AWS that allows you to define your infrastructure using JSON or YAML templates.</li>
-<li>Azure Resource Manager (ARM) templates: A service provided by Azure that allows you to define your infrastructure using JSON templates.</li>
-<li>Bicep: A domain-specific language for defining Azure resources that compiles to ARM templates.</li>
-<li>Pulumi: A tool that allows you to define your infrastructure using familiar programming languages such as Python, JavaScript, and Go.</li>
-<li>Chef: A configuration management tool that can also be used for IaC.</li>
-</ul>
-<h3 id="3-design-your-infrastructure"><a class="toclink" href="../../2024/04/26/what-you-need-to-think-about-when-starting-an-iac-project-/#3-design-your-infrastructure">3. <strong>Design Your Infrastructure</strong></a></h3>
-<p>When designing your infrastructure, think about how you want to structure your code. Consider using modular designs that allow you to reuse code across different projects. Define your infrastructure in a way that is easy to understand and maintain, and follow best practices for code organization.</p>
-<h3 id="4-version-control-your-code"><a class="toclink" href="../../2024/04/26/what-you-need-to-think-about-when-starting-an-iac-project-/#4-version-control-your-code">4. <strong>Version Control Your Code</strong></a></h3>
-<p>Version control is a fundamental practice in software development, and it is equally important for IaC projects. By using version control systems such as Git, you can track changes to your infrastructure code, collaborate with team members, and roll back changes if needed. Make sure to follow best practices for version control, such as using descriptive commit messages and branching strategies.</p>
-<p>Some examples:</p>
-<ul>
-<li>Use Git for version control</li>
-<li>Use branching strategies like Microsoft Flow or GitHub Flow to manage your codebase</li>
-<li>Use pull requests for code reviews</li>
-<li>Automate your CI/CD pipelines to run tests and deploy changes</li>
-<li>Use tags to mark releases or milestones</li>
-</ul>
-<h3 id="5-automate-testing"><a class="toclink" href="../../2024/04/26/what-you-need-to-think-about-when-starting-an-iac-project-/#5-automate-testing">5. <strong>Automate Testing</strong></a></h3>
-<p>Testing is an essential part of any software development project, and IaC is no exception. Automating your tests can help you catch errors early in the development process and ensure that your infrastructure code is working as expected. Consider using tools such as Terraform's built-in testing framework or third-party testing tools to automate your tests.</p>
-<p>Some examples:</p>
-<ul>
-<li>Use Terraform's built-in testing framework to write unit tests for your infrastructure code</li>
-<li>Use tools like Terratest or Kitchen-Terraform to write integration tests for your infrastructure code</li>
-<li>Use static code analysis tools to check for common errors and best practices in your infrastructure code, like Terraform's <code>terraform validate</code> command, or tools like <code>tfsec</code> or <code>checkov</code>.</li>
-<li>Use linting tools to enforce coding standards and style guidelines in your infrastructure code, like Terraform's <code>terraform fmt</code> command, or tools like <code>tflint</code> or <code>checkov</code>.</li>
-<li>Use security scanning tools to identify potential security vulnerabilities in your infrastructure code.</li>
-</ul>
-<h3 id="6-implement-continuous-integrationcontinuous-deployment-cicd"><a class="toclink" href="../../2024/04/26/what-you-need-to-think-about-when-starting-an-iac-project-/#6-implement-continuous-integrationcontinuous-deployment-cicd">6. <strong>Implement Continuous Integration/Continuous Deployment (CI/CD)</strong></a></h3>
-<p>CI/CD pipelines are a key component of modern software development practices, and they are equally important for IaC projects. By implementing CI/CD pipelines, you can automate the testing, building, and deployment of your infrastructure code, reducing the risk of errors and speeding up the development process. Consider using tools such as Github or Azure DevOps to set up your CI/CD pipelines.</p>
-<p>Use tools like Terraform Cloud, Azure DevOps, or Github Actions to automate your CI/CD pipelines.</p>
-<h3 id="7-monitor-and-maintain-your-infrastructure"><a class="toclink" href="../../2024/04/26/what-you-need-to-think-about-when-starting-an-iac-project-/#7-monitor-and-maintain-your-infrastructure">7. <strong>Monitor and Maintain Your Infrastructure</strong></a></h3>
-<p>Once your IaC project is up and running, it's essential to monitor and maintain your infrastructure. Implement monitoring solutions that allow you to track the health and performance of your infrastructure, and set up alerts to notify you of any issues. Regularly review and update your infrastructure code to ensure that it remains up-to-date and secure.</p>
-<p>By keeping these key considerations in mind when starting an IaC project, you can set yourself up for success and ensure that your infrastructure is managed efficiently and effectively. IaC is a powerful practice that can help you automate and scale your infrastructure, and by following best practices, you can maximize the benefits of this approach.</p>
-</div>
-</article>
-<article class="md-post md-post--excerpt">
-<header class="md-post__header">
-<nav class="md-post__authors md-typeset">
-<span class="md-author">
-<img alt="Rafael Fernández" src="https://avatars.githubusercontent.com/u/39990341"/>
-</span>
-</nav>
-<div class="md-post__meta md-meta">
-<ul class="md-meta__list">
-<li class="md-meta__item">
-<time datetime="2024-04-24 00:00:00">April 24, 2024</time></li>
-<li class="md-meta__item">
-            in
-            
-              <a class="md-meta__link" href="../../category/azure-services/">Azure Services</a></li>
-<li class="md-meta__item">
-            
-              4 min read
-            
-          </li>
-</ul>
-</div>
-</header>
-<div class="md-post__content md-typeset">
-<h2 id="how-to-create-a-management-group-diagram-with-drawio"><a class="toclink" href="../../2024/04/24/how-to-create-a-management-group-diagram-with-drawio/">How to create a Management Group diagram with draw.io</a></h2>
-<p>I nedd to create a diagram of the Management Groups in Azure, and I remembered a project that did something similar but with PowerShell: https://github.com/PowerShellToday/new-mgmgroupdiagram.</p>
-<h3 id="export-your-management-group-structure-from-azure-portal-or-ask-for-it"><a class="toclink" href="../../2024/04/24/how-to-create-a-management-group-diagram-with-drawio/#export-your-management-group-structure-from-azure-portal-or-ask-for-it">Export your Management Group structure from Azure Portal or ask for it</a></h3>
-<p>If you can access the Azure Portal, you can export the Management Group structure to a CSV file. To do this, follow these steps:</p>
-<ol>
-<li>Go to the <strong>Azure portal</strong>.</li>
-<li>Navigate to <strong>Management groups</strong>.</li>
-<li>Click on <strong>Export</strong>.</li>
-<li>Save the CSV file to your local machine.</li>
-</ol>
-<p>If you don't have access to the Azure Portal, you can ask your Azure administrator to export the Management Group structure for you.</p>
-<p>The file has the following columns:</p>
-<ul>
-<li>id: The unique identifier of the Management Group or subscription.</li>
-<li>displayName: The name of the Management Group or subscription.</li>
-<li>itemType: The type of the item (Management Group or subscription).</li>
-<li>path: The path to the management or subscription group, its parent.</li>
-<li>accessLevel: Your access level.</li>
-<li>childSubscriptionCount: The number of child subscriptions at this level.</li>
-<li>totalSubscriptionCount: The total number of subscriptions.</li>
-</ul>
-<h3 id="create-a-csv-to-be-imported-into-drawio"><a class="toclink" href="../../2024/04/24/how-to-create-a-management-group-diagram-with-drawio/#create-a-csv-to-be-imported-into-drawio">Create a CSV to be imported into draw.io</a></h3>
-<ol>
-<li>Import the CSV file to excel, rename the sheet to "Export_Portal"</li>
-<li>Create a second sheet with the following columns:<ul>
-<li>id: reference to the id in the first sheet</li>
-<li>displayName: reference to the displayName in the first sheet</li>
-<li>itemType: reference to the itemType in the first sheet</li>
-<li>ParentId: Use the following formula to get the parent of the current item:
-    <div class="language-text highlight"><pre><span></span><code><span id="__span-8-1"><a href="#__codelineno-8-1" id="__codelineno-8-1" name="__codelineno-8-1"></a>=IF(ISERROR(FIND(","; Export_Portal!D2)); Export_Portal!D2; TRIM(RIGHT(SUBSTITUTE(Export_Portal!D2; ","; REPT(" "; LEN(Export_Portal!D2))); LEN(Export_Portal!D2))))
-</span></code></pre></div></li>
-</ul>
-</li>
-<li>Export the second sheet to a CSV file.</li>
-</ol>
-<h3 id="import-the-csv-file-into-drawio"><a class="toclink" href="../../2024/04/24/how-to-create-a-management-group-diagram-with-drawio/#import-the-csv-file-into-drawio">Import the CSV file into draw.io</a></h3>
-<ol>
-<li>Go to <a href="https://app.diagrams.net/">draw.io</a> and create a new diagram.</li>
-<li>Click on Arrange &gt; Insert &gt; Advanced &gt; CSV.</li>
-<li>
-<p>Insert the header for the columns: id, displayName, itemType, Parent:</p>
-<p><div class="language-text highlight"><pre><span></span><code><span id="__span-9-1"><a href="#__codelineno-9-1" id="__codelineno-9-1" name="__codelineno-9-1"></a>    #label: %displayName%
-</span><span id="__span-9-2"><a href="#__codelineno-9-2" id="__codelineno-9-2" name="__codelineno-9-2"></a>    #stylename: itemType
-</span><span id="__span-9-3"><a href="#__codelineno-9-3" id="__codelineno-9-3" name="__codelineno-9-3"></a>    #styles: {"Management Group": "label;image=img/lib/azure2/general/Management_Groups.svg;whiteSpace=wrap;html=1;rounded=1; fillColor=%fill%;strokeColor=#6c8ebf;fillColor=#dae8fc;points=[[0.5,0,0,0,0],[0.5,1,0,0,0]];",\
-</span><span id="__span-9-4"><a href="#__codelineno-9-4" id="__codelineno-9-4" name="__codelineno-9-4"></a>    #"Subscription": "label;image=img/lib/azure2/general/Subscriptions.svg;whiteSpace=wrap;html=1;rounded=1; fillColor=%fill%;strokeColor=#d6b656;fillColor=#fff2cc;points=[[0.5,0,0,0,0],[0.5,1,0,0,0]];imageWidth=26;"}
-</span><span id="__span-9-5"><a href="#__codelineno-9-5" id="__codelineno-9-5" name="__codelineno-9-5"></a>    #
-</span><span id="__span-9-6"><a href="#__codelineno-9-6" id="__codelineno-9-6" name="__codelineno-9-6"></a>    #
-</span><span id="__span-9-7"><a href="#__codelineno-9-7" id="__codelineno-9-7" name="__codelineno-9-7"></a>    #namespace: csvimport-
-</span><span id="__span-9-8"><a href="#__codelineno-9-8" id="__codelineno-9-8" name="__codelineno-9-8"></a>    #
-</span><span id="__span-9-9"><a href="#__codelineno-9-9" id="__codelineno-9-9" name="__codelineno-9-9"></a>    #connect: {"from": "ParentId", "to": "displayName", "invert": true, "style": "curved=1;endArrow=blockThin;endFill=1;fontSize=11;edgeStyle=orthogonalEdgeStyle;"}
-</span><span id="__span-9-10"><a href="#__codelineno-9-10" id="__codelineno-9-10" name="__codelineno-9-10"></a>    #
-</span><span id="__span-9-11"><a href="#__codelineno-9-11" id="__codelineno-9-11" name="__codelineno-9-11"></a>    ## Node width and height, and padding for autosize
-</span><span id="__span-9-12"><a href="#__codelineno-9-12" id="__codelineno-9-12" name="__codelineno-9-12"></a>    #width: auto
-</span><span id="__span-9-13"><a href="#__codelineno-9-13" id="__codelineno-9-13" name="__codelineno-9-13"></a>    #height: auto
-</span><span id="__span-9-14"><a href="#__codelineno-9-14" id="__codelineno-9-14" name="__codelineno-9-14"></a>    #padding: -12
-</span><span id="__span-9-15"><a href="#__codelineno-9-15" id="__codelineno-9-15" name="__codelineno-9-15"></a>    #
-</span><span id="__span-9-16"><a href="#__codelineno-9-16" id="__codelineno-9-16" name="__codelineno-9-16"></a>    ## ignore: id,image,fill,stroke,refs,manager
-</span><span id="__span-9-17"><a href="#__codelineno-9-17" id="__codelineno-9-17" name="__codelineno-9-17"></a>    #
-</span><span id="__span-9-18"><a href="#__codelineno-9-18" id="__codelineno-9-18" name="__codelineno-9-18"></a>    ## Column to be renamed to link attribute (used as link).
-</span><span id="__span-9-19"><a href="#__codelineno-9-19" id="__codelineno-9-19" name="__codelineno-9-19"></a>    ## link: url
-</span><span id="__span-9-20"><a href="#__codelineno-9-20" id="__codelineno-9-20" name="__codelineno-9-20"></a>    #
-</span><span id="__span-9-21"><a href="#__codelineno-9-21" id="__codelineno-9-21" name="__codelineno-9-21"></a>    ## Spacing between nodes, heirarchical levels and parallel connections.
-</span><span id="__span-9-22"><a href="#__codelineno-9-22" id="__codelineno-9-22" name="__codelineno-9-22"></a>    #nodespacing: 40
-</span><span id="__span-9-23"><a href="#__codelineno-9-23" id="__codelineno-9-23" name="__codelineno-9-23"></a>    #levelspacing: 100
-</span><span id="__span-9-24"><a href="#__codelineno-9-24" id="__codelineno-9-24" name="__codelineno-9-24"></a>    #edgespacing: 40
-</span><span id="__span-9-25"><a href="#__codelineno-9-25" id="__codelineno-9-25" name="__codelineno-9-25"></a>    #
-</span><span id="__span-9-26"><a href="#__codelineno-9-26" id="__codelineno-9-26" name="__codelineno-9-26"></a>    ## layout: auto
-</span><span id="__span-9-27"><a href="#__codelineno-9-27" id="__codelineno-9-27" name="__codelineno-9-27"></a>    #layout: verticaltree
-</span><span id="__span-9-28"><a href="#__codelineno-9-28" id="__codelineno-9-28" name="__codelineno-9-28"></a>    #
-</span><span id="__span-9-29"><a href="#__codelineno-9-29" id="__codelineno-9-29" name="__codelineno-9-29"></a>    ## ---- CSV below this line. First line are column names. ----
-</span></code></pre></div>
-4. Paste the content of the CSV file and click on Import.</p>
-</li>
-</ol>
-<p>You should see a diagram with the Management Groups and Subscriptions.</p>
-<p>For example:</p>
-<p>This is the common structure for the Management Groups in the Enterprise Scale Landing Zone, now Accelerator Landing Zone: </p>
-<pre class="mermaid"><code>    graph TD
-        A[Root Management Group] --&gt; B[Intermediary-Management-Group]
-        B --&gt; C[Decommissioned]
-        B --&gt; D[Landing Zones]
-        B --&gt; E[Platform]
-        B --&gt; F[Sandboxes]
-        D --&gt; G[Corp]
-        D --&gt; H[Online]
-        E --&gt; I[Connectivity]
-        E --&gt; J[Identity]
-        E --&gt; K[Management]        
-</code></pre>
-<p>And this is the CSV file to import into draw.io:</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-10-1"><a href="#__codelineno-10-1" id="__codelineno-10-1" name="__codelineno-10-1"></a>#label: %displayName%
-</span><span id="__span-10-2"><a href="#__codelineno-10-2" id="__codelineno-10-2" name="__codelineno-10-2"></a>#stylename: itemType
-</span><span id="__span-10-3"><a href="#__codelineno-10-3" id="__codelineno-10-3" name="__codelineno-10-3"></a>#styles: {"Management Group": "label;image=img/lib/azure2/general/Management_Groups.svg;whiteSpace=wrap;html=1;rounded=1; fillColor=%fill%;strokeColor=#6c8ebf;fillColor=#dae8fc;points=[[0.5,0,0,0,0],[0.5,1,0,0,0]];",\
-</span><span id="__span-10-4"><a href="#__codelineno-10-4" id="__codelineno-10-4" name="__codelineno-10-4"></a>#"Subscription": "label;image=img/lib/azure2/general/Subscriptions.svg;whiteSpace=wrap;html=1;rounded=1; fillColor=%fill%;strokeColor=#d6b656;fillColor=#fff2cc;points=[[0.5,0,0,0,0],[0.5,1,0,0,0]];imageWidth=26;"}
-</span><span id="__span-10-5"><a href="#__codelineno-10-5" id="__codelineno-10-5" name="__codelineno-10-5"></a>#
-</span><span id="__span-10-6"><a href="#__codelineno-10-6" id="__codelineno-10-6" name="__codelineno-10-6"></a>#
-</span><span id="__span-10-7"><a href="#__codelineno-10-7" id="__codelineno-10-7" name="__codelineno-10-7"></a>#namespace: csvimport-
-</span><span id="__span-10-8"><a href="#__codelineno-10-8" id="__codelineno-10-8" name="__codelineno-10-8"></a>#
-</span><span id="__span-10-9"><a href="#__codelineno-10-9" id="__codelineno-10-9" name="__codelineno-10-9"></a>#connect: {"from": "ParentId", "to": "displayName", "invert": true, "style": "curved=1;endArrow=blockThin;endFill=1;fontSize=11;edgeStyle=orthogonalEdgeStyle;"}
-</span><span id="__span-10-10"><a href="#__codelineno-10-10" id="__codelineno-10-10" name="__codelineno-10-10"></a>#
-</span><span id="__span-10-11"><a href="#__codelineno-10-11" id="__codelineno-10-11" name="__codelineno-10-11"></a>## Node width and height, and padding for autosize
-</span><span id="__span-10-12"><a href="#__codelineno-10-12" id="__codelineno-10-12" name="__codelineno-10-12"></a>#width: auto
-</span><span id="__span-10-13"><a href="#__codelineno-10-13" id="__codelineno-10-13" name="__codelineno-10-13"></a>#height: auto
-</span><span id="__span-10-14"><a href="#__codelineno-10-14" id="__codelineno-10-14" name="__codelineno-10-14"></a>#padding: -12
-</span><span id="__span-10-15"><a href="#__codelineno-10-15" id="__codelineno-10-15" name="__codelineno-10-15"></a>#
-</span><span id="__span-10-16"><a href="#__codelineno-10-16" id="__codelineno-10-16" name="__codelineno-10-16"></a>## ignore: id,image,fill,stroke,refs,manager
-</span><span id="__span-10-17"><a href="#__codelineno-10-17" id="__codelineno-10-17" name="__codelineno-10-17"></a>#
-</span><span id="__span-10-18"><a href="#__codelineno-10-18" id="__codelineno-10-18" name="__codelineno-10-18"></a>## Column to be renamed to link attribute (used as link).
-</span><span id="__span-10-19"><a href="#__codelineno-10-19" id="__codelineno-10-19" name="__codelineno-10-19"></a>## link: url
-</span><span id="__span-10-20"><a href="#__codelineno-10-20" id="__codelineno-10-20" name="__codelineno-10-20"></a>#
-</span><span id="__span-10-21"><a href="#__codelineno-10-21" id="__codelineno-10-21" name="__codelineno-10-21"></a>## Spacing between nodes, heirarchical levels and parallel connections.
-</span><span id="__span-10-22"><a href="#__codelineno-10-22" id="__codelineno-10-22" name="__codelineno-10-22"></a>#nodespacing: 40
-</span><span id="__span-10-23"><a href="#__codelineno-10-23" id="__codelineno-10-23" name="__codelineno-10-23"></a>#levelspacing: 100
-</span><span id="__span-10-24"><a href="#__codelineno-10-24" id="__codelineno-10-24" name="__codelineno-10-24"></a>#edgespacing: 40
-</span><span id="__span-10-25"><a href="#__codelineno-10-25" id="__codelineno-10-25" name="__codelineno-10-25"></a>#
-</span><span id="__span-10-26"><a href="#__codelineno-10-26" id="__codelineno-10-26" name="__codelineno-10-26"></a>## layout: auto
-</span><span id="__span-10-27"><a href="#__codelineno-10-27" id="__codelineno-10-27" name="__codelineno-10-27"></a>#layout: verticaltree
-</span><span id="__span-10-28"><a href="#__codelineno-10-28" id="__codelineno-10-28" name="__codelineno-10-28"></a>#
-</span><span id="__span-10-29"><a href="#__codelineno-10-29" id="__codelineno-10-29" name="__codelineno-10-29"></a>## ---- CSV below this line. First line are column names. ----
-</span><span id="__span-10-30"><a href="#__codelineno-10-30" id="__codelineno-10-30" name="__codelineno-10-30"></a>id,displayName,itemType,ParentId
-</span><span id="__span-10-31"><a href="#__codelineno-10-31" id="__codelineno-10-31" name="__codelineno-10-31"></a>1,Tenant Root Group,Management Group,
-</span><span id="__span-10-32"><a href="#__codelineno-10-32" id="__codelineno-10-32" name="__codelineno-10-32"></a>2,Intermediary Management Group,Management Group,Tenant Root Group
-</span><span id="__span-10-33"><a href="#__codelineno-10-33" id="__codelineno-10-33" name="__codelineno-10-33"></a>3,Decommissioned,Management Group,Intermediary Management Group
-</span><span id="__span-10-34"><a href="#__codelineno-10-34" id="__codelineno-10-34" name="__codelineno-10-34"></a>4,Landing Zones,Management Group,Intermediary Management Group
-</span><span id="__span-10-35"><a href="#__codelineno-10-35" id="__codelineno-10-35" name="__codelineno-10-35"></a>5,Platform,Management Group,Intermediary Management Group
-</span><span id="__span-10-36"><a href="#__codelineno-10-36" id="__codelineno-10-36" name="__codelineno-10-36"></a>6,Sandboxes,Management Group,Landing Zones
-</span><span id="__span-10-37"><a href="#__codelineno-10-37" id="__codelineno-10-37" name="__codelineno-10-37"></a>7,Corp,Management Group,Landing Zones
-</span><span id="__span-10-38"><a href="#__codelineno-10-38" id="__codelineno-10-38" name="__codelineno-10-38"></a>8,Online,Management Group,Landing Zones
-</span><span id="__span-10-39"><a href="#__codelineno-10-39" id="__codelineno-10-39" name="__codelineno-10-39"></a>9,Connectivity,Management Group,Platform
-</span><span id="__span-10-40"><a href="#__codelineno-10-40" id="__codelineno-10-40" name="__codelineno-10-40"></a>10,Identity,Management Group,Platform
-</span><span id="__span-10-41"><a href="#__codelineno-10-41" id="__codelineno-10-41" name="__codelineno-10-41"></a>11,Management,Management Group,Platform
-</span><span id="__span-10-42"><a href="#__codelineno-10-42" id="__codelineno-10-42" name="__codelineno-10-42"></a>12,subcr-1,Subscription,Decommissioned
-</span><span id="__span-10-43"><a href="#__codelineno-10-43" id="__codelineno-10-43" name="__codelineno-10-43"></a>13,subcr-2,Subscription,Sandboxes
-</span><span id="__span-10-44"><a href="#__codelineno-10-44" id="__codelineno-10-44" name="__codelineno-10-44"></a>14,subcr-3,Subscription,Corp
-</span><span id="__span-10-45"><a href="#__codelineno-10-45" id="__codelineno-10-45" name="__codelineno-10-45"></a>15,subcr-4,Subscription,Online
-</span><span id="__span-10-46"><a href="#__codelineno-10-46" id="__codelineno-10-46" name="__codelineno-10-46"></a>16,subcr-5,Subscription,Connectivity
-</span><span id="__span-10-47"><a href="#__codelineno-10-47" id="__codelineno-10-47" name="__codelineno-10-47"></a>17,subcr-6,Subscription,Identity
-</span><span id="__span-10-48"><a href="#__codelineno-10-48" id="__codelineno-10-48" name="__codelineno-10-48"></a>18,subcr-7,Subscription,Management
-</span></code></pre></div>
-<h3 id="make-your-diagram-animated-and-interactive"><a class="toclink" href="../../2024/04/24/how-to-create-a-management-group-diagram-with-drawio/#make-your-diagram-animated-and-interactive">Make your diagram animated and interactive</a></h3>
-<p>You can make your diagram animated and interactive by following these steps:</p>
-<ol>
-<li>File &gt; Export as &gt; URL</li>
-<li>Add p=ex&amp; after the first ? in the URL.</li>
-</ol>
-<p>For example, the URL should look like this:</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-11-1"><a href="#__codelineno-11-1" id="__codelineno-11-1" name="__codelineno-11-1"></a>https://viewer.diagrams.net/?p=ex&amp;tags=%7B%7D&amp;highlight=0000ff&amp;layers=1&amp;nav=1&amp;title=MGs.drawio#R7Zxbc5s4FMc%2FjR%2BbAQkEPK7dJHWn3XbW6exMX3ZkkLFakDxCvvXTr7jFxrZi1k0Wg5lxYnR0QfqfHxqOBB7AUbx5FHgx%2F8wDEg2AEWwG8P0AAGAgQ32llm1uMU0X5pZQ0KCw7QwT%2BosUxqJiuKQBSSoFJeeRpIuq0eeMEV9WbFgIvq4Wm%2FGoetYFDsmRYeLj6Nj6Nw3kvBwG8nYZHwgN58WpXeDkGTEuCxcjSeY44Os9E7wfwJHgXOZH8WZEolS9Upe83oMm97ljgjB5osK3hIgv0x%2BpJsCI8FQ5Jis0AHZAk0WEt3%2FimKhU3k7Z7HBLxq7x42mcwOHy%2B0dn9PCRvIOFz%2FYrZqWfCMMsPcFf6TCA8Sj4clE0KEn8tF0UBT9jpoSKCTso9TXr%2Fjgo%2B5YNKcI%2BmStHEbHvvKoMidyWLioGN6Rx7ksah0qFiE7Vf%2FxrKUgqSkgYEVjVfNh15Z%2BsI8ldsgpV9fVcdXmyUOdWbawVzso2l3Eqm6kOVVEWkKBIpSjRKBrxiIusF3aaTNWEw0QK%2FpPssiDyXTKdqZxqFRhg4s58ZV9wymQ2VnuoPsadcsrIqPzZqsLoOc88zFOftFOpfCsiJNloIdnX8pHwmEixVUWKCpYD7goituU1nCfXO%2FqB4ea2%2BR74dmHDhc%2FC57Z3TKqDwoFlco%2FS16fW0lA7ZpKImAQUZ0PXsXkJwS9cED3WDWINnQOsTegec%2B20g2tbw%2FV74vM4pklCOVMuvRjimtdHD3RzQJezcjlJ2%2BiIZtNrB81IQ%2FMnzALKFCLGd4Vz0uPcYZyhZ57nuSWzs6Ph%2BWuE5YyLuAe5wyB7rn0eZKsdILsakCdqYp7yze9MySfn9p7bBu8nAKxwCx3rmFvUDm49DbcjLn4jsuuRvTJkLWieRxa0AlnL0CD7hUWUkR7azkBre955aGE7oDW182y2FE9XVG4vR7d6u9wz2xyzjuN05d7AAhpmx4ESo%2Be1E7wexmBtnmN1G2%2F7TPbEtp1Y00Q1wq92rH9Zul23ZDn1xTvzFK%2BT5TTxBV1IytkpUk9tbLwxr%2FtdentWAzRFNjpmdTabAf8VWc0GXz7HANAr3dPWmG5bEofpdtZydsEl7B6slvXYXgu2wKrOuZYHWsutbg8t5xZewu1utaxH9lqQPVzyajOyum2yHFnrEmT3V8t6aK8FWmRYnYFWtyWWQ2tfAu3xalmP7rWg63hOZ9DV7Yrl6KJL0K0umvXYXgu2nmd0BVtbtzOWY%2Btcgu3h2lkP7rWAa5qu2yS5Ry9ZnGayGNcKR0tSog2qjPhLsXp2IGHBH%2BmrKCo5jbj%2F82lOWW5%2BSB2ZF5pxJovXX8ysUhCSSdEgF3LOQ85wdL%2BzFoKn5V6WW3WML4VPXhhS%2BYKHxCIk8qWC1mkHChJhdQ9T7cl%2FcEZN5UH3lLfqKm83qjy8YeVRo8pbN6y806jydveUR3WVdxtVHt2w8l6jyju3q3z%2BFF5jyrvdU96pq7wmLPiflPduWHnQpPLlrwPcpPKwUeU7GMPadZVvNIZFHYxh3brKNxrDog7GsF5d5RuNYVH3YtjylY3zyjcaw6LuxbDlewfnlW80hkXdi2HLp%2BfPK99oDIu6F8Naddfn7TeKYVVy90tVWd7eD37B%2B38B#%7B%22pageId%22%3A%22UGUHswWqf16rUITyRAQM%22%7D
-</span></code></pre></div>
-<p>You can check it <a href="https://viewer.diagrams.net/?p=ex&amp;tags=%7B%7D&amp;highlight=0000ff&amp;layers=1&amp;nav=1&amp;title=MGs.drawio#R7Zxbc5s4FMc%2FjR%2BbAQkEPK7dJHWn3XbW6exMX3ZkkLFakDxCvvXTr7jFxrZi1k0Wg5lxYnR0QfqfHxqOBB7AUbx5FHgx%2F8wDEg2AEWwG8P0AAGAgQ32llm1uMU0X5pZQ0KCw7QwT%2BosUxqJiuKQBSSoFJeeRpIuq0eeMEV9WbFgIvq4Wm%2FGoetYFDsmRYeLj6Nj6Nw3kvBwG8nYZHwgN58WpXeDkGTEuCxcjSeY44Os9E7wfwJHgXOZH8WZEolS9Upe83oMm97ljgjB5osK3hIgv0x%2BpJsCI8FQ5Jis0AHZAk0WEt3%2FimKhU3k7Z7HBLxq7x42mcwOHy%2B0dn9PCRvIOFz%2FYrZqWfCMMsPcFf6TCA8Sj4clE0KEn8tF0UBT9jpoSKCTso9TXr%2Fjgo%2B5YNKcI%2BmStHEbHvvKoMidyWLioGN6Rx7ksah0qFiE7Vf%2FxrKUgqSkgYEVjVfNh15Z%2BsI8ldsgpV9fVcdXmyUOdWbawVzso2l3Eqm6kOVVEWkKBIpSjRKBrxiIusF3aaTNWEw0QK%2FpPssiDyXTKdqZxqFRhg4s58ZV9wymQ2VnuoPsadcsrIqPzZqsLoOc88zFOftFOpfCsiJNloIdnX8pHwmEixVUWKCpYD7goituU1nCfXO%2FqB4ea2%2BR74dmHDhc%2FC57Z3TKqDwoFlco%2FS16fW0lA7ZpKImAQUZ0PXsXkJwS9cED3WDWINnQOsTegec%2B20g2tbw%2FV74vM4pklCOVMuvRjimtdHD3RzQJezcjlJ2%2BiIZtNrB81IQ%2FMnzALKFCLGd4Vz0uPcYZyhZ57nuSWzs6Ph%2BWuE5YyLuAe5wyB7rn0eZKsdILsakCdqYp7yze9MySfn9p7bBu8nAKxwCx3rmFvUDm49DbcjLn4jsuuRvTJkLWieRxa0AlnL0CD7hUWUkR7azkBre955aGE7oDW182y2FE9XVG4vR7d6u9wz2xyzjuN05d7AAhpmx4ESo%2Be1E7wexmBtnmN1G2%2F7TPbEtp1Y00Q1wq92rH9Zul23ZDn1xTvzFK%2BT5TTxBV1IytkpUk9tbLwxr%2FtdentWAzRFNjpmdTabAf8VWc0GXz7HANAr3dPWmG5bEofpdtZydsEl7B6slvXYXgu2wKrOuZYHWsutbg8t5xZewu1utaxH9lqQPVzyajOyum2yHFnrEmT3V8t6aK8FWmRYnYFWtyWWQ2tfAu3xalmP7rWg63hOZ9DV7Yrl6KJL0K0umvXYXgu2nmd0BVtbtzOWY%2Btcgu3h2lkP7rWAa5qu2yS5Ry9ZnGayGNcKR0tSog2qjPhLsXp2IGHBH%2BmrKCo5jbj%2F82lOWW5%2BSB2ZF5pxJovXX8ysUhCSSdEgF3LOQ85wdL%2BzFoKn5V6WW3WML4VPXhhS%2BYKHxCIk8qWC1mkHChJhdQ9T7cl%2FcEZN5UH3lLfqKm83qjy8YeVRo8pbN6y806jydveUR3WVdxtVHt2w8l6jyju3q3z%2BFF5jyrvdU96pq7wmLPiflPduWHnQpPLlrwPcpPKwUeU7GMPadZVvNIZFHYxh3brKNxrDog7GsF5d5RuNYVH3YtjylY3zyjcaw6LuxbDlewfnlW80hkXdi2HLp%2BfPK99oDIu6F8Naddfn7TeKYVVy90tVWd7eD37B%2B38B#%7B%22pageId%22%3A%22UGUHswWqf16rUITyRAQM%22%7D">here</a></p>
-<h3 id="references"><a class="toclink" href="../../2024/04/24/how-to-create-a-management-group-diagram-with-drawio/#references">References</a></h3>
-<ul>
-<li><a href="https://drawio-app.com/blog/automatically-create-draw-io-diagrams-from-csv-files/">Automatically create draw.io diagrams from CSV files</a></li>
-<li><a href="https://drawio-app.com/blog/animation-and-automatic-layout-explore-complex-diagrams/">Animation and Automatic Layout: Explore Complex Diagrams</a></li>
-</ul>
-</div>
-</article>
-<article class="md-post md-post--excerpt">
-<header class="md-post__header">
-<nav class="md-post__authors md-typeset">
-<span class="md-author">
-<img alt="Rafael Fernández" src="https://avatars.githubusercontent.com/u/39990341"/>
-</span>
-</nav>
-<div class="md-post__meta md-meta">
-<ul class="md-meta__list">
-<li class="md-meta__item">
-<time datetime="2024-04-23 00:00:00">April 23, 2024</time></li>
-<li class="md-meta__item">
-            in
-            
-              <a class="md-meta__link" href="../../category/azure-services/">Azure Services</a></li>
-<li class="md-meta__item">
-            
-              2 min read
-            
-          </li>
-</ul>
-</div>
-</header>
-<div class="md-post__content md-typeset">
-<h2 id="moving-management-groups-and-subscriptions"><a class="toclink" href="../../2024/04/23/moving-management-groups-and-subscriptions/">Moving Management Groups and Subscriptions</a></h2>
-<p>Managing your Azure resources efficiently often involves moving management groups and subscriptions. Here's a brief guide on how to do it:</p>
-<h3 id="moving-management-groups"><a class="toclink" href="../../2024/04/23/moving-management-groups-and-subscriptions/#moving-management-groups">Moving Management Groups</a></h3>
-<p>To move a management group, you need to have the necessary permissions. You must be an owner of the target parent management group and have <code>Management Group Contributor</code> role at the group you want to move.</p>
-<p>Here's the step-by-step process:</p>
-<ol>
-<li>Navigate to the <strong>Azure portal</strong>.</li>
-<li>Go to <strong>Management groups</strong>.</li>
-<li>Select the management group you want to move.</li>
-<li>Click <strong>Details</strong>.</li>
-<li>Under <strong>Parent group</strong>, click <strong>Change</strong>.</li>
-<li>Choose the new parent group from the list and click <strong>Save</strong>.</li>
-</ol>
-<p>Remember, moving a management group will also move all its child resources including other management groups and subscriptions.</p>
-<h3 id="moving-subscriptions"><a class="toclink" href="../../2024/04/23/moving-management-groups-and-subscriptions/#moving-subscriptions">Moving Subscriptions</a></h3>
-<p>You can move a subscription from one management group to another or within the same management group. To do this, you must have the <code>Owner</code> or <code>Contributor</code> role at the target management group and <code>Owner</code> role at the subscription level.</p>
-<p>Follow these steps:</p>
-<ol>
-<li>Go to the <strong>Azure portal</strong>.</li>
-<li>Navigate to <strong>Management groups</strong>.</li>
-<li>Select the management group where the subscription currently resides.</li>
-<li>Click on <strong>Subscriptions</strong>.</li>
-<li>Find the subscription you want to move and select <strong>..."</strong> (More options).</li>
-<li>Click <strong>Change parent</strong>.</li>
-<li>In the pop-up window, select the new parent management group and click <strong>Save</strong>.</li>
-</ol>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Moving subscriptions could affect the resources if there are policies or permissions applied at the management group level. It's important to understand the implications before making the move. Also, keep in mind that you cannot move the Root management group or rename it.</p>
-</div>
-<p>In conclusion, moving management groups and subscriptions allows for better organization and management of your Azure resources. However, it should be done carefully considering the impact on resources and compliance with assigned policies.</p>
 </div>
 </article>
 <nav class="md-pagination">

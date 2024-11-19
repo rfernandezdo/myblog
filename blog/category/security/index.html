@@ -241,6 +241,13 @@
           </label>
 <ul class="md-nav__list" data-md-scrollfix="">
 <li class="md-nav__item">
+<a class="md-nav__link" href="../../2024/11/">
+<span class="md-ellipsis">
+    2024/11
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
 <a class="md-nav__link" href="../../2024/10/">
 <span class="md-ellipsis">
     2024/10
@@ -683,6 +690,90 @@
 </ul>
 <p>By using <strong>ID Protection</strong> in Microsoft Entra, you can enhance the security of your organization's data and resources and protect your users' identities from cyber threats. If you want to learn more about <strong>ID Protection</strong> and other security features in Microsoft Entra, contact us today! </p>
 <p>I hope this helps!</p>
+</div>
+</article>
+<article class="md-post md-post--excerpt">
+<header class="md-post__header">
+<nav class="md-post__authors md-typeset">
+<span class="md-author">
+<img alt="Rafael Fernández" src="https://avatars.githubusercontent.com/u/39990341"/>
+</span>
+</nav>
+<div class="md-post__meta md-meta">
+<ul class="md-meta__list">
+<li class="md-meta__item">
+<time datetime="2024-09-17 00:00:00">September 17, 2024</time></li>
+<li class="md-meta__item">
+            in
+            
+              <a class="md-meta__link" href="./">Security</a></li>
+<li class="md-meta__item">
+            
+              3 min read
+            
+          </li>
+</ul>
+</div>
+</header>
+<div class="md-post__content md-typeset">
+<h2 id="security-score-system"><a class="toclink" href="../../2024/09/17/security-score-system/">Security Score System</a></h2>
+<p>The Common Vulnerability Scoring System (CVSS) is a framework for scoring the severity of security vulnerabilities. It provides a standardized method for assessing the impact of vulnerabilities and helps organizations prioritize their response to security threats. In this article, we will discuss the CVSS and how it can be used to calculate the severity of security vulnerabilities.</p>
+<h3 id="what-is-cvss"><a class="toclink" href="../../2024/09/17/security-score-system/#what-is-cvss">What is CVSS?</a></h3>
+<p>The Common Vulnerability Scoring System (CVSS) is an open framework for scoring the severity of security vulnerabilities. It was developed by the Forum of Incident Response and Security Teams (FIRST) to provide a standardized method for assessing the impact of vulnerabilities. CVSS assigns a numerical score to vulnerabilities based on their characteristics, such as the impact on confidentiality, integrity, and availability, and the complexity of the attack vector.</p>
+<p>CVSS is widely used by security researchers, vendors, and organizations to prioritize their response to security threats. It helps organizations understand the severity of vulnerabilities and allocate resources to address the most critical issues first.</p>
+<h3 id="how-is-cvss-calculated"><a class="toclink" href="../../2024/09/17/security-score-system/#how-is-cvss-calculated">How is CVSS calculated?</a></h3>
+<p>In CVSS Version 4.0, vulnerabilities are scored on a scale of 0.0 to 10.0, with 10.0 being the most severe. The CVSS score is calculated based on several metrics groups, including:</p>
+<ul>
+<li>
+<p><strong>Base Metric</strong>: The Base metric group represents the intrinsic characteristics of a vulnerability that are constant over time and across user environments. It is composed of two sets of metrics: the Exploitability metrics and the Impact metrics.</p>
+</li>
+<li>
+<p><strong>Threat metric group</strong>: The Threat metric group reflects the characteristics of a vulnerability related to threat that may change over time but not necessarily across user environments. </p>
+</li>
+<li>
+<p><strong>Environmental metric group</strong>: The Environmental metric group represents the characteristics of a vulnerability that are relevant and unique to a particular user's environment.</p>
+</li>
+<li>
+<p><strong>The Supplementary metric group</strong>: The Supplemental metric group includes metrics that provide context as well as describe and measure additional extrinsic attributes of a vulnerability. </p>
+</li>
+</ul>
+<h3 id="cvss-version-40-metrics"><a class="toclink" href="../../2024/09/17/security-score-system/#cvss-version-40-metrics">CVSS Version 4.0 Metrics</a></h3>
+<h4 id="base-metrics"><a class="toclink" href="../../2024/09/17/security-score-system/#base-metrics">Base Metrics</a></h4>
+<p>The Base metric group includes the following metrics:</p>
+<ul>
+<li><strong>Exploitability Metrics</strong>: These metrics describe the characteristics of the vulnerability that affect how easy it is to exploit. They include the Attack Vector (AV), Attack Complexity (AC), Privileges Required (PR), and User Interaction (UI).</li>
+<li><strong>Vulnerable System Impact Metrics</strong>: These metrics describe the impact on the system if the vulnerability is exploited. They include the Confidentiality(VC), Integrity (VI), and Availability (VA) impacts.</li>
+<li><strong>Subsequent System Impact Metrics</strong>: These metrics describe the impact on the system if the vulnerability is exploited. They include the Confidentiality(SC), Integrity (II), and Availability (SA) impacts.</li>
+</ul>
+<h5 id="exploitability-metrics"><a class="toclink" href="../../2024/09/17/security-score-system/#exploitability-metrics">Exploitability Metrics</a></h5>
+<ul>
+<li><strong>Attack Vector (AV)</strong>: This metric describes the context where vulnerability is exploited. It can be either Local (L), Adjacent Network (A), Network (N), or Physical (P).</li>
+<li><strong>Attack Complexity (AC)</strong>: This metric describes the complexity of the attack required to exploit the vulnerability. It can be either Low (L), High (H).</li>
+<li><strong>Privileges Required (PR)</strong>: This metric describes the level of privileges required to exploit the vulnerability. It can be either None (N), Low (L), or High (H).</li>
+<li><strong>User Interaction (UI)</strong>: This metric describes whether user interaction is required to exploit the vulnerability. It can be either None (N), Required (R).</li>
+</ul>
+<h5 id="vulnerable-system-impact-metrics"><a class="toclink" href="../../2024/09/17/security-score-system/#vulnerable-system-impact-metrics">Vulnerable System Impact Metrics</a></h5>
+<ul>
+<li>
+<p><strong>Confidentiality Impact (VC)</strong>: This metric measures the impact on the confidentiality of the information managed by the vulnerable system due to a successful exploit of the vulnerability. It can be either Low (L), High (H), or None (N).</p>
+</li>
+<li>
+<p><strong>Integrity Impact (VI)</strong>: This metric measures the impact on the integrity of the information managed by the vulnerable system due to a successful exploit of the vulnerability. It can be either Low (L), High (H), or None (N).</p>
+</li>
+<li>
+<p><strong>Availability Impact (VA)</strong>: This metric measures the impact on the availability of the services of the vulnerable system due to a successful exploit of the vulnerability. It can be either Low (L), High (H), or None (N).</p>
+</li>
+</ul>
+<h5 id="subsequent-system-impact-metrics"><a class="toclink" href="../../2024/09/17/security-score-system/#subsequent-system-impact-metrics">Subsequent System Impact Metrics</a></h5>
+<ul>
+<li><strong>Confidentiality Impact (SC)</strong>: This metric measures the impact to the confidentiality of the information managed by the Subsequent System due to a successful exploit of the vulnerability. It can be either Low (L), High (H), or None (N).</li>
+</ul>
+<h3 id="references"><a class="toclink" href="../../2024/09/17/security-score-system/#references">References</a></h3>
+<ul>
+<li><a href="https://www.first.org/cvss/v4.0/specification-document">Common Vulnerability Scoring System version 4.0: Specification Document</a></li>
+<li><a href="https://www.first.org/cvss/calculator/4.0">CVSS Version 4.0 Calculator</a></li>
+<li><a href="https://www.first.org/cvss/user-guide">CVSS Version 4.0 User Guide</a></li>
+</ul>
 </div>
 </article>
 <article class="md-post md-post--excerpt">

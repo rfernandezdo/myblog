@@ -241,6 +241,13 @@
           </label>
 <ul class="md-nav__list" data-md-scrollfix="">
 <li class="md-nav__item">
+<a class="md-nav__link" href="../11/">
+<span class="md-ellipsis">
+    2024/11
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
 <a class="md-nav__link" href="../10/">
 <span class="md-ellipsis">
     2024/10
@@ -281,9 +288,9 @@
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="#differences-between-b2b-direct-connect-and-b2b-collaboration-in-english">
+<a class="md-nav__link" href="#differences-between-b2b-direct-connect-and-b2b-collaboration-in-microsoft-entra">
 <span class="md-ellipsis">
-      Differences between B2B Direct Connect and B2B Collaboration in English
+      Differences between B2B Direct Connect and B2B Collaboration in Microsoft Entra
     </span>
 </a>
 </li>
@@ -291,6 +298,13 @@
 <a class="md-nav__link" href="#microsoft-defender-for-storage">
 <span class="md-ellipsis">
       Microsoft Defender for Storage
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#security-score-system">
+<span class="md-ellipsis">
+      Security Score System
     </span>
 </a>
 </li>
@@ -804,7 +818,7 @@
 </div>
 </header>
 <div class="md-post__content md-typeset">
-<h2 id="differences-between-b2b-direct-connect-and-b2b-collaboration-in-english"><a class="toclink" href="21/differences-between-b2b-direct-connect-and-b2b-collaboration-in-english/">Differences between <strong>B2B Direct Connect</strong> and <strong>B2B Collaboration</strong> in English</a></h2>
+<h2 id="differences-between-b2b-direct-connect-and-b2b-collaboration-in-microsoft-entra"><a class="toclink" href="21/differences-between-b2b-direct-connect-and-b2b-collaboration-in-microsoft-entra/">Differences between <strong>B2B Direct Connect</strong> and <strong>B2B Collaboration</strong> in Microsoft Entra</a></h2>
 <p>Microsoft Entra offers two ways to collaborate with external users: <strong>B2B Direct Connect</strong> and <strong>B2B Collaboration</strong>. Both features allow organizations to share resources with external users while maintaining control over access and security. However, they differ in functionality, access, and integration. Here is a comparison between <strong>B2B Direct Connect</strong> and <strong>B2B Collaboration</strong>:</p>
 <table>
 <thead>
@@ -927,6 +941,90 @@
 <div class="md-post__meta md-meta">
 <ul class="md-meta__list">
 <li class="md-meta__item">
+<time datetime="2024-09-17 00:00:00">September 17, 2024</time></li>
+<li class="md-meta__item">
+            in
+            
+              <a class="md-meta__link" href="../../category/security/">Security</a></li>
+<li class="md-meta__item">
+            
+              3 min read
+            
+          </li>
+</ul>
+</div>
+</header>
+<div class="md-post__content md-typeset">
+<h2 id="security-score-system"><a class="toclink" href="17/security-score-system/">Security Score System</a></h2>
+<p>The Common Vulnerability Scoring System (CVSS) is a framework for scoring the severity of security vulnerabilities. It provides a standardized method for assessing the impact of vulnerabilities and helps organizations prioritize their response to security threats. In this article, we will discuss the CVSS and how it can be used to calculate the severity of security vulnerabilities.</p>
+<h3 id="what-is-cvss"><a class="toclink" href="17/security-score-system/#what-is-cvss">What is CVSS?</a></h3>
+<p>The Common Vulnerability Scoring System (CVSS) is an open framework for scoring the severity of security vulnerabilities. It was developed by the Forum of Incident Response and Security Teams (FIRST) to provide a standardized method for assessing the impact of vulnerabilities. CVSS assigns a numerical score to vulnerabilities based on their characteristics, such as the impact on confidentiality, integrity, and availability, and the complexity of the attack vector.</p>
+<p>CVSS is widely used by security researchers, vendors, and organizations to prioritize their response to security threats. It helps organizations understand the severity of vulnerabilities and allocate resources to address the most critical issues first.</p>
+<h3 id="how-is-cvss-calculated"><a class="toclink" href="17/security-score-system/#how-is-cvss-calculated">How is CVSS calculated?</a></h3>
+<p>In CVSS Version 4.0, vulnerabilities are scored on a scale of 0.0 to 10.0, with 10.0 being the most severe. The CVSS score is calculated based on several metrics groups, including:</p>
+<ul>
+<li>
+<p><strong>Base Metric</strong>: The Base metric group represents the intrinsic characteristics of a vulnerability that are constant over time and across user environments. It is composed of two sets of metrics: the Exploitability metrics and the Impact metrics.</p>
+</li>
+<li>
+<p><strong>Threat metric group</strong>: The Threat metric group reflects the characteristics of a vulnerability related to threat that may change over time but not necessarily across user environments. </p>
+</li>
+<li>
+<p><strong>Environmental metric group</strong>: The Environmental metric group represents the characteristics of a vulnerability that are relevant and unique to a particular user's environment.</p>
+</li>
+<li>
+<p><strong>The Supplementary metric group</strong>: The Supplemental metric group includes metrics that provide context as well as describe and measure additional extrinsic attributes of a vulnerability. </p>
+</li>
+</ul>
+<h3 id="cvss-version-40-metrics"><a class="toclink" href="17/security-score-system/#cvss-version-40-metrics">CVSS Version 4.0 Metrics</a></h3>
+<h4 id="base-metrics"><a class="toclink" href="17/security-score-system/#base-metrics">Base Metrics</a></h4>
+<p>The Base metric group includes the following metrics:</p>
+<ul>
+<li><strong>Exploitability Metrics</strong>: These metrics describe the characteristics of the vulnerability that affect how easy it is to exploit. They include the Attack Vector (AV), Attack Complexity (AC), Privileges Required (PR), and User Interaction (UI).</li>
+<li><strong>Vulnerable System Impact Metrics</strong>: These metrics describe the impact on the system if the vulnerability is exploited. They include the Confidentiality(VC), Integrity (VI), and Availability (VA) impacts.</li>
+<li><strong>Subsequent System Impact Metrics</strong>: These metrics describe the impact on the system if the vulnerability is exploited. They include the Confidentiality(SC), Integrity (II), and Availability (SA) impacts.</li>
+</ul>
+<h5 id="exploitability-metrics"><a class="toclink" href="17/security-score-system/#exploitability-metrics">Exploitability Metrics</a></h5>
+<ul>
+<li><strong>Attack Vector (AV)</strong>: This metric describes the context where vulnerability is exploited. It can be either Local (L), Adjacent Network (A), Network (N), or Physical (P).</li>
+<li><strong>Attack Complexity (AC)</strong>: This metric describes the complexity of the attack required to exploit the vulnerability. It can be either Low (L), High (H).</li>
+<li><strong>Privileges Required (PR)</strong>: This metric describes the level of privileges required to exploit the vulnerability. It can be either None (N), Low (L), or High (H).</li>
+<li><strong>User Interaction (UI)</strong>: This metric describes whether user interaction is required to exploit the vulnerability. It can be either None (N), Required (R).</li>
+</ul>
+<h5 id="vulnerable-system-impact-metrics"><a class="toclink" href="17/security-score-system/#vulnerable-system-impact-metrics">Vulnerable System Impact Metrics</a></h5>
+<ul>
+<li>
+<p><strong>Confidentiality Impact (VC)</strong>: This metric measures the impact on the confidentiality of the information managed by the vulnerable system due to a successful exploit of the vulnerability. It can be either Low (L), High (H), or None (N).</p>
+</li>
+<li>
+<p><strong>Integrity Impact (VI)</strong>: This metric measures the impact on the integrity of the information managed by the vulnerable system due to a successful exploit of the vulnerability. It can be either Low (L), High (H), or None (N).</p>
+</li>
+<li>
+<p><strong>Availability Impact (VA)</strong>: This metric measures the impact on the availability of the services of the vulnerable system due to a successful exploit of the vulnerability. It can be either Low (L), High (H), or None (N).</p>
+</li>
+</ul>
+<h5 id="subsequent-system-impact-metrics"><a class="toclink" href="17/security-score-system/#subsequent-system-impact-metrics">Subsequent System Impact Metrics</a></h5>
+<ul>
+<li><strong>Confidentiality Impact (SC)</strong>: This metric measures the impact to the confidentiality of the information managed by the Subsequent System due to a successful exploit of the vulnerability. It can be either Low (L), High (H), or None (N).</li>
+</ul>
+<h3 id="references"><a class="toclink" href="17/security-score-system/#references">References</a></h3>
+<ul>
+<li><a href="https://www.first.org/cvss/v4.0/specification-document">Common Vulnerability Scoring System version 4.0: Specification Document</a></li>
+<li><a href="https://www.first.org/cvss/calculator/4.0">CVSS Version 4.0 Calculator</a></li>
+<li><a href="https://www.first.org/cvss/user-guide">CVSS Version 4.0 User Guide</a></li>
+</ul>
+</div>
+</article>
+<article class="md-post md-post--excerpt">
+<header class="md-post__header">
+<nav class="md-post__authors md-typeset">
+<span class="md-author">
+<img alt="Rafael Fernández" src="https://avatars.githubusercontent.com/u/39990341"/>
+</span>
+</nav>
+<div class="md-post__meta md-meta">
+<ul class="md-meta__list">
+<li class="md-meta__item">
 <time datetime="2024-09-09 00:00:00">September 9, 2024</time></li>
 <li class="md-meta__item">
             in
@@ -945,27 +1043,27 @@
 <p>markmap is a visualisation tool that allows you to create mindmaps from markdown files. It is based on the mermaid library and can be used to create a visual representation of a markdown file.</p>
 <h3 id="installation-in-mkdocs"><a class="toclink" href="09/markmap/#installation-in-mkdocs">Installation in mkdocs</a></h3>
 <p>To install markmap in mkdocs, you need install the plugin using pip:</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-4-1"><a href="#__codelineno-4-1" id="__codelineno-4-1" name="__codelineno-4-1"></a>pip<span class="w"> </span>install<span class="w"> </span>mkdocs-markmap
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-0-1"><a href="#__codelineno-0-1" id="__codelineno-0-1" name="__codelineno-0-1"></a>pip<span class="w"> </span>install<span class="w"> </span>mkdocs-markmap
 </span></code></pre></div>
 <p>Then, you need to add the following lines to your <code>mkdocs.yml</code> file:</p>
-<div class="language-yaml highlight"><pre><span></span><code><span id="__span-5-1"><a href="#__codelineno-5-1" id="__codelineno-5-1" name="__codelineno-5-1"></a><span class="nt">plugins</span><span class="p">:</span>
-</span><span id="__span-5-2"><a href="#__codelineno-5-2" id="__codelineno-5-2" name="__codelineno-5-2"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">markmap</span>
+<div class="language-yaml highlight"><pre><span></span><code><span id="__span-1-1"><a href="#__codelineno-1-1" id="__codelineno-1-1" name="__codelineno-1-1"></a><span class="nt">plugins</span><span class="p">:</span>
+</span><span id="__span-1-2"><a href="#__codelineno-1-2" id="__codelineno-1-2" name="__codelineno-1-2"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">markmap</span>
 </span></code></pre></div>
 <h3 id="usage"><a class="toclink" href="09/markmap/#usage">Usage</a></h3>
 <p>To use markmap, you need to add the following code block to your markdown file:</p>
-<div class="language-markdown highlight"><pre><span></span><code><span id="__span-6-1"><a href="#__codelineno-6-1" id="__codelineno-6-1" name="__codelineno-6-1"></a><span class="sb">```markmap</span><span class="w">  </span>
-</span><span id="__span-6-2"><a href="#__codelineno-6-2" id="__codelineno-6-2" name="__codelineno-6-2"></a><span class="s"># Root</span>
-</span><span id="__span-6-3"><a href="#__codelineno-6-3" id="__codelineno-6-3" name="__codelineno-6-3"></a>
-</span><span id="__span-6-4"><a href="#__codelineno-6-4" id="__codelineno-6-4" name="__codelineno-6-4"></a><span class="s">## Branch 1</span>
-</span><span id="__span-6-5"><a href="#__codelineno-6-5" id="__codelineno-6-5" name="__codelineno-6-5"></a>
-</span><span id="__span-6-6"><a href="#__codelineno-6-6" id="__codelineno-6-6" name="__codelineno-6-6"></a><span class="s">* Branchlet 1a</span>
-</span><span id="__span-6-7"><a href="#__codelineno-6-7" id="__codelineno-6-7" name="__codelineno-6-7"></a><span class="s">* Branchlet 1b</span>
-</span><span id="__span-6-8"><a href="#__codelineno-6-8" id="__codelineno-6-8" name="__codelineno-6-8"></a>
-</span><span id="__span-6-9"><a href="#__codelineno-6-9" id="__codelineno-6-9" name="__codelineno-6-9"></a><span class="s">## Branch 2</span>
-</span><span id="__span-6-10"><a href="#__codelineno-6-10" id="__codelineno-6-10" name="__codelineno-6-10"></a>
-</span><span id="__span-6-11"><a href="#__codelineno-6-11" id="__codelineno-6-11" name="__codelineno-6-11"></a><span class="s">* Branchlet 2a</span>
-</span><span id="__span-6-12"><a href="#__codelineno-6-12" id="__codelineno-6-12" name="__codelineno-6-12"></a><span class="s">* Branchlet 2b</span>
-</span><span id="__span-6-13"><a href="#__codelineno-6-13" id="__codelineno-6-13" name="__codelineno-6-13"></a><span class="sb">```</span>
+<div class="language-markdown highlight"><pre><span></span><code><span id="__span-2-1"><a href="#__codelineno-2-1" id="__codelineno-2-1" name="__codelineno-2-1"></a><span class="sb">```markmap</span><span class="w">  </span>
+</span><span id="__span-2-2"><a href="#__codelineno-2-2" id="__codelineno-2-2" name="__codelineno-2-2"></a><span class="s"># Root</span>
+</span><span id="__span-2-3"><a href="#__codelineno-2-3" id="__codelineno-2-3" name="__codelineno-2-3"></a>
+</span><span id="__span-2-4"><a href="#__codelineno-2-4" id="__codelineno-2-4" name="__codelineno-2-4"></a><span class="s">## Branch 1</span>
+</span><span id="__span-2-5"><a href="#__codelineno-2-5" id="__codelineno-2-5" name="__codelineno-2-5"></a>
+</span><span id="__span-2-6"><a href="#__codelineno-2-6" id="__codelineno-2-6" name="__codelineno-2-6"></a><span class="s">* Branchlet 1a</span>
+</span><span id="__span-2-7"><a href="#__codelineno-2-7" id="__codelineno-2-7" name="__codelineno-2-7"></a><span class="s">* Branchlet 1b</span>
+</span><span id="__span-2-8"><a href="#__codelineno-2-8" id="__codelineno-2-8" name="__codelineno-2-8"></a>
+</span><span id="__span-2-9"><a href="#__codelineno-2-9" id="__codelineno-2-9" name="__codelineno-2-9"></a><span class="s">## Branch 2</span>
+</span><span id="__span-2-10"><a href="#__codelineno-2-10" id="__codelineno-2-10" name="__codelineno-2-10"></a>
+</span><span id="__span-2-11"><a href="#__codelineno-2-11" id="__codelineno-2-11" name="__codelineno-2-11"></a><span class="s">* Branchlet 2a</span>
+</span><span id="__span-2-12"><a href="#__codelineno-2-12" id="__codelineno-2-12" name="__codelineno-2-12"></a><span class="s">* Branchlet 2b</span>
+</span><span id="__span-2-13"><a href="#__codelineno-2-13" id="__codelineno-2-13" name="__codelineno-2-13"></a><span class="sb">```</span>
 </span></code></pre></div>
 <p>And this will generate the following mindmap:</p>
 <p><img alt="alt text" src="20240909_DevOps_markmap.png"/></p>
@@ -983,12 +1081,12 @@
 * Branchlet 2b</code></pre>
 <h3 id="visual-studio-code-extension"><a class="toclink" href="09/markmap/#visual-studio-code-extension">Visual Studio Code Extension</a></h3>
 <p>There is also a Visual Studio Code extension that allows you to create mindmaps from markdown files. You can install it from the Visual Studio Code marketplace.</p>
-<p><div class="language-text highlight"><pre><span></span><code><span id="__span-7-1"><a href="#__codelineno-7-1" id="__codelineno-7-1" name="__codelineno-7-1"></a>    Name: Markdown Preview Markmap Support
-</span><span id="__span-7-2"><a href="#__codelineno-7-2" id="__codelineno-7-2" name="__codelineno-7-2"></a>    Id: phoihos.markdown-markmap
-</span><span id="__span-7-3"><a href="#__codelineno-7-3" id="__codelineno-7-3" name="__codelineno-7-3"></a>    Description: Visualize Markdown as Mindmap (A.K.A Markmap) to VS Code's built-in markdown preview
-</span><span id="__span-7-4"><a href="#__codelineno-7-4" id="__codelineno-7-4" name="__codelineno-7-4"></a>    Version: 1.4.6
-</span><span id="__span-7-5"><a href="#__codelineno-7-5" id="__codelineno-7-5" name="__codelineno-7-5"></a>    Publisher: phoihos
-</span><span id="__span-7-6"><a href="#__codelineno-7-6" id="__codelineno-7-6" name="__codelineno-7-6"></a>    VS Marketplace Link: https://marketplace.visualstudio.com/items?itemName=phoihos.markdown-markmap
+<p><div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a href="#__codelineno-3-1" id="__codelineno-3-1" name="__codelineno-3-1"></a>    Name: Markdown Preview Markmap Support
+</span><span id="__span-3-2"><a href="#__codelineno-3-2" id="__codelineno-3-2" name="__codelineno-3-2"></a>    Id: phoihos.markdown-markmap
+</span><span id="__span-3-3"><a href="#__codelineno-3-3" id="__codelineno-3-3" name="__codelineno-3-3"></a>    Description: Visualize Markdown as Mindmap (A.K.A Markmap) to VS Code's built-in markdown preview
+</span><span id="__span-3-4"><a href="#__codelineno-3-4" id="__codelineno-3-4" name="__codelineno-3-4"></a>    Version: 1.4.6
+</span><span id="__span-3-5"><a href="#__codelineno-3-5" id="__codelineno-3-5" name="__codelineno-3-5"></a>    Publisher: phoihos
+</span><span id="__span-3-6"><a href="#__codelineno-3-6" id="__codelineno-3-6" name="__codelineno-3-6"></a>    VS Marketplace Link: https://marketplace.visualstudio.com/items?itemName=phoihos.markdown-markmap
 </span></code></pre></div>
 <a href="https://marketplace.visualstudio.com/items?itemName=phoihos.markdown-markmap">VS Marketplace Link</a></p>
 <h3 id="conclusion"><a class="toclink" href="09/markmap/#conclusion">Conclusion</a></h3>
