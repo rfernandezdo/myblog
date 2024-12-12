@@ -1879,12 +1879,13 @@
   <div class="md-post__content md-typeset">
     <h2 id="ejecutar-terraform-con-archivos-de-variables"><a class="toclink" href="../../2024/12/12/ejecutar-terraform-con-archivos-de-variables/">Ejecutar Terraform con archivos de variables</a></h2>
 <p>Script para ejecutar Terraform con archivos de variables:</p>
-<p>```bash
-    function terraform_with_var_files() {
-    local dir="$1"
-    local action="$2"
-    local auto="$3"</p>
-<div class="language-text highlight"><pre><span></span><code>if [[ ! -d &quot;$dir&quot; ]]; then
+<p>```bash</p>
+<div class="language-text highlight"><pre><span></span><code>function terraform_with_var_files() {
+local dir=&quot;$1&quot;
+local action=&quot;$2&quot;
+local auto=&quot;$3&quot;
+
+if [[ ! -d &quot;$dir&quot; ]]; then
     echo &quot;El directorio especificado no existe.&quot;
     return 1
 fi
