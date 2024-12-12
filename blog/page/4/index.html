@@ -241,6 +241,13 @@
           </label>
 <ul class="md-nav__list" data-md-scrollfix="">
 <li class="md-nav__item">
+<a class="md-nav__link" href="../../2024/12/">
+<span class="md-ellipsis">
+    2024/12
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
 <a class="md-nav__link" href="../../2024/11/">
 <span class="md-ellipsis">
     2024/11
@@ -387,6 +394,13 @@
 <a class="md-nav__link" href="../../category/finops/">
 <span class="md-ellipsis">
     FinOps
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../category/hashicorp/">
+<span class="md-ellipsis">
+    HashiCorp
   </span>
 </a>
 </li>
@@ -646,6 +660,65 @@
 <header class="md-typeset">
 <h1 id="blog">Blog</h1>
 </header>
+<article class="md-post md-post--excerpt">
+<header class="md-post__header">
+<nav class="md-post__authors md-typeset">
+<span class="md-author">
+<img alt="Rafael Fernández" src="https://avatars.githubusercontent.com/u/39990341"/>
+</span>
+</nav>
+<div class="md-post__meta md-meta">
+<ul class="md-meta__list">
+<li class="md-meta__item">
+<time datetime="2024-04-29 00:00:00">April 29, 2024</time></li>
+<li class="md-meta__item">
+            in
+            
+              <a class="md-meta__link" href="../../category/devops/">DevOps</a></li>
+<li class="md-meta__item">
+            
+              2 min read
+            
+          </li>
+</ul>
+</div>
+</header>
+<div class="md-post__content md-typeset">
+<h2 id="repository-strategy-monorepo-vs-multi-repo"><a class="toclink" href="../../2024/04/29/repository-strategy-monorepo-vs-multi-repo/">Repository Strategy: Monorepo vs Multi-repo</a></h2>
+<p>In this post, I will explain the repository strategy that I will use for my Infrastructure as Code (IaC) project with Terraform. </p>
+<h3 id="monorepo"><a class="toclink" href="../../2024/04/29/repository-strategy-monorepo-vs-multi-repo/#monorepo">Monorepo</a></h3>
+<p>A monorepo is a single repository that contains all the code for a project. </p>
+<p>The benefits of using a monorepo include:</p>
+<ul>
+<li><strong>Simplicity</strong>: All the code is in one place, making it easier to manage and maintain.</li>
+<li><strong>Consistency</strong>: Developers can easily see all the code related to a project and ensure that it follows the same standards and conventions.</li>
+<li><strong>Reusability</strong>: Code can be shared across different parts of the project, reducing duplication and improving consistency.</li>
+<li><strong>Versioning</strong>: All the code is versioned together, making it easier to track changes and roll back if necessary.</li>
+</ul>
+<p>The challenges of using a monorepo include:</p>
+<ul>
+<li><strong>Complexity</strong>: A monorepo can become large and complex, making it harder to navigate and understand.</li>
+<li><strong>Build times</strong>: Building and testing a monorepo can take longer than building and testing smaller repositories.</li>
+<li><strong>Conflicts</strong>: Multiple developers working on the same codebase can lead to conflicts and merge issues.</li>
+</ul>
+<h3 id="multi-repo"><a class="toclink" href="../../2024/04/29/repository-strategy-monorepo-vs-multi-repo/#multi-repo">Multi-repo</a></h3>
+<p>A multi-repo is a set of separate repositories that contain the code for different parts of a project.</p>
+<p>The benefits of using a multi-repo include:</p>
+<ul>
+<li><strong>Isolation</strong>: Each repository is independent, making it easier to manage and maintain.</li>
+<li><strong>Flexibility</strong>: Developers can work on different parts of the project without affecting each other.</li>
+<li><strong>Scalability</strong>: As the project grows, new repositories can be added to manage the code more effectively.</li>
+</ul>
+<p>The challenges of using a multi-repo include:</p>
+<ul>
+<li><strong>Complexity</strong>: Managing multiple repositories can be more challenging than managing a single repository.</li>
+<li><strong>Consistency</strong>: Ensuring that all the repositories follow the same standards and conventions can be difficult.</li>
+<li><strong>Versioning</strong>: Each repository is versioned separately, making it harder to track changes across the project.</li>
+</ul>
+<h3 id="conclusion"><a class="toclink" href="../../2024/04/29/repository-strategy-monorepo-vs-multi-repo/#conclusion">Conclusion</a></h3>
+<p>For my IaC project with Terraform, I will use a monorepo approach to manage all the Terraform modules and configurations for my project.</p>
+</div>
+</article>
 <article class="md-post md-post--excerpt">
 <header class="md-post__header">
 <nav class="md-post__authors md-typeset">
@@ -1813,110 +1886,6 @@ In this case, it would be connecting the Spoke networks to each other via virtua
 <li><a href="https://docs.microsoft.com/en-us/azure/network-watcher/frequently-asked-questions">Network Watcher frequently asked questions (FAQ)</a></li>
 <li><a href="https://docs.microsoft.com/en-us/azure/architecture/reference-architectures/hybrid-networking/hub-spoke">Azure Topology</a></li>
 </ul>
-</div>
-</article>
-<article class="md-post md-post--excerpt">
-<header class="md-post__header">
-<nav class="md-post__authors md-typeset">
-<span class="md-author">
-<img alt="Rafael Fernández" src="https://avatars.githubusercontent.com/u/39990341"/>
-</span>
-</nav>
-<div class="md-post__meta md-meta">
-<ul class="md-meta__list">
-<li class="md-meta__item">
-<time datetime="2024-04-19 00:00:00">April 19, 2024</time></li>
-<li class="md-meta__item">
-            in
-            
-              <a class="md-meta__link" href="../../category/azure/">Azure</a></li>
-<li class="md-meta__item">
-            
-              2 min read
-            
-          </li>
-</ul>
-</div>
-</header>
-<div class="md-post__content md-typeset">
-<h2 id="azure-role-based-access-control-rbac"><a class="toclink" href="../../2024/04/19/azure-role-based-access-control-rbac/">Azure Role-Based Access Control (RBAC)</a></h2>
-<p>Azure Role-Based Access Control (RBAC) is a system that provides fine-grained access management of resources in Azure. This allows administrators to grant only the amount of access that users need to perform their jobs.</p>
-<h3 id="overview"><a class="toclink" href="../../2024/04/19/azure-role-based-access-control-rbac/#overview">Overview</a></h3>
-<p>In Azure RBAC, you can assign roles to user accounts, groups, service principals, and managed identities at different scopes. The scope could be a management group, subscription, resource group, or a single resource. </p>
-<p>Here are some key terms you should know:</p>
-<ul>
-<li><strong>Role</strong>: A collection of permissions. For example, the "Virtual Machine Contributor" role allows the user to create and manage virtual machines.</li>
-<li><strong>Scope</strong>: The set of resources that the access applies to. </li>
-<li><strong>Assignment</strong>: The act of granting a role to a security principal at a particular scope.</li>
-</ul>
-<h3 id="built-in-roles"><a class="toclink" href="../../2024/04/19/azure-role-based-access-control-rbac/#built-in-roles">Built-in Roles</a></h3>
-<p>Azure provides several built-in roles that you can assign to users, groups, service principals, and managed identities. Here are a few examples:</p>
-<ul>
-<li><strong>Owner</strong>: Has full access to all resources including the right to delegate access to others.</li>
-<li><strong>Contributor</strong>: Can create and manage all types of Azure resources but can’t grant access to others.</li>
-<li><strong>Reader</strong>: Can view existing Azure resources.</li>
-</ul>
-<div class="language-json highlight"><pre><span></span><code><span id="__span-2-1"><a href="#__codelineno-2-1" id="__codelineno-2-1" name="__codelineno-2-1"></a><span class="p">{</span>
-</span><span id="__span-2-2"><a href="#__codelineno-2-2" id="__codelineno-2-2" name="__codelineno-2-2"></a><span class="w">  </span><span class="nt">"Name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Contributor"</span><span class="p">,</span>
-</span><span id="__span-2-3"><a href="#__codelineno-2-3" id="__codelineno-2-3" name="__codelineno-2-3"></a><span class="w">  </span><span class="nt">"Id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"b24988ac-6180-42a0-ab88-20f7382dd24c"</span><span class="p">,</span>
-</span><span id="__span-2-4"><a href="#__codelineno-2-4" id="__codelineno-2-4" name="__codelineno-2-4"></a><span class="w">  </span><span class="nt">"IsCustom"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
-</span><span id="__span-2-5"><a href="#__codelineno-2-5" id="__codelineno-2-5" name="__codelineno-2-5"></a><span class="w">  </span><span class="nt">"Description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Lets you manage everything except access to resources."</span><span class="p">,</span>
-</span><span id="__span-2-6"><a href="#__codelineno-2-6" id="__codelineno-2-6" name="__codelineno-2-6"></a><span class="w">  </span><span class="nt">"Actions"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
-</span><span id="__span-2-7"><a href="#__codelineno-2-7" id="__codelineno-2-7" name="__codelineno-2-7"></a><span class="w">    </span><span class="s2">"*"</span>
-</span><span id="__span-2-8"><a href="#__codelineno-2-8" id="__codelineno-2-8" name="__codelineno-2-8"></a><span class="w">  </span><span class="p">],</span>
-</span><span id="__span-2-9"><a href="#__codelineno-2-9" id="__codelineno-2-9" name="__codelineno-2-9"></a><span class="w">  </span><span class="nt">"NotActions"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
-</span><span id="__span-2-10"><a href="#__codelineno-2-10" id="__codelineno-2-10" name="__codelineno-2-10"></a><span class="w">    </span><span class="s2">"Microsoft.Authorization/*/Delete"</span><span class="p">,</span>
-</span><span id="__span-2-11"><a href="#__codelineno-2-11" id="__codelineno-2-11" name="__codelineno-2-11"></a><span class="w">    </span><span class="s2">"Microsoft.Authorization/*/Write"</span><span class="p">,</span>
-</span><span id="__span-2-12"><a href="#__codelineno-2-12" id="__codelineno-2-12" name="__codelineno-2-12"></a><span class="w">    </span><span class="s2">"Microsoft.Authorization/elevateAccess/Action"</span>
-</span><span id="__span-2-13"><a href="#__codelineno-2-13" id="__codelineno-2-13" name="__codelineno-2-13"></a><span class="w">  </span><span class="p">],</span>
-</span><span id="__span-2-14"><a href="#__codelineno-2-14" id="__codelineno-2-14" name="__codelineno-2-14"></a><span class="w">  </span><span class="nt">"DataActions"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span>
-</span><span id="__span-2-15"><a href="#__codelineno-2-15" id="__codelineno-2-15" name="__codelineno-2-15"></a><span class="w">  </span><span class="nt">"NotDataActions"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span>
-</span><span id="__span-2-16"><a href="#__codelineno-2-16" id="__codelineno-2-16" name="__codelineno-2-16"></a><span class="w">  </span><span class="nt">"AssignableScopes"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
-</span><span id="__span-2-17"><a href="#__codelineno-2-17" id="__codelineno-2-17" name="__codelineno-2-17"></a><span class="w">    </span><span class="s2">"/"</span>
-</span><span id="__span-2-18"><a href="#__codelineno-2-18" id="__codelineno-2-18" name="__codelineno-2-18"></a><span class="w">  </span><span class="p">]</span>
-</span><span id="__span-2-19"><a href="#__codelineno-2-19" id="__codelineno-2-19" name="__codelineno-2-19"></a><span class="p">}</span>
-</span></code></pre></div>
-<h3 id="custom-roles"><a class="toclink" href="../../2024/04/19/azure-role-based-access-control-rbac/#custom-roles">Custom Roles</a></h3>
-<p>If the built-in roles don't meet your specific needs, you can create your own custom roles. Just like built-in roles, you can assign permissions to custom roles and then assign those roles to users.</p>
-<p><div class="language-json highlight"><pre><span></span><code><span id="__span-3-1"><a href="#__codelineno-3-1" id="__codelineno-3-1" name="__codelineno-3-1"></a><span class="p">{</span>
-</span><span id="__span-3-2"><a href="#__codelineno-3-2" id="__codelineno-3-2" name="__codelineno-3-2"></a><span class="w">  </span><span class="nt">"Name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Custom Role"</span><span class="p">,</span>
-</span><span id="__span-3-3"><a href="#__codelineno-3-3" id="__codelineno-3-3" name="__codelineno-3-3"></a><span class="w">  </span><span class="nt">"Id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"00000000-0000-0000-0000-000000000000"</span><span class="p">,</span>
-</span><span id="__span-3-4"><a href="#__codelineno-3-4" id="__codelineno-3-4" name="__codelineno-3-4"></a><span class="w">  </span><span class="nt">"IsCustom"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
-</span><span id="__span-3-5"><a href="#__codelineno-3-5" id="__codelineno-3-5" name="__codelineno-3-5"></a><span class="w">  </span><span class="nt">"Description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Custom role description"</span><span class="p">,</span>
-</span><span id="__span-3-6"><a href="#__codelineno-3-6" id="__codelineno-3-6" name="__codelineno-3-6"></a><span class="w">  </span><span class="nt">"Actions"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
-</span><span id="__span-3-7"><a href="#__codelineno-3-7" id="__codelineno-3-7" name="__codelineno-3-7"></a><span class="w">    </span><span class="s2">"Microsoft.Compute/virtualMachines/start/action"</span><span class="p">,</span>
-</span><span id="__span-3-8"><a href="#__codelineno-3-8" id="__codelineno-3-8" name="__codelineno-3-8"></a><span class="w">    </span><span class="s2">"Microsoft.Compute/virtualMachines/restart/action"</span>
-</span><span id="__span-3-9"><a href="#__codelineno-3-9" id="__codelineno-3-9" name="__codelineno-3-9"></a><span class="w">  </span><span class="p">],</span>
-</span><span id="__span-3-10"><a href="#__codelineno-3-10" id="__codelineno-3-10" name="__codelineno-3-10"></a><span class="w">  </span><span class="nt">"NotActions"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span>
-</span><span id="__span-3-11"><a href="#__codelineno-3-11" id="__codelineno-3-11" name="__codelineno-3-11"></a><span class="w">  </span><span class="nt">"DataActions"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span>
-</span><span id="__span-3-12"><a href="#__codelineno-3-12" id="__codelineno-3-12" name="__codelineno-3-12"></a><span class="w">  </span><span class="nt">"NotDataActions"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span>
-</span><span id="__span-3-13"><a href="#__codelineno-3-13" id="__codelineno-3-13" name="__codelineno-3-13"></a><span class="w">  </span><span class="nt">"AssignableScopes"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
-</span><span id="__span-3-14"><a href="#__codelineno-3-14" id="__codelineno-3-14" name="__codelineno-3-14"></a><span class="w">    </span><span class="s2">"/subscriptions/{subscriptionId}"</span>
-</span><span id="__span-3-15"><a href="#__codelineno-3-15" id="__codelineno-3-15" name="__codelineno-3-15"></a><span class="w">  </span><span class="p">]</span>
-</span><span id="__span-3-16"><a href="#__codelineno-3-16" id="__codelineno-3-16" name="__codelineno-3-16"></a><span class="p">}</span>
-</span></code></pre></div>
-Custom Roles has the same structure as built-in roles:</p>
-<ul>
-<li><strong>Name</strong>: The name of the custom role.</li>
-<li><strong>Id</strong>: A unique identifier for the custom role.</li>
-<li><strong>IsCustom</strong>: Indicates whether the role is custom or built-in.</li>
-<li><strong>Description</strong>: A description of the custom role.</li>
-<li><strong>Actions</strong>: The list of actions that the role can perform.</li>
-<li><strong>NotActions</strong>: The list of actions that the role cannot perform.</li>
-<li><strong>DataActions</strong>: The list of data actions that the role can perform.</li>
-<li><strong>NotDataActions</strong>: The list of data actions that the role cannot perform.</li>
-<li><strong>AssignableScopes</strong>: The list of scopes where the role can be assigned.</li>
-</ul>
-<p>You can check how to create a custom role <a href="https://learn.microsoft.com/en-us/azure/role-based-access-control/custom-roles#custom-role-properties">here</a> and not forget to check limitations <a href="https://learn.microsoft.com/en-us/azure/role-based-access-control/custom-roles#custom-role-limits">here</a>.</p>
-<h3 id="recommendations"><a class="toclink" href="../../2024/04/19/azure-role-based-access-control-rbac/#recommendations">Recommendations</a></h3>
-<p>Here are some best practices for managing access with Azure RBAC:</p>
-<ul>
-<li><strong>Use the principle of least privilege</strong>: Only grant the permissions that users need to do their jobs.</li>
-<li><strong>Use built-in roles when possible</strong>: <a href="https://learn.microsoft.com/en-us/azure/role-based-access-control/built-in-roles">Built-in roles</a> are already defined and tested by Microsoft. Only create custom roles when necessary.</li>
-<li><strong>Regularly review role assignments</strong>: Make sure that users have the appropriate level of access for their job. Remove any unnecessary role assignments.</li>
-</ul>
-<h3 id="conclusion"><a class="toclink" href="../../2024/04/19/azure-role-based-access-control-rbac/#conclusion">Conclusion</a></h3>
-<p>Azure RBAC is a powerful tool for managing access to your Azure resources. By understanding its core concepts and how to apply them, you can ensure that users have the appropriate level of access for their job.</p>
 </div>
 </article>
 <nav class="md-pagination">
