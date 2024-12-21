@@ -584,6 +584,15 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#how-to-sign-git-commits-in-visual-studio-code-in-windows-subsystem-for-linux-wsl" class="md-nav__link">
+    <span class="md-ellipsis">
+      How to sign Git commits in Visual Studio Code in Windows Subsystem for Linux (WSL)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#ejecutar-terraform-con-archivos-de-variables" class="md-nav__link">
     <span class="md-ellipsis">
       Ejecutar Terraform con archivos de variables
@@ -1376,6 +1385,29 @@
   
   
     <li class="md-nav__item">
+      <a href="../../category/visual-studio-code/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Visual Studio Code
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
       <a href="../../category/windows/" class="md-nav__link">
         
   
@@ -1896,6 +1928,158 @@
     <div class="md-post__meta md-meta">
       <ul class="md-meta__list">
         <li class="md-meta__item">
+          <time datetime="2024-12-21 00:00:00">December 21, 2024</time></li>
+        
+          <li class="md-meta__item">
+            in
+            
+              <a href="../../category/visual-studio-code/" class="md-meta__link">Visual Studio Code</a></li>
+        
+        
+          
+          <li class="md-meta__item">
+            
+              3 min read
+            
+          </li>
+        
+      </ul>
+      
+    </div>
+  </header>
+  <div class="md-post__content md-typeset">
+    <h2 id="how-to-sign-git-commits-in-visual-studio-code-in-windows-subsystem-for-linux-wsl"><a class="toclink" href="21/how-to-sign-git-commits-in-visual-studio-code-in-windows-subsystem-for-linux-wsl/">How to sign Git commits in Visual Studio Code in Windows Subsystem for Linux (WSL)</a></h2>
+<p>In this post, we will see how to sign Git commits in Visual Studio Code.</p>
+<h3 id="prerequisites"><a class="toclink" href="21/how-to-sign-git-commits-in-visual-studio-code-in-windows-subsystem-for-linux-wsl/#prerequisites">Prerequisites</a></h3>
+<ul>
+<li>Visual Studio Code</li>
+<li>Git</li>
+<li>gpg</li>
+<li>gpg-agent</li>
+<li>gpgconf</li>
+<li>pinentry-gtk-2</li>
+<li>Windows Subsystem for Linux (WSL) with Ubuntu 20.04</li>
+</ul>
+<h3 id="steps"><a class="toclink" href="21/how-to-sign-git-commits-in-visual-studio-code-in-windows-subsystem-for-linux-wsl/#steps">Steps</a></h3>
+<h4 id="1-install-gpg"><a class="toclink" href="21/how-to-sign-git-commits-in-visual-studio-code-in-windows-subsystem-for-linux-wsl/#1-install-gpg">1. Install GPG</a></h4>
+<p>First, you need to install GPG ans agents. You can do this by running the following command:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-18-1"><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>gpg<span class="w"> </span>gpg-agent<span class="w"> </span>gpgconf<span class="w"> </span>pinentry-gtk2<span class="w"> </span>-y
+</span></code></pre></div>
+<h4 id="2-generate-a-gpg-key"><a class="toclink" href="21/how-to-sign-git-commits-in-visual-studio-code-in-windows-subsystem-for-linux-wsl/#2-generate-a-gpg-key">2. Generate a GPG key</a></h4>
+<p>To generate a GPG key, run the following command:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-19-1"><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>gpg<span class="w"> </span>--full-generate-key
+</span></code></pre></div>
+<p>You will be asked to enter your name, email, and passphrase. After that, the key will be generated.</p>
+<h4 id="3-list-your-gpg-keys"><a class="toclink" href="21/how-to-sign-git-commits-in-visual-studio-code-in-windows-subsystem-for-linux-wsl/#3-list-your-gpg-keys">3. List your GPG keys</a></h4>
+<p>To list your GPG keys, run the following command:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-20-1"><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a>gpg<span class="w"> </span>--list-secret-keys<span class="w"> </span>--keyid-format<span class="w"> </span>LONG
+</span></code></pre></div>
+<p>You will see a list of your GPG keys. Copy the key ID of the key you want to use.</p>
+<h4 id="4-configure-git-to-use-your-gpg-key"><a class="toclink" href="21/how-to-sign-git-commits-in-visual-studio-code-in-windows-subsystem-for-linux-wsl/#4-configure-git-to-use-your-gpg-key">4. Configure Git to use your GPG key</a></h4>
+<p>To configure Git to use your GPG key, run the following command:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-21-1"><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a>git<span class="w"> </span>config<span class="w"> </span>--global<span class="w"> </span>user.signingkey<span class="w"> </span>YOUR_KEY_ID
+</span></code></pre></div>
+<p>Replace <code>YOUR_KEY_ID</code> with the key ID you copied in the previous step.</p>
+<h4 id="5-configure-git-to-sign-commits-by-default"><a class="toclink" href="21/how-to-sign-git-commits-in-visual-studio-code-in-windows-subsystem-for-linux-wsl/#5-configure-git-to-sign-commits-by-default">5. Configure Git to sign commits by default</a></h4>
+<p>To configure Git to sign commits by default, run the following command:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-22-1"><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a>git<span class="w"> </span>config<span class="w"> </span>--global<span class="w"> </span>commit.gpgsign<span class="w"> </span><span class="nb">true</span>
+</span><span id="__span-22-2"><a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a>git<span class="w"> </span>config<span class="w"> </span>--global<span class="w"> </span>gpg.program<span class="w"> </span><span class="o">(</span>which<span class="w"> </span>gpg<span class="o">)</span>
+</span></code></pre></div>
+<h4 id="6-export-the-gpg-key"><a class="toclink" href="21/how-to-sign-git-commits-in-visual-studio-code-in-windows-subsystem-for-linux-wsl/#6-export-the-gpg-key">6. EXport the GPG key</a></h4>
+<p>To export the GPG key, run the following command:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-23-1"><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a>gpg<span class="w"> </span>--armor<span class="w"> </span>--export<span class="w"> </span>YOUR_KEY_ID
+</span></code></pre></div>
+<p>Replace <code>YOUR_KEY_ID</code> with the key ID you copied in the previous step.</p>
+<h4 id="7-import-to-github"><a class="toclink" href="21/how-to-sign-git-commits-in-visual-studio-code-in-windows-subsystem-for-linux-wsl/#7-import-to-github">7. Import to github</a></h4>
+<p>Go to your <a href="https://github.com/settings/keys">github account</a> and add the exported GPG key in GPG keys section, create a new GPG key and paste the exported key.</p>
+<h4 id="configure-visual-studio-code-to-use-gpg"><a class="toclink" href="21/how-to-sign-git-commits-in-visual-studio-code-in-windows-subsystem-for-linux-wsl/#configure-visual-studio-code-to-use-gpg">Configure Visual Studio Code to use GPG</a></h4>
+<h5 id="1-configure-gpg-agent"><a class="toclink" href="21/how-to-sign-git-commits-in-visual-studio-code-in-windows-subsystem-for-linux-wsl/#1-configure-gpg-agent">1. Configure gpg-agent</a></h5>
+<p>To configure gpg-agent, run the following command:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-24-1"><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;default-cache-ttl&quot;</span><span class="w"> </span>&gt;&gt;<span class="w"> </span>~/.gnupg/gpg-agent.conf
+</span><span id="__span-24-2"><a id="__codelineno-24-2" name="__codelineno-24-2" href="#__codelineno-24-2"></a><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;pinentry-program /usr/bin/pinentry-gtk-2&quot;</span><span class="w"> </span>&gt;&gt;<span class="w"> </span>~/.gnupg/gpg-agent.conf
+</span><span id="__span-24-3"><a id="__codelineno-24-3" name="__codelineno-24-3" href="#__codelineno-24-3"></a><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;allow-preset-passphrase&quot;</span><span class="w"> </span>&gt;&gt;<span class="w"> </span>~/.gnupg/gpg-agent.conf
+</span></code></pre></div>
+<h4 id="2-restart-the-gpg-agent"><a class="toclink" href="21/how-to-sign-git-commits-in-visual-studio-code-in-windows-subsystem-for-linux-wsl/#2-restart-the-gpg-agent">2. Restart the gpg-agent</a></h4>
+<p>To restart the gpg-agent, run the following command:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-25-1"><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a>gpgconf<span class="w"> </span>--kill<span class="w"> </span>gpg-agent
+</span><span id="__span-25-2"><a id="__codelineno-25-2" name="__codelineno-25-2" href="#__codelineno-25-2"></a>gpgconf<span class="w"> </span>--launch<span class="w"> </span>gpg-agent
+</span></code></pre></div>
+<h4 id="3-sign-a-commit"><a class="toclink" href="21/how-to-sign-git-commits-in-visual-studio-code-in-windows-subsystem-for-linux-wsl/#3-sign-a-commit">3. Sign a commit</a></h4>
+<p>To sign a commit, run the following command:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-26-1"><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a>git<span class="w"> </span>commit<span class="w"> </span>-S<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;Your commit message&quot;</span>
+</span></code></pre></div>
+<h4 id="4-verify-the-signature"><a class="toclink" href="21/how-to-sign-git-commits-in-visual-studio-code-in-windows-subsystem-for-linux-wsl/#4-verify-the-signature">4. Verify the signature</a></h4>
+<p>To verify the signature of a commit, run the following command:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-27-1"><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a>git<span class="w"> </span>verify-commit<span class="w"> </span>HEAD
+</span></code></pre></div>
+<h4 id="5-configure-visual-studio-code-to-use-gpg"><a class="toclink" href="21/how-to-sign-git-commits-in-visual-studio-code-in-windows-subsystem-for-linux-wsl/#5-configure-visual-studio-code-to-use-gpg">5. Configure Visual Studio Code to use GPG</a></h4>
+<p>To configure Visual Studio Code to use GPG, open the settings by pressing <code>Ctrl + ,</code> and search for <code>git.enableCommitSigning</code>. Set the value to <code>true</code>.</p>
+<h4 id="6-sign-a-commit"><a class="toclink" href="21/how-to-sign-git-commits-in-visual-studio-code-in-windows-subsystem-for-linux-wsl/#6-sign-a-commit">6. Sign a commit</a></h4>
+<p>Make a commit in Visual Studio Code, and you will see a prompt asking you introduce your GPG passphrase. Enter your passphrase, and the commit will be signed.</p>
+<p>That's it! Now you know how to sign Git commits in Visual Studio Code.</p>
+<h3 id="some-tips"><a class="toclink" href="21/how-to-sign-git-commits-in-visual-studio-code-in-windows-subsystem-for-linux-wsl/#some-tips">Some tips</a></h3>
+<h3 id="for-all-repositories"><a class="toclink" href="21/how-to-sign-git-commits-in-visual-studio-code-in-windows-subsystem-for-linux-wsl/#for-all-repositories">For all repositories</a></h3>
+<ul>
+<li>Establish your email in git configuration:</li>
+</ul>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-28-1"><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a>git<span class="w"> </span>config<span class="w"> </span>--global<span class="w"> </span>user.email<span class="w"> </span><span class="s2">&quot;petete@something.es&quot;</span>
+</span></code></pre></div>
+<ul>
+<li>Establish your name in git configuration:</li>
+</ul>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-29-1"><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a>git<span class="w"> </span>config<span class="w"> </span>--global<span class="w"> </span>user.name<span class="w"> </span><span class="s2">&quot;Petete&quot;</span>
+</span></code></pre></div>
+<ul>
+<li>Establish your GPG key in git configuration:</li>
+</ul>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-30-1"><a id="__codelineno-30-1" name="__codelineno-30-1" href="#__codelineno-30-1"></a>git<span class="w"> </span>config<span class="w"> </span>--global<span class="w"> </span>user.signingkey<span class="w"> </span>YOUR_KEY_ID
+</span></code></pre></div>
+<ul>
+<li>Establish your GPG program in git configuration:</li>
+</ul>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-31-1"><a id="__codelineno-31-1" name="__codelineno-31-1" href="#__codelineno-31-1"></a>git<span class="w"> </span>config<span class="w"> </span>--global<span class="w"> </span>gpg.program<span class="w"> </span><span class="o">(</span>which<span class="w"> </span>gpg<span class="o">)</span>
+</span></code></pre></div>
+<h3 id="for-a-specific-repository"><a class="toclink" href="21/how-to-sign-git-commits-in-visual-studio-code-in-windows-subsystem-for-linux-wsl/#for-a-specific-repository">For a specific repository</a></h3>
+<ul>
+<li>Establish your email in git configuration:</li>
+</ul>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-32-1"><a id="__codelineno-32-1" name="__codelineno-32-1" href="#__codelineno-32-1"></a>git<span class="w"> </span>config<span class="w"> </span>user.email<span class="w"> </span><span class="s2">&quot;petete@something.es&quot;</span>
+</span></code></pre></div>
+<ul>
+<li>Establish your name in git configuration:</li>
+</ul>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-33-1"><a id="__codelineno-33-1" name="__codelineno-33-1" href="#__codelineno-33-1"></a>git<span class="w"> </span>config<span class="w"> </span>user.name<span class="w"> </span><span class="s2">&quot;Petete&quot;</span>
+</span></code></pre></div>
+<ul>
+<li>Establish your GPG key in git configuration:</li>
+</ul>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-34-1"><a id="__codelineno-34-1" name="__codelineno-34-1" href="#__codelineno-34-1"></a>git<span class="w"> </span>config<span class="w"> </span>user.signingkey<span class="w"> </span>YOUR_KEY_ID
+</span></code></pre></div>
+<ul>
+<li>Establish your GPG program in git configuration:</li>
+</ul>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-35-1"><a id="__codelineno-35-1" name="__codelineno-35-1" href="#__codelineno-35-1"></a>git<span class="w"> </span>config<span class="w"> </span>gpg.program<span class="w"> </span><span class="o">(</span>which<span class="w"> </span>gpg<span class="o">)</span>
+</span></code></pre></div>
+<h3 id="conclusion"><a class="toclink" href="21/how-to-sign-git-commits-in-visual-studio-code-in-windows-subsystem-for-linux-wsl/#conclusion">Conclusion</a></h3>
+<p>In this post, we saw how to sign Git commits in Visual Studio Code. This is useful if you want to verify the authenticity of your commits. I hope you found this post helpful. If you have any questions or comments, please let me know. Thank you for reading!</p>
+    
+  </div>
+</article>
+      
+        <article class="md-post md-post--excerpt">
+  <header class="md-post__header">
+    
+      <nav class="md-post__authors md-typeset">
+        
+          <span class="md-author">
+            <img src="https://avatars.githubusercontent.com/u/39990341" alt="Rafael Fernández">
+          </span>
+        
+      </nav>
+    
+    <div class="md-post__meta md-meta">
+      <ul class="md-meta__list">
+        <li class="md-meta__item">
           <time datetime="2024-12-12 00:00:00">December 12, 2024</time></li>
         
           <li class="md-meta__item">
@@ -1919,46 +2103,53 @@
     <h2 id="ejecutar-terraform-con-archivos-de-variables"><a class="toclink" href="12/ejecutar-terraform-con-archivos-de-variables/">Ejecutar Terraform con archivos de variables</a></h2>
 <p>Script para ejecutar Terraform con archivos de variables:</p>
 <div class="language-bash highlight"><span class="filename">terraform_with_var_files.sh</span><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">function</span><span class="w"> </span>terraform_with_var_files<span class="o">()</span><span class="w"> </span><span class="o">{</span>
-</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="nb">local</span><span class="w"> </span><span class="nv">dir</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span>
-</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="nb">local</span><span class="w"> </span><span class="nv">action</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$2</span><span class="s2">&quot;</span>
-</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="nb">local</span><span class="w"> </span><span class="nv">auto</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$3</span><span class="s2">&quot;</span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">  </span><span class="nb">local</span><span class="w"> </span><span class="nv">dir</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span>
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">  </span><span class="nb">local</span><span class="w"> </span><span class="nv">action</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$2</span><span class="s2">&quot;</span>
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">  </span><span class="nb">local</span><span class="w"> </span><span class="nv">auto</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$3</span><span class="s2">&quot;</span>
 </span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>
-</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span>!<span class="w"> </span>-d<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$dir</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span>!<span class="w"> </span>-d<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$dir</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
 </span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;El directorio especificado no existe.&quot;</span>
 </span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="m">1</span>
-</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="k">fi</span>
+</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="w">  </span><span class="k">fi</span>
 </span><span id="__span-1-10"><a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>
-</span><span id="__span-1-11"><a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$action</span><span class="s2">&quot;</span><span class="w"> </span>!<span class="o">=</span><span class="w"> </span><span class="s2">&quot;plan&quot;</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$action</span><span class="s2">&quot;</span><span class="w"> </span>!<span class="o">=</span><span class="w"> </span><span class="s2">&quot;apply&quot;</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$action</span><span class="s2">&quot;</span><span class="w"> </span>!<span class="o">=</span><span class="w"> </span><span class="s2">&quot;destroy&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+</span><span id="__span-1-11"><a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a><span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$action</span><span class="s2">&quot;</span><span class="w"> </span>!<span class="o">=</span><span class="w"> </span><span class="s2">&quot;plan&quot;</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$action</span><span class="s2">&quot;</span><span class="w"> </span>!<span class="o">=</span><span class="w"> </span><span class="s2">&quot;apply&quot;</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$action</span><span class="s2">&quot;</span><span class="w"> </span>!<span class="o">=</span><span class="w"> </span><span class="s2">&quot;destroy&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
 </span><span id="__span-1-12"><a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a><span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Acción no válida. Usa &#39;plan&#39;, &#39;apply&#39; o &#39;destroy&#39;.&quot;</span>
 </span><span id="__span-1-13"><a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="m">1</span>
-</span><span id="__span-1-14"><a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a><span class="k">fi</span>
+</span><span id="__span-1-14"><a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a><span class="w">  </span><span class="k">fi</span>
 </span><span id="__span-1-15"><a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a>
-</span><span id="__span-1-16"><a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a><span class="nb">local</span><span class="w"> </span><span class="nv">var_files</span><span class="o">=()</span>
-</span><span id="__span-1-17"><a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a><span class="k">for</span><span class="w"> </span>file<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$dir</span><span class="s2">&quot;</span>/*.tfvars<span class="p">;</span><span class="w"> </span><span class="k">do</span>
+</span><span id="__span-1-16"><a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a><span class="w">  </span><span class="nb">local</span><span class="w"> </span><span class="nv">var_files</span><span class="o">=()</span>
+</span><span id="__span-1-17"><a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a><span class="w">  </span><span class="k">for</span><span class="w"> </span>file<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$dir</span><span class="s2">&quot;</span>/*.tfvars<span class="p">;</span><span class="w"> </span><span class="k">do</span>
 </span><span id="__span-1-18"><a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span>-f<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$file</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
-</span><span id="__span-1-19"><a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a><span class="w">    </span><span class="nv">var_files</span><span class="o">+=(</span><span class="s2">&quot;--var-file </span><span class="nv">$file</span><span class="s2">&quot;</span><span class="o">)</span>
+</span><span id="__span-1-19"><a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a><span class="w">      </span><span class="nv">var_files</span><span class="o">+=(</span><span class="s2">&quot;--var-file </span><span class="nv">$file</span><span class="s2">&quot;</span><span class="o">)</span>
 </span><span id="__span-1-20"><a id="__codelineno-1-20" name="__codelineno-1-20" href="#__codelineno-1-20"></a><span class="w">    </span><span class="k">fi</span>
-</span><span id="__span-1-21"><a id="__codelineno-1-21" name="__codelineno-1-21" href="#__codelineno-1-21"></a><span class="k">done</span>
+</span><span id="__span-1-21"><a id="__codelineno-1-21" name="__codelineno-1-21" href="#__codelineno-1-21"></a><span class="w">  </span><span class="k">done</span>
 </span><span id="__span-1-22"><a id="__codelineno-1-22" name="__codelineno-1-22" href="#__codelineno-1-22"></a>
-</span><span id="__span-1-23"><a id="__codelineno-1-23" name="__codelineno-1-23" href="#__codelineno-1-23"></a><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="si">${#</span><span class="nv">var_files</span><span class="p">[@]</span><span class="si">}</span><span class="w"> </span>-eq<span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+</span><span id="__span-1-23"><a id="__codelineno-1-23" name="__codelineno-1-23" href="#__codelineno-1-23"></a><span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="si">${#</span><span class="nv">var_files</span><span class="p">[@]</span><span class="si">}</span><span class="w"> </span>-eq<span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
 </span><span id="__span-1-24"><a id="__codelineno-1-24" name="__codelineno-1-24" href="#__codelineno-1-24"></a><span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;No se encontraron archivos .tfvars en el directorio especificado.&quot;</span>
 </span><span id="__span-1-25"><a id="__codelineno-1-25" name="__codelineno-1-25" href="#__codelineno-1-25"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="m">1</span>
-</span><span id="__span-1-26"><a id="__codelineno-1-26" name="__codelineno-1-26" href="#__codelineno-1-26"></a><span class="k">fi</span>
+</span><span id="__span-1-26"><a id="__codelineno-1-26" name="__codelineno-1-26" href="#__codelineno-1-26"></a><span class="w">  </span><span class="k">fi</span>
 </span><span id="__span-1-27"><a id="__codelineno-1-27" name="__codelineno-1-27" href="#__codelineno-1-27"></a>
-</span><span id="__span-1-28"><a id="__codelineno-1-28" name="__codelineno-1-28" href="#__codelineno-1-28"></a><span class="nb">local</span><span class="w"> </span><span class="nv">command</span><span class="o">=</span><span class="s2">&quot;terraform </span><span class="nv">$action</span><span class="s2"> </span><span class="si">${</span><span class="nv">var_files</span><span class="p">[@]</span><span class="si">}</span><span class="s2">&quot;</span>
-</span><span id="__span-1-29"><a id="__codelineno-1-29" name="__codelineno-1-29" href="#__codelineno-1-29"></a>
-</span><span id="__span-1-30"><a id="__codelineno-1-30" name="__codelineno-1-30" href="#__codelineno-1-30"></a><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$auto</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;auto&quot;</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="o">(</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$action</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;apply&quot;</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$action</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;destroy&quot;</span><span class="w"> </span><span class="o">)</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
-</span><span id="__span-1-31"><a id="__codelineno-1-31" name="__codelineno-1-31" href="#__codelineno-1-31"></a><span class="w">    </span><span class="nv">command</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$command</span><span class="s2"> -auto-approve&quot;</span>
-</span><span id="__span-1-32"><a id="__codelineno-1-32" name="__codelineno-1-32" href="#__codelineno-1-32"></a><span class="k">fi</span>
-</span><span id="__span-1-33"><a id="__codelineno-1-33" name="__codelineno-1-33" href="#__codelineno-1-33"></a>
-</span><span id="__span-1-34"><a id="__codelineno-1-34" name="__codelineno-1-34" href="#__codelineno-1-34"></a><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Ejecutando: </span><span class="nv">$command</span><span class="s2">&quot;</span>
-</span><span id="__span-1-35"><a id="__codelineno-1-35" name="__codelineno-1-35" href="#__codelineno-1-35"></a><span class="nb">eval</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$command</span><span class="s2">&quot;</span>
-</span><span id="__span-1-36"><a id="__codelineno-1-36" name="__codelineno-1-36" href="#__codelineno-1-36"></a><span class="o">}</span>
-</span><span id="__span-1-37"><a id="__codelineno-1-37" name="__codelineno-1-37" href="#__codelineno-1-37"></a>
-</span><span id="__span-1-38"><a id="__codelineno-1-38" name="__codelineno-1-38" href="#__codelineno-1-38"></a><span class="c1"># Uso de la función</span>
-</span><span id="__span-1-39"><a id="__codelineno-1-39" name="__codelineno-1-39" href="#__codelineno-1-39"></a><span class="c1"># terraform_with_var_files &quot;/ruta/al/directorio&quot; &quot;plan&quot;</span>
-</span><span id="__span-1-40"><a id="__codelineno-1-40" name="__codelineno-1-40" href="#__codelineno-1-40"></a><span class="c1"># terraform_with_var_files &quot;/ruta/al/directorio&quot; &quot;apply&quot; &quot;auto&quot;</span>
-</span><span id="__span-1-41"><a id="__codelineno-1-41" name="__codelineno-1-41" href="#__codelineno-1-41"></a><span class="c1"># terraform_with_var_files &quot;/ruta/al/directorio&quot; &quot;destroy&quot; &quot;auto&quot;</span>
+</span><span id="__span-1-28"><a id="__codelineno-1-28" name="__codelineno-1-28" href="#__codelineno-1-28"></a><span class="w">  </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Validando la configuración de Terraform...&quot;</span>
+</span><span id="__span-1-29"><a id="__codelineno-1-29" name="__codelineno-1-29" href="#__codelineno-1-29"></a><span class="w">  </span><span class="o">(</span><span class="nb">cd</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$dir</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>terraform<span class="w"> </span>validate<span class="o">)</span>
+</span><span id="__span-1-30"><a id="__codelineno-1-30" name="__codelineno-1-30" href="#__codelineno-1-30"></a><span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="nv">$?</span><span class="w"> </span>-ne<span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+</span><span id="__span-1-31"><a id="__codelineno-1-31" name="__codelineno-1-31" href="#__codelineno-1-31"></a><span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;La validación de Terraform falló.&quot;</span>
+</span><span id="__span-1-32"><a id="__codelineno-1-32" name="__codelineno-1-32" href="#__codelineno-1-32"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="m">1</span>
+</span><span id="__span-1-33"><a id="__codelineno-1-33" name="__codelineno-1-33" href="#__codelineno-1-33"></a><span class="w">  </span><span class="k">fi</span>
+</span><span id="__span-1-34"><a id="__codelineno-1-34" name="__codelineno-1-34" href="#__codelineno-1-34"></a>
+</span><span id="__span-1-35"><a id="__codelineno-1-35" name="__codelineno-1-35" href="#__codelineno-1-35"></a><span class="w">  </span><span class="nb">local</span><span class="w"> </span><span class="nv">command</span><span class="o">=</span><span class="s2">&quot;terraform </span><span class="nv">$action</span><span class="s2"> </span><span class="si">${</span><span class="nv">var_files</span><span class="p">[@]</span><span class="si">}</span><span class="s2">&quot;</span>
+</span><span id="__span-1-36"><a id="__codelineno-1-36" name="__codelineno-1-36" href="#__codelineno-1-36"></a>
+</span><span id="__span-1-37"><a id="__codelineno-1-37" name="__codelineno-1-37" href="#__codelineno-1-37"></a><span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$auto</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;auto&quot;</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="o">(</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$action</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;apply&quot;</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$action</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;destroy&quot;</span><span class="w"> </span><span class="o">)</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+</span><span id="__span-1-38"><a id="__codelineno-1-38" name="__codelineno-1-38" href="#__codelineno-1-38"></a><span class="w">    </span><span class="nv">command</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$command</span><span class="s2"> -auto-approve&quot;</span>
+</span><span id="__span-1-39"><a id="__codelineno-1-39" name="__codelineno-1-39" href="#__codelineno-1-39"></a><span class="w">  </span><span class="k">fi</span>
+</span><span id="__span-1-40"><a id="__codelineno-1-40" name="__codelineno-1-40" href="#__codelineno-1-40"></a>
+</span><span id="__span-1-41"><a id="__codelineno-1-41" name="__codelineno-1-41" href="#__codelineno-1-41"></a><span class="w">  </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Ejecutando: </span><span class="nv">$command</span><span class="s2">&quot;</span>
+</span><span id="__span-1-42"><a id="__codelineno-1-42" name="__codelineno-1-42" href="#__codelineno-1-42"></a><span class="w">  </span><span class="nb">eval</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$command</span><span class="s2">&quot;</span>
+</span><span id="__span-1-43"><a id="__codelineno-1-43" name="__codelineno-1-43" href="#__codelineno-1-43"></a><span class="o">}</span>
+</span><span id="__span-1-44"><a id="__codelineno-1-44" name="__codelineno-1-44" href="#__codelineno-1-44"></a>
+</span><span id="__span-1-45"><a id="__codelineno-1-45" name="__codelineno-1-45" href="#__codelineno-1-45"></a><span class="c1"># Uso de la función</span>
+</span><span id="__span-1-46"><a id="__codelineno-1-46" name="__codelineno-1-46" href="#__codelineno-1-46"></a><span class="c1"># terraform_with_var_files &quot;/ruta/al/directorio&quot; &quot;plan&quot;</span>
+</span><span id="__span-1-47"><a id="__codelineno-1-47" name="__codelineno-1-47" href="#__codelineno-1-47"></a><span class="c1"># terraform_with_var_files &quot;/ruta/al/directorio&quot; &quot;apply&quot; &quot;auto&quot;</span>
+</span><span id="__span-1-48"><a id="__codelineno-1-48" name="__codelineno-1-48" href="#__codelineno-1-48"></a><span class="c1"># terraform_with_var_files &quot;/ruta/al/directorio&quot; &quot;destroy&quot; &quot;auto&quot;</span>
 </span></code></pre></div>
 <p>Para cargar la función en tu terminal, copia y pega el script en tu archivo <code>.bashrc</code>, <code>.zshrc</code> o el que toque y recarga tu terminal.</p>
 <p>Espero que os sea de utilidad. ¡Saludos!</p>

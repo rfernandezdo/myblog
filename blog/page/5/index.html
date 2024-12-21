@@ -482,6 +482,13 @@
 </a>
 </li>
 <li class="md-nav__item">
+<a class="md-nav__link" href="../../category/visual-studio-code/">
+<span class="md-ellipsis">
+    Visual Studio Code
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
 <a class="md-nav__link" href="../../category/windows/">
 <span class="md-ellipsis">
     Windows
@@ -660,6 +667,147 @@
 <header class="md-typeset">
 <h1 id="blog">Blog</h1>
 </header>
+<article class="md-post md-post--excerpt">
+<header class="md-post__header">
+<nav class="md-post__authors md-typeset">
+<span class="md-author">
+<img alt="Rafael Fernández" src="https://avatars.githubusercontent.com/u/39990341"/>
+</span>
+</nav>
+<div class="md-post__meta md-meta">
+<ul class="md-meta__list">
+<li class="md-meta__item">
+<time datetime="2024-04-19 00:00:00">April 19, 2024</time></li>
+<li class="md-meta__item">
+            in
+            
+              <a class="md-meta__link" href="../../category/azure-services/">Azure Services</a></li>
+<li class="md-meta__item">
+            
+              5 min read
+            
+          </li>
+</ul>
+</div>
+</header>
+<div class="md-post__content md-typeset">
+<h2 id="azure-network-hub-and-spoke-topology"><a class="toclink" href="../../2024/04/19/azure-network-hub-and-spoke-topology/">Azure Network, Hub-and-Spoke Topology</a></h2>
+<p>Hub and Spoke is a network topology where a central Hub is connected to multiple Spokes. The Hub acts as a central point of connectivity and control, while the Spokes are isolated networks that connect to the Hub. This topology is common in Azure to simplify the connectivity and management of virtual networks.</p>
+<pre class="mermaid"><code>graph TD
+    HUB(("Central Hub"))
+    SPOKE1[Spoke1]
+    SPOKE2[Spoke2]
+    SPOKE3[Spoke3]
+    SPOKEN[Spoke...]
+    HUB --- SPOKE1
+    HUB --- SPOKE2
+    HUB --- SPOKE3
+    HUB --- SPOKEN
+</code></pre>
+<h3 id="key-features-of-the-hub-and-spoke-topology"><a class="toclink" href="../../2024/04/19/azure-network-hub-and-spoke-topology/#key-features-of-the-hub-and-spoke-topology">Key Features of the Hub and Spoke Topology</a></h3>
+<ol>
+<li>
+<p><strong>Centralized Connectivity:</strong> The Hub centralizes the connectivity between the Spoke networks. This simplifies the administration and maintenance of the network.</p>
+</li>
+<li>
+<p><strong>Traffic Control:</strong> The Hub acts as a traffic control point between the Spoke networks. This allows for centralized application of security and routing policies.</p>
+</li>
+<li>
+<p><strong>Scalability:</strong> The Hub and Spoke topology is highly scalable and can grow to meet the organization's connectivity needs.</p>
+</li>
+<li>
+<p><strong>Resilience:</strong> The Hub and Spoke topology provides redundancy and resilience in case of network failures.</p>
+</li>
+</ol>
+<h3 id="how-to-use-the-hub-and-spoke-topology-in-azure"><a class="toclink" href="../../2024/04/19/azure-network-hub-and-spoke-topology/#how-to-use-the-hub-and-spoke-topology-in-azure">How to Use the Hub and Spoke Topology in Azure</a></h3>
+<p>To implement the Hub and Spoke topology in Azure, follow these steps:</p>
+<div class="language-sh highlight"><pre><span></span><code><span id="__span-0-1"><a href="#__codelineno-0-1" id="__codelineno-0-1" name="__codelineno-0-1"></a><span class="c1"># Step 1: Create a virtual network for the Hub</span>
+</span><span id="__span-0-2"><a href="#__codelineno-0-2" id="__codelineno-0-2" name="__codelineno-0-2"></a>az<span class="w"> </span>network<span class="w"> </span>vnet<span class="w"> </span>create<span class="w"> </span>--name<span class="w"> </span>HubVnet<span class="w"> </span>--resource-group<span class="w"> </span>MyResourceGroup<span class="w"> </span>--location<span class="w"> </span>eastus<span class="w"> </span>--address-prefix
+</span><span id="__span-0-3"><a href="#__codelineno-0-3" id="__codelineno-0-3" name="__codelineno-0-3"></a>
+</span><span id="__span-0-4"><a href="#__codelineno-0-4" id="__codelineno-0-4" name="__codelineno-0-4"></a><span class="c1"># Step 2: Create virtual networks for the Spokes</span>
+</span><span id="__span-0-5"><a href="#__codelineno-0-5" id="__codelineno-0-5" name="__codelineno-0-5"></a>az<span class="w"> </span>network<span class="w"> </span>vnet<span class="w"> </span>create<span class="w"> </span>--name<span class="w"> </span>Spoke1Vnet<span class="w"> </span>--resource-group<span class="w"> </span>MyResourceGroup<span class="w"> </span>--location<span class="w"> </span>eastus<span class="w"> </span>--address-prefix
+</span><span id="__span-0-6"><a href="#__codelineno-0-6" id="__codelineno-0-6" name="__codelineno-0-6"></a>az<span class="w"> </span>network<span class="w"> </span>vnet<span class="w"> </span>create<span class="w"> </span>--name<span class="w"> </span>Spoke2Vnet<span class="w"> </span>--resource-group<span class="w"> </span>MyResourceGroup<span class="w"> </span>--location<span class="w"> </span>eastus<span class="w"> </span>--address-prefix
+</span><span id="__span-0-7"><a href="#__codelineno-0-7" id="__codelineno-0-7" name="__codelineno-0-7"></a>az<span class="w"> </span>network<span class="w"> </span>vnet<span class="w"> </span>create<span class="w"> </span>--name<span class="w"> </span>Spoke3Vnet<span class="w"> </span>--resource-group<span class="w"> </span>MyResourceGroup<span class="w"> </span>--location<span class="w"> </span>eastus<span class="w"> </span>--address-prefix
+</span><span id="__span-0-8"><a href="#__codelineno-0-8" id="__codelineno-0-8" name="__codelineno-0-8"></a>
+</span><span id="__span-0-9"><a href="#__codelineno-0-9" id="__codelineno-0-9" name="__codelineno-0-9"></a><span class="c1"># Step 3: Connect the Spokes to the Hub</span>
+</span><span id="__span-0-10"><a href="#__codelineno-0-10" id="__codelineno-0-10" name="__codelineno-0-10"></a>az<span class="w"> </span>network<span class="w"> </span>vnet<span class="w"> </span>peering<span class="w"> </span>create<span class="w"> </span>--name<span class="w"> </span>Spoke1ToHub<span class="w"> </span>--resource-group<span class="w"> </span>MyResourceGroup<span class="w"> </span>--vnet-name<span class="w"> </span>Spoke1Vnet<span class="w"> </span>--remote-vnet<span class="w"> </span>HubVnet<span class="w"> </span>--allow-vnet-access
+</span><span id="__span-0-11"><a href="#__codelineno-0-11" id="__codelineno-0-11" name="__codelineno-0-11"></a>az<span class="w"> </span>network<span class="w"> </span>vnet<span class="w"> </span>peering<span class="w"> </span>create<span class="w"> </span>--name<span class="w"> </span>Spoke2ToHub<span class="w"> </span>--resource-group<span class="w"> </span>MyResourceGroup<span class="w"> </span>--vnet-name<span class="w"> </span>Spoke2Vnet<span class="w"> </span>--remote-vnet<span class="w"> </span>HubVnet<span class="w"> </span>--allow-vnet-access
+</span><span id="__span-0-12"><a href="#__codelineno-0-12" id="__codelineno-0-12" name="__codelineno-0-12"></a>az<span class="w"> </span>network<span class="w"> </span>vnet<span class="w"> </span>peering<span class="w"> </span>create<span class="w"> </span>--name<span class="w"> </span>Spoke3ToHub<span class="w"> </span>--resource-group<span class="w"> </span>MyResourceGroup<span class="w"> </span>--vnet-name<span class="w"> </span>Spoke3Vnet<span class="w"> </span>--remote-vnet<span class="w"> </span>HubVnet<span class="w"> </span>--allow-vnet-access
+</span><span id="__span-0-13"><a href="#__codelineno-0-13" id="__codelineno-0-13" name="__codelineno-0-13"></a>
+</span><span id="__span-0-14"><a href="#__codelineno-0-14" id="__codelineno-0-14" name="__codelineno-0-14"></a><span class="c1"># Step 4: Configure routing between the Hub and the Spokes</span>
+</span><span id="__span-0-15"><a href="#__codelineno-0-15" id="__codelineno-0-15" name="__codelineno-0-15"></a>az<span class="w"> </span>network<span class="w"> </span>vnet<span class="w"> </span>peering<span class="w"> </span>update<span class="w"> </span>--name<span class="w"> </span>Spoke1ToHub<span class="w"> </span>--resource-group<span class="w"> </span>MyResourceGroup<span class="w"> </span>--vnet-name<span class="w"> </span>Spoke1Vnet<span class="w"> </span>--set<span class="w"> </span>virtualNetworkGateway:AllowGatewayTransit<span class="o">=</span><span class="nb">true</span>
+</span><span id="__span-0-16"><a href="#__codelineno-0-16" id="__codelineno-0-16" name="__codelineno-0-16"></a>az<span class="w"> </span>network<span class="w"> </span>vnet<span class="w"> </span>peering<span class="w"> </span>update<span class="w"> </span>--name<span class="w"> </span>Spoke2ToHub<span class="w"> </span>--resource-group<span class="w"> </span>MyResourceGroup<span class="w"> </span>--vnet-name<span class="w"> </span>Spoke2Vnet<span class="w"> </span>--set<span class="w"> </span>virtualNetworkGateway:AllowGatewayTransit<span class="o">=</span><span class="nb">true</span>
+</span><span id="__span-0-17"><a href="#__codelineno-0-17" id="__codelineno-0-17" name="__codelineno-0-17"></a>az<span class="w"> </span>network<span class="w"> </span>vnet<span class="w"> </span>peering<span class="w"> </span>update<span class="w"> </span>--name<span class="w"> </span>Spoke3ToHub<span class="w"> </span>--resource-group<span class="w"> </span>MyResourceGroup<span class="w"> </span>--vnet-name<span class="w"> </span>Spoke3Vnet<span class="w"> </span>--set<span class="w"> </span>virtualNetworkGateway:AllowGatewayTransit<span class="o">=</span><span class="nb">true</span>
+</span><span id="__span-0-18"><a href="#__codelineno-0-18" id="__codelineno-0-18" name="__codelineno-0-18"></a>
+</span><span id="__span-0-19"><a href="#__codelineno-0-19" id="__codelineno-0-19" name="__codelineno-0-19"></a><span class="c1"># Step 5: Configure routing in the Hub</span>
+</span><span id="__span-0-20"><a href="#__codelineno-0-20" id="__codelineno-0-20" name="__codelineno-0-20"></a>az<span class="w"> </span>network<span class="w"> </span>vnet<span class="w"> </span>peering<span class="w"> </span>update<span class="w"> </span>--name<span class="w"> </span>HubToSpoke1<span class="w"> </span>--resource-group<span class="w"> </span>MyResourceGroup<span class="w"> </span>--vnet-name<span class="w"> </span>HubVnet<span class="w"> </span>--set<span class="w"> </span>virtualNetworkGateway:UseRemoteGateways<span class="o">=</span><span class="nb">true</span>
+</span><span id="__span-0-21"><a href="#__codelineno-0-21" id="__codelineno-0-21" name="__codelineno-0-21"></a>az<span class="w"> </span>network<span class="w"> </span>vnet<span class="w"> </span>peering<span class="w"> </span>update<span class="w"> </span>--name<span class="w"> </span>HubToSpoke2<span class="w"> </span>--resource-group<span class="w"> </span>MyResourceGroup<span class="w"> </span>--vnet-name<span class="w"> </span>HubVnet<span class="w"> </span>--set<span class="w"> </span>virtualNetworkGateway:UseRemoteGateways<span class="o">=</span><span class="nb">true</span>
+</span><span id="__span-0-22"><a href="#__codelineno-0-22" id="__codelineno-0-22" name="__codelineno-0-22"></a>az<span class="w"> </span>network<span class="w"> </span>vnet<span class="w"> </span>peering<span class="w"> </span>update<span class="w"> </span>--name<span class="w"> </span>HubToSpoke3<span class="w"> </span>--resource-group<span class="w"> </span>MyResourceGroup<span class="w"> </span>--vnet-name<span class="w"> </span>HubVnet<span class="w"> </span>--set<span class="w"> </span>virtualNetworkGateway:UseRemoteGateways<span class="o">=</span><span class="nb">true</span>
+</span></code></pre></div>
+<h3 id="variant-of-the-hub-and-spoke-topology"><a class="toclink" href="../../2024/04/19/azure-network-hub-and-spoke-topology/#variant-of-the-hub-and-spoke-topology">Variant of the Hub and Spoke Topology</a></h3>
+<p>A variant of the Hub and Spoke topology is the Hub and Spoke with peering between spokes that is generally used to allow direct connectivity between the Spoke networks without going through the Hub. This can be useful in scenarios where direct connectivity between the Spoke networks is required, such as data replication or application communication.</p>
+<p><pre class="mermaid"><code>graph TD
+    HUB(("Central Hub"))
+    SPOKE1[Spoke1]
+    SPOKE2[Spoke2]
+    SPOKE3[Spoke3]
+    SPOKEN[Spoke...]
+    HUB --- SPOKE1
+    HUB --- SPOKE2
+    HUB --- SPOKE3
+    HUB --- SPOKEN
+    SPOKE1 -.- SPOKE2    
+</code></pre>
+In this case, it would be connecting the Spoke networks to each other via virtual network peering, for example:</p>
+<div class="language-sh highlight"><pre><span></span><code><span id="__span-1-1"><a href="#__codelineno-1-1" id="__codelineno-1-1" name="__codelineno-1-1"></a><span class="c1"># Connect Spoke1 to Spoke2</span>
+</span><span id="__span-1-2"><a href="#__codelineno-1-2" id="__codelineno-1-2" name="__codelineno-1-2"></a>az<span class="w"> </span>network<span class="w"> </span>vnet<span class="w"> </span>peering<span class="w"> </span>create<span class="w"> </span>--name<span class="w"> </span>Spoke1ToSpoke2<span class="w"> </span>--resource-group<span class="w"> </span>MyResourceGroup<span class="w"> </span>--vnet-name<span class="w"> </span>Spoke1Vnet<span class="w"> </span>--remote-vnet<span class="w"> </span>Spoke2Vnet<span class="w"> </span>--allow-vnet-access
+</span></code></pre></div>
+<h3 id="scalability-and-performance"><a class="toclink" href="../../2024/04/19/azure-network-hub-and-spoke-topology/#scalability-and-performance">Scalability and Performance</a></h3>
+<p>The Hub and Spoke topology in Azure is highly scalable and can handle thousands of virtual networks and subnets. In terms of performance, the Hub and Spoke topology provides efficient and low-latency connectivity between the Spoke networks and the Hub.</p>
+<h3 id="security-and-compliance"><a class="toclink" href="../../2024/04/19/azure-network-hub-and-spoke-topology/#security-and-compliance">Security and Compliance</a></h3>
+<p>The Hub and Spoke topology in Azure provides centralized control over network security and compliance. Security and routing policies can be applied centrally at the Hub, ensuring consistency and compliance with the organization's network policies.</p>
+<h3 id="monitoring-and-logging"><a class="toclink" href="../../2024/04/19/azure-network-hub-and-spoke-topology/#monitoring-and-logging">Monitoring and Logging</a></h3>
+<p>Use Network Watcher to monitor and diagnose network problems in the Hub and Spoke topology. Network Watcher provides the following tools: </p>
+<ul>
+<li>Monitoring<ul>
+<li><a href="https://docs.microsoft.com/en-us/azure/network-watcher/view-network-topology">Topology view</a> shows you the resources in your virtual network and the relationships between them.</li>
+<li><a href="https://docs.microsoft.com/en-us/azure/network-watcher/connection-monitor-overview">Connection monitor</a> allows you to monitor connectivity and latency between endpoints within and outside of Azure.</li>
+</ul>
+</li>
+<li>Network diagnostic tools<ul>
+<li><a href="https://docs.microsoft.com/en-us/azure/network-watcher/network-watcher-ip-flow-verify-overview">IP flow verify</a> helps you detect traffic filtering issues at the virtual machine level.</li>
+<li><a href="https://docs.microsoft.com/en-us/azure/network-watcher/network-watcher-network-configuration-diagnostics-overview">NSG diagnostics</a> helps you detect traffic filtering issues at the virtual machine, virtual machine scale set, or application gateway level.</li>
+<li><a href="https://docs.microsoft.com/en-us/azure/network-watcher/network-watcher-next-hop-overview">Next hop</a> helps you verify traffic routes and detect routing issues.</li>
+<li><a href="https://docs.microsoft.com/en-us/azure/network-watcher/network-watcher-connectivity-portal">Connection troubleshoot</a> enables a one-time check of connectivity and latency between a virtual machine and the Bastion host, application gateway, or another virtual machine.</li>
+<li><a href="https://docs.microsoft.com/en-us/azure/network-watcher/network-watcher-packet-capture-overview">Packet capture</a> allows you to capture traffic from your virtual machine.</li>
+<li><a href="https://docs.microsoft.com/en-us/azure/network-watcher/network-watcher-troubleshoot-overview">VPN troubleshoot</a> runs multiple diagnostic checks on your gateways and VPN connections to help debug issues.</li>
+</ul>
+</li>
+<li>Traffic<ul>
+<li><a href="https://docs.microsoft.com/en-us/azure/network-watcher/network-watcher-nsg-flow-logging-overview">Network security group flow logs</a> and <a href="https://docs.microsoft.com/en-us/azure/network-watcher/vnet-flow-logs-overview">virtual network flow logs</a> let you log network traffic passing through your network security groups (NSGs) and virtual networks respectively.</li>
+<li><a href="https://docs.microsoft.com/en-us/azure/network-watcher/traffic-analytics">Traffic analytics</a> processes data from your network security group flow log allowing you to visualize, query, analyze, and understand your network traffic.</li>
+</ul>
+</li>
+</ul>
+<p>Virtual network flow logs have recently been released which allows for monitoring network traffic in Azure virtual networks.</p>
+<h3 id="use-cases-and-examples"><a class="toclink" href="../../2024/04/19/azure-network-hub-and-spoke-topology/#use-cases-and-examples">Use Cases and Examples</a></h3>
+<p>The Hub and Spoke topology is ideal for organizations that require centralized connectivity and traffic control between multiple virtual networks in Azure. For example, an organization with multiple branches or departments can use the Hub and Spoke topology to securely and efficiently connect their virtual networks in the cloud.</p>
+<h3 id="best-practices-and-tips"><a class="toclink" href="../../2024/04/19/azure-network-hub-and-spoke-topology/#best-practices-and-tips">Best Practices and Tips</a></h3>
+<p>When implementing the Hub and Spoke topology in Azure, it is recommended to follow these best practices:</p>
+<ul>
+<li><strong>Security:</strong> Apply consistent security policies at the Hub and Spokes to ensure network protection.</li>
+<li><strong>Resilience:</strong> Configure redundancy and resilience in the topology to ensure network availability in case of failures.</li>
+<li><strong>Monitoring:</strong> Use monitoring tools like Azure Monitor to monitor network traffic and detect potential performance issues.</li>
+</ul>
+<h3 id="conclusion"><a class="toclink" href="../../2024/04/19/azure-network-hub-and-spoke-topology/#conclusion">Conclusion</a></h3>
+<p>The Hub and Spoke topology is an effective way to simplify the connectivity and management of virtual networks in Azure. It provides centralized control over network connectivity and traffic, making it easier to implement security and routing policies consistently across the network. By following the recommended best practices and tips, organizations can make the most of the Hub and Spoke topology to meet their cloud connectivity needs.</p>
+<h3 id="references"><a class="toclink" href="../../2024/04/19/azure-network-hub-and-spoke-topology/#references">References</a></h3>
+<ul>
+<li><a href="https://docs.microsoft.com/en-us/azure/network-watcher/frequently-asked-questions">Network Watcher frequently asked questions (FAQ)</a></li>
+<li><a href="https://docs.microsoft.com/en-us/azure/architecture/reference-architectures/hybrid-networking/hub-spoke">Azure Topology</a></li>
+</ul>
+</div>
+</article>
 <article class="md-post md-post--excerpt">
 <header class="md-post__header">
 <nav class="md-post__authors md-typeset">
@@ -1823,149 +1971,8 @@ Microsoft.Compute (for Azure Update Manager and automatic extension upgrades)</p
 <p>You can find more information about Microsoft certifications on the <a href="https://aka.ms/CertificationsPoster">Microsoft Certification Poster</a> and in the <a href="https://learn.microsoft.com/en-us/certifications/">Microsoft Learning</a> website.</p>
 </div>
 </article>
-<article class="md-post md-post--excerpt">
-<header class="md-post__header">
-<nav class="md-post__authors md-typeset">
-<span class="md-author">
-<img alt="Rafael Fernández" src="https://avatars.githubusercontent.com/u/39990341"/>
-</span>
-</nav>
-<div class="md-post__meta md-meta">
-<ul class="md-meta__list">
-<li class="md-meta__item">
-<time datetime="2024-04-04 00:00:00">April 4, 2024</time></li>
-<li class="md-meta__item">
-            in
-            
-              <a class="md-meta__link" href="../../category/security/">Security</a></li>
-<li class="md-meta__item">
-            
-              4 min read
-            
-          </li>
-</ul>
-</div>
-</header>
-<div class="md-post__content md-typeset">
-<h2 id="privileged-access-management-pam-strategy-with-microsoft-entra-id-and-some-azure-services"><a class="toclink" href="../../2024/04/04/privileged-access-management-pam-strategy-with-microsoft-entra-id-and-some-azure-services/">Privileged Access Management (PAM) Strategy with Microsoft Entra ID and some Azure Services</a></h2>
-<p>Today, I'd like to share a brief of a recommended strategy for Privileged Access Management (PAM) of other vendors with Microsoft Entra ID and some Azure Services. This strategy is divided into seven phases:</p>
-<pre class="mermaid"><code>
-graph LR;
-    A[Phase 1: Set Policy] 
-    C[Phase 2: The Process of Discovery]
-    E[Phase 3: Protect Credentials]
-    G[Phase 4: Secure Privileged Access]
-    I[Phase 5: Least Privilege]
-    K[Phase 6: Control All Applications]
-    M[Phase 7: Detect and Respond]
-
-    A--&gt;C
-    C--&gt;E
-    E--&gt;G
-    G--&gt;I
-    I--&gt;K
-    K--&gt;M
-    M--&gt;A
-
-    classDef phase fill:#f9f,stroke:#333,stroke-width:2px;
-    class A,C,E,G,I,K,M phase;
-
-
-</code></pre>
-<div class="admonition info">
-<p class="admonition-title">Info</p>
-<p>Be hybrid, be secure with a single control plane, use Azure ARC to inherit the same security and compliance policies across your on-premises, multi-cloud, and edge environments as in Azure.</p>
-</div>
-<h3 id="phase-1-set-policy"><a class="toclink" href="../../2024/04/04/privileged-access-management-pam-strategy-with-microsoft-entra-id-and-some-azure-services/#phase-1-set-policy"><strong>Phase 1: Set Policy</strong></a></h3>
-<p>The first step in any PAM strategy is to establish a clear policy. This policy should define who has access to what, when they have access, and what they can do with that access. It should also include guidelines for password management and multi-factor authentication. For example:</p>
-<ul>
-<li>Define clear access control policies.</li>
-<li>Establish guidelines for password management and multi-factor authentication.</li>
-<li>Regularly review and update the policy to reflect changes in the organization.</li>
-</ul>
-<p>How to implement this:</p>
-<ul>
-<li>Use <strong>Azure Policy</strong> to define and manage policies for your Azure environment.</li>
-<li>Use <strong>Microsoft Entra multifactor authentication</strong> for implementing multi-factor authentication.</li>
-</ul>
-<h3 id="phase-2-the-process-of-discovery"><a class="toclink" href="../../2024/04/04/privileged-access-management-pam-strategy-with-microsoft-entra-id-and-some-azure-services/#phase-2-the-process-of-discovery"><strong>Phase 2: The Process of Discovery</strong></a></h3>
-<p>In this phase, we identify all the privileged accounts across the organization. This includes service accounts, local administrative accounts, domain administrative accounts, emergency accounts, and application accounts. For example:</p>
-<ul>
-<li>Use automated tools to identify all privileged accounts across the organization.</li>
-<li>Regularly update the inventory of privileged accounts.</li>
-<li>Identify any accounts that are no longer in use and deactivate them.</li>
-</ul>
-<p>How to implement this:</p>
-<ul>
-<li>Use <strong>Microsoft Entra Privileged Identity Management</strong> to discover, restrict and monitor administrators and their access to resources and provide just-in-time access when needed.</li>
-</ul>
-<h3 id="phase-3-protect-credentials"><a class="toclink" href="../../2024/04/04/privileged-access-management-pam-strategy-with-microsoft-entra-id-and-some-azure-services/#phase-3-protect-credentials"><strong>Phase 3: Protect Credentials</strong></a></h3>
-<p>Once we've identified all privileged accounts, we need to ensure that these credentials are stored securely. This could involve using a secure vault, regularly rotating passwords, and using unique passwords for each account. For example:</p>
-<ul>
-<li>Store credentials in a secure vault.</li>
-<li>Implement regular password rotation.</li>
-<li>Use unique passwords for each account.</li>
-</ul>
-<p>How to implement this:</p>
-<ul>
-<li>Use <strong>Azure Key Vault</strong> to safeguard cryptographic keys and other secrets used by your apps and services and <a href="https://learn.microsoft.com/en-us/azure/key-vault/secrets/tutorial-rotation-dual?tabs=azure-cli">rotate secrets regularly</a>.</li>
-<li>Implement <strong>Microsoft Entra ID Password Protection</strong> to protect against weak passwords that can be easily guessed or cracked.</li>
-</ul>
-<h3 id="phase-4-secure-privileged-access"><a class="toclink" href="../../2024/04/04/privileged-access-management-pam-strategy-with-microsoft-entra-id-and-some-azure-services/#phase-4-secure-privileged-access"><strong>Phase 4: Secure Privileged Access</strong></a></h3>
-<p>Securing privileged access involves implementing controls to prevent unauthorized access. This could include limiting the number of privileged accounts, implementing least privilege, and using just-in-time access. For example:</p>
-<ul>
-<li>Limit the number of privileged accounts.</li>
-<li>Implement just-in-time access, where access is granted only for the duration of a task.</li>
-<li>Use session recording and monitoring for privileged access.</li>
-</ul>
-<p>How to implement this:</p>
-<ul>
-<li>Use <strong>Microsoft Entra ID Conditional Access</strong> to enforce controls on the access to apps in your environment based on specific conditions.</li>
-<li>Implement <strong>Microsoft Entra Privileged Identity Management</strong> for just-in-time access.</li>
-</ul>
-<h3 id="phase-5-least-privilege"><a class="toclink" href="../../2024/04/04/privileged-access-management-pam-strategy-with-microsoft-entra-id-and-some-azure-services/#phase-5-least-privilege"><strong>Phase 5: Least Privilege</strong></a></h3>
-<p>The principle of least privilege involves giving users the minimum levels of access — or permissions — they need to complete their job functions. By limiting the access rights of users, the risk of a security breach is reduced. For example:</p>
-<ul>
-<li>Implement role-based access control (RBAC) in Azure to grant the minimum necessary access to users.</li>
-<li>Regularly review user roles and access rights.</li>
-<li>Implement a process for revoking access when it's no longer needed.</li>
-</ul>
-<p>How to implement this:</p>
-<ul>
-<li>Implement <strong>Role-Based Access Control (RBAC)</strong> in Azure to grant the minimum necessary access to users.</li>
-<li>Use <strong>Microsoft Entra ID Access Reviews</strong> to efficiently manage group memberships, access to enterprise applications, and role assignments.</li>
-</ul>
-<h3 id="phase-6-control-all-applications"><a class="toclink" href="../../2024/04/04/privileged-access-management-pam-strategy-with-microsoft-entra-id-and-some-azure-services/#phase-6-control-all-applications"><strong>Phase 6: Control All Applications</strong></a></h3>
-<p>In this phase, we ensure that all applications, whether on-premises or in the cloud, are controlled and monitored. This includes implementing application control policies and monitoring application usage. For example:</p>
-<ul>
-<li>Implement application control policies that dictate what applications can be run on systems.</li>
-<li>Monitor application usage and block unauthorized applications.</li>
-<li>Regularly update and patch all applications to reduce vulnerabilities.</li>
-</ul>
-<p>How to implement this:</p>
-<ul>
-<li>Use <strong>Microsoft Entra Application Proxy</strong> to control and secure access to on-premises and cloud apps.</li>
-<li>Enable Change Tracking and Inventory in <strong>Azure Automation</strong> to track changes to your Azure VMs. Use desired state configuration to ensure that your VMs are configured correctly.</li>
-<li>Implement <strong>Microsoft Intune</strong> to manage and secure your devices and applications.</li>
-</ul>
-<h3 id="phase-7-detect-and-respond"><a class="toclink" href="../../2024/04/04/privileged-access-management-pam-strategy-with-microsoft-entra-id-and-some-azure-services/#phase-7-detect-and-respond"><strong>Phase 7: Detect and Respond</strong></a></h3>
-<p>The final phase involves setting up systems to detect and respond to any suspicious activity. This could involve setting up alerts for unusual activity, regularly auditing access logs, and having a response plan in place for when a breach occurs. For example:</p>
-<ul>
-<li>Set up alerts for unusual activity.</li>
-<li>Regularly audit access logs.</li>
-<li>Have a response plan in place for when a breach occurs, including steps for containment, eradication, and recovery.</li>
-</ul>
-<p>How to implement this:</p>
-<ul>
-<li>Use <strong>Microsoft Defender for Cloud</strong> for increased visibility into your security state and to detect and respond to threats.</li>
-<li>Implement <strong>Azure Sentinel</strong>, Microsoft's cloud-native SIEM solution, for intelligent security analytics.</li>
-</ul>
-<p>By following these seven phases, you can create a robust PAM strategy that protects your organization from security breaches and helps you maintain compliance with various regulations.</p>
-<p>Remember, a good PAM strategy is not a one-time effort but an ongoing process that needs to be regularly reviewed and updated. Microsoft and Azure services provide a robust set of tools to help you implement and manage your PAM strategy effectively.</p>
-</div>
-</article>
 <nav class="md-pagination">
-<a class="md-pagination__link" href="../../">1</a> <span class="md-pagination__dots">..</span> <a class="md-pagination__link" href="../3/">3</a> <a class="md-pagination__link" href="../4/">4</a> <span class="md-pagination__current">5</span> <a class="md-pagination__link" href="../6/">6</a> <a class="md-pagination__link" href="../7/">7</a>
+<a class="md-pagination__link" href="../../">1</a> <span class="md-pagination__dots">..</span> <a class="md-pagination__link" href="../3/">3</a> <a class="md-pagination__link" href="../4/">4</a> <span class="md-pagination__current">5</span> <a class="md-pagination__link" href="../6/">6</a> <a class="md-pagination__link" href="../7/">7</a> <a class="md-pagination__link" href="../8/">8</a>
 </nav>
 </div>
 </div>

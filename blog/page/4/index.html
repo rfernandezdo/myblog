@@ -482,6 +482,13 @@
 </a>
 </li>
 <li class="md-nav__item">
+<a class="md-nav__link" href="../../category/visual-studio-code/">
+<span class="md-ellipsis">
+    Visual Studio Code
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
 <a class="md-nav__link" href="../../category/windows/">
 <span class="md-ellipsis">
     Windows
@@ -660,6 +667,73 @@
 <header class="md-typeset">
 <h1 id="blog">Blog</h1>
 </header>
+<article class="md-post md-post--excerpt">
+<header class="md-post__header">
+<nav class="md-post__authors md-typeset">
+<span class="md-author">
+<img alt="Rafael Fernández" src="https://avatars.githubusercontent.com/u/39990341"/>
+</span>
+</nav>
+<div class="md-post__meta md-meta">
+<ul class="md-meta__list">
+<li class="md-meta__item">
+<time datetime="2024-04-30 00:00:00">April 30, 2024</time></li>
+<li class="md-meta__item">
+            in
+            
+              <a class="md-meta__link" href="../../category/devops/">DevOps</a></li>
+<li class="md-meta__item">
+            
+              2 min read
+            
+          </li>
+</ul>
+</div>
+</header>
+<div class="md-post__content md-typeset">
+<h2 id="repository-strategy-fork-vs-branch"><a class="toclink" href="../../2024/04/30/repository-strategy-fork-vs-branch/">Repository Strategy: Fork vs Branch</a></h2>
+<p>In this post, I will explain the different ways to contribute to a Git repository: Fork vs Branch.</p>
+<h3 id="fork"><a class="toclink" href="../../2024/04/30/repository-strategy-fork-vs-branch/#fork">Fork</a></h3>
+<p>A fork is a copy of a repository that you can make changes to without affecting the original repository. When you fork a repository, you create a new repository in your GitHub account that is a copy of the original repository.</p>
+<p>The benefits of forking a repository include:</p>
+<ul>
+<li><strong>Isolation</strong>: You can work on your changes without affecting the original repository.</li>
+<li><strong>Collaboration</strong>: You can make changes to the forked repository and submit a pull request to the original repository to merge your changes.  </li>
+<li><strong>Ownership</strong>: You have full control over the forked repository and can manage it as you see fit.</li>
+</ul>
+<p>The challenges of forking a repository include:</p>
+<ul>
+<li><strong>Synchronization</strong>: Keeping the forked repository up to date with the original repository can be challenging.</li>
+<li><strong>Conflicts</strong>: Multiple contributors working on the same codebase can lead to conflicts and merge issues.</li>
+<li><strong>Visibility</strong>: Changes made to the forked repository are not visible in the original repository until they are merged.</li>
+</ul>
+<h3 id="branch"><a class="toclink" href="../../2024/04/30/repository-strategy-fork-vs-branch/#branch">Branch</a></h3>
+<p>A branch is a parallel version of a repository that allows you to work on changes without affecting the main codebase. When you create a branch, you can make changes to the code and submit a pull request to merge the changes back into the main branch.</p>
+<p>The benefits of using branches include:</p>
+<ul>
+<li><strong>Flexibility</strong>: You can work on different features or bug fixes in separate branches without affecting each other.</li>
+<li><strong>Collaboration</strong>: You can work with other developers on the same codebase by creating branches and submitting pull requests.</li>
+<li><strong>Visibility</strong>: Changes made in branches are visible to other developers, making it easier to review and merge changes.</li>
+</ul>
+<p>The challenges of using branches include:</p>
+<ul>
+<li><strong>Conflicts</strong>: Multiple developers working on the same branch can lead to conflicts and merge issues.</li>
+<li><strong>Complexity</strong>: Managing multiple branches can be challenging, especially in large projects.</li>
+<li><strong>Versioning</strong>: Branches are versioned separately, making it harder to track changes across the project.</li>
+</ul>
+<h3 id="fork-vs-branch"><a class="toclink" href="../../2024/04/30/repository-strategy-fork-vs-branch/#fork-vs-branch">Fork vs Branch</a></h3>
+<p>The decision to fork or branch a repository depends on the project's requirements and the collaboration model.</p>
+<ul>
+<li>
+<p><strong>Fork</strong>: Use a fork when you want to work on changes independently of the original repository or when you want to contribute to a project that you do not have write access to.</p>
+</li>
+<li>
+<p><strong>Branch</strong>: Use a branch when you want to work on changes that will be merged back into the main codebase or when you want to collaborate with other developers on the same codebase.</p>
+</li>
+</ul>
+<p>For my IaC project with Terraform, I will use branches to work on different features and bug fixes and submit pull requests to merge the changes back into the main branch. This approach will allow me to collaborate with other developers and keep the codebase clean and organized.</p>
+</div>
+</article>
 <article class="md-post md-post--excerpt">
 <header class="md-post__header">
 <nav class="md-post__authors md-typeset">
@@ -1747,149 +1821,8 @@ graph TD
 <p>In this article, we have shown you how to create reports for role assignments and role definitions in Azure using PowerShell and the ImportExcel module. These reports can help you better understand the permissions assigned to users, groups, and applications in your Azure environment and ensure that they are configured correctly. You can customize the scripts to include additional information or export the reports in different formats to suit your needs.</p>
 </div>
 </article>
-<article class="md-post md-post--excerpt">
-<header class="md-post__header">
-<nav class="md-post__authors md-typeset">
-<span class="md-author">
-<img alt="Rafael Fernández" src="https://avatars.githubusercontent.com/u/39990341"/>
-</span>
-</nav>
-<div class="md-post__meta md-meta">
-<ul class="md-meta__list">
-<li class="md-meta__item">
-<time datetime="2024-04-19 00:00:00">April 19, 2024</time></li>
-<li class="md-meta__item">
-            in
-            
-              <a class="md-meta__link" href="../../category/azure-services/">Azure Services</a></li>
-<li class="md-meta__item">
-            
-              5 min read
-            
-          </li>
-</ul>
-</div>
-</header>
-<div class="md-post__content md-typeset">
-<h2 id="azure-network-hub-and-spoke-topology"><a class="toclink" href="../../2024/04/19/azure-network-hub-and-spoke-topology/">Azure Network, Hub-and-Spoke Topology</a></h2>
-<p>Hub and Spoke is a network topology where a central Hub is connected to multiple Spokes. The Hub acts as a central point of connectivity and control, while the Spokes are isolated networks that connect to the Hub. This topology is common in Azure to simplify the connectivity and management of virtual networks.</p>
-<pre class="mermaid"><code>graph TD
-    HUB(("Central Hub"))
-    SPOKE1[Spoke1]
-    SPOKE2[Spoke2]
-    SPOKE3[Spoke3]
-    SPOKEN[Spoke...]
-    HUB --- SPOKE1
-    HUB --- SPOKE2
-    HUB --- SPOKE3
-    HUB --- SPOKEN
-</code></pre>
-<h3 id="key-features-of-the-hub-and-spoke-topology"><a class="toclink" href="../../2024/04/19/azure-network-hub-and-spoke-topology/#key-features-of-the-hub-and-spoke-topology">Key Features of the Hub and Spoke Topology</a></h3>
-<ol>
-<li>
-<p><strong>Centralized Connectivity:</strong> The Hub centralizes the connectivity between the Spoke networks. This simplifies the administration and maintenance of the network.</p>
-</li>
-<li>
-<p><strong>Traffic Control:</strong> The Hub acts as a traffic control point between the Spoke networks. This allows for centralized application of security and routing policies.</p>
-</li>
-<li>
-<p><strong>Scalability:</strong> The Hub and Spoke topology is highly scalable and can grow to meet the organization's connectivity needs.</p>
-</li>
-<li>
-<p><strong>Resilience:</strong> The Hub and Spoke topology provides redundancy and resilience in case of network failures.</p>
-</li>
-</ol>
-<h3 id="how-to-use-the-hub-and-spoke-topology-in-azure"><a class="toclink" href="../../2024/04/19/azure-network-hub-and-spoke-topology/#how-to-use-the-hub-and-spoke-topology-in-azure">How to Use the Hub and Spoke Topology in Azure</a></h3>
-<p>To implement the Hub and Spoke topology in Azure, follow these steps:</p>
-<div class="language-sh highlight"><pre><span></span><code><span id="__span-0-1"><a href="#__codelineno-0-1" id="__codelineno-0-1" name="__codelineno-0-1"></a><span class="c1"># Step 1: Create a virtual network for the Hub</span>
-</span><span id="__span-0-2"><a href="#__codelineno-0-2" id="__codelineno-0-2" name="__codelineno-0-2"></a>az<span class="w"> </span>network<span class="w"> </span>vnet<span class="w"> </span>create<span class="w"> </span>--name<span class="w"> </span>HubVnet<span class="w"> </span>--resource-group<span class="w"> </span>MyResourceGroup<span class="w"> </span>--location<span class="w"> </span>eastus<span class="w"> </span>--address-prefix
-</span><span id="__span-0-3"><a href="#__codelineno-0-3" id="__codelineno-0-3" name="__codelineno-0-3"></a>
-</span><span id="__span-0-4"><a href="#__codelineno-0-4" id="__codelineno-0-4" name="__codelineno-0-4"></a><span class="c1"># Step 2: Create virtual networks for the Spokes</span>
-</span><span id="__span-0-5"><a href="#__codelineno-0-5" id="__codelineno-0-5" name="__codelineno-0-5"></a>az<span class="w"> </span>network<span class="w"> </span>vnet<span class="w"> </span>create<span class="w"> </span>--name<span class="w"> </span>Spoke1Vnet<span class="w"> </span>--resource-group<span class="w"> </span>MyResourceGroup<span class="w"> </span>--location<span class="w"> </span>eastus<span class="w"> </span>--address-prefix
-</span><span id="__span-0-6"><a href="#__codelineno-0-6" id="__codelineno-0-6" name="__codelineno-0-6"></a>az<span class="w"> </span>network<span class="w"> </span>vnet<span class="w"> </span>create<span class="w"> </span>--name<span class="w"> </span>Spoke2Vnet<span class="w"> </span>--resource-group<span class="w"> </span>MyResourceGroup<span class="w"> </span>--location<span class="w"> </span>eastus<span class="w"> </span>--address-prefix
-</span><span id="__span-0-7"><a href="#__codelineno-0-7" id="__codelineno-0-7" name="__codelineno-0-7"></a>az<span class="w"> </span>network<span class="w"> </span>vnet<span class="w"> </span>create<span class="w"> </span>--name<span class="w"> </span>Spoke3Vnet<span class="w"> </span>--resource-group<span class="w"> </span>MyResourceGroup<span class="w"> </span>--location<span class="w"> </span>eastus<span class="w"> </span>--address-prefix
-</span><span id="__span-0-8"><a href="#__codelineno-0-8" id="__codelineno-0-8" name="__codelineno-0-8"></a>
-</span><span id="__span-0-9"><a href="#__codelineno-0-9" id="__codelineno-0-9" name="__codelineno-0-9"></a><span class="c1"># Step 3: Connect the Spokes to the Hub</span>
-</span><span id="__span-0-10"><a href="#__codelineno-0-10" id="__codelineno-0-10" name="__codelineno-0-10"></a>az<span class="w"> </span>network<span class="w"> </span>vnet<span class="w"> </span>peering<span class="w"> </span>create<span class="w"> </span>--name<span class="w"> </span>Spoke1ToHub<span class="w"> </span>--resource-group<span class="w"> </span>MyResourceGroup<span class="w"> </span>--vnet-name<span class="w"> </span>Spoke1Vnet<span class="w"> </span>--remote-vnet<span class="w"> </span>HubVnet<span class="w"> </span>--allow-vnet-access
-</span><span id="__span-0-11"><a href="#__codelineno-0-11" id="__codelineno-0-11" name="__codelineno-0-11"></a>az<span class="w"> </span>network<span class="w"> </span>vnet<span class="w"> </span>peering<span class="w"> </span>create<span class="w"> </span>--name<span class="w"> </span>Spoke2ToHub<span class="w"> </span>--resource-group<span class="w"> </span>MyResourceGroup<span class="w"> </span>--vnet-name<span class="w"> </span>Spoke2Vnet<span class="w"> </span>--remote-vnet<span class="w"> </span>HubVnet<span class="w"> </span>--allow-vnet-access
-</span><span id="__span-0-12"><a href="#__codelineno-0-12" id="__codelineno-0-12" name="__codelineno-0-12"></a>az<span class="w"> </span>network<span class="w"> </span>vnet<span class="w"> </span>peering<span class="w"> </span>create<span class="w"> </span>--name<span class="w"> </span>Spoke3ToHub<span class="w"> </span>--resource-group<span class="w"> </span>MyResourceGroup<span class="w"> </span>--vnet-name<span class="w"> </span>Spoke3Vnet<span class="w"> </span>--remote-vnet<span class="w"> </span>HubVnet<span class="w"> </span>--allow-vnet-access
-</span><span id="__span-0-13"><a href="#__codelineno-0-13" id="__codelineno-0-13" name="__codelineno-0-13"></a>
-</span><span id="__span-0-14"><a href="#__codelineno-0-14" id="__codelineno-0-14" name="__codelineno-0-14"></a><span class="c1"># Step 4: Configure routing between the Hub and the Spokes</span>
-</span><span id="__span-0-15"><a href="#__codelineno-0-15" id="__codelineno-0-15" name="__codelineno-0-15"></a>az<span class="w"> </span>network<span class="w"> </span>vnet<span class="w"> </span>peering<span class="w"> </span>update<span class="w"> </span>--name<span class="w"> </span>Spoke1ToHub<span class="w"> </span>--resource-group<span class="w"> </span>MyResourceGroup<span class="w"> </span>--vnet-name<span class="w"> </span>Spoke1Vnet<span class="w"> </span>--set<span class="w"> </span>virtualNetworkGateway:AllowGatewayTransit<span class="o">=</span><span class="nb">true</span>
-</span><span id="__span-0-16"><a href="#__codelineno-0-16" id="__codelineno-0-16" name="__codelineno-0-16"></a>az<span class="w"> </span>network<span class="w"> </span>vnet<span class="w"> </span>peering<span class="w"> </span>update<span class="w"> </span>--name<span class="w"> </span>Spoke2ToHub<span class="w"> </span>--resource-group<span class="w"> </span>MyResourceGroup<span class="w"> </span>--vnet-name<span class="w"> </span>Spoke2Vnet<span class="w"> </span>--set<span class="w"> </span>virtualNetworkGateway:AllowGatewayTransit<span class="o">=</span><span class="nb">true</span>
-</span><span id="__span-0-17"><a href="#__codelineno-0-17" id="__codelineno-0-17" name="__codelineno-0-17"></a>az<span class="w"> </span>network<span class="w"> </span>vnet<span class="w"> </span>peering<span class="w"> </span>update<span class="w"> </span>--name<span class="w"> </span>Spoke3ToHub<span class="w"> </span>--resource-group<span class="w"> </span>MyResourceGroup<span class="w"> </span>--vnet-name<span class="w"> </span>Spoke3Vnet<span class="w"> </span>--set<span class="w"> </span>virtualNetworkGateway:AllowGatewayTransit<span class="o">=</span><span class="nb">true</span>
-</span><span id="__span-0-18"><a href="#__codelineno-0-18" id="__codelineno-0-18" name="__codelineno-0-18"></a>
-</span><span id="__span-0-19"><a href="#__codelineno-0-19" id="__codelineno-0-19" name="__codelineno-0-19"></a><span class="c1"># Step 5: Configure routing in the Hub</span>
-</span><span id="__span-0-20"><a href="#__codelineno-0-20" id="__codelineno-0-20" name="__codelineno-0-20"></a>az<span class="w"> </span>network<span class="w"> </span>vnet<span class="w"> </span>peering<span class="w"> </span>update<span class="w"> </span>--name<span class="w"> </span>HubToSpoke1<span class="w"> </span>--resource-group<span class="w"> </span>MyResourceGroup<span class="w"> </span>--vnet-name<span class="w"> </span>HubVnet<span class="w"> </span>--set<span class="w"> </span>virtualNetworkGateway:UseRemoteGateways<span class="o">=</span><span class="nb">true</span>
-</span><span id="__span-0-21"><a href="#__codelineno-0-21" id="__codelineno-0-21" name="__codelineno-0-21"></a>az<span class="w"> </span>network<span class="w"> </span>vnet<span class="w"> </span>peering<span class="w"> </span>update<span class="w"> </span>--name<span class="w"> </span>HubToSpoke2<span class="w"> </span>--resource-group<span class="w"> </span>MyResourceGroup<span class="w"> </span>--vnet-name<span class="w"> </span>HubVnet<span class="w"> </span>--set<span class="w"> </span>virtualNetworkGateway:UseRemoteGateways<span class="o">=</span><span class="nb">true</span>
-</span><span id="__span-0-22"><a href="#__codelineno-0-22" id="__codelineno-0-22" name="__codelineno-0-22"></a>az<span class="w"> </span>network<span class="w"> </span>vnet<span class="w"> </span>peering<span class="w"> </span>update<span class="w"> </span>--name<span class="w"> </span>HubToSpoke3<span class="w"> </span>--resource-group<span class="w"> </span>MyResourceGroup<span class="w"> </span>--vnet-name<span class="w"> </span>HubVnet<span class="w"> </span>--set<span class="w"> </span>virtualNetworkGateway:UseRemoteGateways<span class="o">=</span><span class="nb">true</span>
-</span></code></pre></div>
-<h3 id="variant-of-the-hub-and-spoke-topology"><a class="toclink" href="../../2024/04/19/azure-network-hub-and-spoke-topology/#variant-of-the-hub-and-spoke-topology">Variant of the Hub and Spoke Topology</a></h3>
-<p>A variant of the Hub and Spoke topology is the Hub and Spoke with peering between spokes that is generally used to allow direct connectivity between the Spoke networks without going through the Hub. This can be useful in scenarios where direct connectivity between the Spoke networks is required, such as data replication or application communication.</p>
-<p><pre class="mermaid"><code>graph TD
-    HUB(("Central Hub"))
-    SPOKE1[Spoke1]
-    SPOKE2[Spoke2]
-    SPOKE3[Spoke3]
-    SPOKEN[Spoke...]
-    HUB --- SPOKE1
-    HUB --- SPOKE2
-    HUB --- SPOKE3
-    HUB --- SPOKEN
-    SPOKE1 -.- SPOKE2    
-</code></pre>
-In this case, it would be connecting the Spoke networks to each other via virtual network peering, for example:</p>
-<div class="language-sh highlight"><pre><span></span><code><span id="__span-1-1"><a href="#__codelineno-1-1" id="__codelineno-1-1" name="__codelineno-1-1"></a><span class="c1"># Connect Spoke1 to Spoke2</span>
-</span><span id="__span-1-2"><a href="#__codelineno-1-2" id="__codelineno-1-2" name="__codelineno-1-2"></a>az<span class="w"> </span>network<span class="w"> </span>vnet<span class="w"> </span>peering<span class="w"> </span>create<span class="w"> </span>--name<span class="w"> </span>Spoke1ToSpoke2<span class="w"> </span>--resource-group<span class="w"> </span>MyResourceGroup<span class="w"> </span>--vnet-name<span class="w"> </span>Spoke1Vnet<span class="w"> </span>--remote-vnet<span class="w"> </span>Spoke2Vnet<span class="w"> </span>--allow-vnet-access
-</span></code></pre></div>
-<h3 id="scalability-and-performance"><a class="toclink" href="../../2024/04/19/azure-network-hub-and-spoke-topology/#scalability-and-performance">Scalability and Performance</a></h3>
-<p>The Hub and Spoke topology in Azure is highly scalable and can handle thousands of virtual networks and subnets. In terms of performance, the Hub and Spoke topology provides efficient and low-latency connectivity between the Spoke networks and the Hub.</p>
-<h3 id="security-and-compliance"><a class="toclink" href="../../2024/04/19/azure-network-hub-and-spoke-topology/#security-and-compliance">Security and Compliance</a></h3>
-<p>The Hub and Spoke topology in Azure provides centralized control over network security and compliance. Security and routing policies can be applied centrally at the Hub, ensuring consistency and compliance with the organization's network policies.</p>
-<h3 id="monitoring-and-logging"><a class="toclink" href="../../2024/04/19/azure-network-hub-and-spoke-topology/#monitoring-and-logging">Monitoring and Logging</a></h3>
-<p>Use Network Watcher to monitor and diagnose network problems in the Hub and Spoke topology. Network Watcher provides the following tools: </p>
-<ul>
-<li>Monitoring<ul>
-<li><a href="https://docs.microsoft.com/en-us/azure/network-watcher/view-network-topology">Topology view</a> shows you the resources in your virtual network and the relationships between them.</li>
-<li><a href="https://docs.microsoft.com/en-us/azure/network-watcher/connection-monitor-overview">Connection monitor</a> allows you to monitor connectivity and latency between endpoints within and outside of Azure.</li>
-</ul>
-</li>
-<li>Network diagnostic tools<ul>
-<li><a href="https://docs.microsoft.com/en-us/azure/network-watcher/network-watcher-ip-flow-verify-overview">IP flow verify</a> helps you detect traffic filtering issues at the virtual machine level.</li>
-<li><a href="https://docs.microsoft.com/en-us/azure/network-watcher/network-watcher-network-configuration-diagnostics-overview">NSG diagnostics</a> helps you detect traffic filtering issues at the virtual machine, virtual machine scale set, or application gateway level.</li>
-<li><a href="https://docs.microsoft.com/en-us/azure/network-watcher/network-watcher-next-hop-overview">Next hop</a> helps you verify traffic routes and detect routing issues.</li>
-<li><a href="https://docs.microsoft.com/en-us/azure/network-watcher/network-watcher-connectivity-portal">Connection troubleshoot</a> enables a one-time check of connectivity and latency between a virtual machine and the Bastion host, application gateway, or another virtual machine.</li>
-<li><a href="https://docs.microsoft.com/en-us/azure/network-watcher/network-watcher-packet-capture-overview">Packet capture</a> allows you to capture traffic from your virtual machine.</li>
-<li><a href="https://docs.microsoft.com/en-us/azure/network-watcher/network-watcher-troubleshoot-overview">VPN troubleshoot</a> runs multiple diagnostic checks on your gateways and VPN connections to help debug issues.</li>
-</ul>
-</li>
-<li>Traffic<ul>
-<li><a href="https://docs.microsoft.com/en-us/azure/network-watcher/network-watcher-nsg-flow-logging-overview">Network security group flow logs</a> and <a href="https://docs.microsoft.com/en-us/azure/network-watcher/vnet-flow-logs-overview">virtual network flow logs</a> let you log network traffic passing through your network security groups (NSGs) and virtual networks respectively.</li>
-<li><a href="https://docs.microsoft.com/en-us/azure/network-watcher/traffic-analytics">Traffic analytics</a> processes data from your network security group flow log allowing you to visualize, query, analyze, and understand your network traffic.</li>
-</ul>
-</li>
-</ul>
-<p>Virtual network flow logs have recently been released which allows for monitoring network traffic in Azure virtual networks.</p>
-<h3 id="use-cases-and-examples"><a class="toclink" href="../../2024/04/19/azure-network-hub-and-spoke-topology/#use-cases-and-examples">Use Cases and Examples</a></h3>
-<p>The Hub and Spoke topology is ideal for organizations that require centralized connectivity and traffic control between multiple virtual networks in Azure. For example, an organization with multiple branches or departments can use the Hub and Spoke topology to securely and efficiently connect their virtual networks in the cloud.</p>
-<h3 id="best-practices-and-tips"><a class="toclink" href="../../2024/04/19/azure-network-hub-and-spoke-topology/#best-practices-and-tips">Best Practices and Tips</a></h3>
-<p>When implementing the Hub and Spoke topology in Azure, it is recommended to follow these best practices:</p>
-<ul>
-<li><strong>Security:</strong> Apply consistent security policies at the Hub and Spokes to ensure network protection.</li>
-<li><strong>Resilience:</strong> Configure redundancy and resilience in the topology to ensure network availability in case of failures.</li>
-<li><strong>Monitoring:</strong> Use monitoring tools like Azure Monitor to monitor network traffic and detect potential performance issues.</li>
-</ul>
-<h3 id="conclusion"><a class="toclink" href="../../2024/04/19/azure-network-hub-and-spoke-topology/#conclusion">Conclusion</a></h3>
-<p>The Hub and Spoke topology is an effective way to simplify the connectivity and management of virtual networks in Azure. It provides centralized control over network connectivity and traffic, making it easier to implement security and routing policies consistently across the network. By following the recommended best practices and tips, organizations can make the most of the Hub and Spoke topology to meet their cloud connectivity needs.</p>
-<h3 id="references"><a class="toclink" href="../../2024/04/19/azure-network-hub-and-spoke-topology/#references">References</a></h3>
-<ul>
-<li><a href="https://docs.microsoft.com/en-us/azure/network-watcher/frequently-asked-questions">Network Watcher frequently asked questions (FAQ)</a></li>
-<li><a href="https://docs.microsoft.com/en-us/azure/architecture/reference-architectures/hybrid-networking/hub-spoke">Azure Topology</a></li>
-</ul>
-</div>
-</article>
 <nav class="md-pagination">
-<a class="md-pagination__link" href="../../">1</a> <a class="md-pagination__link" href="../2/">2</a> <a class="md-pagination__link" href="../3/">3</a> <span class="md-pagination__current">4</span> <a class="md-pagination__link" href="../5/">5</a> <a class="md-pagination__link" href="../6/">6</a> <a class="md-pagination__link" href="../7/">7</a>
+<a class="md-pagination__link" href="../../">1</a> <a class="md-pagination__link" href="../2/">2</a> <a class="md-pagination__link" href="../3/">3</a> <span class="md-pagination__current">4</span> <a class="md-pagination__link" href="../5/">5</a> <a class="md-pagination__link" href="../6/">6</a> <span class="md-pagination__dots">..</span> <a class="md-pagination__link" href="../8/">8</a>
 </nav>
 </div>
 </div>

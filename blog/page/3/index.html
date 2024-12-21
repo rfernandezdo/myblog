@@ -482,6 +482,13 @@
 </a>
 </li>
 <li class="md-nav__item">
+<a class="md-nav__link" href="../../category/visual-studio-code/">
+<span class="md-ellipsis">
+    Visual Studio Code
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
 <a class="md-nav__link" href="../../category/windows/">
 <span class="md-ellipsis">
     Windows
@@ -660,6 +667,382 @@
 <header class="md-typeset">
 <h1 id="blog">Blog</h1>
 </header>
+<article class="md-post md-post--excerpt">
+<header class="md-post__header">
+<nav class="md-post__authors md-typeset">
+<span class="md-author">
+<img alt="Rafael Fernández" src="https://avatars.githubusercontent.com/u/39990341"/>
+</span>
+</nav>
+<div class="md-post__meta md-meta">
+<ul class="md-meta__list">
+<li class="md-meta__item">
+<time datetime="2024-06-12 00:00:00">June 12, 2024</time></li>
+<li class="md-meta__item">
+            in
+            
+              <a class="md-meta__link" href="../../category/microsoft-entra-id/">Microsoft Entra ID</a></li>
+<li class="md-meta__item">
+            
+              8 min read
+            
+          </li>
+</ul>
+</div>
+</header>
+<div class="md-post__content md-typeset">
+<h2 id="microsoft-entra-id-privileged-identity-management"><a class="toclink" href="../../2024/06/12/microsoft-entra-id-privileged-identity-management/">Microsoft Entra ID Privileged Identity Management</a></h2>
+<p>In this post, I will show you how to use Microsoft Entra ID Privileged Identity Management (PIM) to manage and monitor access to privileged roles in your organization.</p>
+<h3 id="what-is-microsoft-entra-id-privileged-identity-management"><a class="toclink" href="../../2024/06/12/microsoft-entra-id-privileged-identity-management/#what-is-microsoft-entra-id-privileged-identity-management">What is Microsoft Entra ID Privileged Identity Management?</a></h3>
+<p>Microsoft Entra ID Privileged Identity Management (PIM) is a service that helps you manage, control, and monitor access within your organization. It provides just-in-time privileged access to Azure AD and Azure resources, along with access reviews and monitoring capabilities.</p>
+<h3 id="reasons-to-use-microsoft-entra-id-pim"><a class="toclink" href="../../2024/06/12/microsoft-entra-id-privileged-identity-management/#reasons-to-use-microsoft-entra-id-pim">Reasons to Use Microsoft Entra ID PIM</a></h3>
+<p>There are several reasons to use Microsoft Entra ID PIM:</p>
+<ul>
+<li><strong>Security</strong>: Microsoft Entra ID PIM helps you reduce the risk of unauthorized access to privileged roles.</li>
+<li><strong>Compliance</strong>: Microsoft Entra ID PIM helps you meet compliance requirements by providing access reviews and monitoring capabilities.</li>
+<li><strong>Efficiency</strong>: Microsoft Entra ID PIM provides just-in-time access to privileged roles, reducing the risk of unauthorized access.</li>
+<li><strong>Monitoring</strong>: Microsoft Entra ID PIM provides monitoring and alerts that help you detect and respond to suspicious activities.</li>
+<li><strong>Traceability</strong>: Microsoft Entra ID PIM provides an audit trail of all access requests and approvals, helping you track who has access to privileged roles.</li>
+</ul>
+<p>Maybe you can't use Microsoft Entra ID PIM to log all changess that the users do in the system, but you can use <a href="https://techcommunity.microsoft.com/t5/azure-governance-and-management/announcing-the-general-availability-of-change-actor/ba-p/4171801">Actor Change</a> for that.</p>
+<h3 id="key-features-of-microsoft-entra-id-pim"><a class="toclink" href="../../2024/06/12/microsoft-entra-id-privileged-identity-management/#key-features-of-microsoft-entra-id-pim">Key Features of Microsoft Entra ID PIM</a></h3>
+<p>Microsoft Entra ID PIM offers several key features that help you manage and monitor access to privileged roles:</p>
+<ul>
+<li>Provide just-in-time privileged access to Microsoft Entra ID and Azure resources.</li>
+<li>Assign time-bound access to resources using start and end dates.</li>
+<li>Require approval to activate privileged roles.</li>
+<li>Enforce multifactor authentication to activate any role.</li>
+<li>Use justification to understand why users activate.</li>
+<li>Get notifications when users activate privileged roles.</li>
+<li>Conduct access reviews to ensure users still need roles.</li>
+<li>Download audit history for internal or external audit.</li>
+<li>Prevent removal of the last active Global Administrator and Privileged Role Administrator role assignments.</li>
+</ul>
+<h3 id="how-to-use-microsoft-entra-id-pim"><a class="toclink" href="../../2024/06/12/microsoft-entra-id-privileged-identity-management/#how-to-use-microsoft-entra-id-pim">How to Use Microsoft Entra ID PIM</a></h3>
+<p>We can manage three types of "things" in Microsoft Entra ID PIM:</p>
+<ul>
+<li><strong>Microsoft Entra roles.</strong> Microsoft Entra roles are also referred to as directory roles. They include built-in and custom roles to manage Microsoft Entra ID and other Microsoft 365 online services.</li>
+<li><strong>PIM for Groups.</strong> To set up just-in-time access to the member and owner role of a Microsoft Entra security group. PIM for Groups provides an alternative way to set up PIM for Microsoft Entra roles and Azure roles. It also allows you to set up PIM for other permissions across Microsoft online services like Intune, Azure Key Vaults, and Microsoft Entra ID Protection.</li>
+<li><strong>Azure roles.</strong> Azure's role-based access control roles that grant access to management groups, subscriptions, resource groups, and resources.</li>
+</ul>
+<h4 id="microsoft-entra-id-roles"><a class="toclink" href="../../2024/06/12/microsoft-entra-id-privileged-identity-management/#microsoft-entra-id-roles">Microsoft Entra ID roles</a></h4>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If you want to use groups, you need create eligible groups, for now the maximum number of eligible groups is 500.</p>
+</div>
+<p>In the Microsoft Entra ID portal, you can manage Microsoft Entra ID roles by selecting the "Roles" tab. Here you can see all the roles that are available to you, as well as the roles that you have activated.</p>
+<p>You can made the following actions:</p>
+<ul>
+<li><strong>Assign</strong>: Create assignments for Microsoft Entra ID roles, update existing assignments to ensure that users have just-in-time access to privileged roles.</li>
+<li><strong>Activate</strong>: Activate your eligible assignments to get just-in-time access to privileged roles. </li>
+<li><strong>Approve</strong>: List, approve, or deny activation requests for Microsoft Entra ID roles.</li>
+<li><strong>Audit</strong>: View and export a history of all assignments and activations done in PIM so you can identify attacks and stay compliant.</li>
+</ul>
+<p>Ok, let's see how to assign a role to a group.</p>
+<p>In the "Roles" tab, click on the role that you want to assign. </p>
+<p>In Role settings, edit the settings for the role, modify Activation, Assignment, and Notification settings and then click "Update. These are the default settings:</p>
+<p><strong>Activation</strong></p>
+<table>
+<thead>
+<tr>
+<th>Setting</th>
+<th>State</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Activation maximum duration (hours)</th>
+<th>8 hour(s)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>On activation, require</td>
+<td>None</td>
+</tr>
+<tr>
+<td>Require justification on activation</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Require ticket information on activation</td>
+<td>No</td>
+</tr>
+<tr>
+<td>Require approval to activate</td>
+<td>No</td>
+</tr>
+<tr>
+<td>Approvers</td>
+<td>None</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Assignment</strong></p>
+<table>
+<thead>
+<tr>
+<th>Setting</th>
+<th>State</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Allow permanent eligible assignment</th>
+<th>Yes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Expire eligible assignments after</td>
+<td>-</td>
+</tr>
+<tr>
+<td>Allow permanent active assignment</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Expire active assignments after</td>
+<td>-</td>
+</tr>
+<tr>
+<td>Require Azure Multi-Factor Authentication on active assignment</td>
+<td>No</td>
+</tr>
+<tr>
+<td>Require justification on active assignment</td>
+<td>Yes</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Send notifications when members are assigned as eligible to this role:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Default recipients</th>
+<th>Additional recipients</th>
+<th>Critical emails only</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Role assignment alert</th>
+<th>Admin</th>
+<th>None</th>
+<th>False</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Notification to the assigned user (assignee)</td>
+<td>Assignee</td>
+<td>None</td>
+<td>False</td>
+</tr>
+<tr>
+<td>Request to approve a role assignment renewal/extension</td>
+<td>Approver</td>
+<td>None</td>
+<td>False</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Send notifications when members are assigned as active to this role:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Default recipients</th>
+<th>Additional recipients</th>
+<th>Critical emails only</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Role assignment alert</th>
+<th>Admin</th>
+<th>None</th>
+<th>False</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Notification to the assigned user (assignee)</td>
+<td>Assignee</td>
+<td>None</td>
+<td>False</td>
+</tr>
+<tr>
+<td>Request to approve a role assignment renewal/extension</td>
+<td>Approver</td>
+<td>None</td>
+<td>False</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Send notifications when eligible members activate this role:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Default recipients</th>
+<th>Additional recipients</th>
+<th>Critical emails only</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Role activation alert</th>
+<th>Admin</th>
+<th>None</th>
+<th>False</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Notification to activated user (requestor)</td>
+<td>Requestor</td>
+<td>None</td>
+<td>False</td>
+</tr>
+<tr>
+<td>Request to approve an activation</td>
+<td>Approver</td>
+<td>None</td>
+<td>False</td>
+</tr>
+</tbody>
+</table>
+<p>In the "Assignments" tab, click on "Add assignments". In Membership, select the scope type: Application, Device, Directory, Group, Service Principal or User (It's dependes of each role)  and select the identity related that you want to assign the role to. We are going to select Directory and a eligible group,  and then click "Next". </p>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>App registrations are supported in PIM for Microsoft Entra ID roles but only in active assignments. </p>
+</div>
+<p>In the "Settings" tab, you can set the Assigment type: Eligible or I need to do something to activate and Active or I don't need to do nothing to activate my role. You can configure too if you want that the duration of the assignment is permanent or if you want to expire the assignment after a certain period of time. Once you're done, click "Assign".</p>
+<p>You can set the activation settings, assignment settings, and notification settings for the assignment. Once you're done, click "Assign".</p>
+<h4 id="pim-for-groups"><a class="toclink" href="../../2024/06/12/microsoft-entra-id-privileged-identity-management/#pim-for-groups">PIM for Groups</a></h4>
+<p>In the Microsoft Entra ID portal, you can manage PIM for Groups by selecting the "Groups" tab. </p>
+<p>First you need to discover the groups that you want to manage. In the "Groups" tab, click on "Discover groups". In the "Discover groups" pane, you can search for groups by name. Once you've found the group you want to manage, click on "Add to PIM".</p>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>You must be an owner of the group or have Microsoft Entra role that allows to discover and manage group in PIM.</p>
+</div>
+<p>Now, in the "Groups" tab, you can see all the groups that you have discovered.</p>
+<p>In the "Groups" tab, click on the group that you want to manage. You can made the following actions under manage:</p>
+<ul>
+<li><strong>Assign</strong>: Create assignments for the member and owner role of the group, update existing assignments to ensure that users have just-in-time access to privileged roles.</li>
+<li><strong>Activate</strong>: Activate your eligible assignments to get just-in-time access to privileged roles.</li>
+<li><strong>Approve</strong>: List, approve, or deny activation requests for the member and owner role of the group.</li>
+<li><strong>Audit</strong>: View and export a history of all assignments and activations done in PIM so you can identify attacks and stay compliant.</li>
+</ul>
+<p>Ok, let's see how to assign a role to a group.</p>
+<p>In the "Groups" tab, click on the group that you want to assign a role to. </p>
+<p>In Role settings, edit the settings for the role, modify Activation, Assignment, and Notification settings for members or users, these settings are the same that we saw in the Microsoft Entra ID roles section.</p>
+<p>In the "Assignments" tab, click on "Add assignments". In Select role, select the scope type: Member or Owner and in Select members select the identity related that you want to assign the role to or groupm, if you select a group, you doesn't need a eligible group,  and then click "Next".</p>
+<p>In the "Settings" tab, you can set the Assigment type: Eligible or I need to do something to activate and Active or I don't need to do nothing to activate my role. You can configure too if you want that the duration of the assignment is permanent or if you want to expire the assignment after a certain period of time. Once you're done, click "Assign".</p>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>App registrations are supported in PIM for Groups but only in active assignments. I think that this is very useful for IaC for example because you can assign a role to a service principal and you can activate the role when you need it.</p>
+</div>
+<p>Example of a sequence diagram of the activation process for a group:</p>
+<pre class="mermaid"><code>sequenceDiagram
+    participant User
+    participant PIM
+    participant Approver
+    participant MFA
+    participant Group
+
+    User-&gt;&gt;PIM: Logs in
+    User-&gt;&gt;PIM: Navigates to PIM and selects "My roles"
+    User-&gt;&gt;PIM: Selects eligible group
+    User-&gt;&gt;PIM: Requests activation
+    PIM-&gt;&gt;MFA: Requests multi-factor authentication
+    MFA--&gt;&gt;User: MFA request
+    User-&gt;&gt;MFA: Provides MFA credentials
+    MFA--&gt;&gt;PIM: MFA confirmation
+    PIM-&gt;&gt;User: Requests justification
+    User-&gt;&gt;PIM: Provides justification
+    PIM-&gt;&gt;Approver: Sends approval request
+    Approver--&gt;&gt;PIM: Approval
+    PIM--&gt;&gt;User: Activation confirmation
+    PIM-&gt;&gt;Group: Activates temporary membership
+    Group--&gt;&gt;PIM: Activation confirmation
+    PIM--&gt;&gt;User: Access granted
+</code></pre>
+<h4 id="azure-roles"><a class="toclink" href="../../2024/06/12/microsoft-entra-id-privileged-identity-management/#azure-roles">Azure roles</a></h4>
+<p>In the Microsoft Entra ID portal, you can manage Azure roles by selecting the "Azure resources" tab. Here you can see all the Azure roles that are available to you by scope, as well as the roles that you have activated.</p>
+<p>First you need to select the Azure resource that you want to manage: Management groups, Subscriptions, Resource groups or Resources and follow Manage Resource.</p>
+<p>Once here, same as the other sections, you can made the following actions for this scope:</p>
+<ul>
+<li><strong>Assign</strong>: Create assignments for the member and owner role of the group, update existing assignments to ensure that users have just-in-time access to privileged roles.</li>
+<li><strong>Activate</strong>: Activate your eligible assignments to get just-in-time access to privileged roles.</li>
+<li><strong>Approve</strong>: List, approve, or deny activation requests for the member and owner role of the group.</li>
+<li><strong>Audit</strong>: View and export a history of all assignments and activations done in PIM so you can identify attacks and stay compliant.</li>
+</ul>
+<p>Ok, let's see how to assign a role to a identity in a scope.</p>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>We already have a scope selected</p>
+</div>
+<p>In the "Assignments" tab, click on "Add assignments". In Select role, select the role that you want to assign and in Select members select the identity related that you want to assign the role to or group, if you select a group, you doesn't need a eligible group,  and then click "Next".</p>
+<p>In the "Settings" tab, you can set the Assigment type: Eligible or I need to do something to activate and Active or I don't need to do nothing to activate my role. You can configure too if you want that the duration of the assignment is permanent or if you want to expire the assignment after a certain period of time. Once you're done, click "Assign".</p>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>App registrations are supported in PIM for Azure roles but only in active assignments. I think that this is very useful for IaC for example because you can assign a role to a service principal and you can activate the role when you need it.</p>
+</div>
+<p>Don't forget review settings for the role, modify Activation, Assignment, and Notification settings for members or users, these settings are the same that we saw in the Microsoft Entra ID roles section.</p>
+<h3 id="conclusion"><a class="toclink" href="../../2024/06/12/microsoft-entra-id-privileged-identity-management/#conclusion">Conclusion</a></h3>
+<p>Microsoft Entra ID Privileged Identity Management (PIM) is a powerful service that helps you manage and monitor access to privileged roles in your organization. By using Microsoft Entra ID PIM, you can reduce the risk of unauthorized access, meet compliance requirements, and improve the efficiency of your organization. I hope this post has helped you understand how to use Microsoft Entra ID PIM and how it can benefit your organization.</p>
+<p>If you want to play with Microsoft Enter ID PIM, you can use a test on a new tenant or the current one if you haven't used it before.</p>
+</div>
+</article>
 <article class="md-post md-post--excerpt">
 <header class="md-post__header">
 <nav class="md-post__authors md-typeset">
@@ -1713,75 +2096,8 @@ merge production
 </code></pre>
 </div>
 </article>
-<article class="md-post md-post--excerpt">
-<header class="md-post__header">
-<nav class="md-post__authors md-typeset">
-<span class="md-author">
-<img alt="Rafael Fernández" src="https://avatars.githubusercontent.com/u/39990341"/>
-</span>
-</nav>
-<div class="md-post__meta md-meta">
-<ul class="md-meta__list">
-<li class="md-meta__item">
-<time datetime="2024-04-30 00:00:00">April 30, 2024</time></li>
-<li class="md-meta__item">
-            in
-            
-              <a class="md-meta__link" href="../../category/devops/">DevOps</a></li>
-<li class="md-meta__item">
-            
-              2 min read
-            
-          </li>
-</ul>
-</div>
-</header>
-<div class="md-post__content md-typeset">
-<h2 id="repository-strategy-fork-vs-branch"><a class="toclink" href="../../2024/04/30/repository-strategy-fork-vs-branch/">Repository Strategy: Fork vs Branch</a></h2>
-<p>In this post, I will explain the different ways to contribute to a Git repository: Fork vs Branch.</p>
-<h3 id="fork"><a class="toclink" href="../../2024/04/30/repository-strategy-fork-vs-branch/#fork">Fork</a></h3>
-<p>A fork is a copy of a repository that you can make changes to without affecting the original repository. When you fork a repository, you create a new repository in your GitHub account that is a copy of the original repository.</p>
-<p>The benefits of forking a repository include:</p>
-<ul>
-<li><strong>Isolation</strong>: You can work on your changes without affecting the original repository.</li>
-<li><strong>Collaboration</strong>: You can make changes to the forked repository and submit a pull request to the original repository to merge your changes.  </li>
-<li><strong>Ownership</strong>: You have full control over the forked repository and can manage it as you see fit.</li>
-</ul>
-<p>The challenges of forking a repository include:</p>
-<ul>
-<li><strong>Synchronization</strong>: Keeping the forked repository up to date with the original repository can be challenging.</li>
-<li><strong>Conflicts</strong>: Multiple contributors working on the same codebase can lead to conflicts and merge issues.</li>
-<li><strong>Visibility</strong>: Changes made to the forked repository are not visible in the original repository until they are merged.</li>
-</ul>
-<h3 id="branch"><a class="toclink" href="../../2024/04/30/repository-strategy-fork-vs-branch/#branch">Branch</a></h3>
-<p>A branch is a parallel version of a repository that allows you to work on changes without affecting the main codebase. When you create a branch, you can make changes to the code and submit a pull request to merge the changes back into the main branch.</p>
-<p>The benefits of using branches include:</p>
-<ul>
-<li><strong>Flexibility</strong>: You can work on different features or bug fixes in separate branches without affecting each other.</li>
-<li><strong>Collaboration</strong>: You can work with other developers on the same codebase by creating branches and submitting pull requests.</li>
-<li><strong>Visibility</strong>: Changes made in branches are visible to other developers, making it easier to review and merge changes.</li>
-</ul>
-<p>The challenges of using branches include:</p>
-<ul>
-<li><strong>Conflicts</strong>: Multiple developers working on the same branch can lead to conflicts and merge issues.</li>
-<li><strong>Complexity</strong>: Managing multiple branches can be challenging, especially in large projects.</li>
-<li><strong>Versioning</strong>: Branches are versioned separately, making it harder to track changes across the project.</li>
-</ul>
-<h3 id="fork-vs-branch"><a class="toclink" href="../../2024/04/30/repository-strategy-fork-vs-branch/#fork-vs-branch">Fork vs Branch</a></h3>
-<p>The decision to fork or branch a repository depends on the project's requirements and the collaboration model.</p>
-<ul>
-<li>
-<p><strong>Fork</strong>: Use a fork when you want to work on changes independently of the original repository or when you want to contribute to a project that you do not have write access to.</p>
-</li>
-<li>
-<p><strong>Branch</strong>: Use a branch when you want to work on changes that will be merged back into the main codebase or when you want to collaborate with other developers on the same codebase.</p>
-</li>
-</ul>
-<p>For my IaC project with Terraform, I will use branches to work on different features and bug fixes and submit pull requests to merge the changes back into the main branch. This approach will allow me to collaborate with other developers and keep the codebase clean and organized.</p>
-</div>
-</article>
 <nav class="md-pagination">
-<a class="md-pagination__link" href="../../">1</a> <a class="md-pagination__link" href="../2/">2</a> <span class="md-pagination__current">3</span> <a class="md-pagination__link" href="../4/">4</a> <a class="md-pagination__link" href="../5/">5</a> <span class="md-pagination__dots">..</span> <a class="md-pagination__link" href="../7/">7</a>
+<a class="md-pagination__link" href="../../">1</a> <a class="md-pagination__link" href="../2/">2</a> <span class="md-pagination__current">3</span> <a class="md-pagination__link" href="../4/">4</a> <a class="md-pagination__link" href="../5/">5</a> <span class="md-pagination__dots">..</span> <a class="md-pagination__link" href="../8/">8</a>
 </nav>
 </div>
 </div>

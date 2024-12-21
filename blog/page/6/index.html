@@ -482,6 +482,13 @@
 </a>
 </li>
 <li class="md-nav__item">
+<a class="md-nav__link" href="../../category/visual-studio-code/">
+<span class="md-ellipsis">
+    Visual Studio Code
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
 <a class="md-nav__link" href="../../category/windows/">
 <span class="md-ellipsis">
     Windows
@@ -660,6 +667,147 @@
 <header class="md-typeset">
 <h1 id="blog">Blog</h1>
 </header>
+<article class="md-post md-post--excerpt">
+<header class="md-post__header">
+<nav class="md-post__authors md-typeset">
+<span class="md-author">
+<img alt="Rafael Fernández" src="https://avatars.githubusercontent.com/u/39990341"/>
+</span>
+</nav>
+<div class="md-post__meta md-meta">
+<ul class="md-meta__list">
+<li class="md-meta__item">
+<time datetime="2024-04-04 00:00:00">April 4, 2024</time></li>
+<li class="md-meta__item">
+            in
+            
+              <a class="md-meta__link" href="../../category/security/">Security</a></li>
+<li class="md-meta__item">
+            
+              4 min read
+            
+          </li>
+</ul>
+</div>
+</header>
+<div class="md-post__content md-typeset">
+<h2 id="privileged-access-management-pam-strategy-with-microsoft-entra-id-and-some-azure-services"><a class="toclink" href="../../2024/04/04/privileged-access-management-pam-strategy-with-microsoft-entra-id-and-some-azure-services/">Privileged Access Management (PAM) Strategy with Microsoft Entra ID and some Azure Services</a></h2>
+<p>Today, I'd like to share a brief of a recommended strategy for Privileged Access Management (PAM) of other vendors with Microsoft Entra ID and some Azure Services. This strategy is divided into seven phases:</p>
+<pre class="mermaid"><code>
+graph LR;
+    A[Phase 1: Set Policy] 
+    C[Phase 2: The Process of Discovery]
+    E[Phase 3: Protect Credentials]
+    G[Phase 4: Secure Privileged Access]
+    I[Phase 5: Least Privilege]
+    K[Phase 6: Control All Applications]
+    M[Phase 7: Detect and Respond]
+
+    A--&gt;C
+    C--&gt;E
+    E--&gt;G
+    G--&gt;I
+    I--&gt;K
+    K--&gt;M
+    M--&gt;A
+
+    classDef phase fill:#f9f,stroke:#333,stroke-width:2px;
+    class A,C,E,G,I,K,M phase;
+
+
+</code></pre>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>Be hybrid, be secure with a single control plane, use Azure ARC to inherit the same security and compliance policies across your on-premises, multi-cloud, and edge environments as in Azure.</p>
+</div>
+<h3 id="phase-1-set-policy"><a class="toclink" href="../../2024/04/04/privileged-access-management-pam-strategy-with-microsoft-entra-id-and-some-azure-services/#phase-1-set-policy"><strong>Phase 1: Set Policy</strong></a></h3>
+<p>The first step in any PAM strategy is to establish a clear policy. This policy should define who has access to what, when they have access, and what they can do with that access. It should also include guidelines for password management and multi-factor authentication. For example:</p>
+<ul>
+<li>Define clear access control policies.</li>
+<li>Establish guidelines for password management and multi-factor authentication.</li>
+<li>Regularly review and update the policy to reflect changes in the organization.</li>
+</ul>
+<p>How to implement this:</p>
+<ul>
+<li>Use <strong>Azure Policy</strong> to define and manage policies for your Azure environment.</li>
+<li>Use <strong>Microsoft Entra multifactor authentication</strong> for implementing multi-factor authentication.</li>
+</ul>
+<h3 id="phase-2-the-process-of-discovery"><a class="toclink" href="../../2024/04/04/privileged-access-management-pam-strategy-with-microsoft-entra-id-and-some-azure-services/#phase-2-the-process-of-discovery"><strong>Phase 2: The Process of Discovery</strong></a></h3>
+<p>In this phase, we identify all the privileged accounts across the organization. This includes service accounts, local administrative accounts, domain administrative accounts, emergency accounts, and application accounts. For example:</p>
+<ul>
+<li>Use automated tools to identify all privileged accounts across the organization.</li>
+<li>Regularly update the inventory of privileged accounts.</li>
+<li>Identify any accounts that are no longer in use and deactivate them.</li>
+</ul>
+<p>How to implement this:</p>
+<ul>
+<li>Use <strong>Microsoft Entra Privileged Identity Management</strong> to discover, restrict and monitor administrators and their access to resources and provide just-in-time access when needed.</li>
+</ul>
+<h3 id="phase-3-protect-credentials"><a class="toclink" href="../../2024/04/04/privileged-access-management-pam-strategy-with-microsoft-entra-id-and-some-azure-services/#phase-3-protect-credentials"><strong>Phase 3: Protect Credentials</strong></a></h3>
+<p>Once we've identified all privileged accounts, we need to ensure that these credentials are stored securely. This could involve using a secure vault, regularly rotating passwords, and using unique passwords for each account. For example:</p>
+<ul>
+<li>Store credentials in a secure vault.</li>
+<li>Implement regular password rotation.</li>
+<li>Use unique passwords for each account.</li>
+</ul>
+<p>How to implement this:</p>
+<ul>
+<li>Use <strong>Azure Key Vault</strong> to safeguard cryptographic keys and other secrets used by your apps and services and <a href="https://learn.microsoft.com/en-us/azure/key-vault/secrets/tutorial-rotation-dual?tabs=azure-cli">rotate secrets regularly</a>.</li>
+<li>Implement <strong>Microsoft Entra ID Password Protection</strong> to protect against weak passwords that can be easily guessed or cracked.</li>
+</ul>
+<h3 id="phase-4-secure-privileged-access"><a class="toclink" href="../../2024/04/04/privileged-access-management-pam-strategy-with-microsoft-entra-id-and-some-azure-services/#phase-4-secure-privileged-access"><strong>Phase 4: Secure Privileged Access</strong></a></h3>
+<p>Securing privileged access involves implementing controls to prevent unauthorized access. This could include limiting the number of privileged accounts, implementing least privilege, and using just-in-time access. For example:</p>
+<ul>
+<li>Limit the number of privileged accounts.</li>
+<li>Implement just-in-time access, where access is granted only for the duration of a task.</li>
+<li>Use session recording and monitoring for privileged access.</li>
+</ul>
+<p>How to implement this:</p>
+<ul>
+<li>Use <strong>Microsoft Entra ID Conditional Access</strong> to enforce controls on the access to apps in your environment based on specific conditions.</li>
+<li>Implement <strong>Microsoft Entra Privileged Identity Management</strong> for just-in-time access.</li>
+</ul>
+<h3 id="phase-5-least-privilege"><a class="toclink" href="../../2024/04/04/privileged-access-management-pam-strategy-with-microsoft-entra-id-and-some-azure-services/#phase-5-least-privilege"><strong>Phase 5: Least Privilege</strong></a></h3>
+<p>The principle of least privilege involves giving users the minimum levels of access — or permissions — they need to complete their job functions. By limiting the access rights of users, the risk of a security breach is reduced. For example:</p>
+<ul>
+<li>Implement role-based access control (RBAC) in Azure to grant the minimum necessary access to users.</li>
+<li>Regularly review user roles and access rights.</li>
+<li>Implement a process for revoking access when it's no longer needed.</li>
+</ul>
+<p>How to implement this:</p>
+<ul>
+<li>Implement <strong>Role-Based Access Control (RBAC)</strong> in Azure to grant the minimum necessary access to users.</li>
+<li>Use <strong>Microsoft Entra ID Access Reviews</strong> to efficiently manage group memberships, access to enterprise applications, and role assignments.</li>
+</ul>
+<h3 id="phase-6-control-all-applications"><a class="toclink" href="../../2024/04/04/privileged-access-management-pam-strategy-with-microsoft-entra-id-and-some-azure-services/#phase-6-control-all-applications"><strong>Phase 6: Control All Applications</strong></a></h3>
+<p>In this phase, we ensure that all applications, whether on-premises or in the cloud, are controlled and monitored. This includes implementing application control policies and monitoring application usage. For example:</p>
+<ul>
+<li>Implement application control policies that dictate what applications can be run on systems.</li>
+<li>Monitor application usage and block unauthorized applications.</li>
+<li>Regularly update and patch all applications to reduce vulnerabilities.</li>
+</ul>
+<p>How to implement this:</p>
+<ul>
+<li>Use <strong>Microsoft Entra Application Proxy</strong> to control and secure access to on-premises and cloud apps.</li>
+<li>Enable Change Tracking and Inventory in <strong>Azure Automation</strong> to track changes to your Azure VMs. Use desired state configuration to ensure that your VMs are configured correctly.</li>
+<li>Implement <strong>Microsoft Intune</strong> to manage and secure your devices and applications.</li>
+</ul>
+<h3 id="phase-7-detect-and-respond"><a class="toclink" href="../../2024/04/04/privileged-access-management-pam-strategy-with-microsoft-entra-id-and-some-azure-services/#phase-7-detect-and-respond"><strong>Phase 7: Detect and Respond</strong></a></h3>
+<p>The final phase involves setting up systems to detect and respond to any suspicious activity. This could involve setting up alerts for unusual activity, regularly auditing access logs, and having a response plan in place for when a breach occurs. For example:</p>
+<ul>
+<li>Set up alerts for unusual activity.</li>
+<li>Regularly audit access logs.</li>
+<li>Have a response plan in place for when a breach occurs, including steps for containment, eradication, and recovery.</li>
+</ul>
+<p>How to implement this:</p>
+<ul>
+<li>Use <strong>Microsoft Defender for Cloud</strong> for increased visibility into your security state and to detect and respond to threats.</li>
+<li>Implement <strong>Azure Sentinel</strong>, Microsoft's cloud-native SIEM solution, for intelligent security analytics.</li>
+</ul>
+<p>By following these seven phases, you can create a robust PAM strategy that protects your organization from security breaches and helps you maintain compliance with various regulations.</p>
+<p>Remember, a good PAM strategy is not a one-time effort but an ongoing process that needs to be regularly reviewed and updated. Microsoft and Azure services provide a robust set of tools to help you implement and manage your PAM strategy effectively.</p>
+</div>
+</article>
 <article class="md-post md-post--excerpt">
 <header class="md-post__header">
 <nav class="md-post__authors md-typeset">
@@ -1782,56 +1930,8 @@ initiative.
 </ul>
 </div>
 </article>
-<article class="md-post md-post--excerpt">
-<header class="md-post__header">
-<nav class="md-post__authors md-typeset">
-<span class="md-author">
-<img alt="Rafael Fernández" src="https://avatars.githubusercontent.com/u/39990341"/>
-</span>
-</nav>
-<div class="md-post__meta md-meta">
-<ul class="md-meta__list">
-<li class="md-meta__item">
-<time datetime="2023-12-01 00:00:00">December 1, 2023</time></li>
-<li class="md-meta__item">
-            in
-            
-              <a class="md-meta__link" href="../../category/azure-services/">Azure Services</a></li>
-<li class="md-meta__item">
-            
-              2 min read
-            
-          </li>
-</ul>
-</div>
-</header>
-<div class="md-post__content md-typeset">
-<h2 id="azure-functions"><a class="toclink" href="../../2023/12/01/azure-functions/">Azure Functions</a></h2>
-<h3 id="introduction"><a class="toclink" href="../../2023/12/01/azure-functions/#introduction">Introduction</a></h3>
-<p>Azure Functions is a serverless compute service provided by Microsoft Azure. This analysis aims to provide a comprehensive understanding of Azure Functions, its architecture, deployment, scalability, security, and more.</p>
-<h3 id="service-overview"><a class="toclink" href="../../2023/12/01/azure-functions/#service-overview">Service Overview</a></h3>
-<p>Azure Functions allows developers to run small pieces of code (called "functions") without worrying about application infrastructure. With Azure Functions, the cloud infrastructure provides all the up-to-date servers needed to keep your applications running at scale.</p>
-<h3 id="architecture-and-components"><a class="toclink" href="../../2023/12/01/azure-functions/#architecture-and-components">Architecture and Components</a></h3>
-<p>Azure Functions is built on an event-driven, compute-on-demand experience that extends the existing Azure application platform with capabilities to implement code triggered by events occurring in Azure or third-party services.</p>
-<h3 id="deployment-and-configuration"><a class="toclink" href="../../2023/12/01/azure-functions/#deployment-and-configuration">Deployment and Configuration</a></h3>
-<p>Azure Functions can be deployed using the Azure portal, Azure Resource Manager (ARM) templates, or the Azure Command-Line Interface (CLI). Configuration settings can be managed through environment variables and application settings.</p>
-<h3 id="scalability-and-performance"><a class="toclink" href="../../2023/12/01/azure-functions/#scalability-and-performance">Scalability and Performance</a></h3>
-<p>Azure Functions supports auto-scaling based on the load, ensuring optimal performance. It also provides features like load balancing to distribute incoming traffic across multiple instances of a function app.</p>
-<h3 id="security-and-compliance"><a class="toclink" href="../../2023/12/01/azure-functions/#security-and-compliance">Security and Compliance</a></h3>
-<p>Azure Functions provides built-in authentication and authorization support. It also supports network isolation with Azure Virtual Network (VNet) and encryption of data at rest and in transit. Azure Functions complies with key international and industry-specific compliance standards like ISO, SOC, and GDPR.</p>
-<h3 id="monitoring-and-logging"><a class="toclink" href="../../2023/12/01/azure-functions/#monitoring-and-logging">Monitoring and Logging</a></h3>
-<p>Azure Functions integrates with Azure Monitor and Application Insights for monitoring and logging. It provides real-time information on how your function app is performing and where your application is spending its time.</p>
-<h3 id="use-cases-and-examples"><a class="toclink" href="../../2023/12/01/azure-functions/#use-cases-and-examples">Use Cases and Examples</a></h3>
-<p>Azure Functions is commonly used for processing data, integrating systems, working with the internet-of-things (IoT), and building simple APIs and microservices.</p>
-<h3 id="best-practices-and-tips"><a class="toclink" href="../../2023/12/01/azure-functions/#best-practices-and-tips">Best Practices and Tips</a></h3>
-<p>When using Azure Functions, it's recommended to keep functions small and focused on a single task. Also, avoid long-running functions as they may cause unexpected timeout issues.</p>
-<p>If you are using long-running functions, consider using Durable Functions, which are an extension of Azure Functions that lets you write stateful functions in a serverless environment.</p>
-<h3 id="conclusion"><a class="toclink" href="../../2023/12/01/azure-functions/#conclusion">Conclusion</a></h3>
-<p>Azure Functions is a powerful service for running event-driven applications at scale. It offers a wide range of features and capabilities that can meet the needs of almost any application. We encourage you to explore Azure Functions further and see how it can benefit your applications.</p>
-</div>
-</article>
 <nav class="md-pagination">
-<a class="md-pagination__link" href="../../">1</a> <span class="md-pagination__dots">..</span> <a class="md-pagination__link" href="../4/">4</a> <a class="md-pagination__link" href="../5/">5</a> <span class="md-pagination__current">6</span> <a class="md-pagination__link" href="../7/">7</a>
+<a class="md-pagination__link" href="../../">1</a> <span class="md-pagination__dots">..</span> <a class="md-pagination__link" href="../4/">4</a> <a class="md-pagination__link" href="../5/">5</a> <span class="md-pagination__current">6</span> <a class="md-pagination__link" href="../7/">7</a> <a class="md-pagination__link" href="../8/">8</a>
 </nav>
 </div>
 </div>
