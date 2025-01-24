@@ -241,6 +241,13 @@
           </label>
 <ul class="md-nav__list" data-md-scrollfix="">
 <li class="md-nav__item">
+<a class="md-nav__link" href="../../2025/01/">
+<span class="md-ellipsis">
+    2025/01
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
 <a class="md-nav__link" href="../../2024/12/">
 <span class="md-ellipsis">
     2024/12
@@ -450,6 +457,13 @@
 <a class="md-nav__link" href="../../category/microsoft-entra-id/">
 <span class="md-ellipsis">
     Microsoft Entra ID
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../category/outlook/">
+<span class="md-ellipsis">
+    Outlook
   </span>
 </a>
 </li>
@@ -667,6 +681,140 @@
 <header class="md-typeset">
 <h1 id="blog">Blog</h1>
 </header>
+<article class="md-post md-post--excerpt">
+<header class="md-post__header">
+<nav class="md-post__authors md-typeset">
+<span class="md-author">
+<img alt="Rafael Fernández" src="https://avatars.githubusercontent.com/u/39990341"/>
+</span>
+</nav>
+<div class="md-post__meta md-meta">
+<ul class="md-meta__list">
+<li class="md-meta__item">
+<time datetime="2024-06-15 00:00:00">June 15, 2024</time></li>
+<li class="md-meta__item">
+            in
+            
+              <a class="md-meta__link" href="../../category/azure-services/">Azure Services</a></li>
+<li class="md-meta__item">
+            
+              3 min read
+            
+          </li>
+</ul>
+</div>
+</header>
+<div class="md-post__content md-typeset">
+<h2 id="tagging-best-practices-in-azure"><a class="toclink" href="../../2024/06/15/tagging-best-practices-in-azure/">Tagging best practices in Azure</a></h2>
+<p>In this post, I will show you some best practices for tagging resources in Azure.</p>
+<h3 id="what-are-tags"><a class="toclink" href="../../2024/06/15/tagging-best-practices-in-azure/#what-are-tags">What are tags?</a></h3>
+<p>Tags are key-value pairs that you can assign to your Azure resources to organize and manage them more effectively. Tags allow you to categorize resources in different ways, such as by environment, owner, or cost center, and to apply policies and automation based on these categories.</p>
+<p>If you don't know anything about tags, you can read the <a href="https://docs.microsoft.com/en-us/azure/azure-resource-manager/management/tag-resources">official documentation</a> to learn more about them.</p>
+<h3 id="why-use-tags"><a class="toclink" href="../../2024/06/15/tagging-best-practices-in-azure/#why-use-tags">Why use tags?</a></h3>
+<p>There are several reasons to use tags:</p>
+<ul>
+<li>
+<p><strong>Organization</strong>: Tags allow you to organize your resources in a way that makes sense for your organization. You can use tags to group resources by environment, project, or department, making it easier to manage and monitor them.</p>
+</li>
+<li>
+<p><strong>Cost management</strong>: Tags allow you to track and manage costs more effectively. You can use tags to identify resources that are part of a specific project or department, and to allocate costs accordingly.</p>
+</li>
+<li>
+<p><strong>Automation</strong>: Tags allow you to automate tasks based on resource categories. You can use tags to apply policies, trigger alerts, or enforce naming conventions, making it easier to manage your resources at scale.</p>
+</li>
+</ul>
+<h3 id="best-practices-for-tagging-resources-in-azure"><a class="toclink" href="../../2024/06/15/tagging-best-practices-in-azure/#best-practices-for-tagging-resources-in-azure">Best practices for tagging resources in Azure</a></h3>
+<p>Here are some best practices for tagging resources in Azure:</p>
+<ul>
+<li>
+<p><strong>Use consistent naming conventions</strong>: Define a set of standard tags that you will use across all your resources. This will make it easier to search for and manage resources, and to apply policies and automation consistently.</p>
+</li>
+<li>
+<p><strong>Apply tags at resource creation</strong>: Apply tags to resources when you create them, rather than adding them later. This will ensure that all resources are tagged correctly from the start, and will help you avoid missing or incorrect tags.</p>
+</li>
+<li>
+<p><strong>Use tags to track costs</strong>: Use tags to track costs by project, department, or environment. This will help you allocate costs more effectively, and will make it easier to identify resources that are not being used or are costing more than expected.</p>
+</li>
+<li>
+<p><strong>Define tags by hierarchy</strong>: Define tags in a hierarchy that makes sense for your organization, from more general at level subscription to more specific at resource group level. </p>
+</li>
+<li>
+<p><strong>Use inherited tags</strong>: Use inherited tags to apply tags to resources automatically based on their parent resources. This will help you ensure that all resources are tagged consistently, and will reduce the risk of missing or incorrect tags. Exist Azure Policy to enforce inherited tags for example, you can check all in   <a href="https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/tag-policies#policy-definitions">Assign policy definitions for tag compliance</a></p>
+</li>
+<li>
+<p><strong>Don't use tags for policy filtering</strong>: If you use Azure Policy, it's highly recommended not to use tag filtering in your policy rules when the policy relates to security setting, when you use tags to filter, resources without tag appear Compliance. Azure Policy exemptions or Azure Policy exclusions are recommended.</p>
+</li>
+<li>
+<p><strong>Don't use tags for replace naming convention gaps</strong>: Tags are not a replacement for naming conventions. Use tags to categorize resources, and use naming conventions to identify resources uniquely.</p>
+</li>
+<li>
+<p><strong>Use tags for automation</strong>: Use tags to trigger automation tasks, such as scaling, backup, or monitoring. You can use tags to define policies that enforce specific actions based on resource categories.</p>
+</li>
+<li>
+<p><strong>Don't go crazy adding tags</strong>: Don't add too many tags to your resources. Keep it simple and use tags that are meaningful and useful. Too many tags can make it difficult to manage. You can begin with a small set of tags and expand as needed, for example: <a href="https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/ready/azure-best-practices/resource-tagging#minimum-suggested-tags">Minimum Suggested Tags</a></p>
+</li>
+<li>
+<p><strong>Not all Azure services support tags</strong>: Keep in mind that not all Azure services support tags. You can check in the <a href="https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/tag-support">Tag support for Azure resources</a> to see which services support tags.</p>
+</li>
+</ul>
+<h3 id="conclusion"><a class="toclink" href="../../2024/06/15/tagging-best-practices-in-azure/#conclusion">Conclusion</a></h3>
+<p>By using tags, you can organize and manage your resources more effectively, track and manage costs more efficiently, and automate tasks based on resource categories. I hope this post has given you a good introduction to tagging best practices in Azure and how you can use tags to optimize your cloud environment.</p>
+</div>
+</article>
+<article class="md-post md-post--excerpt">
+<header class="md-post__header">
+<nav class="md-post__authors md-typeset">
+<span class="md-author">
+<img alt="Rafael Fernández" src="https://avatars.githubusercontent.com/u/39990341"/>
+</span>
+</nav>
+<div class="md-post__meta md-meta">
+<ul class="md-meta__list">
+<li class="md-meta__item">
+<time datetime="2024-06-13 00:00:00">June 13, 2024</time></li>
+<li class="md-meta__item">
+            in
+            
+              <a class="md-meta__link" href="../../category/azure-services/">Azure Services</a>, 
+              <a class="md-meta__link" href="../../category/security/">Security</a></li>
+<li class="md-meta__item">
+            
+              2 min read
+            
+          </li>
+</ul>
+</div>
+</header>
+<div class="md-post__content md-typeset">
+<h2 id="restrict-managed-disks-from-being-imported-or-exported"><a class="toclink" href="../../2024/06/13/restrict-managed-disks-from-being-imported-or-exported/">Restrict managed disks from being imported or exported</a></h2>
+<p>In this post, I will show you how to restrict managed disks from being imported or exported in Azure.</p>
+<h3 id="what-are-managed-disks"><a class="toclink" href="../../2024/06/13/restrict-managed-disks-from-being-imported-or-exported/#what-are-managed-disks">What are managed disks?</a></h3>
+<p>Azure Managed Disks are block-level storage volumes that are managed by Azure and used with Azure Virtual Machines. Managed Disks are designed for high availability and durability, and they provide a simple and scalable way to manage your storage.</p>
+<p>If you don't know anything about Azue Managed Disks, grab a cup of coffee( it will take you a while), you can read the <a href="https://docs.microsoft.com/en-us/azure/virtual-machines/managed-disks-overview">official documentation</a> to learn more about them.</p>
+<h3 id="why-restrict-managed-disks-from-being-imported-or-exported"><a class="toclink" href="../../2024/06/13/restrict-managed-disks-from-being-imported-or-exported/#why-restrict-managed-disks-from-being-imported-or-exported">Why restrict managed disks from being imported or exported?</a></h3>
+<p>There are several reasons to restrict managed disks from being imported or exported:</p>
+<ul>
+<li><strong>Security</strong>: By restricting managed disks from being imported or exported, you can reduce the risk of unauthorized access to your data.</li>
+<li><strong>Compliance</strong>: By restricting managed disks from being imported or exported, you can help ensure that your organization complies with data protection regulations.</li>
+</ul>
+<h3 id="how-to-restrict-managed-disks-from-being-imported-or-exported"><a class="toclink" href="../../2024/06/13/restrict-managed-disks-from-being-imported-or-exported/#how-to-restrict-managed-disks-from-being-imported-or-exported">How to restrict managed disks from being imported or exported</a></h3>
+<h4 id="at-deployment-time"><a class="toclink" href="../../2024/06/13/restrict-managed-disks-from-being-imported-or-exported/#at-deployment-time">At deployment time</a></h4>
+<p>An example with azcli:</p>
+<h5 id="create-a-managed-disk-with-public-network-access-disabled"><a class="toclink" href="../../2024/06/13/restrict-managed-disks-from-being-imported-or-exported/#create-a-managed-disk-with-public-network-access-disabled">Create a managed disk with public network access disabled</a></h5>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a href="#__codelineno-3-1" id="__codelineno-3-1" name="__codelineno-3-1"></a>## Create a managed disk with public network access disabled
+</span><span id="__span-3-2"><a href="#__codelineno-3-2" id="__codelineno-3-2" name="__codelineno-3-2"></a>az disk create --resource-group myResourceGroup --name myDisk --size-gb 128 --location eastus --sku Standard_LRS --no-wait --public-network-access disabled 
+</span></code></pre></div>
+<h5 id="create-a-managed-disk-with-public-network-access-disabled-and-private-endpoint-enabled"><a class="toclink" href="../../2024/06/13/restrict-managed-disks-from-being-imported-or-exported/#create-a-managed-disk-with-public-network-access-disabled-and-private-endpoint-enabled">Create a managed disk with public network access disabled and private endpoint enabled</a></h5>
+<p>Follow <a href="https://learn.microsoft.com/en-us/azure/virtual-machines/linux/disks-export-import-private-links-cli#log-in-into-your-subscription-and-set-your-variables">Azure CLI - Restrict import/export access for managed disks with Private Links</a></p>
+<h4 id="at-scale"><a class="toclink" href="../../2024/06/13/restrict-managed-disks-from-being-imported-or-exported/#at-scale">At Scale</a></h4>
+<p>If you want to restrict managed disks from being imported or exported, you can use Azure Policy to enforce this restriction. Azure Policy is a service in Azure that you can use to create, assign, and manage policies that enforce rules and effects over your resources. By using Azure Policy, you can ensure that your resources comply with your organization's standards and service-level agreements.</p>
+<p>To restrict managed disks from being imported or exported using Azure Policy, you can use or create a policy definition that specifies the conditions under which managed disks can be imported or exported. You can then assign this policy definition to a scope, such as a management group, subscription, or resource group, to enforce the restriction across your resources.</p>
+<p>In this case we have a Built-in policy definition that restricts managed disks from being imported or exported <a href="https://portal.azure.com/#blade/Microsoft_Azure_Policy/PolicyDetailBlade/definitionId/%2Fproviders%2FMicrosoft.Authorization%2FpolicyDefinitions%2F582bd7a6-a5f6-4dc6-b9dc-9cb81fe0d4c5">Configure disk access resources with private endpoints</a></p>
+<h3 id="conclusion"><a class="toclink" href="../../2024/06/13/restrict-managed-disks-from-being-imported-or-exported/#conclusion">Conclusion</a></h3>
+<p>In this post, I showed you how to restrict managed disks from being imported or exported in Azure. By restricting managed disks from being imported or exported, you can reduce the risk of unauthorized access to your data and help ensure that your organization complies with data protection regulations. </p>
+<p>Curiosly, restrict managed disks from being imported or exported, it's not a compliance check in the Microsoft cloud security benchmark but it's a good practice to follow.</p>
+</div>
+</article>
 <article class="md-post md-post--excerpt">
 <header class="md-post__header">
 <nav class="md-post__authors md-typeset">
@@ -1114,7 +1262,7 @@
 <p>To set up a VNet data gateway, follow these steps:</p>
 <h4 id="register-microsoftpowerplatform-as-a-resource-provider"><a class="toclink" href="../../2024/06/11/securely-connect-power-bi-to-data-sources-with-a-vnet-data-gateway/#register-microsoftpowerplatform-as-a-resource-provider">Register Microsoft.PowerPlatform as a resource provider</a></h4>
 <p>Before you can create a VNet data gateway, you need to register the Microsoft.PowerPlatform resource provider. This can be done using the Azure portal or the Azure CLI.</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-6-1"><a href="#__codelineno-6-1" id="__codelineno-6-1" name="__codelineno-6-1"></a>az provider register --namespace Microsoft.PowerPlatform
+<div class="language-text highlight"><pre><span></span><code><span id="__span-4-1"><a href="#__codelineno-4-1" id="__codelineno-4-1" name="__codelineno-4-1"></a>az provider register --namespace Microsoft.PowerPlatform
 </span></code></pre></div>
 <h4 id="associate-the-subnet-to-microsoft-power-platform"><a class="toclink" href="../../2024/06/11/securely-connect-power-bi-to-data-sources-with-a-vnet-data-gateway/#associate-the-subnet-to-microsoft-power-platform">Associate the subnet to Microsoft Power Platform</a></h4>
 <p>Create a VNet in your Azure subscription and a subnet where the VNet data gateway will be deployed. Next, you need to delegate subnet to service <strong>Microsoft.PowerPlatform/vnetaccesslinks</strong>. </p>
@@ -1127,15 +1275,15 @@
 </ul>
 </div>
 <p>This can be done using the Azure portal or the Azure CLI.</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-7-1"><a href="#__codelineno-7-1" id="__codelineno-7-1" name="__codelineno-7-1"></a># Create a VNet and address prefix 10.0.0.0/24
-</span><span id="__span-7-2"><a href="#__codelineno-7-2" id="__codelineno-7-2" name="__codelineno-7-2"></a>az network vnet create --name MyVNet --resource-group MyResourceGroup --location eastus --address-prefixes 10.0.0.0/24
-</span><span id="__span-7-3"><a href="#__codelineno-7-3" id="__codelineno-7-3" name="__codelineno-7-3"></a>
-</span><span id="__span-7-4"><a href="#__codelineno-7-4" id="__codelineno-7-4" name="__codelineno-7-4"></a>
-</span><span id="__span-7-5"><a href="#__codelineno-7-5" id="__codelineno-7-5" name="__codelineno-7-5"></a># Create a Netwrok Security Group
-</span><span id="__span-7-6"><a href="#__codelineno-7-6" id="__codelineno-7-6" name="__codelineno-7-6"></a>az network nsg create --name MyNsg --resource-group MyResourceGroup --location eastus
-</span><span id="__span-7-7"><a href="#__codelineno-7-7" id="__codelineno-7-7" name="__codelineno-7-7"></a>
-</span><span id="__span-7-8"><a href="#__codelineno-7-8" id="__codelineno-7-8" name="__codelineno-7-8"></a># Create a subnet with delegation to Microsoft.PowerPlatform/vnetaccesslinks and associate the NSG
-</span><span id="__span-7-9"><a href="#__codelineno-7-9" id="__codelineno-7-9" name="__codelineno-7-9"></a>az network vnet subnet create --name MySubnet --vnet-name MyVNet --resource-group MyResourceGroup --address-prefixes 10.0.0.1/27 --network-security-group MyNsg --delegations Microsoft.PowerPlatform/vnetaccesslinks
+<div class="language-text highlight"><pre><span></span><code><span id="__span-5-1"><a href="#__codelineno-5-1" id="__codelineno-5-1" name="__codelineno-5-1"></a># Create a VNet and address prefix 10.0.0.0/24
+</span><span id="__span-5-2"><a href="#__codelineno-5-2" id="__codelineno-5-2" name="__codelineno-5-2"></a>az network vnet create --name MyVNet --resource-group MyResourceGroup --location eastus --address-prefixes 10.0.0.0/24
+</span><span id="__span-5-3"><a href="#__codelineno-5-3" id="__codelineno-5-3" name="__codelineno-5-3"></a>
+</span><span id="__span-5-4"><a href="#__codelineno-5-4" id="__codelineno-5-4" name="__codelineno-5-4"></a>
+</span><span id="__span-5-5"><a href="#__codelineno-5-5" id="__codelineno-5-5" name="__codelineno-5-5"></a># Create a Netwrok Security Group
+</span><span id="__span-5-6"><a href="#__codelineno-5-6" id="__codelineno-5-6" name="__codelineno-5-6"></a>az network nsg create --name MyNsg --resource-group MyResourceGroup --location eastus
+</span><span id="__span-5-7"><a href="#__codelineno-5-7" id="__codelineno-5-7" name="__codelineno-5-7"></a>
+</span><span id="__span-5-8"><a href="#__codelineno-5-8" id="__codelineno-5-8" name="__codelineno-5-8"></a># Create a subnet with delegation to Microsoft.PowerPlatform/vnetaccesslinks and associate the NSG
+</span><span id="__span-5-9"><a href="#__codelineno-5-9" id="__codelineno-5-9" name="__codelineno-5-9"></a>az network vnet subnet create --name MySubnet --vnet-name MyVNet --resource-group MyResourceGroup --address-prefixes 10.0.0.1/27 --network-security-group MyNsg --delegations Microsoft.PowerPlatform/vnetaccesslinks
 </span></code></pre></div>
 <h4 id="create-a-vnet-data-gateway"><a class="toclink" href="../../2024/06/11/securely-connect-power-bi-to-data-sources-with-a-vnet-data-gateway/#create-a-vnet-data-gateway">Create a VNet data gateway</a></h4>
 <div class="admonition note">
@@ -1737,363 +1885,6 @@ MFA adds an extra layer of security by requiring users to provide at least two f
 <p>In this example, the <code>network_interfaces</code> variable defines a list of objects representing network interfaces with three attributes: <code>name</code>, <code>subnet</code>, and <code>security_group</code>. The dynamic block iterates over the list of network interfaces and creates a network interface block for each object in the list.</p>
 <h3 id="conclusion"><a class="toclink" href="../../2024/05/03/nested-structures-with-optional-attributes-and-dynamic-blocks/#conclusion">Conclusion</a></h3>
 <p>In this post, I explained how to define nested structures with optional attributes and use dynamic blocks in Terraform. Nested structures are useful for representing complex data types, while optional attributes allow you to provide default values for attributes that can be overridden by users. Dynamic blocks are useful for creating multiple instances of a block based on a list or map of values. By combining these features, you can create flexible and reusable configurations in Terraform.</p>
-</div>
-</article>
-<article class="md-post md-post--excerpt">
-<header class="md-post__header">
-<nav class="md-post__authors md-typeset">
-<span class="md-author">
-<img alt="Rafael Fernández" src="https://avatars.githubusercontent.com/u/39990341"/>
-</span>
-</nav>
-<div class="md-post__meta md-meta">
-<ul class="md-meta__list">
-<li class="md-meta__item">
-<time datetime="2024-05-02 00:00:00">May 2, 2024</time></li>
-<li class="md-meta__item">
-            in
-            
-              <a class="md-meta__link" href="../../category/azure-services/">Azure Services</a></li>
-<li class="md-meta__item">
-            
-              2 min read
-            
-          </li>
-</ul>
-</div>
-</header>
-<div class="md-post__content md-typeset">
-<h2 id="azure-container-registry-artifact-cache"><a class="toclink" href="../../2024/05/02/azure-container-registry-artifact-cache/">Azure Container Registry: Artifact Cache</a></h2>
-<p>Azure Container Registry is a managed, private Docker registry service provided by Microsoft. It allows you to build, store, and manage container images and artifacts in a secure environment. </p>
-<h3 id="what-is-artifact-caching"><a class="toclink" href="../../2024/05/02/azure-container-registry-artifact-cache/#what-is-artifact-caching">What is Artifact Caching?</a></h3>
-<p>Artifact Cache is a feature in Azure Container Registry that allows users to cache container images in a private container registry. It is available in Basic, Standard, and Premium service tiers.</p>
-<h4 id="benefits-of-artifact-cache"><a class="toclink" href="../../2024/05/02/azure-container-registry-artifact-cache/#benefits-of-artifact-cache">Benefits of Artifact Cache</a></h4>
-<ul>
-<li><strong>Reliable pull operations</strong>: Faster pulls of container images are achievable by caching the container images in ACR.</li>
-<li><strong>Private networks</strong>: Cached registries are available on private networks.</li>
-<li><strong>Ensuring upstream content is delivered</strong>: Artifact Cache allows users to pull images from the local ACR instead of the upstream registry.</li>
-</ul>
-<h3 id="limitations"><a class="toclink" href="../../2024/05/02/azure-container-registry-artifact-cache/#limitations">Limitations</a></h3>
-<p>Cache will only occur after at least one image pull is complete on the available container image</p>
-<h3 id="how-to-use-artifact-cache-in-azure-container-registry-without-credential"><a class="toclink" href="../../2024/05/02/azure-container-registry-artifact-cache/#how-to-use-artifact-cache-in-azure-container-registry-without-credential">How to Use Artifact Cache in Azure Container Registry without credential?</a></h3>
-<p>Let's take a look at how you can implement artifact caching in Azure Container Registry.</p>
-<h4 id="step-1-create-a-cache-rule"><a class="toclink" href="../../2024/05/02/azure-container-registry-artifact-cache/#step-1-create-a-cache-rule">Step 1: Create a Cache Rule</a></h4>
-<p>The first step is to create a cache rule in your Azure Container Registry. This rule specifies the source image that should be cached and the target image that will be stored in the cache.</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-5-1"><a href="#__codelineno-5-1" id="__codelineno-5-1" name="__codelineno-5-1"></a>az<span class="w"> </span>acr<span class="w"> </span>cache<span class="w"> </span>create<span class="w"> </span>-r<span class="w"> </span>MyRegistry<span class="w"> </span>-n<span class="w"> </span>MyRule<span class="w"> </span>-s<span class="w"> </span>docker.io/library/ubuntu<span class="w"> </span>-t<span class="w"> </span>ubuntu
-</span></code></pre></div>
-<p>Check the cache rule:</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-6-1"><a href="#__codelineno-6-1" id="__codelineno-6-1" name="__codelineno-6-1"></a>az<span class="w"> </span>acr<span class="w"> </span>cache<span class="w"> </span>show<span class="w"> </span>-r<span class="w"> </span>MyRegistry<span class="w"> </span>-n<span class="w"> </span>MyRule
-</span></code></pre></div>
-<h4 id="step-2-pull-the-image"><a class="toclink" href="../../2024/05/02/azure-container-registry-artifact-cache/#step-2-pull-the-image">Step 2: Pull the Image</a></h4>
-<p>Next, you need to pull the image from the source registry to the cache. This will download the image and store it in the cache for future use.</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-7-1"><a href="#__codelineno-7-1" id="__codelineno-7-1" name="__codelineno-7-1"></a>docker<span class="w"> </span>pull<span class="w"> </span>myregistry.azurecr.io/hello-world:latest
-</span></code></pre></div>
-<h4 id="step-3-clean-up-the-resources"><a class="toclink" href="../../2024/05/02/azure-container-registry-artifact-cache/#step-3-clean-up-the-resources">Step 3: Clean up the resources</a></h4>
-<p>Finally, you can clean up the resources by deleting the cache rule.</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-8-1"><a href="#__codelineno-8-1" id="__codelineno-8-1" name="__codelineno-8-1"></a>az<span class="w"> </span>acr<span class="w"> </span>cache<span class="w"> </span>delete<span class="w"> </span>-r<span class="w"> </span>MyRegistry<span class="w"> </span>-n<span class="w"> </span>MyRule
-</span></code></pre></div>
-<p>If you need to check other rules, you can use the following command:</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-9-1"><a href="#__codelineno-9-1" id="__codelineno-9-1" name="__codelineno-9-1"></a>az<span class="w"> </span>acr<span class="w"> </span>cache<span class="w"> </span>list<span class="w"> </span>-r<span class="w"> </span>MyRegistry
-</span></code></pre></div>
-<h3 id="conclusion"><a class="toclink" href="../../2024/05/02/azure-container-registry-artifact-cache/#conclusion">Conclusion</a></h3>
-<p>Azure Container Registry's Artifact Cache feature provides a convenient way to cache container images in a private registry, improving pull performance and reducing network traffic. By following the steps outlined in this article, you can easily set up and use artifact caching in your Azure Container Registry.</p>
-<p>If you need to use the cache with authentication, you can use the following article: <a href="https://learn.microsoft.com/en-us/azure/container-registry/tutorial-enable-artifact-cache-auth-cli">Enable Artifact Cache with authentication</a>.</p>
-<p>For more detailed information, please visit the <a href="https://learn.microsoft.com/en-us/azure/container-registry/tutorial-artifact-cache">official tutorial</a> on the Microsoft Azure website.</p>
-<h3 id="references"><a class="toclink" href="../../2024/05/02/azure-container-registry-artifact-cache/#references">References</a></h3>
-<ul>
-<li><a href="https://docs.microsoft.com/en-us/azure/container-registry/">Azure Container Registry Documentation</a></li>
-<li><a href="https://learn.microsoft.com/en-us/azure/container-registry/tutorial-artifact-cache">Azure Container Artifact Cache Overview</a></li>
-</ul>
-</div>
-</article>
-<article class="md-post md-post--excerpt">
-<header class="md-post__header">
-<nav class="md-post__authors md-typeset">
-<span class="md-author">
-<img alt="Rafael Fernández" src="https://avatars.githubusercontent.com/u/39990341"/>
-</span>
-</nav>
-<div class="md-post__meta md-meta">
-<ul class="md-meta__list">
-<li class="md-meta__item">
-<time datetime="2024-05-01 00:00:00">May 1, 2024</time></li>
-<li class="md-meta__item">
-            in
-            
-              <a class="md-meta__link" href="../../category/devops/">DevOps</a></li>
-<li class="md-meta__item">
-            
-              6 min read
-            
-          </li>
-</ul>
-</div>
-</header>
-<div class="md-post__content md-typeset">
-<h2 id="repository-strategy-branching-strategy"><a class="toclink" href="../../2024/05/01/repository-strategy-branching-strategy/">Repository Strategy: Branching Strategy</a></h2>
-<p>Once we have decided that we will use branches, it is time to define a strategy, so that all developers can work in a coordinated way.</p>
-<p>Some of the best known strategies are:</p>
-<ul>
-<li><strong>Gitflow</strong>: It is a branching model designed around the project release. It is a strict branching model that assigns very specific roles to different branches.</li>
-<li><strong>Feature Branch</strong>: It is a strategy where each feature is developed in a separate branch. This strategy is simple and easy to understand.</li>
-<li><strong>Trunk-Based Development</strong>: It is a strategy where all developers work on a single branch. This strategy is simple and easy to understand.</li>
-<li><strong>GitHub Flow</strong>: It is a strategy where all developers work on a single branch. This strategy is simple and easy to understand.</li>
-<li><strong>GitLab Flow</strong>: It is a strategy where all developers work on a single branch. This strategy is simple and easy to understand.</li>
-<li><strong>Microsoft Flow</strong>: It is a strategy where all developers work on a single branch. This strategy is simple and easy to understand.</li>
-</ul>
-<h3 id="gitflow"><a class="toclink" href="../../2024/05/01/repository-strategy-branching-strategy/#gitflow">Gitflow</a></h3>
-<p>Gitflow is a branching model designed around the project release. It is a strict branching model that assigns very specific roles to different branches.</p>
-<p>The Gitflow strategy is based on the following branches:</p>
-<ul>
-<li><strong>main</strong>: It is the main branch of the project. It contains the code that is in production.</li>
-<li><strong>develop</strong>: It is the branch where the code is integrated before being released to production.</li>
-</ul>
-<p>The Gitflow strategy is based on the following types of branches:</p>
-<ul>
-<li><strong>feature</strong>: It is the branch where the code for a new feature is developed.</li>
-<li><strong>release</strong>: It is the branch where the code is prepared for release.</li>
-<li><strong>hotfix</strong>: It is the branch where the code is developed to fix a bug in production.</li>
-</ul>
-<p>The Gitflow strategy is based on the following rules:</p>
-<ul>
-<li><strong>Feature branches are created from the develop branch</strong>.</li>
-<li><strong>Feature branches are merged into the develop branch</strong>.</li>
-<li><strong>Release branches are created from the develop branch</strong>.</li>
-<li><strong>Release branches are merged into the main and develop branches</strong>.</li>
-<li><strong>Hotfix branches are created from the main branch</strong>.</li>
-<li><strong>Hotfix branches are merged into the main and develop branches</strong>.</li>
-</ul>
-<p>The Gitflow strategy is based on the following workflow:</p>
-<ol>
-<li><strong>Developers create a feature branch from the develop branch</strong>.</li>
-<li><strong>Developers develop the code for the new feature in the feature branch</strong>.</li>
-<li><strong>Developers merge the feature branch into the develop branch</strong>.</li>
-<li><strong>Developers create a release branch from the develop branch</strong>.</li>
-<li><strong>Developers prepare the code for release in the release branch</strong>.</li>
-<li><strong>Developers merge the release branch into the main and develop branches</strong>.</li>
-<li><strong>Developers create a hotfix branch from the main branch</strong>.</li>
-<li><strong>Developers fix the bug in the hotfix branch</strong>.</li>
-<li><strong>Developers merge the hotfix branch into the main and develop branches</strong>.</li>
-</ol>
-<pre class="mermaid"><code>gitGraph:
-options
-{
-    "nodeSpacing": 150,
-    "nodeRadius": 10
-}
-end
-commit
-branch develop
-checkout develop
-commit
-commit
-branch feature_branch
-checkout feature_branch
-commit
-commit
-checkout develop
-merge feature_branch
-commit
-branch release_branch
-checkout release_branch
-commit
-commit
-checkout develop
-merge release_branch
-checkout main
-merge release_branch
-commit
-branch hotfix_branch
-checkout hotfix_branch
-commit
-commit
-checkout develop
-merge hotfix_branch
-checkout main
-merge hotfix_branch
-</code></pre>
-<p>The Gitflow strategy have the following advantages:</p>
-<ul>
-<li><strong>Isolation</strong>: Each feature is developed in a separate branch, isolating it from other features.</li>
-<li><strong>Collaboration</strong>: Developers can work on different features at the same time without affecting each other.</li>
-<li><strong>Stability</strong>: The main branch contains the code that is in production, ensuring that it is stable and reliable.</li>
-</ul>
-<p>The Gitflow strategy is based on the following disadvantages:</p>
-<ul>
-<li><strong>Complexity</strong>: The Gitflow strategy is complex and can be difficult to understand for new developers.</li>
-<li><strong>Overhead</strong>: The Gitflow strategy requires developers to create and manage multiple branches, which can be time-consuming.</li>
-</ul>
-<h3 id="feature-branch-workflow"><a class="toclink" href="../../2024/05/01/repository-strategy-branching-strategy/#feature-branch-workflow">Feature Branch Workflow</a></h3>
-<p>Feature Branch is a strategy where each feature is developed in a separate branch. This strategy is simple and easy to understand.</p>
-<p>The Feature Branch strategy is based on the following rules:</p>
-<ul>
-<li><strong>Developers create a feature branch from the main branch</strong>.</li>
-<li><strong>Developers develop the code for the new feature in the feature branch</strong>.</li>
-<li><strong>Developers merge the feature branch into the main branch</strong>.</li>
-</ul>
-<p>The Feature Branch strategy is based on the following workflow:</p>
-<ol>
-<li><strong>Developers create a feature branch from the main branch</strong>.</li>
-<li><strong>Developers develop the code for the new feature in the feature branch</strong>.</li>
-<li><strong>Developers merge the feature branch into the main branch</strong>.</li>
-</ol>
-<pre class="mermaid"><code>gitGraph:
-options
-{
-    "nodeSpacing": 150,
-    "nodeRadius": 10
-}
-end
-commit
-checkout main
-commit
-commit
-branch feature_branch
-checkout feature_branch
-commit
-commit
-checkout main
-merge feature_branch
-</code></pre>
-<p>The Feature Branch strategy is based on the following advantages:</p>
-<ul>
-<li><strong>Simplicity</strong>: The Feature Branch strategy is simple and easy to understand.</li>
-<li><strong>Flexibility</strong>: Developers can work on different features at the same time without affecting each other.</li>
-<li><strong>Visibility</strong>: Changes made in feature branches are visible to other developers, making it easier to review and merge changes.</li>
-</ul>
-<p>The Feature Branch strategy is based on the following disadvantages:</p>
-<ul>
-<li><strong>Conflicts</strong>: Multiple developers working on the same feature can lead to conflicts and merge issues.</li>
-<li><strong>Complexity</strong>: Managing multiple feature branches can be challenging, especially in large projects.</li>
-</ul>
-<h3 id="trunk-based-development"><a class="toclink" href="../../2024/05/01/repository-strategy-branching-strategy/#trunk-based-development">Trunk-Based Development</a></h3>
-<p>The Trunk-Based Development strategy is based on the following rules:</p>
-<ul>
-<li><strong>Developers work on a single branch</strong>.</li>
-<li><strong>Developers create feature flags to hide unfinished features</strong>.</li>
-<li><strong>Developers merge the code into the main branch when it is ready</strong>.</li>
-</ul>
-<p>The Trunk-Based Development strategy is based on the following workflow:</p>
-<ol>
-<li><strong>Developers work on a single branch</strong>.</li>
-<li><strong>Developers create feature flags to hide unfinished features</strong>.</li>
-<li><strong>Developers merge the code into the main branch when it is ready</strong>.</li>
-</ol>
-<pre class="mermaid"><code>gitGraph:
-options
-{
-    "nodeSpacing": 150,
-    "nodeRadius": 10
-}
-end
-commit
-checkout main
-commit
-commit tag:"v1.0.0"
-commit
-commit
-commit tag:"v2.0.0"
-</code></pre>
-<p>The Trunk-Based Development strategy is based on the following advantages:</p>
-<ul>
-<li><strong>Simplicity</strong>: The Trunk-Based Development strategy is simple and easy to understand.</li>
-<li><strong>Flexibility</strong>: Developers can work on different features at the same time without affecting each other.</li>
-<li><strong>Visibility</strong>: Changes made in the main branch are visible to other developers, making it easier to review and merge changes.</li>
-</ul>
-<p>The Trunk-Based Development strategy is based on the following disadvantages:</p>
-<ul>
-<li><strong>Conflicts</strong>: Multiple developers working on the same codebase can lead to conflicts and merge issues.</li>
-<li><strong>Complexity</strong>: Managing feature flags can be challenging, especially in large projects.</li>
-</ul>
-<h3 id="github-flow"><a class="toclink" href="../../2024/05/01/repository-strategy-branching-strategy/#github-flow">GitHub Flow</a></h3>
-<p>GitHub Flow is a strategy where all developers work on a single branch. This strategy is simple and easy to understand.</p>
-<p>The GitHub Flow strategy is based on the following rules:</p>
-<ul>
-<li><strong>Developers work on a single branch</strong>.</li>
-<li><strong>Developers create feature branches to work on new features</strong>.</li>
-<li><strong>Developers merge the feature branches into the main branch when they are ready</strong>.</li>
-</ul>
-<p>The GitHub Flow strategy is based on the following workflow:</p>
-<ol>
-<li><strong>Developers work on a single branch</strong>.</li>
-<li><strong>Developers create a feature branch from the main branch</strong>.</li>
-<li><strong>Developers develop the code for the new feature in the feature branch</strong>.</li>
-<li><strong>Developers merge the feature branch into the main branch</strong>.</li>
-</ol>
-<pre class="mermaid"><code>gitGraph:
-options
-{
-    "nodeSpacing": 150,
-    "nodeRadius": 10
-}
-end
-commit
-checkout main
-commit
-commit
-branch feature_branch
-checkout feature_branch
-commit
-commit
-checkout main
-merge feature_branch
-</code></pre>
-<h3 id="gitlab-flow"><a class="toclink" href="../../2024/05/01/repository-strategy-branching-strategy/#gitlab-flow">GitLab Flow</a></h3>
-<p>GitLab Flow is a strategy where all developers work on a single branch. This strategy is simple and easy to understand. GitLab Flow is often used with release branches.</p>
-<p>The GitLab Flow strategy is based on the following rules:</p>
-<ul>
-<li><strong>Developers work on a single branch</strong>.</li>
-<li><strong>Developers create feature branches to work on new features</strong>.</li>
-<li><strong>Developers merge the feature branches into the main branch when they are ready</strong>.</li>
-<li><strong>Developers create a pre-production branch to make bug fixes before merging changes back to the main branch</strong>.</li>
-<li><strong>Developers merge the pre-production branch into the main branch before going to production</strong>.</li>
-<li><strong>Developers can add as many pre-production branches as needed</strong>.</li>
-<li><strong>Developers can maintain different versions of the production branch</strong>.</li>
-</ul>
-<p>The GitLab Flow strategy is based on the following workflow:</p>
-<ol>
-<li><strong>Developers work on a single branch</strong>.</li>
-<li><strong>Developers create a feature branch from the main branch</strong>.</li>
-<li><strong>Developers develop the code for the new feature in the feature branch</strong>.</li>
-<li><strong>Developers merge the feature branch into the main branch</strong>.</li>
-<li><strong>Developers create a pre-production branch from the main branch</strong>.</li>
-<li><strong>Developers make bug fixes in the pre-production branch</strong>.</li>
-<li><strong>Developers merge the pre-production branch into the main branch</strong>.</li>
-<li><strong>Developers create a production branch from the main branch</strong>.</li>
-<li><strong>Developers merge the production branch into the main branch</strong>.</li>
-</ol>
-<pre class="mermaid"><code>gitGraph:
-options
-{
-    "nodeSpacing": 150,
-    "nodeRadius": 10
-}
-end
-commit
-checkout main
-commit
-commit
-branch feature_branch
-checkout feature_branch
-commit
-commit
-checkout main
-merge feature_branch
-commit
-branch pre-production
-checkout pre-production
-commit
-commit
-checkout main
-merge pre-production
-commit
-branch production
-checkout production
-commit
-commit
-checkout main
-merge production
-</code></pre>
 </div>
 </article>
 <nav class="md-pagination">

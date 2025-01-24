@@ -241,6 +241,13 @@
           </label>
 <ul class="md-nav__list" data-md-scrollfix="">
 <li class="md-nav__item">
+<a class="md-nav__link" href="../../2025/01/">
+<span class="md-ellipsis">
+    2025/01
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
 <a class="md-nav__link" href="../../2024/12/">
 <span class="md-ellipsis">
     2024/12
@@ -451,6 +458,13 @@
 <a class="md-nav__link" href="../microsoft-entra-id/">
 <span class="md-ellipsis">
     Microsoft Entra ID
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../outlook/">
+<span class="md-ellipsis">
+    Outlook
   </span>
 </a>
 </li>
@@ -668,6 +682,106 @@
 <header class="md-typeset">
 <h1 id="azure-services">Azure Services</h1>
 </header>
+<article class="md-post md-post--excerpt">
+<header class="md-post__header">
+<nav class="md-post__authors md-typeset">
+<span class="md-author">
+<img alt="Rafael Fernández" src="https://avatars.githubusercontent.com/u/39990341"/>
+</span>
+</nav>
+<div class="md-post__meta md-meta">
+<ul class="md-meta__list">
+<li class="md-meta__item">
+<time datetime="2025-01-24 00:00:00">January 24, 2025</time></li>
+<li class="md-meta__item">
+            in
+            
+              <a class="md-meta__link" href="./">Azure Services</a></li>
+<li class="md-meta__item">
+            
+              4 min read
+            
+          </li>
+</ul>
+</div>
+</header>
+<div class="md-post__content md-typeset">
+<h2 id="azure-virtual-network-manager-a-comprehensive-guide"><a class="toclink" href="../../2025/01/24/azure-virtual-network-manager-a-comprehensive-guide/">Azure Virtual Network Manager: A Comprehensive Guide</a></h2>
+<p>Azure Virtual Network Manager is a powerful management service that allows you to group, configure, deploy, and manage virtual networks across subscriptions on a global scale. It provides the ability to define network groups for logical segmentation of your virtual networks. You can then establish connectivity and security configurations and apply them across all selected virtual networks in network groups simultaneously.</p>
+<h3 id="how-does-azure-virtual-network-manager-work"><a class="toclink" href="../../2025/01/24/azure-virtual-network-manager-a-comprehensive-guide/#how-does-azure-virtual-network-manager-work">How Does Azure Virtual Network Manager Work?</a></h3>
+<p>The functionality of Azure Virtual Network Manager revolves around a well-defined process:</p>
+<ol>
+<li>
+<p><strong>Scope Definition:</strong> During the creation process, you determine the scope of what your Azure Virtual Network Manager will manage. The Network Manager only has delegated access to apply configurations within this defined scope boundary. Although you can directly define a scope on a list of subscriptions, it's recommended to use management groups for scope definition as they provide hierarchical organization to your subscriptions.</p>
+</li>
+<li>
+<p><strong>Deployment of Configuration Types:</strong> After defining the scope, you deploy configuration types including Connectivity and SecurityAdmin rules for your Virtual Network Manager.</p>
+</li>
+<li>
+<p><strong>Creation of Network Group:</strong> Post-deployment, you create a network group which acts as a logical container of networking resources for applying configurations at scale. You can manually select individual virtual networks to be added to your network group (static membership) or use Azure Policy to define conditions for dynamic group membership.</p>
+</li>
+<li>
+<p><strong>Connectivity and Security Configurations:</strong> Next, you create connectivity and/or security configurations to be applied to those network groups based on your topology and security requirements. A connectivity configuration enables you to create a mesh or a hub-and-spoke network topology, while a security configuration lets you define a collection of rules that can be applied globally to one or more network groups.</p>
+</li>
+<li>
+<p><strong>Deployment of Configurations:</strong> Once you've created your desired network groups and configurations, you can deploy the configurations to any region of your choosing.</p>
+</li>
+</ol>
+<p>Azure Virtual Network Manager can be deployed and managed through various platforms such as the Azure portal, Azure CLI, Azure PowerShell, or Terraform.</p>
+<h3 id="key-benefits-of-azure-virtual-network-manager"><a class="toclink" href="../../2025/01/24/azure-virtual-network-manager-a-comprehensive-guide/#key-benefits-of-azure-virtual-network-manager">Key Benefits of Azure Virtual Network Manager</a></h3>
+<ul>
+<li>Centralized management of connectivity and security policies globally across regions and subscriptions.</li>
+<li>Direct connectivity between spokes in a hub-and-spoke configuration without the complexity of managing a mesh network.</li>
+<li>Highly scalable and highly available service with redundancy and replication across the globe.</li>
+<li>Ability to create network security rules that override network security group rules.</li>
+<li>Low latency and high bandwidth between resources in different virtual networks using virtual network peering.</li>
+<li>Roll out network changes through a specific region sequence and frequency of your choosing.</li>
+</ul>
+<h3 id="use-cases-for-azure-virtual-network-manager"><a class="toclink" href="../../2025/01/24/azure-virtual-network-manager-a-comprehensive-guide/#use-cases-for-azure-virtual-network-manager">Use Cases for Azure Virtual Network Manager</a></h3>
+<p>Azure Virtual Network Manager is a versatile tool that can be used in a variety of scenarios:</p>
+<ol>
+<li>
+<p><strong>Hub-and-Spoke Network Topology:</strong> Azure Virtual Network Manager is ideal for managing hub-and-spoke network topologies where you have a central hub virtual network that connects to multiple spoke virtual networks. You can easily create and manage these configurations at scale using Azure Virtual Network Manager.</p>
+</li>
+<li>
+<p><strong>Global Connectivity and Security Policies:</strong> If you have a global presence with virtual networks deployed across multiple regions, Azure Virtual Network Manager allows you to define and apply connectivity and security policies globally, ensuring consistent network configurations across all regions.</p>
+</li>
+<li>
+<p><strong>Network Segmentation and Isolation:</strong> Azure Virtual Network Manager enables you to segment and isolate your virtual networks based on your organizational requirements. You can create network groups and apply security configurations to enforce network isolation and access control.</p>
+</li>
+<li>
+<p><strong>Centralized Network Management:</strong> For organizations with multiple subscriptions and virtual networks, Azure Virtual Network Manager provides a centralized management solution to manage network configurations, connectivity, and security policies across all subscriptions.</p>
+</li>
+<li>
+<p><strong>Automated Network Configuration Deployment:</strong> By leveraging Azure Policy and Azure Virtual Network Manager, you can automate the deployment of network configurations based on predefined conditions, ensuring consistent network configurations and compliance across your Azure environment.</p>
+</li>
+</ol>
+<h3 id="example-connectivity-and-security-configurations-forcing-a-network-security-rule"><a class="toclink" href="../../2025/01/24/azure-virtual-network-manager-a-comprehensive-guide/#example-connectivity-and-security-configurations-forcing-a-network-security-rule">Example connectivity and security configurations forcing a Network Security Rule</a></h3>
+<p>In Azure Virtual Network Manager:</p>
+<p><img alt="alt text" src="../../2025/image-3.png"/></p>
+<p>In Azure Virtual Network:</p>
+<p><img alt="alt text" src="../../2025/image.png"/></p>
+<h4 id="example-connectivity-configuration-forcing-a-hub-and-spoke-network-topology"><a class="toclink" href="../../2025/01/24/azure-virtual-network-manager-a-comprehensive-guide/#example-connectivity-configuration-forcing-a-hub-and-spoke-network-topology">Example Connectivity Configuration forcing a Hub-and-Spoke Network Topology</a></h4>
+<p>In Azure Virtual Network Manager:</p>
+<p><img alt="alt text" src="../../2025/image-2.png"/></p>
+<p>In Azure Virtual Network:</p>
+<p><img alt="alt text" src="../../2025/image-1.png"/></p>
+<h3 id="preview-features"><a class="toclink" href="../../2025/01/24/azure-virtual-network-manager-a-comprehensive-guide/#preview-features">Preview Features</a></h3>
+<p>At the time of writing, Azure Virtual Network Manager has some features in preview and may not be available in all regions. Some of the preview features include:</p>
+<ul>
+<li>IP address management: allows you to manage IP addresses by creating and assigning IP address pools to your virtual networks.</li>
+<li>
+<p>Virtual Network verifier: Enables you to check if your network policies allow or disallow traffic between your Azure network resources.</p>
+</li>
+<li>
+<p>Configurations, creation of a routing is in preview, very interesting to manage the traffic between the different networks.</p>
+</li>
+</ul>
+<h3 id="conclusion"><a class="toclink" href="../../2025/01/24/azure-virtual-network-manager-a-comprehensive-guide/#conclusion">Conclusion</a></h3>
+<p>Azure Virtual Network Manager is a powerful service that simplifies the management of virtual networks in Azure. By providing a centralized platform to define and apply connectivity and security configurations at scale, Azure Virtual Network Manager streamlines network management tasks and ensures consistent network configurations across your Azure environment.</p>
+<p>For up-to-date information on the regions where Azure Virtual Network Manager is available, refer to <a href="https://azure.microsoft.com/en-us/explore/global-infrastructure/products-by-region/table">Products available by region</a>.</p>
+</div>
+</article>
 <article class="md-post md-post--excerpt">
 <header class="md-post__header">
 <nav class="md-post__authors md-typeset">
@@ -2400,118 +2514,6 @@ click BG2 "https://learn.microsoft.com/en-us/azure/role-based-access-control/bui
 <h3 id="conclusion"><a class="toclink" href="../../2024/06/13/restrict-managed-disks-from-being-imported-or-exported/#conclusion">Conclusion</a></h3>
 <p>In this post, I showed you how to restrict managed disks from being imported or exported in Azure. By restricting managed disks from being imported or exported, you can reduce the risk of unauthorized access to your data and help ensure that your organization complies with data protection regulations. </p>
 <p>Curiosly, restrict managed disks from being imported or exported, it's not a compliance check in the Microsoft cloud security benchmark but it's a good practice to follow.</p>
-</div>
-</article>
-<article class="md-post md-post--excerpt">
-<header class="md-post__header">
-<nav class="md-post__authors md-typeset">
-<span class="md-author">
-<img alt="Rafael Fernández" src="https://avatars.githubusercontent.com/u/39990341"/>
-</span>
-</nav>
-<div class="md-post__meta md-meta">
-<ul class="md-meta__list">
-<li class="md-meta__item">
-<time datetime="2024-06-11 00:00:00">June 11, 2024</time></li>
-<li class="md-meta__item">
-            in
-            
-              <a class="md-meta__link" href="./">Azure Services</a>, 
-              <a class="md-meta__link" href="../power-bi/">Power BI</a></li>
-<li class="md-meta__item">
-            
-              4 min read
-            
-          </li>
-</ul>
-</div>
-</header>
-<div class="md-post__content md-typeset">
-<h2 id="securely-connect-power-bi-to-data-sources-with-a-vnet-data-gateway"><a class="toclink" href="../../2024/06/11/securely-connect-power-bi-to-data-sources-with-a-vnet-data-gateway/">Securely connect Power BI to data sources with a VNet data gateway</a></h2>
-<p>In this post, I will show you how to securely connect Power BI to your Azure data services using a Virtual Network (VNet) data gateway.</p>
-<h3 id="what-is-a-virtual-network-vnet-data-gateway"><a class="toclink" href="../../2024/06/11/securely-connect-power-bi-to-data-sources-with-a-vnet-data-gateway/#what-is-a-virtual-network-vnet-data-gateway">What is a Virtual Network (VNet) data gateway?</a></h3>
-<p>The virtual network (VNet) data gateway helps you to connect from Microsoft Cloud services to your Azure data services within a VNet without the need of an on-premises data gateway. The VNet data gateway securely communicates with the data source, executes queries, and transmits results back to the service.</p>
-<h3 id="the-role-of-a-vnet-data-gateway"><a class="toclink" href="../../2024/06/11/securely-connect-power-bi-to-data-sources-with-a-vnet-data-gateway/#the-role-of-a-vnet-data-gateway">The Role of a VNet Data Gateway</a></h3>
-<p>A VNet data gateway acts as a bridge that allows for the secure flow of data between the Power Platform and external data sources that reside within a virtual network. This includes services such as SQL databases, file storage solutions, and other cloud-based resources. The gateway ensures that data can be transferred securely and reliably, without exposing the network to potential threats or breaches.</p>
-<h3 id="how-it-works"><a class="toclink" href="../../2024/06/11/securely-connect-power-bi-to-data-sources-with-a-vnet-data-gateway/#how-it-works">How It Works</a></h3>
-<pre class="mermaid"><code>graph LR
-    User([User]) --&gt;|Semantic Models| SM[Semantic Models]
-    User --&gt;|"Dataflows (Gen2)"| DF["Dataflows (Gen2)"]
-    User --&gt;|Paginated Reports| PR[Paginated Reports]
-    SM --&gt; PPVS[Power Platform VNET Service]
-    DF --&gt; PPVS
-    PR --&gt; PPVS
-    PPVS --&gt; MCVG[Managed Container<br/>for VNet Gateway]
-    MCVG --&gt;|Interfaces with| SQLDB[(SQL Databases)]
-    MCVG --&gt;|Interfaces with| FS[(File Storage)]
-    MCVG --&gt;|Interfaces with| CS[(Cloud Services)]
-    MCVG -.-&gt;|Secured by| SEC{{Security Features}}
-
-    subgraph VNET_123
-    SQLDB
-    FS
-    CS
-    SEC
-    end
-
-    classDef filled fill:#f96,stroke:#333,stroke-width:2px;
-    classDef user fill:#bbf,stroke:#f66,stroke-width:2px,stroke-dasharray: 5, 5;
-    class User user
-    class SM,DF,PR,PPVS,MCVG,SQLDB,FS,CS,SEC filled
-</code></pre>
-<p>The process begins with a user leveraging Power Platform services like Semantic Models, Dataflows (Gen2), and Paginated Reports. These services are designed to handle various data-related tasks, from analysis to visualization. They connect to the Power Platform VNET Service, which is the heart of the operation, orchestrating the flow of data through the managed container for the VNet gateway.</p>
-<p>This managed container is a secure environment specifically designed for the VNet gateway’s operations. It’s isolated from the public internet, ensuring that the data remains protected within the confines of the virtual network. Within this secure environment, the VNet gateway interfaces with the necessary external resources, such as SQL databases and cloud storage, all while maintaining strict security protocols symbolized by the padlock icon in our diagram.</p>
-<p>If you need to connect to services on others VNets, you can use <a href="https://docs.microsoft.com/en-us/azure/virtual-network/virtual-network-peering-overview">VNet peering</a> to connect the VNets, and maybe access to on-premises resources using <a href="https://docs.microsoft.com/en-us/azure/expressroute/expressroute-introduction">ExpressRoute</a> or other VPN solutions.</p>
-<h3 id="the-benefits"><a class="toclink" href="../../2024/06/11/securely-connect-power-bi-to-data-sources-with-a-vnet-data-gateway/#the-benefits">The Benefits</a></h3>
-<p>By utilizing a VNet data gateway, organizations can enjoy several benefits:</p>
-<ul>
-<li>Enhanced Security: The gateway provides a secure path for data, safeguarding sensitive information and complying with organizational security policies.</li>
-<li>Network Isolation: The managed container and the virtual network setup ensure that the data does not traverse public internet spaces, reducing exposure to vulnerabilities.</li>
-<li>Seamless Integration: The gateway facilitates smooth integration between Power Platform services and external data sources, enabling efficient data processing and analysis.</li>
-</ul>
-<h3 id="getting-started"><a class="toclink" href="../../2024/06/11/securely-connect-power-bi-to-data-sources-with-a-vnet-data-gateway/#getting-started">Getting Started</a></h3>
-<p>To set up a VNet data gateway, follow these steps:</p>
-<h4 id="register-microsoftpowerplatform-as-a-resource-provider"><a class="toclink" href="../../2024/06/11/securely-connect-power-bi-to-data-sources-with-a-vnet-data-gateway/#register-microsoftpowerplatform-as-a-resource-provider">Register Microsoft.PowerPlatform as a resource provider</a></h4>
-<p>Before you can create a VNet data gateway, you need to register the Microsoft.PowerPlatform resource provider. This can be done using the Azure portal or the Azure CLI.</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a href="#__codelineno-2-1" id="__codelineno-2-1" name="__codelineno-2-1"></a>az provider register --namespace Microsoft.PowerPlatform
-</span></code></pre></div>
-<h4 id="associate-the-subnet-to-microsoft-power-platform"><a class="toclink" href="../../2024/06/11/securely-connect-power-bi-to-data-sources-with-a-vnet-data-gateway/#associate-the-subnet-to-microsoft-power-platform">Associate the subnet to Microsoft Power Platform</a></h4>
-<p>Create a VNet in your Azure subscription and a subnet where the VNet data gateway will be deployed. Next, you need to delegate subnet to service <strong>Microsoft.PowerPlatform/vnetaccesslinks</strong>. </p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<ul>
-<li>This subnet can't be shared with other services.</li>
-<li>Five IP addresses are reserved in the subnet for basic functionality. You need to reserve additional IP addresses for the VNet data gateway, add more IPs for future gateways.</li>
-<li>You need a role with the Microsoft.Network/virtualNetworks/subnets/join/action permission</li>
-</ul>
-</div>
-<p>This can be done using the Azure portal or the Azure CLI.</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a href="#__codelineno-3-1" id="__codelineno-3-1" name="__codelineno-3-1"></a># Create a VNet and address prefix 10.0.0.0/24
-</span><span id="__span-3-2"><a href="#__codelineno-3-2" id="__codelineno-3-2" name="__codelineno-3-2"></a>az network vnet create --name MyVNet --resource-group MyResourceGroup --location eastus --address-prefixes 10.0.0.0/24
-</span><span id="__span-3-3"><a href="#__codelineno-3-3" id="__codelineno-3-3" name="__codelineno-3-3"></a>
-</span><span id="__span-3-4"><a href="#__codelineno-3-4" id="__codelineno-3-4" name="__codelineno-3-4"></a>
-</span><span id="__span-3-5"><a href="#__codelineno-3-5" id="__codelineno-3-5" name="__codelineno-3-5"></a># Create a Netwrok Security Group
-</span><span id="__span-3-6"><a href="#__codelineno-3-6" id="__codelineno-3-6" name="__codelineno-3-6"></a>az network nsg create --name MyNsg --resource-group MyResourceGroup --location eastus
-</span><span id="__span-3-7"><a href="#__codelineno-3-7" id="__codelineno-3-7" name="__codelineno-3-7"></a>
-</span><span id="__span-3-8"><a href="#__codelineno-3-8" id="__codelineno-3-8" name="__codelineno-3-8"></a># Create a subnet with delegation to Microsoft.PowerPlatform/vnetaccesslinks and associate the NSG
-</span><span id="__span-3-9"><a href="#__codelineno-3-9" id="__codelineno-3-9" name="__codelineno-3-9"></a>az network vnet subnet create --name MySubnet --vnet-name MyVNet --resource-group MyResourceGroup --address-prefixes 10.0.0.1/27 --network-security-group MyNsg --delegations Microsoft.PowerPlatform/vnetaccesslinks
-</span></code></pre></div>
-<h4 id="create-a-vnet-data-gateway"><a class="toclink" href="../../2024/06/11/securely-connect-power-bi-to-data-sources-with-a-vnet-data-gateway/#create-a-vnet-data-gateway">Create a VNet data gateway</a></h4>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>A Microsoft Power Platform User with with Microsoft.Network/virtualNetworks/subnets/join/action permission on the VNet is required. Network Contributor role is not necessary.</p>
-</div>
-<ol>
-<li>Sign in to the <a href="https://app.powerbi.com/">Power BI homepage</a>.</li>
-<li>In the top navigation bar, select the settings gear icon on the right.</li>
-<li>From the drop down, select the Manage connections and gateways page, in Resources and extensions.</li>
-<li>Select <strong>Create a virtual network data gateway.</strong>.</li>
-<li>Select the license capacity, subscription, resource group, VNet and the Subnet. Only subnets that are delegated to Microsoft Power Platform are displayed in the drop-down list. VNET data gateways require a <a href="https://learn.microsoft.com/en-us/power-bi/enterprise/service-premium-what-is">Power BI Premium capacity</a> license (A4 SKU or higher or any P SKU) or <a href="https://learn.microsoft.com/en-us/fabric/enterprise/buy-subscription">Fabric license</a> to be used (any SKU).</li>
-<li>By default, we provide a unique name for this data gateway, but you could optionally update it.</li>
-<li>Select <strong>Save</strong>. This VNet data gateway is now displayed in your <strong>Virtual network data gateways</strong> tab. A VNet data gateway is a managed gateway that could be used for controlling access to this resource for Power platform users.</li>
-</ol>
-<h3 id="conclusion"><a class="toclink" href="../../2024/06/11/securely-connect-power-bi-to-data-sources-with-a-vnet-data-gateway/#conclusion">Conclusion</a></h3>
-<p>The VNet data gateway is a powerful tool that enables secure data transfer between the Power Platform and external data sources residing within a virtual network. By leveraging this gateway, organizations can ensure that their data remains protected and compliant with security standards, all while facilitating seamless integration and analysis of data. If you are looking to enhance the security and reliability of your data connections, consider implementing a VNet data gateway in your environment.</p>
 </div>
 </article>
 <nav class="md-pagination">

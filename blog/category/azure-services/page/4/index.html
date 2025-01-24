@@ -536,6 +536,29 @@
   
   
     <li class="md-nav__item">
+      <a href="../../../../2025/01/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2025/01
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
       <a href="../../../../2024/12/" class="md-nav__link">
         
   
@@ -1243,6 +1266,29 @@
   
   
     <li class="md-nav__item">
+      <a href="../../../outlook/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Outlook
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
       <a href="../../../power-bi/" class="md-nav__link">
         
   
@@ -1863,6 +1909,97 @@
       <header class="md-typeset">
         <h1 id="azure-services">Azure Services</h1>
       </header>
+      
+        <article class="md-post md-post--excerpt">
+  <header class="md-post__header">
+    
+      <nav class="md-post__authors md-typeset">
+        
+          <span class="md-author">
+            <img src="https://avatars.githubusercontent.com/u/39990341" alt="Rafael Fernández">
+          </span>
+        
+      </nav>
+    
+    <div class="md-post__meta md-meta">
+      <ul class="md-meta__list">
+        <li class="md-meta__item">
+          <time datetime="2023-11-18 00:00:00">November 18, 2023</time></li>
+        
+          <li class="md-meta__item">
+            in
+            
+              <a href="../../" class="md-meta__link">Azure Services</a></li>
+        
+        
+          
+          <li class="md-meta__item">
+            
+              2 min read
+            
+          </li>
+        
+      </ul>
+      
+    </div>
+  </header>
+  <div class="md-post__content md-typeset">
+    <h2 id="azure-communication-services"><a class="toclink" href="../../../../2023/11/18/azure-communication-services/">Azure Communication Services</a></h2>
+<h3 id="what-is-azure-communication-services"><a class="toclink" href="../../../../2023/11/18/azure-communication-services/#what-is-azure-communication-services">What is Azure Communication Services?</a></h3>
+<p>Azure Communication Services are cloud-based services with REST APIs and client library SDKs available to help you integrate communication into your applications. You can add communication to your applications without being an expert in underlying technologies such as media encoding or telephony.</p>
+<p>Azure Communication Services supports various communication formats:</p>
+<ul>
+<li>Voice and Video Calling</li>
+<li>Rich Text Chat</li>
+<li>SMS</li>
+<li>Email</li>
+</ul>
+<p>And offers the following services:</p>
+<ul>
+<li>SMS: Send and receive SMS messages from your applications.</li>
+<li>Phone calling: Enable your applications to make and receive PSTN calls.</li>
+<li>Voice and video calling: Enable your applications to make and receive voice and video calls.</li>
+<li>Chat: Enable your applications to send and receive chat messages.</li>
+<li>Email: Send and receive emails from your applications.</li>
+<li>Network traversal: Enable your applications to connect to other clients behind firewalls and NATs.</li>
+<li>Advanced Messaging:<ul>
+<li>WhatsApp(Public Preview): Enable you to send and receive WhatsApp messages using the Azure Communication Services Messaging SDK. </li>
+</ul>
+</li>
+<li>Job Router(Public Preview): It's a tool designed to optimize the management of customer interactions across various communication applications.</li>
+</ul>
+<p>Some Use Cases:</p>
+<ul>
+<li>Telemedicine: Enable patients to connect with doctors and nurses through video consultations.</li>
+<li>Remote education: Enable students to connect with teachers and other students through video classes.</li>
+<li>Financial Advisory: Enhancing global advisor and client interactions with rich capabilities such as translation for chat.</li>
+<li>Retail Notifications: Send notifications to customers about their orders via SMS or email.</li>
+<li>Professional Support: Enable customers to connect with support agents through chat, voice, or video.</li>
+</ul>
+<h3 id="design-considerations"><a class="toclink" href="../../../../2023/11/18/azure-communication-services/#design-considerations">Design considerations</a></h3>
+<p>You have  some data flow diagrams to help you to understand how Azure Communication Services works <a href="https://learn.microsoft.com/en-us/azure/architecture/guide/mobile/azure-communication-services-architecture">here</a></p>
+<p>Some aspects to consider:</p>
+<ul>
+<li>You need to apply throttling patterns to avoid overloading the service,  HTTP status code 429 (Too many requests).</li>
+<li>Plan how to map users from your identity domain to Azure Communication Services identities. You can follow any kind of pattern. For example, you can use 1:1, 1:N, N:1, or M:N</li>
+<li>Check regional availability. You can see more information about regional availability <a href="https://azure.microsoft.com/en-us/global-infrastructure/services/?products=communication-services">here</a>.</li>
+<li>Check the service limits. You can see more information about service limits <a href="https://learn.microsoft.com/en-us/azure/communication-services/concepts/service-limits">here</a>.</li>
+<li>Check security baseline. You can see more information about security baseline <a href="https://learn.microsoft.com/en-us/security/benchmark/azure/baselines/azure-communication-services-security-baseline">here</a>.</li>
+</ul>
+<h3 id="pricing"><a class="toclink" href="../../../../2023/11/18/azure-communication-services/#pricing">Pricing</a></h3>
+<p>Azure Communication Services is a pay-as-you-go service. You only pay for what you use, and there are no upfront costs. You can see more information about pricing <a href="https://azure.microsoft.com/en-us/pricing/details/communication-services/">here</a>.</p>
+<p>The bad news are:</p>
+<ul>
+<li>In some services pricing vary by country.</li>
+<li>You don't have a free tier, but you have something free.</li>
+<li>You don't have Azure Reservations or equivalent.</li>
+</ul>
+<h3 id="conclusion"><a class="toclink" href="../../../../2023/11/18/azure-communication-services/#conclusion">Conclusion</a></h3>
+<p>Azure Communication Services is a very interesting service but you need to consider the cost of the service and the regional availability before to use it.</p>
+<p>That's it folks!, thanks for reading <img alt="😄" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.0.3/assets/svg/1f604.svg" title=":smile:" />!.</p>
+    
+  </div>
+</article>
       
         <article class="md-post md-post--excerpt">
   <header class="md-post__header">

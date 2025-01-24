@@ -241,6 +241,13 @@
           </label>
 <ul class="md-nav__list" data-md-scrollfix="">
 <li class="md-nav__item">
+<a class="md-nav__link" href="../../../../2025/01/">
+<span class="md-ellipsis">
+    2025/01
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
 <a class="md-nav__link" href="../../../../2024/12/">
 <span class="md-ellipsis">
     2024/12
@@ -451,6 +458,13 @@
 <a class="md-nav__link" href="../../../microsoft-entra-id/">
 <span class="md-ellipsis">
     Microsoft Entra ID
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../../outlook/">
+<span class="md-ellipsis">
+    Outlook
   </span>
 </a>
 </li>
@@ -668,6 +682,118 @@
 <header class="md-typeset">
 <h1 id="azure-services">Azure Services</h1>
 </header>
+<article class="md-post md-post--excerpt">
+<header class="md-post__header">
+<nav class="md-post__authors md-typeset">
+<span class="md-author">
+<img alt="Rafael Fernández" src="https://avatars.githubusercontent.com/u/39990341"/>
+</span>
+</nav>
+<div class="md-post__meta md-meta">
+<ul class="md-meta__list">
+<li class="md-meta__item">
+<time datetime="2024-06-11 00:00:00">June 11, 2024</time></li>
+<li class="md-meta__item">
+            in
+            
+              <a class="md-meta__link" href="../../">Azure Services</a>, 
+              <a class="md-meta__link" href="../../../power-bi/">Power BI</a></li>
+<li class="md-meta__item">
+            
+              4 min read
+            
+          </li>
+</ul>
+</div>
+</header>
+<div class="md-post__content md-typeset">
+<h2 id="securely-connect-power-bi-to-data-sources-with-a-vnet-data-gateway"><a class="toclink" href="../../../../2024/06/11/securely-connect-power-bi-to-data-sources-with-a-vnet-data-gateway/">Securely connect Power BI to data sources with a VNet data gateway</a></h2>
+<p>In this post, I will show you how to securely connect Power BI to your Azure data services using a Virtual Network (VNet) data gateway.</p>
+<h3 id="what-is-a-virtual-network-vnet-data-gateway"><a class="toclink" href="../../../../2024/06/11/securely-connect-power-bi-to-data-sources-with-a-vnet-data-gateway/#what-is-a-virtual-network-vnet-data-gateway">What is a Virtual Network (VNet) data gateway?</a></h3>
+<p>The virtual network (VNet) data gateway helps you to connect from Microsoft Cloud services to your Azure data services within a VNet without the need of an on-premises data gateway. The VNet data gateway securely communicates with the data source, executes queries, and transmits results back to the service.</p>
+<h3 id="the-role-of-a-vnet-data-gateway"><a class="toclink" href="../../../../2024/06/11/securely-connect-power-bi-to-data-sources-with-a-vnet-data-gateway/#the-role-of-a-vnet-data-gateway">The Role of a VNet Data Gateway</a></h3>
+<p>A VNet data gateway acts as a bridge that allows for the secure flow of data between the Power Platform and external data sources that reside within a virtual network. This includes services such as SQL databases, file storage solutions, and other cloud-based resources. The gateway ensures that data can be transferred securely and reliably, without exposing the network to potential threats or breaches.</p>
+<h3 id="how-it-works"><a class="toclink" href="../../../../2024/06/11/securely-connect-power-bi-to-data-sources-with-a-vnet-data-gateway/#how-it-works">How It Works</a></h3>
+<pre class="mermaid"><code>graph LR
+    User([User]) --&gt;|Semantic Models| SM[Semantic Models]
+    User --&gt;|"Dataflows (Gen2)"| DF["Dataflows (Gen2)"]
+    User --&gt;|Paginated Reports| PR[Paginated Reports]
+    SM --&gt; PPVS[Power Platform VNET Service]
+    DF --&gt; PPVS
+    PR --&gt; PPVS
+    PPVS --&gt; MCVG[Managed Container<br/>for VNet Gateway]
+    MCVG --&gt;|Interfaces with| SQLDB[(SQL Databases)]
+    MCVG --&gt;|Interfaces with| FS[(File Storage)]
+    MCVG --&gt;|Interfaces with| CS[(Cloud Services)]
+    MCVG -.-&gt;|Secured by| SEC{{Security Features}}
+
+    subgraph VNET_123
+    SQLDB
+    FS
+    CS
+    SEC
+    end
+
+    classDef filled fill:#f96,stroke:#333,stroke-width:2px;
+    classDef user fill:#bbf,stroke:#f66,stroke-width:2px,stroke-dasharray: 5, 5;
+    class User user
+    class SM,DF,PR,PPVS,MCVG,SQLDB,FS,CS,SEC filled
+</code></pre>
+<p>The process begins with a user leveraging Power Platform services like Semantic Models, Dataflows (Gen2), and Paginated Reports. These services are designed to handle various data-related tasks, from analysis to visualization. They connect to the Power Platform VNET Service, which is the heart of the operation, orchestrating the flow of data through the managed container for the VNet gateway.</p>
+<p>This managed container is a secure environment specifically designed for the VNet gateway’s operations. It’s isolated from the public internet, ensuring that the data remains protected within the confines of the virtual network. Within this secure environment, the VNet gateway interfaces with the necessary external resources, such as SQL databases and cloud storage, all while maintaining strict security protocols symbolized by the padlock icon in our diagram.</p>
+<p>If you need to connect to services on others VNets, you can use <a href="https://docs.microsoft.com/en-us/azure/virtual-network/virtual-network-peering-overview">VNet peering</a> to connect the VNets, and maybe access to on-premises resources using <a href="https://docs.microsoft.com/en-us/azure/expressroute/expressroute-introduction">ExpressRoute</a> or other VPN solutions.</p>
+<h3 id="the-benefits"><a class="toclink" href="../../../../2024/06/11/securely-connect-power-bi-to-data-sources-with-a-vnet-data-gateway/#the-benefits">The Benefits</a></h3>
+<p>By utilizing a VNet data gateway, organizations can enjoy several benefits:</p>
+<ul>
+<li>Enhanced Security: The gateway provides a secure path for data, safeguarding sensitive information and complying with organizational security policies.</li>
+<li>Network Isolation: The managed container and the virtual network setup ensure that the data does not traverse public internet spaces, reducing exposure to vulnerabilities.</li>
+<li>Seamless Integration: The gateway facilitates smooth integration between Power Platform services and external data sources, enabling efficient data processing and analysis.</li>
+</ul>
+<h3 id="getting-started"><a class="toclink" href="../../../../2024/06/11/securely-connect-power-bi-to-data-sources-with-a-vnet-data-gateway/#getting-started">Getting Started</a></h3>
+<p>To set up a VNet data gateway, follow these steps:</p>
+<h4 id="register-microsoftpowerplatform-as-a-resource-provider"><a class="toclink" href="../../../../2024/06/11/securely-connect-power-bi-to-data-sources-with-a-vnet-data-gateway/#register-microsoftpowerplatform-as-a-resource-provider">Register Microsoft.PowerPlatform as a resource provider</a></h4>
+<p>Before you can create a VNet data gateway, you need to register the Microsoft.PowerPlatform resource provider. This can be done using the Azure portal or the Azure CLI.</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-6-1"><a href="#__codelineno-6-1" id="__codelineno-6-1" name="__codelineno-6-1"></a>az provider register --namespace Microsoft.PowerPlatform
+</span></code></pre></div>
+<h4 id="associate-the-subnet-to-microsoft-power-platform"><a class="toclink" href="../../../../2024/06/11/securely-connect-power-bi-to-data-sources-with-a-vnet-data-gateway/#associate-the-subnet-to-microsoft-power-platform">Associate the subnet to Microsoft Power Platform</a></h4>
+<p>Create a VNet in your Azure subscription and a subnet where the VNet data gateway will be deployed. Next, you need to delegate subnet to service <strong>Microsoft.PowerPlatform/vnetaccesslinks</strong>. </p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ul>
+<li>This subnet can't be shared with other services.</li>
+<li>Five IP addresses are reserved in the subnet for basic functionality. You need to reserve additional IP addresses for the VNet data gateway, add more IPs for future gateways.</li>
+<li>You need a role with the Microsoft.Network/virtualNetworks/subnets/join/action permission</li>
+</ul>
+</div>
+<p>This can be done using the Azure portal or the Azure CLI.</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-7-1"><a href="#__codelineno-7-1" id="__codelineno-7-1" name="__codelineno-7-1"></a># Create a VNet and address prefix 10.0.0.0/24
+</span><span id="__span-7-2"><a href="#__codelineno-7-2" id="__codelineno-7-2" name="__codelineno-7-2"></a>az network vnet create --name MyVNet --resource-group MyResourceGroup --location eastus --address-prefixes 10.0.0.0/24
+</span><span id="__span-7-3"><a href="#__codelineno-7-3" id="__codelineno-7-3" name="__codelineno-7-3"></a>
+</span><span id="__span-7-4"><a href="#__codelineno-7-4" id="__codelineno-7-4" name="__codelineno-7-4"></a>
+</span><span id="__span-7-5"><a href="#__codelineno-7-5" id="__codelineno-7-5" name="__codelineno-7-5"></a># Create a Netwrok Security Group
+</span><span id="__span-7-6"><a href="#__codelineno-7-6" id="__codelineno-7-6" name="__codelineno-7-6"></a>az network nsg create --name MyNsg --resource-group MyResourceGroup --location eastus
+</span><span id="__span-7-7"><a href="#__codelineno-7-7" id="__codelineno-7-7" name="__codelineno-7-7"></a>
+</span><span id="__span-7-8"><a href="#__codelineno-7-8" id="__codelineno-7-8" name="__codelineno-7-8"></a># Create a subnet with delegation to Microsoft.PowerPlatform/vnetaccesslinks and associate the NSG
+</span><span id="__span-7-9"><a href="#__codelineno-7-9" id="__codelineno-7-9" name="__codelineno-7-9"></a>az network vnet subnet create --name MySubnet --vnet-name MyVNet --resource-group MyResourceGroup --address-prefixes 10.0.0.1/27 --network-security-group MyNsg --delegations Microsoft.PowerPlatform/vnetaccesslinks
+</span></code></pre></div>
+<h4 id="create-a-vnet-data-gateway"><a class="toclink" href="../../../../2024/06/11/securely-connect-power-bi-to-data-sources-with-a-vnet-data-gateway/#create-a-vnet-data-gateway">Create a VNet data gateway</a></h4>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>A Microsoft Power Platform User with with Microsoft.Network/virtualNetworks/subnets/join/action permission on the VNet is required. Network Contributor role is not necessary.</p>
+</div>
+<ol>
+<li>Sign in to the <a href="https://app.powerbi.com/">Power BI homepage</a>.</li>
+<li>In the top navigation bar, select the settings gear icon on the right.</li>
+<li>From the drop down, select the Manage connections and gateways page, in Resources and extensions.</li>
+<li>Select <strong>Create a virtual network data gateway.</strong>.</li>
+<li>Select the license capacity, subscription, resource group, VNet and the Subnet. Only subnets that are delegated to Microsoft Power Platform are displayed in the drop-down list. VNET data gateways require a <a href="https://learn.microsoft.com/en-us/power-bi/enterprise/service-premium-what-is">Power BI Premium capacity</a> license (A4 SKU or higher or any P SKU) or <a href="https://learn.microsoft.com/en-us/fabric/enterprise/buy-subscription">Fabric license</a> to be used (any SKU).</li>
+<li>By default, we provide a unique name for this data gateway, but you could optionally update it.</li>
+<li>Select <strong>Save</strong>. This VNet data gateway is now displayed in your <strong>Virtual network data gateways</strong> tab. A VNet data gateway is a managed gateway that could be used for controlling access to this resource for Power platform users.</li>
+</ol>
+<h3 id="conclusion"><a class="toclink" href="../../../../2024/06/11/securely-connect-power-bi-to-data-sources-with-a-vnet-data-gateway/#conclusion">Conclusion</a></h3>
+<p>The VNet data gateway is a powerful tool that enables secure data transfer between the Power Platform and external data sources residing within a virtual network. By leveraging this gateway, organizations can ensure that their data remains protected and compliant with security standards, all while facilitating seamless integration and analysis of data. If you are looking to enhance the security and reliability of your data connections, consider implementing a VNet data gateway in your environment.</p>
+</div>
+</article>
 <article class="md-post md-post--excerpt">
 <header class="md-post__header">
 <nav class="md-post__authors md-typeset">
@@ -1795,80 +1921,6 @@ In this case, it would be connecting the Spoke networks to each other via virtua
 </tr>
 </tbody>
 </table>
-</div>
-</article>
-<article class="md-post md-post--excerpt">
-<header class="md-post__header">
-<nav class="md-post__authors md-typeset">
-<span class="md-author">
-<img alt="Rafael Fernández" src="https://avatars.githubusercontent.com/u/39990341"/>
-</span>
-</nav>
-<div class="md-post__meta md-meta">
-<ul class="md-meta__list">
-<li class="md-meta__item">
-<time datetime="2024-04-17 00:00:00">April 17, 2024</time></li>
-<li class="md-meta__item">
-            in
-            
-              <a class="md-meta__link" href="../../">Azure Services</a></li>
-<li class="md-meta__item">
-            
-              2 min read
-            
-          </li>
-</ul>
-</div>
-</header>
-<div class="md-post__content md-typeset">
-<h2 id="azure-policy-useful-queries"><a class="toclink" href="../../../../2024/04/17/azure-policy-useful-queries/">Azure Policy useful queries</a></h2>
-<h3 id="policy-assignments-and-information-about-each-of-its-respective-definitions"><a class="toclink" href="../../../../2024/04/17/azure-policy-useful-queries/#policy-assignments-and-information-about-each-of-its-respective-definitions">Policy assignments and information about each of its respective definitions</a></h3>
-<div class="language-kusto highlight"><pre><span></span><code><span id="__span-8-1"><a href="#__codelineno-8-1" id="__codelineno-8-1" name="__codelineno-8-1"></a><span class="c">// Policy assignments and information about each of its respective definitions</span>
-</span><span id="__span-8-2"><a href="#__codelineno-8-2" id="__codelineno-8-2" name="__codelineno-8-2"></a><span class="c">// Gets policy assignments in your environment with the respective assignment name,definition associated, category of definition (if applicable), as well as whether the definition type is an initiative or a single policy.</span>
-</span><span id="__span-8-3"><a href="#__codelineno-8-3" id="__codelineno-8-3" name="__codelineno-8-3"></a>
-</span><span id="__span-8-4"><a href="#__codelineno-8-4" id="__codelineno-8-4" name="__codelineno-8-4"></a><span class="n">policyResources</span>
-</span><span id="__span-8-5"><a href="#__codelineno-8-5" id="__codelineno-8-5" name="__codelineno-8-5"></a><span class="p">|</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">type</span><span class="w"> </span><span class="p">=~</span><span class="s">'Microsoft.Authorization/PolicyAssignments'</span>
-</span><span id="__span-8-6"><a href="#__codelineno-8-6" id="__codelineno-8-6" name="__codelineno-8-6"></a><span class="p">|</span><span class="w"> </span><span class="k">project</span><span class="w"> </span><span class="n">policyAssignmentId</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">tolower</span><span class="p">(</span><span class="n">tostring</span><span class="p">(</span><span class="n">id</span><span class="p">)),</span><span class="w"> </span><span class="n">policyAssignmentDisplayName</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">tostring</span><span class="p">(</span><span class="n">properties</span><span class="err">.</span><span class="n">displayName</span><span class="p">),</span><span class="w"> </span><span class="n">policyAssignmentDefinitionId</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">tolower</span><span class="p">(</span><span class="n">properties</span><span class="err">.</span><span class="n">policyDefinitionId</span><span class="p">)</span>
-</span><span id="__span-8-7"><a href="#__codelineno-8-7" id="__codelineno-8-7" name="__codelineno-8-7"></a><span class="p">|</span><span class="w"> </span><span class="k">join</span><span class="w"> </span><span class="n">kind</span><span class="p">=</span><span class="n">leftouter</span><span class="p">(</span>
-</span><span id="__span-8-8"><a href="#__codelineno-8-8" id="__codelineno-8-8" name="__codelineno-8-8"></a><span class="w"> </span><span class="n">policyResources</span>
-</span><span id="__span-8-9"><a href="#__codelineno-8-9" id="__codelineno-8-9" name="__codelineno-8-9"></a><span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">type</span><span class="w"> </span><span class="p">=~</span><span class="s">'Microsoft.Authorization/PolicySetDefinitions'</span><span class="w"> </span><span class="k">or</span><span class="w"> </span><span class="n">type</span><span class="w"> </span><span class="p">=~</span><span class="s">'Microsoft.Authorization/PolicyDefinitions'</span>
-</span><span id="__span-8-10"><a href="#__codelineno-8-10" id="__codelineno-8-10" name="__codelineno-8-10"></a><span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="k">project</span><span class="w"> </span><span class="n">definitionId</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">tolower</span><span class="p">(</span><span class="n">id</span><span class="p">),</span><span class="w"> </span><span class="n">category</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">tostring</span><span class="p">(</span><span class="n">properties</span><span class="err">.</span><span class="n">metadata</span><span class="err">.</span><span class="n">category</span><span class="p">),</span><span class="w"> </span><span class="n">definitionType</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">iff</span><span class="p">(</span><span class="n">type</span><span class="w"> </span><span class="p">=~</span><span class="w"> </span><span class="s">'Microsoft.Authorization/PolicysetDefinitions'</span><span class="p">,</span><span class="w"> </span><span class="s">'initiative'</span><span class="p">,</span><span class="w"> </span><span class="s">'policy'</span><span class="p">)</span>
-</span><span id="__span-8-11"><a href="#__codelineno-8-11" id="__codelineno-8-11" name="__codelineno-8-11"></a><span class="p">)</span><span class="w"> </span><span class="k">on</span><span class="w"> </span><span class="err">$</span><span class="n">left</span><span class="err">.</span><span class="n">policyAssignmentDefinitionId</span><span class="w"> </span><span class="p">==</span><span class="w"> </span><span class="err">$</span><span class="n">right</span><span class="err">.</span><span class="n">definitionId</span>
-</span></code></pre></div>
-<ul>
-<li><a href="https://https://gist.github.com/timothywarner/8e5b6dea296f506871223883eb33059e">Original Gist</a></li>
-</ul>
-<h3 id="list-subscriptionid-and-subscriptionname"><a class="toclink" href="../../../../2024/04/17/azure-policy-useful-queries/#list-subscriptionid-and-subscriptionname">List SubscriptionId and SubscriptionName</a></h3>
-<div class="language-kusto highlight"><pre><span></span><code><span id="__span-9-1"><a href="#__codelineno-9-1" id="__codelineno-9-1" name="__codelineno-9-1"></a><span class="n">ResourceContainers</span>
-</span><span id="__span-9-2"><a href="#__codelineno-9-2" id="__codelineno-9-2" name="__codelineno-9-2"></a><span class="p">|</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">type</span><span class="w"> </span><span class="p">=~</span><span class="w"> </span><span class="s">'microsoft.resources/subscriptions'</span>
-</span><span id="__span-9-3"><a href="#__codelineno-9-3" id="__codelineno-9-3" name="__codelineno-9-3"></a><span class="p">|</span><span class="w"> </span><span class="k">project</span><span class="w"> </span><span class="n">subscriptionId</span><span class="p">,</span><span class="w"> </span><span class="n">subscriptionName</span><span class="p">=</span><span class="n">name</span>
-</span></code></pre></div>
-<h3 id="list-managementgroupid-and-managementgroupname"><a class="toclink" href="../../../../2024/04/17/azure-policy-useful-queries/#list-managementgroupid-and-managementgroupname">List ManagementGroupId and ManagementGroupName</a></h3>
-<div class="language-kusto highlight"><pre><span></span><code><span id="__span-10-1"><a href="#__codelineno-10-1" id="__codelineno-10-1" name="__codelineno-10-1"></a><span class="n">ResourceContainers</span>
-</span><span id="__span-10-2"><a href="#__codelineno-10-2" id="__codelineno-10-2" name="__codelineno-10-2"></a><span class="p">|</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">type</span><span class="w"> </span><span class="p">=~</span><span class="w"> </span><span class="s">'microsoft.management/managementgroups'</span>
-</span><span id="__span-10-3"><a href="#__codelineno-10-3" id="__codelineno-10-3" name="__codelineno-10-3"></a><span class="p">|</span><span class="w"> </span><span class="k">project</span><span class="w"> </span><span class="n">mgname</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="n">displayName</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">properties</span><span class="err">.</span><span class="n">displayName</span>
-</span></code></pre></div>
-<h3 id="policy-assignments-and-information-about-each-of-its-respective-definitions-displaying-the-scope-of-the-assignment-the-subscription-display-name-the-management-group-id-the-resource-group-name-the-definition-type-the-assignment-name-the-category-of-the-definition-and-the-policy-assignment-id"><a class="toclink" href="../../../../2024/04/17/azure-policy-useful-queries/#policy-assignments-and-information-about-each-of-its-respective-definitions-displaying-the-scope-of-the-assignment-the-subscription-display-name-the-management-group-id-the-resource-group-name-the-definition-type-the-assignment-name-the-category-of-the-definition-and-the-policy-assignment-id">Policy assignments and information about each of its respective definitions displaying the scope of the assignment, the subscription display name, the management group id, the resource group name, the definition type, the assignment name, the category of the definition, and the policy assignment ID.</a></h3>
-<div class="language-kusto highlight"><pre><span></span><code><span id="__span-11-1"><a href="#__codelineno-11-1" id="__codelineno-11-1" name="__codelineno-11-1"></a><span class="n">policyResources</span>
-</span><span id="__span-11-2"><a href="#__codelineno-11-2" id="__codelineno-11-2" name="__codelineno-11-2"></a><span class="p">|</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">type</span><span class="w"> </span><span class="p">=~</span><span class="s">'Microsoft.Authorization/PolicyAssignments'</span>
-</span><span id="__span-11-3"><a href="#__codelineno-11-3" id="__codelineno-11-3" name="__codelineno-11-3"></a><span class="p">|</span><span class="w"> </span><span class="k">project</span><span class="w"> </span><span class="n">policyAssignmentId</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">tolower</span><span class="p">(</span><span class="n">tostring</span><span class="p">(</span><span class="n">id</span><span class="p">)),</span><span class="w"> </span><span class="n">policyAssignmentDisplayName</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">tostring</span><span class="p">(</span><span class="n">properties</span><span class="err">.</span><span class="n">displayName</span><span class="p">),</span><span class="w"> </span><span class="n">policyAssignmentDefinitionId</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">tolower</span><span class="p">(</span><span class="n">properties</span><span class="err">.</span><span class="n">policyDefinitionId</span><span class="p">),</span><span class="w"> </span><span class="n">subscriptionId</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">tostring</span><span class="p">(</span><span class="n">subscriptionId</span><span class="p">),</span><span class="n">resourceGroup</span><span class="p">=</span><span class="n">tostring</span><span class="p">(</span><span class="n">resourceGroup</span><span class="p">),</span><span class="w"> </span><span class="n">AssignmentDefinition</span><span class="p">=</span><span class="n">properties</span>
-</span><span id="__span-11-4"><a href="#__codelineno-11-4" id="__codelineno-11-4" name="__codelineno-11-4"></a><span class="p">|</span><span class="w"> </span><span class="k">join</span><span class="w"> </span><span class="n">kind</span><span class="p">=</span><span class="n">leftouter</span><span class="p">(</span>
-</span><span id="__span-11-5"><a href="#__codelineno-11-5" id="__codelineno-11-5" name="__codelineno-11-5"></a><span class="w">    </span><span class="n">policyResources</span>
-</span><span id="__span-11-6"><a href="#__codelineno-11-6" id="__codelineno-11-6" name="__codelineno-11-6"></a><span class="w">    </span><span class="p">|</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">type</span><span class="w"> </span><span class="p">=~</span><span class="s">'Microsoft.Authorization/PolicySetDefinitions'</span><span class="w"> </span><span class="k">or</span><span class="w"> </span><span class="n">type</span><span class="w"> </span><span class="p">=~</span><span class="s">'Microsoft.Authorization/PolicyDefinitions'</span>
-</span><span id="__span-11-7"><a href="#__codelineno-11-7" id="__codelineno-11-7" name="__codelineno-11-7"></a><span class="w">    </span><span class="p">|</span><span class="w"> </span><span class="k">project</span><span class="w"> </span><span class="n">definitionId</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">tolower</span><span class="p">(</span><span class="n">id</span><span class="p">),</span><span class="w"> </span><span class="n">category</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">tostring</span><span class="p">(</span><span class="n">properties</span><span class="err">.</span><span class="n">metadata</span><span class="err">.</span><span class="n">category</span><span class="p">),</span><span class="w"> </span><span class="n">definitionType</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">iff</span><span class="p">(</span><span class="n">type</span><span class="w"> </span><span class="p">=~</span><span class="w"> </span><span class="s">'Microsoft.Authorization/PolicysetDefinitions'</span><span class="p">,</span><span class="w"> </span><span class="s">'initiative'</span><span class="p">,</span><span class="w"> </span><span class="s">'policy'</span><span class="p">),</span><span class="n">PolicyDefinition</span><span class="p">=</span><span class="n">properties</span>
-</span><span id="__span-11-8"><a href="#__codelineno-11-8" id="__codelineno-11-8" name="__codelineno-11-8"></a><span class="p">)</span><span class="w"> </span><span class="k">on</span><span class="w"> </span><span class="err">$</span><span class="n">left</span><span class="err">.</span><span class="n">policyAssignmentDefinitionId</span><span class="w"> </span><span class="p">==</span><span class="w"> </span><span class="err">$</span><span class="n">right</span><span class="err">.</span><span class="n">definitionId</span>
-</span><span id="__span-11-9"><a href="#__codelineno-11-9" id="__codelineno-11-9" name="__codelineno-11-9"></a><span class="p">|</span><span class="w"> </span><span class="k">extend</span><span class="w"> </span><span class="n">scope</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">iff</span><span class="p">(</span><span class="n">policyAssignmentId</span><span class="w"> </span><span class="k">contains</span><span class="w"> </span><span class="s">'/subscriptions/'</span><span class="p">,</span><span class="w"> </span><span class="s">'Subscription'</span><span class="p">,</span><span class="w"> </span><span class="n">iff</span><span class="p">(</span><span class="n">policyAssignmentId</span><span class="w"> </span><span class="k">contains</span><span class="w"> </span><span class="s">'/providers/microsoft.management/managementgroups'</span><span class="p">,</span><span class="w"> </span><span class="s">'Management Group'</span><span class="p">,</span><span class="w"> </span><span class="s">'Resource Group'</span><span class="p">))</span>
-</span><span id="__span-11-10"><a href="#__codelineno-11-10" id="__codelineno-11-10" name="__codelineno-11-10"></a><span class="p">|</span><span class="w"> </span><span class="k">join</span><span class="w"> </span><span class="n">kind</span><span class="p">=</span><span class="n">leftouter</span><span class="w"> </span><span class="p">(</span><span class="n">ResourceContainers</span>
-</span><span id="__span-11-11"><a href="#__codelineno-11-11" id="__codelineno-11-11" name="__codelineno-11-11"></a><span class="p">|</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">type</span><span class="w"> </span><span class="p">=~</span><span class="w"> </span><span class="s">'microsoft.resources/subscriptions'</span>
-</span><span id="__span-11-12"><a href="#__codelineno-11-12" id="__codelineno-11-12" name="__codelineno-11-12"></a><span class="p">|</span><span class="w"> </span><span class="k">project</span><span class="w"> </span><span class="n">subscriptionId</span><span class="p">,</span><span class="w"> </span><span class="n">subscriptionName</span><span class="p">=</span><span class="n">name</span><span class="p">)</span><span class="w"> </span><span class="k">on</span><span class="w"> </span><span class="err">$</span><span class="n">left</span><span class="err">.</span><span class="n">subscriptionId</span><span class="w"> </span><span class="p">==</span><span class="w"> </span><span class="err">$</span><span class="n">right</span><span class="err">.</span><span class="n">subscriptionId</span>
-</span><span id="__span-11-13"><a href="#__codelineno-11-13" id="__codelineno-11-13" name="__codelineno-11-13"></a><span class="p">|</span><span class="w"> </span><span class="k">extend</span><span class="w"> </span><span class="n">SubscriptionDisplayName</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">iff</span><span class="p">(</span><span class="n">isnotempty</span><span class="p">(</span><span class="n">subscriptionId</span><span class="p">),</span><span class="w"> </span><span class="n">subscriptionName</span><span class="p">,</span><span class="w"> </span><span class="s">''</span><span class="p">)</span>
-</span><span id="__span-11-14"><a href="#__codelineno-11-14" id="__codelineno-11-14" name="__codelineno-11-14"></a><span class="p">|</span><span class="w"> </span><span class="k">extend</span><span class="w"> </span><span class="n">ManagementGroupName</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">iff</span><span class="p">(</span><span class="n">policyAssignmentId</span><span class="w"> </span><span class="k">contains</span><span class="w"> </span><span class="s">'/providers/microsoft.management/'</span><span class="p">,</span><span class="w"> </span><span class="n">split</span><span class="p">(</span><span class="n">policyAssignmentId</span><span class="p">,</span><span class="w"> </span><span class="s">'/'</span><span class="p">)[</span><span class="mi">4</span><span class="p">],</span><span class="s">''</span><span class="p">)</span>
-</span><span id="__span-11-15"><a href="#__codelineno-11-15" id="__codelineno-11-15" name="__codelineno-11-15"></a><span class="p">|</span><span class="w"> </span><span class="k">extend</span><span class="w"> </span><span class="n">resourceGroupDisplayName</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">iff</span><span class="p">(</span><span class="n">isnotempty</span><span class="p">(</span><span class="n">resourceGroup</span><span class="p">),</span><span class="w"> </span><span class="n">resourceGroup</span><span class="p">,</span><span class="w"> </span><span class="s">''</span><span class="p">)</span>
-</span><span id="__span-11-16"><a href="#__codelineno-11-16" id="__codelineno-11-16" name="__codelineno-11-16"></a><span class="p">|</span><span class="w"> </span><span class="k">project</span><span class="w"> </span><span class="n">ManagementGroupName</span><span class="p">,</span><span class="n">SubscriptionDisplayName</span><span class="p">,</span><span class="n">resourceGroupDisplayName</span><span class="p">,</span><span class="w"> </span><span class="n">scope</span><span class="p">,</span><span class="n">definitionType</span><span class="p">,</span><span class="n">policyAssignmentDisplayName</span><span class="p">,</span><span class="w"> </span><span class="n">category</span><span class="p">,</span><span class="n">policyAssignmentId</span><span class="p">,</span><span class="w"> </span><span class="n">AssignmentDefinition</span><span class="p">,</span><span class="w"> </span><span class="n">PolicyDefinition</span>
-</span></code></pre></div>
-<ul class="task-list">
-<li class="task-list-item"><label class="task-list-control"><input disabled="" type="checkbox"><span class="task-list-indicator"></span></input></label> Add Management Group Display Name</li>
-</ul>
 </div>
 </article>
 <nav class="md-pagination">

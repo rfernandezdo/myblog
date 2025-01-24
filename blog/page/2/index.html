@@ -241,6 +241,13 @@
           </label>
 <ul class="md-nav__list" data-md-scrollfix="">
 <li class="md-nav__item">
+<a class="md-nav__link" href="../../2025/01/">
+<span class="md-ellipsis">
+    2025/01
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
 <a class="md-nav__link" href="../../2024/12/">
 <span class="md-ellipsis">
     2024/12
@@ -450,6 +457,13 @@
 <a class="md-nav__link" href="../../category/microsoft-entra-id/">
 <span class="md-ellipsis">
     Microsoft Entra ID
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../category/outlook/">
+<span class="md-ellipsis">
+    Outlook
   </span>
 </a>
 </li>
@@ -667,6 +681,142 @@
 <header class="md-typeset">
 <h1 id="blog">Blog</h1>
 </header>
+<article class="md-post md-post--excerpt">
+<header class="md-post__header">
+<nav class="md-post__authors md-typeset">
+<span class="md-author">
+<img alt="Rafael Fernández" src="https://avatars.githubusercontent.com/u/39990341"/>
+</span>
+</nav>
+<div class="md-post__meta md-meta">
+<ul class="md-meta__list">
+<li class="md-meta__item">
+<time datetime="2024-10-03 00:00:00">October 3, 2024</time></li>
+<li class="md-meta__item">
+            in
+            
+              <a class="md-meta__link" href="../../category/devops/">DevOps</a></li>
+<li class="md-meta__item">
+            
+              2 min read
+            
+          </li>
+</ul>
+</div>
+</header>
+<div class="md-post__content md-typeset">
+<h2 id="terraform-import-block"><a class="toclink" href="../../2024/10/03/terraform-import-block/">terraform import block</a></h2>
+<p>Sometimes you need to import existing infrastructure into Terraform. This is useful when you have existing resources that you want to manage with Terraform, or when you want to migrate from another tool to Terraform.</p>
+<p>Other times, you may need to import resources that were created outside of Terraform, such as manually created resources or resources created by another tool. For example: </p>
+<p>"Error: unexpected status 409 (409 Conflict) with error: RoleDefinitionWithSameNameExists: A custom role with the same name already exists in this directory. Use a different name"</p>
+<p>In my case, I had to import a custom role that was created outside of Terraform. Here's how I did it:</p>
+<ol>
+<li>Create a new Terraform configuration file for the resource you want to import. In my case, I created a new file called <code>custom_role.tf</code> with the following content:</li>
+</ol>
+<div class="language-hcl highlight"><pre><span></span><code><span id="__span-12-1"><a href="#__codelineno-12-1" id="__codelineno-12-1" name="__codelineno-12-1"></a><span class="kr">resource</span><span class="w"> </span><span class="nc">"azurerm_role_definition"</span><span class="w"> </span><span class="nv">"custom_role"</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-12-2"><a href="#__codelineno-12-2" id="__codelineno-12-2" name="__codelineno-12-2"></a><span class="w">  </span><span class="na">name</span><span class="w">        </span><span class="o">=</span><span class="w"> </span><span class="s2">"CustomRole"</span>
+</span><span id="__span-12-3"><a href="#__codelineno-12-3" id="__codelineno-12-3" name="__codelineno-12-3"></a><span class="w">  </span><span class="na">scope</span><span class="w">       </span><span class="o">=</span><span class="w"> </span><span class="s2">"/providers/Microsoft.Management/managementGroups/00000000-0000-0000-0000-000000000000"</span>
+</span><span id="__span-12-4"><a href="#__codelineno-12-4" id="__codelineno-12-4" name="__codelineno-12-4"></a><span class="w">  </span><span class="nb">permissions</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-12-5"><a href="#__codelineno-12-5" id="__codelineno-12-5" name="__codelineno-12-5"></a><span class="w">    </span><span class="na">actions</span><span class="w">     </span><span class="o">=</span><span class="w"> </span><span class="p">[</span>
+</span><span id="__span-12-6"><a href="#__codelineno-12-6" id="__codelineno-12-6" name="__codelineno-12-6"></a><span class="w">      </span><span class="s2">"Microsoft.Storage/storageAccounts/listKeys/action"</span><span class="p">,</span>
+</span><span id="__span-12-7"><a href="#__codelineno-12-7" id="__codelineno-12-7" name="__codelineno-12-7"></a><span class="w">      </span><span class="s2">"Microsoft.Storage/storageAccounts/read"</span>
+</span><span id="__span-12-8"><a href="#__codelineno-12-8" id="__codelineno-12-8" name="__codelineno-12-8"></a><span class="w">    </span><span class="p">]</span>
+</span><span id="__span-12-9"><a href="#__codelineno-12-9" id="__codelineno-12-9" name="__codelineno-12-9"></a>
+</span><span id="__span-12-10"><a href="#__codelineno-12-10" id="__codelineno-12-10" name="__codelineno-12-10"></a><span class="w">    </span><span class="na">data_actions</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[]</span>
+</span><span id="__span-12-11"><a href="#__codelineno-12-11" id="__codelineno-12-11" name="__codelineno-12-11"></a>
+</span><span id="__span-12-12"><a href="#__codelineno-12-12" id="__codelineno-12-12" name="__codelineno-12-12"></a><span class="w">    </span><span class="na">not_data_actions</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[]</span>
+</span><span id="__span-12-13"><a href="#__codelineno-12-13" id="__codelineno-12-13" name="__codelineno-12-13"></a><span class="w">  </span><span class="p">}</span>
+</span><span id="__span-12-14"><a href="#__codelineno-12-14" id="__codelineno-12-14" name="__codelineno-12-14"></a><span class="w">  </span><span class="na">assignable_scopes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span>
+</span><span id="__span-12-15"><a href="#__codelineno-12-15" id="__codelineno-12-15" name="__codelineno-12-15"></a><span class="w">    </span><span class="s2">"/providers/Microsoft.Management/managementGroups/00000000-0000-0000-0000-000000000000"</span>
+</span><span id="__span-12-16"><a href="#__codelineno-12-16" id="__codelineno-12-16" name="__codelineno-12-16"></a><span class="w">  </span><span class="p">]</span>
+</span><span id="__span-12-17"><a href="#__codelineno-12-17" id="__codelineno-12-17" name="__codelineno-12-17"></a><span class="p">}</span>
+</span></code></pre></div>
+<ol>
+<li>Add a import block to the configuration file with the resource type and name you want to import. In my case, I added the following block to the <code>custom_role.tf</code> file:</li>
+</ol>
+<div class="language-hcl highlight"><pre><span></span><code><span id="__span-13-1"><a href="#__codelineno-13-1" id="__codelineno-13-1" name="__codelineno-13-1"></a><span class="nb">import</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-13-2"><a href="#__codelineno-13-2" id="__codelineno-13-2" name="__codelineno-13-2"></a><span class="w">  </span><span class="na">to</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">azurerm_role_definition.custom_role</span>
+</span><span id="__span-13-3"><a href="#__codelineno-13-3" id="__codelineno-13-3" name="__codelineno-13-3"></a><span class="w">  </span><span class="na">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"/providers/Microsoft.Authorization/roleDefinitions/11111111-1111-1111-1111-111111111111|/providers/Microsoft.Management/managementGroups/00000000-0000-0000-0000-000000000000"</span>
+</span><span id="__span-13-4"><a href="#__codelineno-13-4" id="__codelineno-13-4" name="__codelineno-13-4"></a>
+</span><span id="__span-13-5"><a href="#__codelineno-13-5" id="__codelineno-13-5" name="__codelineno-13-5"></a><span class="p">}</span>
+</span></code></pre></div>
+<ol>
+<li>Run the <code>terraform</code>plan` command to see the changes that Terraform will make to the resource. In my case, the output looked like this:</li>
+</ol>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-14-1"><a href="#__codelineno-14-1" id="__codelineno-14-1" name="__codelineno-14-1"></a>.
+</span><span id="__span-14-2"><a href="#__codelineno-14-2" id="__codelineno-14-2" name="__codelineno-14-2"></a>.
+</span><span id="__span-14-3"><a href="#__codelineno-14-3" id="__codelineno-14-3" name="__codelineno-14-3"></a>.
+</span><span id="__span-14-4"><a href="#__codelineno-14-4" id="__codelineno-14-4" name="__codelineno-14-4"></a>Terraform<span class="w"> </span>used<span class="w"> </span>the<span class="w"> </span>selected<span class="w"> </span>providers<span class="w"> </span>to<span class="w"> </span>generate<span class="w"> </span>the<span class="w"> </span>following<span class="w"> </span>execution<span class="w"> </span>plan.<span class="w"> </span>Resource<span class="w"> </span>actions<span class="w"> </span>are<span class="w"> </span>indicated<span class="w"> </span>with<span class="w"> </span>the<span class="w"> </span>following<span class="w"> </span>symbols:
+</span><span id="__span-14-5"><a href="#__codelineno-14-5" id="__codelineno-14-5" name="__codelineno-14-5"></a><span class="w">  </span>~<span class="w"> </span>update<span class="w"> </span><span class="k">in</span>-place
+</span><span id="__span-14-6"><a href="#__codelineno-14-6" id="__codelineno-14-6" name="__codelineno-14-6"></a>.
+</span><span id="__span-14-7"><a href="#__codelineno-14-7" id="__codelineno-14-7" name="__codelineno-14-7"></a>.
+</span><span id="__span-14-8"><a href="#__codelineno-14-8" id="__codelineno-14-8" name="__codelineno-14-8"></a>.
+</span></code></pre></div>
+<ol>
+<li>Run the <code>terraform apply</code> command to import the resource into Terraform. In my case, the output looked like this after a long 9 minutes:</li>
+</ol>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-15-1"><a href="#__codelineno-15-1" id="__codelineno-15-1" name="__codelineno-15-1"></a>...
+</span><span id="__span-15-2"><a href="#__codelineno-15-2" id="__codelineno-15-2" name="__codelineno-15-2"></a>Apply<span class="w"> </span>complete!<span class="w"> </span>Resources:<span class="w"> </span><span class="m">1</span><span class="w"> </span>imported,<span class="w"> </span><span class="m">0</span><span class="w"> </span>added,<span class="w"> </span><span class="m">1</span><span class="w"> </span>changed,<span class="w"> </span><span class="m">0</span><span class="w"> </span>destroyed.
+</span></code></pre></div>
+<ol>
+<li>Verify that the resource was imported successfully by running the <code>terraform show</code> command. In my case, the output looked like this:</li>
+</ol>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-16-1"><a href="#__codelineno-16-1" id="__codelineno-16-1" name="__codelineno-16-1"></a>terraform<span class="w"> </span>show
+</span></code></pre></div>
+<p>You can use the <code>terraform import</code> command to import existing infrastructure into Terraform too but I prefer to use the <code>import</code> block because it's more readable and easier to manage.</p>
+<p>With terraform import the command would look like this:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-17-1"><a href="#__codelineno-17-1" id="__codelineno-17-1" name="__codelineno-17-1"></a>terraform<span class="w"> </span>import<span class="w"> </span>azurerm_role_definition.custom_role<span class="w"> </span><span class="s2">"/providers/Microsoft.Authorization/roleDefinitions/11111111-1111-1111-1111-111111111111|/providers/Microsoft.Management/managementGroups/00000000-0000-0000-0000-000000000000"</span>
+</span></code></pre></div>
+<h3 id="conclusion"><a class="toclink" href="../../2024/10/03/terraform-import-block/#conclusion">Conclusion</a></h3>
+<p>That's it! You've successfully imported an existing resource into Terraform. Now you can manage it with Terraform just like any other resource.</p>
+<p>Happy coding! 🚀</p>
+</div>
+</article>
+<article class="md-post md-post--excerpt">
+<header class="md-post__header">
+<nav class="md-post__authors md-typeset">
+<span class="md-author">
+<img alt="Rafael Fernández" src="https://avatars.githubusercontent.com/u/39990341"/>
+</span>
+</nav>
+<div class="md-post__meta md-meta">
+<ul class="md-meta__list">
+<li class="md-meta__item">
+<time datetime="2024-09-22 00:00:00">September 22, 2024</time></li>
+<li class="md-meta__item">
+            in
+            
+              <a class="md-meta__link" href="../../category/microsoft-entra/">Microsoft Entra</a>, 
+              <a class="md-meta__link" href="../../category/security/">Security</a></li>
+<li class="md-meta__item">
+            
+              2 min read
+            
+          </li>
+</ul>
+</div>
+</header>
+<div class="md-post__content md-typeset">
+<h2 id="microsoft-entra-id-protection"><a class="toclink" href="../../2024/09/22/microsoft-entra-id-protection/">Microsoft Entra ID Protection</a></h2>
+<p>Microsoft Entra offers a comprehensive set of security features to protect your organization's data and resources. One of these features is <strong>ID Protection</strong>, which helps you secure your users' identities and prevent unauthorized access to your organization's data. Here are some key benefits of using <strong>ID Protection</strong> in Microsoft Entra:</p>
+<ul>
+<li>
+<p><strong>Multi-factor authentication (MFA)</strong>: <strong>ID Protection</strong> enables you to enforce multi-factor authentication for all users in your organization. This adds an extra layer of security to your users' accounts and helps prevent unauthorized access.</p>
+</li>
+<li>
+<p><strong>Conditional access policies</strong>: With <strong>ID Protection</strong>, you can create conditional access policies that define the conditions under which users can access your organization's resources. For example, you can require users to use multi-factor authentication when accessing sensitive data or restrict access to certain applications based on the user's location.</p>
+</li>
+<li>
+<p><strong>Risk-based policies</strong>: <strong>ID Protection</strong> uses advanced machine learning algorithms to detect suspicious activities and risky sign-in attempts. You can create risk-based policies that automatically block or allow access based on the risk level associated with the sign-in attempt.</p>
+</li>
+<li>
+<p><strong>Identity protection reports</strong>: <strong>ID Protection</strong> provides detailed reports and insights into your organization's identity security posture. You can use these reports to identify security risks, monitor user activity, and take proactive measures to protect your organization's data.</p>
+</li>
+</ul>
+<p>By using <strong>ID Protection</strong> in Microsoft Entra, you can enhance the security of your organization's data and resources and protect your users' identities from cyber threats. If you want to learn more about <strong>ID Protection</strong> and other security features in Microsoft Entra, contact us today! </p>
+<p>I hope this helps!</p>
+</div>
+</article>
 <article class="md-post md-post--excerpt">
 <header class="md-post__header">
 <nav class="md-post__authors md-typeset">
@@ -1710,140 +1860,6 @@ click BG2 "https://learn.microsoft.com/en-us/azure/role-based-access-control/bui
 <li><a href="https://learn.microsoft.com/en-us/azure/defender-for-storage/overview">Microsoft Defender for Storage</a></li>
 <li><a href="https://center-for-threat-informed-defense.github.io/mappings-explorer/external/azure/">Azure MAPPINGS</a></li>
 </ul>
-</div>
-</article>
-<article class="md-post md-post--excerpt">
-<header class="md-post__header">
-<nav class="md-post__authors md-typeset">
-<span class="md-author">
-<img alt="Rafael Fernández" src="https://avatars.githubusercontent.com/u/39990341"/>
-</span>
-</nav>
-<div class="md-post__meta md-meta">
-<ul class="md-meta__list">
-<li class="md-meta__item">
-<time datetime="2024-06-15 00:00:00">June 15, 2024</time></li>
-<li class="md-meta__item">
-            in
-            
-              <a class="md-meta__link" href="../../category/azure-services/">Azure Services</a></li>
-<li class="md-meta__item">
-            
-              3 min read
-            
-          </li>
-</ul>
-</div>
-</header>
-<div class="md-post__content md-typeset">
-<h2 id="tagging-best-practices-in-azure"><a class="toclink" href="../../2024/06/15/tagging-best-practices-in-azure/">Tagging best practices in Azure</a></h2>
-<p>In this post, I will show you some best practices for tagging resources in Azure.</p>
-<h3 id="what-are-tags"><a class="toclink" href="../../2024/06/15/tagging-best-practices-in-azure/#what-are-tags">What are tags?</a></h3>
-<p>Tags are key-value pairs that you can assign to your Azure resources to organize and manage them more effectively. Tags allow you to categorize resources in different ways, such as by environment, owner, or cost center, and to apply policies and automation based on these categories.</p>
-<p>If you don't know anything about tags, you can read the <a href="https://docs.microsoft.com/en-us/azure/azure-resource-manager/management/tag-resources">official documentation</a> to learn more about them.</p>
-<h3 id="why-use-tags"><a class="toclink" href="../../2024/06/15/tagging-best-practices-in-azure/#why-use-tags">Why use tags?</a></h3>
-<p>There are several reasons to use tags:</p>
-<ul>
-<li>
-<p><strong>Organization</strong>: Tags allow you to organize your resources in a way that makes sense for your organization. You can use tags to group resources by environment, project, or department, making it easier to manage and monitor them.</p>
-</li>
-<li>
-<p><strong>Cost management</strong>: Tags allow you to track and manage costs more effectively. You can use tags to identify resources that are part of a specific project or department, and to allocate costs accordingly.</p>
-</li>
-<li>
-<p><strong>Automation</strong>: Tags allow you to automate tasks based on resource categories. You can use tags to apply policies, trigger alerts, or enforce naming conventions, making it easier to manage your resources at scale.</p>
-</li>
-</ul>
-<h3 id="best-practices-for-tagging-resources-in-azure"><a class="toclink" href="../../2024/06/15/tagging-best-practices-in-azure/#best-practices-for-tagging-resources-in-azure">Best practices for tagging resources in Azure</a></h3>
-<p>Here are some best practices for tagging resources in Azure:</p>
-<ul>
-<li>
-<p><strong>Use consistent naming conventions</strong>: Define a set of standard tags that you will use across all your resources. This will make it easier to search for and manage resources, and to apply policies and automation consistently.</p>
-</li>
-<li>
-<p><strong>Apply tags at resource creation</strong>: Apply tags to resources when you create them, rather than adding them later. This will ensure that all resources are tagged correctly from the start, and will help you avoid missing or incorrect tags.</p>
-</li>
-<li>
-<p><strong>Use tags to track costs</strong>: Use tags to track costs by project, department, or environment. This will help you allocate costs more effectively, and will make it easier to identify resources that are not being used or are costing more than expected.</p>
-</li>
-<li>
-<p><strong>Define tags by hierarchy</strong>: Define tags in a hierarchy that makes sense for your organization, from more general at level subscription to more specific at resource group level. </p>
-</li>
-<li>
-<p><strong>Use inherited tags</strong>: Use inherited tags to apply tags to resources automatically based on their parent resources. This will help you ensure that all resources are tagged consistently, and will reduce the risk of missing or incorrect tags. Exist Azure Policy to enforce inherited tags for example, you can check all in   <a href="https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/tag-policies#policy-definitions">Assign policy definitions for tag compliance</a></p>
-</li>
-<li>
-<p><strong>Don't use tags for policy filtering</strong>: If you use Azure Policy, it's highly recommended not to use tag filtering in your policy rules when the policy relates to security setting, when you use tags to filter, resources without tag appear Compliance. Azure Policy exemptions or Azure Policy exclusions are recommended.</p>
-</li>
-<li>
-<p><strong>Don't use tags for replace naming convention gaps</strong>: Tags are not a replacement for naming conventions. Use tags to categorize resources, and use naming conventions to identify resources uniquely.</p>
-</li>
-<li>
-<p><strong>Use tags for automation</strong>: Use tags to trigger automation tasks, such as scaling, backup, or monitoring. You can use tags to define policies that enforce specific actions based on resource categories.</p>
-</li>
-<li>
-<p><strong>Don't go crazy adding tags</strong>: Don't add too many tags to your resources. Keep it simple and use tags that are meaningful and useful. Too many tags can make it difficult to manage. You can begin with a small set of tags and expand as needed, for example: <a href="https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/ready/azure-best-practices/resource-tagging#minimum-suggested-tags">Minimum Suggested Tags</a></p>
-</li>
-<li>
-<p><strong>Not all Azure services support tags</strong>: Keep in mind that not all Azure services support tags. You can check in the <a href="https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/tag-support">Tag support for Azure resources</a> to see which services support tags.</p>
-</li>
-</ul>
-<h3 id="conclusion"><a class="toclink" href="../../2024/06/15/tagging-best-practices-in-azure/#conclusion">Conclusion</a></h3>
-<p>By using tags, you can organize and manage your resources more effectively, track and manage costs more efficiently, and automate tasks based on resource categories. I hope this post has given you a good introduction to tagging best practices in Azure and how you can use tags to optimize your cloud environment.</p>
-</div>
-</article>
-<article class="md-post md-post--excerpt">
-<header class="md-post__header">
-<nav class="md-post__authors md-typeset">
-<span class="md-author">
-<img alt="Rafael Fernández" src="https://avatars.githubusercontent.com/u/39990341"/>
-</span>
-</nav>
-<div class="md-post__meta md-meta">
-<ul class="md-meta__list">
-<li class="md-meta__item">
-<time datetime="2024-06-13 00:00:00">June 13, 2024</time></li>
-<li class="md-meta__item">
-            in
-            
-              <a class="md-meta__link" href="../../category/azure-services/">Azure Services</a>, 
-              <a class="md-meta__link" href="../../category/security/">Security</a></li>
-<li class="md-meta__item">
-            
-              2 min read
-            
-          </li>
-</ul>
-</div>
-</header>
-<div class="md-post__content md-typeset">
-<h2 id="restrict-managed-disks-from-being-imported-or-exported"><a class="toclink" href="../../2024/06/13/restrict-managed-disks-from-being-imported-or-exported/">Restrict managed disks from being imported or exported</a></h2>
-<p>In this post, I will show you how to restrict managed disks from being imported or exported in Azure.</p>
-<h3 id="what-are-managed-disks"><a class="toclink" href="../../2024/06/13/restrict-managed-disks-from-being-imported-or-exported/#what-are-managed-disks">What are managed disks?</a></h3>
-<p>Azure Managed Disks are block-level storage volumes that are managed by Azure and used with Azure Virtual Machines. Managed Disks are designed for high availability and durability, and they provide a simple and scalable way to manage your storage.</p>
-<p>If you don't know anything about Azue Managed Disks, grab a cup of coffee( it will take you a while), you can read the <a href="https://docs.microsoft.com/en-us/azure/virtual-machines/managed-disks-overview">official documentation</a> to learn more about them.</p>
-<h3 id="why-restrict-managed-disks-from-being-imported-or-exported"><a class="toclink" href="../../2024/06/13/restrict-managed-disks-from-being-imported-or-exported/#why-restrict-managed-disks-from-being-imported-or-exported">Why restrict managed disks from being imported or exported?</a></h3>
-<p>There are several reasons to restrict managed disks from being imported or exported:</p>
-<ul>
-<li><strong>Security</strong>: By restricting managed disks from being imported or exported, you can reduce the risk of unauthorized access to your data.</li>
-<li><strong>Compliance</strong>: By restricting managed disks from being imported or exported, you can help ensure that your organization complies with data protection regulations.</li>
-</ul>
-<h3 id="how-to-restrict-managed-disks-from-being-imported-or-exported"><a class="toclink" href="../../2024/06/13/restrict-managed-disks-from-being-imported-or-exported/#how-to-restrict-managed-disks-from-being-imported-or-exported">How to restrict managed disks from being imported or exported</a></h3>
-<h4 id="at-deployment-time"><a class="toclink" href="../../2024/06/13/restrict-managed-disks-from-being-imported-or-exported/#at-deployment-time">At deployment time</a></h4>
-<p>An example with azcli:</p>
-<h5 id="create-a-managed-disk-with-public-network-access-disabled"><a class="toclink" href="../../2024/06/13/restrict-managed-disks-from-being-imported-or-exported/#create-a-managed-disk-with-public-network-access-disabled">Create a managed disk with public network access disabled</a></h5>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a href="#__codelineno-3-1" id="__codelineno-3-1" name="__codelineno-3-1"></a>## Create a managed disk with public network access disabled
-</span><span id="__span-3-2"><a href="#__codelineno-3-2" id="__codelineno-3-2" name="__codelineno-3-2"></a>az disk create --resource-group myResourceGroup --name myDisk --size-gb 128 --location eastus --sku Standard_LRS --no-wait --public-network-access disabled 
-</span></code></pre></div>
-<h5 id="create-a-managed-disk-with-public-network-access-disabled-and-private-endpoint-enabled"><a class="toclink" href="../../2024/06/13/restrict-managed-disks-from-being-imported-or-exported/#create-a-managed-disk-with-public-network-access-disabled-and-private-endpoint-enabled">Create a managed disk with public network access disabled and private endpoint enabled</a></h5>
-<p>Follow <a href="https://learn.microsoft.com/en-us/azure/virtual-machines/linux/disks-export-import-private-links-cli#log-in-into-your-subscription-and-set-your-variables">Azure CLI - Restrict import/export access for managed disks with Private Links</a></p>
-<h4 id="at-scale"><a class="toclink" href="../../2024/06/13/restrict-managed-disks-from-being-imported-or-exported/#at-scale">At Scale</a></h4>
-<p>If you want to restrict managed disks from being imported or exported, you can use Azure Policy to enforce this restriction. Azure Policy is a service in Azure that you can use to create, assign, and manage policies that enforce rules and effects over your resources. By using Azure Policy, you can ensure that your resources comply with your organization's standards and service-level agreements.</p>
-<p>To restrict managed disks from being imported or exported using Azure Policy, you can use or create a policy definition that specifies the conditions under which managed disks can be imported or exported. You can then assign this policy definition to a scope, such as a management group, subscription, or resource group, to enforce the restriction across your resources.</p>
-<p>In this case we have a Built-in policy definition that restricts managed disks from being imported or exported <a href="https://portal.azure.com/#blade/Microsoft_Azure_Policy/PolicyDetailBlade/definitionId/%2Fproviders%2FMicrosoft.Authorization%2FpolicyDefinitions%2F582bd7a6-a5f6-4dc6-b9dc-9cb81fe0d4c5">Configure disk access resources with private endpoints</a></p>
-<h3 id="conclusion"><a class="toclink" href="../../2024/06/13/restrict-managed-disks-from-being-imported-or-exported/#conclusion">Conclusion</a></h3>
-<p>In this post, I showed you how to restrict managed disks from being imported or exported in Azure. By restricting managed disks from being imported or exported, you can reduce the risk of unauthorized access to your data and help ensure that your organization complies with data protection regulations. </p>
-<p>Curiosly, restrict managed disks from being imported or exported, it's not a compliance check in the Microsoft cloud security benchmark but it's a good practice to follow.</p>
 </div>
 </article>
 <nav class="md-pagination">

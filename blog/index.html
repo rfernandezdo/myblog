@@ -241,6 +241,13 @@
           </label>
 <ul class="md-nav__list" data-md-scrollfix="">
 <li class="md-nav__item">
+<a class="md-nav__link" href="2025/01/">
+<span class="md-ellipsis">
+    2025/01
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
 <a class="md-nav__link" href="2024/12/">
 <span class="md-ellipsis">
     2024/12
@@ -450,6 +457,13 @@
 <a class="md-nav__link" href="category/microsoft-entra-id/">
 <span class="md-ellipsis">
     Microsoft Entra ID
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="category/outlook/">
+<span class="md-ellipsis">
+    Outlook
   </span>
 </a>
 </li>
@@ -667,6 +681,302 @@
 <header class="md-typeset">
 <h1 id="blog">Blog</h1>
 </header>
+<article class="md-post md-post--excerpt">
+<header class="md-post__header">
+<nav class="md-post__authors md-typeset">
+<span class="md-author">
+<img alt="Rafael Fernández" src="https://avatars.githubusercontent.com/u/39990341"/>
+</span>
+</nav>
+<div class="md-post__meta md-meta">
+<ul class="md-meta__list">
+<li class="md-meta__item">
+<time datetime="2025-01-24 00:00:00">January 24, 2025</time></li>
+<li class="md-meta__item">
+            in
+            
+              <a class="md-meta__link" href="category/azure-services/">Azure Services</a></li>
+<li class="md-meta__item">
+            
+              4 min read
+            
+          </li>
+</ul>
+</div>
+</header>
+<div class="md-post__content md-typeset">
+<h2 id="azure-virtual-network-manager-a-comprehensive-guide"><a class="toclink" href="2025/01/24/azure-virtual-network-manager-a-comprehensive-guide/">Azure Virtual Network Manager: A Comprehensive Guide</a></h2>
+<p>Azure Virtual Network Manager is a powerful management service that allows you to group, configure, deploy, and manage virtual networks across subscriptions on a global scale. It provides the ability to define network groups for logical segmentation of your virtual networks. You can then establish connectivity and security configurations and apply them across all selected virtual networks in network groups simultaneously.</p>
+<h3 id="how-does-azure-virtual-network-manager-work"><a class="toclink" href="2025/01/24/azure-virtual-network-manager-a-comprehensive-guide/#how-does-azure-virtual-network-manager-work">How Does Azure Virtual Network Manager Work?</a></h3>
+<p>The functionality of Azure Virtual Network Manager revolves around a well-defined process:</p>
+<ol>
+<li>
+<p><strong>Scope Definition:</strong> During the creation process, you determine the scope of what your Azure Virtual Network Manager will manage. The Network Manager only has delegated access to apply configurations within this defined scope boundary. Although you can directly define a scope on a list of subscriptions, it's recommended to use management groups for scope definition as they provide hierarchical organization to your subscriptions.</p>
+</li>
+<li>
+<p><strong>Deployment of Configuration Types:</strong> After defining the scope, you deploy configuration types including Connectivity and SecurityAdmin rules for your Virtual Network Manager.</p>
+</li>
+<li>
+<p><strong>Creation of Network Group:</strong> Post-deployment, you create a network group which acts as a logical container of networking resources for applying configurations at scale. You can manually select individual virtual networks to be added to your network group (static membership) or use Azure Policy to define conditions for dynamic group membership.</p>
+</li>
+<li>
+<p><strong>Connectivity and Security Configurations:</strong> Next, you create connectivity and/or security configurations to be applied to those network groups based on your topology and security requirements. A connectivity configuration enables you to create a mesh or a hub-and-spoke network topology, while a security configuration lets you define a collection of rules that can be applied globally to one or more network groups.</p>
+</li>
+<li>
+<p><strong>Deployment of Configurations:</strong> Once you've created your desired network groups and configurations, you can deploy the configurations to any region of your choosing.</p>
+</li>
+</ol>
+<p>Azure Virtual Network Manager can be deployed and managed through various platforms such as the Azure portal, Azure CLI, Azure PowerShell, or Terraform.</p>
+<h3 id="key-benefits-of-azure-virtual-network-manager"><a class="toclink" href="2025/01/24/azure-virtual-network-manager-a-comprehensive-guide/#key-benefits-of-azure-virtual-network-manager">Key Benefits of Azure Virtual Network Manager</a></h3>
+<ul>
+<li>Centralized management of connectivity and security policies globally across regions and subscriptions.</li>
+<li>Direct connectivity between spokes in a hub-and-spoke configuration without the complexity of managing a mesh network.</li>
+<li>Highly scalable and highly available service with redundancy and replication across the globe.</li>
+<li>Ability to create network security rules that override network security group rules.</li>
+<li>Low latency and high bandwidth between resources in different virtual networks using virtual network peering.</li>
+<li>Roll out network changes through a specific region sequence and frequency of your choosing.</li>
+</ul>
+<h3 id="use-cases-for-azure-virtual-network-manager"><a class="toclink" href="2025/01/24/azure-virtual-network-manager-a-comprehensive-guide/#use-cases-for-azure-virtual-network-manager">Use Cases for Azure Virtual Network Manager</a></h3>
+<p>Azure Virtual Network Manager is a versatile tool that can be used in a variety of scenarios:</p>
+<ol>
+<li>
+<p><strong>Hub-and-Spoke Network Topology:</strong> Azure Virtual Network Manager is ideal for managing hub-and-spoke network topologies where you have a central hub virtual network that connects to multiple spoke virtual networks. You can easily create and manage these configurations at scale using Azure Virtual Network Manager.</p>
+</li>
+<li>
+<p><strong>Global Connectivity and Security Policies:</strong> If you have a global presence with virtual networks deployed across multiple regions, Azure Virtual Network Manager allows you to define and apply connectivity and security policies globally, ensuring consistent network configurations across all regions.</p>
+</li>
+<li>
+<p><strong>Network Segmentation and Isolation:</strong> Azure Virtual Network Manager enables you to segment and isolate your virtual networks based on your organizational requirements. You can create network groups and apply security configurations to enforce network isolation and access control.</p>
+</li>
+<li>
+<p><strong>Centralized Network Management:</strong> For organizations with multiple subscriptions and virtual networks, Azure Virtual Network Manager provides a centralized management solution to manage network configurations, connectivity, and security policies across all subscriptions.</p>
+</li>
+<li>
+<p><strong>Automated Network Configuration Deployment:</strong> By leveraging Azure Policy and Azure Virtual Network Manager, you can automate the deployment of network configurations based on predefined conditions, ensuring consistent network configurations and compliance across your Azure environment.</p>
+</li>
+</ol>
+<h3 id="example-connectivity-and-security-configurations-forcing-a-network-security-rule"><a class="toclink" href="2025/01/24/azure-virtual-network-manager-a-comprehensive-guide/#example-connectivity-and-security-configurations-forcing-a-network-security-rule">Example connectivity and security configurations forcing a Network Security Rule</a></h3>
+<p>In Azure Virtual Network Manager:</p>
+<p><img alt="alt text" src="2025/image-3.png"/></p>
+<p>In Azure Virtual Network:</p>
+<p><img alt="alt text" src="2025/image.png"/></p>
+<h4 id="example-connectivity-configuration-forcing-a-hub-and-spoke-network-topology"><a class="toclink" href="2025/01/24/azure-virtual-network-manager-a-comprehensive-guide/#example-connectivity-configuration-forcing-a-hub-and-spoke-network-topology">Example Connectivity Configuration forcing a Hub-and-Spoke Network Topology</a></h4>
+<p>In Azure Virtual Network Manager:</p>
+<p><img alt="alt text" src="2025/image-2.png"/></p>
+<p>In Azure Virtual Network:</p>
+<p><img alt="alt text" src="2025/image-1.png"/></p>
+<h3 id="preview-features"><a class="toclink" href="2025/01/24/azure-virtual-network-manager-a-comprehensive-guide/#preview-features">Preview Features</a></h3>
+<p>At the time of writing, Azure Virtual Network Manager has some features in preview and may not be available in all regions. Some of the preview features include:</p>
+<ul>
+<li>IP address management: allows you to manage IP addresses by creating and assigning IP address pools to your virtual networks.</li>
+<li>
+<p>Virtual Network verifier: Enables you to check if your network policies allow or disallow traffic between your Azure network resources.</p>
+</li>
+<li>
+<p>Configurations, creation of a routing is in preview, very interesting to manage the traffic between the different networks.</p>
+</li>
+</ul>
+<h3 id="conclusion"><a class="toclink" href="2025/01/24/azure-virtual-network-manager-a-comprehensive-guide/#conclusion">Conclusion</a></h3>
+<p>Azure Virtual Network Manager is a powerful service that simplifies the management of virtual networks in Azure. By providing a centralized platform to define and apply connectivity and security configurations at scale, Azure Virtual Network Manager streamlines network management tasks and ensures consistent network configurations across your Azure environment.</p>
+<p>For up-to-date information on the regions where Azure Virtual Network Manager is available, refer to <a href="https://azure.microsoft.com/en-us/explore/global-infrastructure/products-by-region/table">Products available by region</a>.</p>
+</div>
+</article>
+<article class="md-post md-post--excerpt">
+<header class="md-post__header">
+<nav class="md-post__authors md-typeset">
+<span class="md-author">
+<img alt="Rafael Fernández" src="https://avatars.githubusercontent.com/u/39990341"/>
+</span>
+</nav>
+<div class="md-post__meta md-meta">
+<ul class="md-meta__list">
+<li class="md-meta__item">
+<time datetime="2024-12-22 00:00:00">December 22, 2024</time></li>
+<li class="md-meta__item">
+            in
+            
+              <a class="md-meta__link" href="category/outlook/">Outlook</a></li>
+<li class="md-meta__item">
+            
+              5 min read
+            
+          </li>
+</ul>
+</div>
+</header>
+<div class="md-post__content md-typeset">
+<h2 id="gtd-in-outlook-with-microsoft-to-do"><a class="toclink" href="2024/12/22/gtd-in-outlook-with-microsoft-to-do/">GTD in Outlook with Microsoft To Do</a></h2>
+<p>In this post, we will see how to use GTD in Outlook.</p>
+<p>Firs of all, let's define what GTD is. GTD stands for Getting Things Done, a productivity method created by David Allen. The GTD method is based on the idea that you should get things out of your head and into a trusted system, so you can focus on what you need to do.</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>The GTD method is not about doing more things faster. It's about doing the right things at the right time.
+This method needs to be aligned with your purpose, objectives, and goals, so you can focus on what really matters to you.</p>
+</div>
+<h3 id="the-gtd-workflow"><a class="toclink" href="2024/12/22/gtd-in-outlook-with-microsoft-to-do/#the-gtd-workflow">The GTD workflow</a></h3>
+<p>The GTD workflow consists of five steps:</p>
+<ol>
+<li>Capture: Collect everything that has your attention.</li>
+<li>Clarify: Process what you've captured.</li>
+<li>Organize: Put everything in its place.</li>
+<li>Reflect: Review your system regularly.</li>
+<li>Engage: Choose what to do and do it.</li>
+</ol>
+<p>The detailed flowchart of the GTD method is shown below:</p>
+<pre class="mermaid"><code>graph TD;
+    subgraph Capture    
+    subgraph for_each_item_not_in_Inbox
+    AA[Collect everything that has your attention in the Inbox];
+    end    
+    A[Inbox]
+    AA--&gt;A
+    end
+    subgraph Clarify        
+    subgraph for_each_item_in_Inbox
+    BB[  What is this?
+            What should I do?
+            Is this really worth doing?
+            How does it fit in with all the other things I have to do?
+            Is there any action that needs to be done about it or because of it?]
+    end
+    end
+    A --&gt; BB
+    subgraph Organize
+    BB --&gt; B{Is it actionable?}
+    B -- no --&gt; C{Is it reference material?}
+    C -- yes --&gt; D[Archive]
+    C -- no --&gt; E{Is it trash?}
+    E -- yes --&gt; FF[Trash it]
+    E -- no --&gt; GG[Incubate it]
+    GG --&gt; HH[Review it weekly]
+    B -- yes --&gt; F{Can it be done in one step?}
+    F -- no --&gt; G[Project]
+    G --&gt; HHH[Define a next action at least]
+    HHH --&gt; H[Project Actions]    
+    end
+    subgraph Engage
+    H --&gt; I
+    F -- yes --&gt; I{Does it take more than 2 minutes?}
+    I -- no --&gt; J[DO IT]
+    I -- yes --&gt; K{Is it my responsibility?}
+    K -- no --&gt; L[Delegate]
+    L --&gt; M[Waiting For]    
+    K -- yes --&gt; N{Does it have a specific date?}
+    N -- yes --&gt; O[Add to Calendar]
+    N -- no --&gt; P[Next Actions]
+    O --&gt; Q[Schedule. Do it at a specific time]
+    P --&gt; R[Do it as soon as possible]
+    end
+</code></pre>
+<pre class="mermaid"><code>graph TD;
+subgraph Reflect
+    S[**Daily Review**
+            - Review your tasks daily
+            - Calendar
+            - Next  actions
+            - Urgent tasks]
+    T[**Weekly Review**
+            - Review your projects weekly, make sure you're making progress
+            - Next actions
+            - Waiting for
+            - Someday/Maybe
+            - Calendar]
+    U[**Monthly Review**
+            - Focus on your goals
+            - Reference archive
+            - Someday/Maybe
+            - Completed projects]
+    V[**Review your purpose annually**
+            - Goals and purposes
+            - Big projects
+            - Historical archive]
+    end
+
+</code></pre>
+<p>It's important to note that the GTD method is not a one-size-fits-all solution. You can adapt it to your needs and preferences. The key is to find a system that works for you and stick to it.</p>
+<p>And now, let's see how to use GTD in Outlook and Microsoft To Do.</p>
+<h3 id="how-to-use-gtd-in-outlook-with-microsoft-to-do"><a class="toclink" href="2024/12/22/gtd-in-outlook-with-microsoft-to-do/#how-to-use-gtd-in-outlook-with-microsoft-to-do">How to use GTD in Outlook with Microsoft To Do</a></h3>
+<p>When it comes to implementing the GTD method in Outlook, the key is to use the right tools and techniques. Microsoft To Do is a great tool for managing your tasks and projects, and it integrates seamlessly with Outlook.</p>
+<p>You can use Outlook to implement the GTD method by following these steps:</p>
+<ol>
+<li>Capture:<ul>
+<li>emails: Use the Inbox to collect everything that has your attention.</li>
+<li>Other Things: Use Microsoft To Do Taks default list to capture tasks and projects.</li>
+</ul>
+</li>
+<li>Clarify: Process what you've captured by asking yourself the following questions:<ul>
+<li>What is this?</li>
+<li>What should I do?</li>
+<li>Is this really worth doing?</li>
+<li>How does it fit in with all the other things I have to do?</li>
+<li>Is there any action that needs to be done about it or because of it?</li>
+</ul>
+</li>
+<li>Organize: Put everything in its place by following these steps:<ul>
+<li>Inbox:<ul>
+<li>Move emails to the appropriate folder or delete them.</li>
+<li>Categories: Use categories to organize your emails by context and folder to organize your emails by project or client.</li>
+<li>Use search folders to find emails quickly by category or categories, you can clear categories after processing.</li>
+<li>Flags emails to add to To Do.</li>
+<li>Create rules to automate repetitive tasks when clarifying one type of email has allways the same action.</li>
+</ul>
+</li>
+<li>Tasks: Organize your tasks and projects in Microsoft To Do.<ul>
+<li>Lists: Create lists for different types of tasks, one by context or use #tags for that in one lists. For example:<ul>
+<li>In the case of lists: Agendas, Anywhere, Calls, Computed, Errands, Home, Office, Waiting For, Someday/Maybe.</li>
+<li>In the case of tags, one list with: #Agendas, #Anywhere, #Calls, #Computed, #Errands, #Home, #Office, #WaitingFor, #SomedayMaybe.</li>
+</ul>
+</li>
+<li>Use tag #nextaction to identify the next task to do.</li>
+<li>Use tag #urgent to identify urgent tasks.</li>
+</ul>
+</li>
+<li>Projects<ul>
+<li>Group Lists: Group lists by category of projects or client.</li>
+<li>One list per project: Create a list for each project and add tasks to it.</li>
+<li>Use #nextaction tag to identify the next task in each project.</li>
+</ul>
+</li>
+<li>Reference Material:<ul>
+<li>Store reference material in folders, better in OneDrive or SharePoint.</li>
+<li>Use a folder structure to organize your reference material</li>
+<li>Use search folders to find it quickly.</li>
+<li>Use tags to identify the context of the reference material. You can use <a href="https://github.com/Dijji/FileMeta?tab=readme-ov-file">FileMeta</a> to add tags to files in Windows for non-taggeable files.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Reflect: Review your system regularly to make sure it's up to date.<ul>
+<li>Daily Review</li>
+<li>Weekly Review</li>
+<li>Monthly Review</li>
+<li>Annual Review</li>
+</ul>
+</li>
+<li>Engage: Choose what to do and do it.<ul>
+<li>Use the My Day Bar to see your tasks and events at a glance or in search bar type #nextaction to see all your next actions.</li>
+</ul>
+</li>
+</ol>
+<p>These are just some ideas to get you started. You can adapt the GTD method to your needs and preferences. The key is to find a system that works for you and stick to it.</p>
+<p>My example of GTD in Outlook with Microsoft To Do:</p>
+<p>Outlook:</p>
+<p><img alt="alt text" src="2024/12/image-1.png"/></p>
+<p>To Do:</p>
+<p><img alt="alt text" src="2024/12/image.png"/></p>
+<p>I'm using a mix of lists and tags with the same name to organize my tasks and projects. I have lists for different types of tasks, such as Agendas, Anywhere, Calls, Computed, Errands, Home, Office, Waiting For, and Someday/Maybe. I also use tags to identify the next action, urgent tasks and context of the task in projects.</p>
+<p>In the case of emails, I use categories to organize them by context and folders to organize them by project or client. I also use search folders to find emails quickly by category or categories and filter by unreads. The reason for this is that I can clear categories after processing and in the mayorie of cases, I only need a quick review of the emails without the need to convert them into tasks.</p>
+<p>By following these steps, you can implement the GTD method in Outlook and Microsoft To Do and improve your productivity and focus.</p>
+<p>Good luck! 🍀</p>
+<h3 id="references"><a class="toclink" href="2024/12/22/gtd-in-outlook-with-microsoft-to-do/#references">References</a></h3>
+<ul>
+<li><a href="https://youtu.be/Nob50sN4be0">How to use Microsoft To Do for Getting Things Done (GTD)</a></li>
+<li><a href="https://gettingthingsdone.com/">Getting Things Done: The Art of Stress-Free Productivity</a></li>
+<li><a href="https://support.microsoft.com/en-us/office/manage-email-messages-by-using-rules-in-outlook-c24f5dea-9465-4df4-ad17-a50704d66c59">Manage email messages by using rules in Outlook</a></li>
+<li><a href="https://github.com/Dijji/FileMeta?tab=readme-ov-file">FileMeta</a></li>
+</ul>
+</div>
+</article>
 <article class="md-post md-post--excerpt">
 <header class="md-post__header">
 <nav class="md-post__authors md-typeset">
@@ -2089,142 +2399,6 @@ We must see a message like this:</p>
 <p>This script downloads Azure provider operations to a CSV file, reads the CSV file, extracts text from Terraform files, and compares the extracted text with the CSV data to find mismatches. You can use this script to check if a role permission is good or bad in Azure RBAC using Terraform files.</p>
 <p>I hope this post has given you a good introduction to how you can check if a role permission is good or bad in Azure RBAC and how you can use Terraform files to automate this process. </p>
 <p>Happy coding! 🚀</p>
-</div>
-</article>
-<article class="md-post md-post--excerpt">
-<header class="md-post__header">
-<nav class="md-post__authors md-typeset">
-<span class="md-author">
-<img alt="Rafael Fernández" src="https://avatars.githubusercontent.com/u/39990341"/>
-</span>
-</nav>
-<div class="md-post__meta md-meta">
-<ul class="md-meta__list">
-<li class="md-meta__item">
-<time datetime="2024-10-03 00:00:00">October 3, 2024</time></li>
-<li class="md-meta__item">
-            in
-            
-              <a class="md-meta__link" href="category/devops/">DevOps</a></li>
-<li class="md-meta__item">
-            
-              2 min read
-            
-          </li>
-</ul>
-</div>
-</header>
-<div class="md-post__content md-typeset">
-<h2 id="terraform-import-block"><a class="toclink" href="2024/10/03/terraform-import-block/">terraform import block</a></h2>
-<p>Sometimes you need to import existing infrastructure into Terraform. This is useful when you have existing resources that you want to manage with Terraform, or when you want to migrate from another tool to Terraform.</p>
-<p>Other times, you may need to import resources that were created outside of Terraform, such as manually created resources or resources created by another tool. For example: </p>
-<p>"Error: unexpected status 409 (409 Conflict) with error: RoleDefinitionWithSameNameExists: A custom role with the same name already exists in this directory. Use a different name"</p>
-<p>In my case, I had to import a custom role that was created outside of Terraform. Here's how I did it:</p>
-<ol>
-<li>Create a new Terraform configuration file for the resource you want to import. In my case, I created a new file called <code>custom_role.tf</code> with the following content:</li>
-</ol>
-<div class="language-hcl highlight"><pre><span></span><code><span id="__span-0-1"><a href="#__codelineno-0-1" id="__codelineno-0-1" name="__codelineno-0-1"></a><span class="kr">resource</span><span class="w"> </span><span class="nc">"azurerm_role_definition"</span><span class="w"> </span><span class="nv">"custom_role"</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-0-2"><a href="#__codelineno-0-2" id="__codelineno-0-2" name="__codelineno-0-2"></a><span class="w">  </span><span class="na">name</span><span class="w">        </span><span class="o">=</span><span class="w"> </span><span class="s2">"CustomRole"</span>
-</span><span id="__span-0-3"><a href="#__codelineno-0-3" id="__codelineno-0-3" name="__codelineno-0-3"></a><span class="w">  </span><span class="na">scope</span><span class="w">       </span><span class="o">=</span><span class="w"> </span><span class="s2">"/providers/Microsoft.Management/managementGroups/00000000-0000-0000-0000-000000000000"</span>
-</span><span id="__span-0-4"><a href="#__codelineno-0-4" id="__codelineno-0-4" name="__codelineno-0-4"></a><span class="w">  </span><span class="nb">permissions</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-0-5"><a href="#__codelineno-0-5" id="__codelineno-0-5" name="__codelineno-0-5"></a><span class="w">    </span><span class="na">actions</span><span class="w">     </span><span class="o">=</span><span class="w"> </span><span class="p">[</span>
-</span><span id="__span-0-6"><a href="#__codelineno-0-6" id="__codelineno-0-6" name="__codelineno-0-6"></a><span class="w">      </span><span class="s2">"Microsoft.Storage/storageAccounts/listKeys/action"</span><span class="p">,</span>
-</span><span id="__span-0-7"><a href="#__codelineno-0-7" id="__codelineno-0-7" name="__codelineno-0-7"></a><span class="w">      </span><span class="s2">"Microsoft.Storage/storageAccounts/read"</span>
-</span><span id="__span-0-8"><a href="#__codelineno-0-8" id="__codelineno-0-8" name="__codelineno-0-8"></a><span class="w">    </span><span class="p">]</span>
-</span><span id="__span-0-9"><a href="#__codelineno-0-9" id="__codelineno-0-9" name="__codelineno-0-9"></a>
-</span><span id="__span-0-10"><a href="#__codelineno-0-10" id="__codelineno-0-10" name="__codelineno-0-10"></a><span class="w">    </span><span class="na">data_actions</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[]</span>
-</span><span id="__span-0-11"><a href="#__codelineno-0-11" id="__codelineno-0-11" name="__codelineno-0-11"></a>
-</span><span id="__span-0-12"><a href="#__codelineno-0-12" id="__codelineno-0-12" name="__codelineno-0-12"></a><span class="w">    </span><span class="na">not_data_actions</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[]</span>
-</span><span id="__span-0-13"><a href="#__codelineno-0-13" id="__codelineno-0-13" name="__codelineno-0-13"></a><span class="w">  </span><span class="p">}</span>
-</span><span id="__span-0-14"><a href="#__codelineno-0-14" id="__codelineno-0-14" name="__codelineno-0-14"></a><span class="w">  </span><span class="na">assignable_scopes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span>
-</span><span id="__span-0-15"><a href="#__codelineno-0-15" id="__codelineno-0-15" name="__codelineno-0-15"></a><span class="w">    </span><span class="s2">"/providers/Microsoft.Management/managementGroups/00000000-0000-0000-0000-000000000000"</span>
-</span><span id="__span-0-16"><a href="#__codelineno-0-16" id="__codelineno-0-16" name="__codelineno-0-16"></a><span class="w">  </span><span class="p">]</span>
-</span><span id="__span-0-17"><a href="#__codelineno-0-17" id="__codelineno-0-17" name="__codelineno-0-17"></a><span class="p">}</span>
-</span></code></pre></div>
-<ol>
-<li>Add a import block to the configuration file with the resource type and name you want to import. In my case, I added the following block to the <code>custom_role.tf</code> file:</li>
-</ol>
-<div class="language-hcl highlight"><pre><span></span><code><span id="__span-1-1"><a href="#__codelineno-1-1" id="__codelineno-1-1" name="__codelineno-1-1"></a><span class="nb">import</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-1-2"><a href="#__codelineno-1-2" id="__codelineno-1-2" name="__codelineno-1-2"></a><span class="w">  </span><span class="na">to</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">azurerm_role_definition.custom_role</span>
-</span><span id="__span-1-3"><a href="#__codelineno-1-3" id="__codelineno-1-3" name="__codelineno-1-3"></a><span class="w">  </span><span class="na">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"/providers/Microsoft.Authorization/roleDefinitions/11111111-1111-1111-1111-111111111111|/providers/Microsoft.Management/managementGroups/00000000-0000-0000-0000-000000000000"</span>
-</span><span id="__span-1-4"><a href="#__codelineno-1-4" id="__codelineno-1-4" name="__codelineno-1-4"></a>
-</span><span id="__span-1-5"><a href="#__codelineno-1-5" id="__codelineno-1-5" name="__codelineno-1-5"></a><span class="p">}</span>
-</span></code></pre></div>
-<ol>
-<li>Run the <code>terraform</code>plan` command to see the changes that Terraform will make to the resource. In my case, the output looked like this:</li>
-</ol>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a href="#__codelineno-2-1" id="__codelineno-2-1" name="__codelineno-2-1"></a>.
-</span><span id="__span-2-2"><a href="#__codelineno-2-2" id="__codelineno-2-2" name="__codelineno-2-2"></a>.
-</span><span id="__span-2-3"><a href="#__codelineno-2-3" id="__codelineno-2-3" name="__codelineno-2-3"></a>.
-</span><span id="__span-2-4"><a href="#__codelineno-2-4" id="__codelineno-2-4" name="__codelineno-2-4"></a>Terraform<span class="w"> </span>used<span class="w"> </span>the<span class="w"> </span>selected<span class="w"> </span>providers<span class="w"> </span>to<span class="w"> </span>generate<span class="w"> </span>the<span class="w"> </span>following<span class="w"> </span>execution<span class="w"> </span>plan.<span class="w"> </span>Resource<span class="w"> </span>actions<span class="w"> </span>are<span class="w"> </span>indicated<span class="w"> </span>with<span class="w"> </span>the<span class="w"> </span>following<span class="w"> </span>symbols:
-</span><span id="__span-2-5"><a href="#__codelineno-2-5" id="__codelineno-2-5" name="__codelineno-2-5"></a><span class="w">  </span>~<span class="w"> </span>update<span class="w"> </span><span class="k">in</span>-place
-</span><span id="__span-2-6"><a href="#__codelineno-2-6" id="__codelineno-2-6" name="__codelineno-2-6"></a>.
-</span><span id="__span-2-7"><a href="#__codelineno-2-7" id="__codelineno-2-7" name="__codelineno-2-7"></a>.
-</span><span id="__span-2-8"><a href="#__codelineno-2-8" id="__codelineno-2-8" name="__codelineno-2-8"></a>.
-</span></code></pre></div>
-<ol>
-<li>Run the <code>terraform apply</code> command to import the resource into Terraform. In my case, the output looked like this after a long 9 minutes:</li>
-</ol>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-3-1"><a href="#__codelineno-3-1" id="__codelineno-3-1" name="__codelineno-3-1"></a>...
-</span><span id="__span-3-2"><a href="#__codelineno-3-2" id="__codelineno-3-2" name="__codelineno-3-2"></a>Apply<span class="w"> </span>complete!<span class="w"> </span>Resources:<span class="w"> </span><span class="m">1</span><span class="w"> </span>imported,<span class="w"> </span><span class="m">0</span><span class="w"> </span>added,<span class="w"> </span><span class="m">1</span><span class="w"> </span>changed,<span class="w"> </span><span class="m">0</span><span class="w"> </span>destroyed.
-</span></code></pre></div>
-<ol>
-<li>Verify that the resource was imported successfully by running the <code>terraform show</code> command. In my case, the output looked like this:</li>
-</ol>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-4-1"><a href="#__codelineno-4-1" id="__codelineno-4-1" name="__codelineno-4-1"></a>terraform<span class="w"> </span>show
-</span></code></pre></div>
-<p>You can use the <code>terraform import</code> command to import existing infrastructure into Terraform too but I prefer to use the <code>import</code> block because it's more readable and easier to manage.</p>
-<p>With terraform import the command would look like this:</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-5-1"><a href="#__codelineno-5-1" id="__codelineno-5-1" name="__codelineno-5-1"></a>terraform<span class="w"> </span>import<span class="w"> </span>azurerm_role_definition.custom_role<span class="w"> </span><span class="s2">"/providers/Microsoft.Authorization/roleDefinitions/11111111-1111-1111-1111-111111111111|/providers/Microsoft.Management/managementGroups/00000000-0000-0000-0000-000000000000"</span>
-</span></code></pre></div>
-<h3 id="conclusion"><a class="toclink" href="2024/10/03/terraform-import-block/#conclusion">Conclusion</a></h3>
-<p>That's it! You've successfully imported an existing resource into Terraform. Now you can manage it with Terraform just like any other resource.</p>
-<p>Happy coding! 🚀</p>
-</div>
-</article>
-<article class="md-post md-post--excerpt">
-<header class="md-post__header">
-<nav class="md-post__authors md-typeset">
-<span class="md-author">
-<img alt="Rafael Fernández" src="https://avatars.githubusercontent.com/u/39990341"/>
-</span>
-</nav>
-<div class="md-post__meta md-meta">
-<ul class="md-meta__list">
-<li class="md-meta__item">
-<time datetime="2024-09-22 00:00:00">September 22, 2024</time></li>
-<li class="md-meta__item">
-            in
-            
-              <a class="md-meta__link" href="category/microsoft-entra/">Microsoft Entra</a>, 
-              <a class="md-meta__link" href="category/security/">Security</a></li>
-<li class="md-meta__item">
-            
-              2 min read
-            
-          </li>
-</ul>
-</div>
-</header>
-<div class="md-post__content md-typeset">
-<h2 id="microsoft-entra-id-protection"><a class="toclink" href="2024/09/22/microsoft-entra-id-protection/">Microsoft Entra ID Protection</a></h2>
-<p>Microsoft Entra offers a comprehensive set of security features to protect your organization's data and resources. One of these features is <strong>ID Protection</strong>, which helps you secure your users' identities and prevent unauthorized access to your organization's data. Here are some key benefits of using <strong>ID Protection</strong> in Microsoft Entra:</p>
-<ul>
-<li>
-<p><strong>Multi-factor authentication (MFA)</strong>: <strong>ID Protection</strong> enables you to enforce multi-factor authentication for all users in your organization. This adds an extra layer of security to your users' accounts and helps prevent unauthorized access.</p>
-</li>
-<li>
-<p><strong>Conditional access policies</strong>: With <strong>ID Protection</strong>, you can create conditional access policies that define the conditions under which users can access your organization's resources. For example, you can require users to use multi-factor authentication when accessing sensitive data or restrict access to certain applications based on the user's location.</p>
-</li>
-<li>
-<p><strong>Risk-based policies</strong>: <strong>ID Protection</strong> uses advanced machine learning algorithms to detect suspicious activities and risky sign-in attempts. You can create risk-based policies that automatically block or allow access based on the risk level associated with the sign-in attempt.</p>
-</li>
-<li>
-<p><strong>Identity protection reports</strong>: <strong>ID Protection</strong> provides detailed reports and insights into your organization's identity security posture. You can use these reports to identify security risks, monitor user activity, and take proactive measures to protect your organization's data.</p>
-</li>
-</ul>
-<p>By using <strong>ID Protection</strong> in Microsoft Entra, you can enhance the security of your organization's data and resources and protect your users' identities from cyber threats. If you want to learn more about <strong>ID Protection</strong> and other security features in Microsoft Entra, contact us today! </p>
-<p>I hope this helps!</p>
 </div>
 </article>
 <nav class="md-pagination">
